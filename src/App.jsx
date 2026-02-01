@@ -332,6 +332,7 @@ function App() {
   useEffect(() => { // force user to update version by clearing their local storage!
     setTimeout(() => {
       handleShow('Patch');
+      handleShow('About');
     }, 2500);
 
     // Startup sound praise

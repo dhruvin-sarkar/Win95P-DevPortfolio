@@ -3,8 +3,8 @@
 .bio_folder {
     display: none;
     position: fixed;
-    width: 420px;
-    height: 475px;
+    width: 600px;
+    height: 600px;
     min-height: 320px;
     background: #c5c4c4;
     border: 2px solid white;
