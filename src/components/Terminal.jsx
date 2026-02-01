@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import Draggable from 'react-draggable';
 import UseContext from '../Context';
 import '../css/Terminal.css';
@@ -64,6 +64,8 @@ const Terminal = () => {
     ]);
     const [cwd, setCwd] = useState(['C:', 'Users', 'Dhruvin']); // Current Working Directory path array
     const [matrixMode, setMatrixMode] = useState(false);
+    const [textColor, setTextColor] = useState('#c0c0c0'); // Default styling color
+
     
     // Commands implementation helpers
     const getFormattedDate = () => {
@@ -78,6 +80,14 @@ const Terminal = () => {
 
     const inputRef = useRef(null);
     const bottomRef = useRef(null);
+
+    // Sync initial position for correct maximization
+    useEffect(() => {
+        const initX = window.innerWidth <= 500 ? 5 : 150;
+        const initY = window.innerWidth <= 500 ? 50 : 150;
+        setTerminalExpand(prev => ({ ...prev, x: initX, y: initY }));
+    }, [setTerminalExpand]);
+
 
     // Auto-scroll to bottom
     useEffect(() => {
@@ -211,6 +221,28 @@ const Terminal = () => {
                 setMatrixMode(prev => !prev);
                 newHistory.push({ output: matrixMode ? 'Matrix mode deactivated.' : 'Wake up, Neo...' });
                 break;
+            case 'color':
+                if (args[0]) {
+                    const colorMap = {
+                        '0': 'black', '1': 'blue', '2': 'green', '3': 'aqua',
+                        '4': 'red', '5': 'purple', '6': 'yellow', '7': 'white', 
+                        '8': 'gray', '9': 'lightblue', 'a': '#00ff00', 'b': 'lightaqua',
+                        'c': 'lightred', 'd': 'lightpurple', 'e': 'lightyellow', 'f': 'brightwhite'
+                    };
+                    const selectedColor = colorMap[args[0].toLowerCase()];
+                    if (selectedColor) {
+                        setTextColor(selectedColor);
+                        setMatrixMode(false); // Disable matrix mode if color is manually set
+                        newHistory.push({ output: '' });
+                    } else {
+                        newHistory.push({ output: 'Invalid color attribute.' });
+                    }
+                } else {
+                    setTextColor('#c0c0c0'); // Reset to default
+                    setMatrixMode(false);
+                     newHistory.push({ output: '' });
+                }
+                break;
             case '':
                 break;
             default:
@@ -252,12 +284,15 @@ const Terminal = () => {
             }}
             disabled={TerminalExpand.expand}
             onStart={() => handleSetFocusItemTrue('Terminal')}
+            onStop={(e, data) => {
+                setTerminalExpand(prev => ({ ...prev, x: data.x, y: data.y }));
+            }}
         >
             <div 
                 className={`folder_folder_terminal ${matrixMode ? 'matrix-mode' : ''}`}
                 style={{
                   ...(TerminalExpand.expand ? inlineStyleExpand('Terminal') : inlineStyle('Terminal')),
-                  color: matrixMode ? '#00ff00' : '#c0c0c0'
+                  color: matrixMode ? '#00ff00' : textColor
                 }}
                 onClick={() => {
                    handleSetFocusItemTrue('Terminal');

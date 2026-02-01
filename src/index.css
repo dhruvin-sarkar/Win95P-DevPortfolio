@@ -432,6 +432,10 @@ body {
     color: white;
 }
 
+.footer .start_popup .msdos span {
+    white-space: nowrap;
+}
+
 .sub_start_container {
     display: flex;
     position: absolute;
