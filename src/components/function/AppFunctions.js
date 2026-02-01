@@ -304,7 +304,7 @@ export function iconContainerSize(size) {
     case 5:
       return {width: '65px', height: '70px'};
     default:
-      return {width: '65px', height: '70px'};
+      return {width: '75px', height: '80px'};
   }
 }
 export function iconImgSize(size) {
@@ -320,7 +320,7 @@ export function iconImgSize(size) {
     case 5:
       return {width: '35px'};
     default:
-      return {width: '35px'};
+      return {width: '45px'};
   }
 }
 export function iconTextSize(size) {
@@ -336,6 +336,6 @@ export function iconTextSize(size) {
     case 5:
       return {fontSize: '12px', number: 5};
     default:
-      return {fontSize: '12px', number: 5};
+      return {fontSize: '14px', lineHeight: '12px', number: 3};
   }
 }

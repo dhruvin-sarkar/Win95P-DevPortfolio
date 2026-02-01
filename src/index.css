@@ -357,8 +357,17 @@ body {
         'sidebar ig'
         'sidebar project'
         'sidebar resume'
+        'sidebar msdos'
         'sidebar groove'
         'sidebar shutdown';
+}
+
+.start_popup .msdos {
+    grid-area: msdos;
+}
+
+.start_popup .shutdownicon:last-child {
+    grid-area: shutdown;
 }
 
 

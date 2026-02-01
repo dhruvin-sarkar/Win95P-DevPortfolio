@@ -609,7 +609,7 @@ export default function Footer() {
                                 />
                             )}
                             {item.spanText && <span>{item.spanText}</span>}
-                            {item.arrow && (<p><BsFillCaretRightFill/></p>)}
+                            {item.arrow && (<span><BsFillCaretRightFill/></span>)}
                         </motion.div>
                         ))}
                         {projectStartBar && (
