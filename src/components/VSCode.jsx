@@ -273,7 +273,12 @@ export default function VSCode() {
         setLastTapTime(now);
     }
 
-    if (!VSCodeExpand.show) return null;
+    console.log('VSCode component rendered. show:', VSCodeExpand.show);
+
+    if (!VSCodeExpand.show) {
+        console.log('VSCode component returning null (show is false)');
+        return null;
+    }
 
     // Recursive File Tree Component
     const RenderTree = ({ items, path = '' }) => {

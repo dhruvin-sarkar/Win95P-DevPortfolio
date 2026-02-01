@@ -1595,7 +1595,7 @@ function ObjectState() {
 
 
 function iconFocusIcon(name) { // if focus on one, the rest goes unfocus
-
+  console.log('iconFocusIcon called for:', name);
   const allSetItems = ObjectState();
 
   const passedName = name.toLowerCase().split(' ').join('');
@@ -1617,6 +1617,7 @@ function iconFocusIcon(name) { // if focus on one, the rest goes unfocus
 }
 
 function handleShow(name) {
+  console.log('handleShow called for:', name);
   setRightClickDefault(false);
 
   if(name === '' || !name) return;
@@ -1626,10 +1627,14 @@ function handleShow(name) {
     return;
   }
 
-  const lowerCaseName = name.toLowerCase().split(' ').join('');
+  const lowerCaseName = name.toLowerCase().trim().split(' ').join('');
   const allSetItems = ObjectState();
 
-  const itemExists = allSetItems.some(item => item.name.toLowerCase().split(' ').join('') === lowerCaseName);
+  if (lowerCaseName === 'vscode') {
+      console.log('Special case: VS Code matched');
+  }
+
+  const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().split(' ').join('') === lowerCaseName);
 
   const pictureMatch = allPicture.find(picture => name.includes(picture.name));
   
