@@ -809,6 +809,14 @@ body {
     pointer-events: none;
 }
 
+/* Specific scaling for icons that appear smaller due to asset padding */
+.icon img[alt="MyComputer"],
+.icon img[alt="My Computer"],
+.icon img[alt="About"],
+.icon img[alt="about"] {
+    transform: scale(1.15);
+}
+
 .icon .img_focus {
     filter: brightness(8%) sepia(10) saturate(50) hue-rotate(200deg);
 }

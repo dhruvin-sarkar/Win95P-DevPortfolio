@@ -41,7 +41,7 @@ import notepad from '../../assets/notepad.png'
 import store from '../../assets/store.png'
 import layer from '../../assets/layer.png'
 import About from '../../assets/ipng.png'
-import MyComputer from '../../assets/pcicon.png'
+import MyComputer from '../../assets/pc.png'
 
 
 
@@ -259,11 +259,11 @@ export function handleDoubleClickPhotoOpenMobile(name, setCurrentPhoto, lastTapT
   }
 
 // click to open links
-export function handleDoubleClickiframe(name, setOpenProjectExpand, setProjectUrl) {
+export function handleDoubleClickiframe(name) {
   // Projects removed - replace with your own projects
 }
 
-export function handleDoubleTapiframeMobile(name, lastTapTime, setLastTapTime, setOpenProjectExpand, setProjectUrl) {
+export function handleDoubleTapiframeMobile(name, lastTapTime, setLastTapTime) {
   const now = Date.now();
   if (now - lastTapTime < 300) {
     // Projects removed - replace with your own projects
@@ -280,7 +280,7 @@ export function handleDoubleClickEnterLink(name, handleshow) {
 }
 
 
-export function handleDoubleTapEnterMobile(name, lastTapTime, setLastTapTime, setOpenProjectExpand, setProjectUrl) {
+export function handleDoubleTapEnterMobile(name, lastTapTime, setLastTapTime) {
   const now = Date.now();
   if (now - lastTapTime < 300) {
     // Projects removed - replace with your own projects
