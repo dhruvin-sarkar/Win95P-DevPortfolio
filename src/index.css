@@ -358,12 +358,17 @@ body {
         'sidebar project'
         'sidebar resume'
         'sidebar msdos'
+        'sidebar vscode'
         'sidebar groove'
         'sidebar shutdown';
 }
 
 .start_popup .msdos {
     grid-area: msdos;
+}
+
+.start_popup .vscode {
+    grid-area: vscode;
 }
 
 .start_popup .shutdownicon:last-child {
