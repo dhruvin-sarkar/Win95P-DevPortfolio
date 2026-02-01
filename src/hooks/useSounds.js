@@ -6,6 +6,8 @@ import tadaSound from '../assets/tada.mp3';
 import dingSound from '../assets/ding.mp3';
 import chordSound from '../assets/chord.mp3';
 import chimesSound from '../assets/chimes.mp3';
+import maximizeSound from '../assets/windows-95-sfx-maximize.wav';
+import minimizeSound from '../assets/windows-95-sfx-minimize.wav';
 
 const SOUND_FILES = {
   startup: startupSound,
@@ -13,12 +15,14 @@ const SOUND_FILES = {
   ding: dingSound,
   chord: chordSound,
   chimes: chimesSound,
+  maximize: maximizeSound,
+  minimize: minimizeSound,
 };
 
 export const useSounds = () => {
   const [volume, setVolume] = useState(() => {
     const saved = localStorage.getItem('win95_volume');
-    return saved ? parseFloat(saved) : 0.5;
+    return saved ? parseFloat(saved) : 1.0;
   });
 
   const [muted, setMuted] = useState(() => {
@@ -210,6 +214,14 @@ export const useSounds = () => {
     return playSound('chord');
   }, [playSound]);
 
+  const playWindowMaximize = useCallback(() => {
+    return playSound('maximize');
+  }, [playSound]);
+
+  const playWindowMinimize = useCallback(() => {
+    return playSound('minimize');
+  }, [playSound]);
+
   const toggleMute = useCallback(() => {
     setMuted(prev => !prev);
   }, []);
@@ -228,6 +240,8 @@ export const useSounds = () => {
     playChimes,
     playNotification,
     playWindowClose,
+    playWindowMaximize,
+    playWindowMinimize,
     
     // Controls
     volume: Math.round(volume * 100),
