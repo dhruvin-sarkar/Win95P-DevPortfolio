@@ -323,6 +323,13 @@ export default function Tile({ id, content, index, size, color, moveTile, imageM
           backgroundSize: '38px',
           backgroundRepeat: 'no-repeat',
         };
+      case 'MS-DOS Prompt':
+        return {
+            backgroundImage: `url(${imageMapping('MS-DOS Prompt')})`,
+            backgroundPosition: '50% 57%',
+            backgroundSize: '50px',
+            backgroundRepeat: 'no-repeat',
+        };
       default:
         return {};
     }

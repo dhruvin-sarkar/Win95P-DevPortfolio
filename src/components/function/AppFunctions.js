@@ -1,5 +1,17 @@
-import MyComputer from '../../assets/pc.png'
-import About from '../../assets/ipng.png'
+import msDosIcon from '../../assets/Msdos-icon.svg'
+
+// ... existing imports
+
+// Mapping image function
+export function imageMapping (name, type) { 
+  switch(name) {
+
+    case 'MS-DOS Prompt':
+    case 'ms-dos prompt':
+      return msDosIcon;
+
+    case 'About':
+// ... existing cases
 import Resume from '../../assets/folder.png'
 import Mail from '../../assets/mail.png'
 import Project from '../../assets/regFolder.png'
@@ -80,6 +92,10 @@ export function imageMapping (name, type) {
     case 'About':
     case 'about':
       return About;
+
+    case 'MS-DOS Prompt':
+    case 'ms-dos prompt':
+      return msDosIcon;
 
     case 'MyComputer':
     case 'My Computer':

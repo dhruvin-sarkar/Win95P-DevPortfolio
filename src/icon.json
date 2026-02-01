@@ -329,6 +329,17 @@
         "type": ".exe",
         "x": 39,
         "y": 39
-    }
+    },
 
+    {
+        "name": "MS-DOS Prompt",
+        "pic": "MS-DOS Prompt",
+        "folderId": "Desktop",
+        "size": 5000,
+        "type": ".exe",
+        "x": 2,
+        "y": 1,
+        "category": "Utilities",
+        "description": "Command line interface for system operations."
+    }
 ]

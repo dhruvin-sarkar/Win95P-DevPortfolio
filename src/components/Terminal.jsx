@@ -3,7 +3,7 @@ import Draggable from 'react-draggable';
 import UseContext from '../Context';
 import '../css/Terminal.css';
 import { useSounds } from '../hooks/useSounds';
-import terminalIcon from '../assets/run.png'; // Reusing run icon or we can add a specifically different one if available
+import terminalIcon from '../assets/Msdos-icon.svg';
 
 // Mock File System
 const fileSystem = {
@@ -321,6 +321,48 @@ const Terminal = () => {
                         >
                             X
                         </div>
+                    </div>
+                </div>
+
+                {/* MS-DOS Toolbar */}
+                <div className="terminal_toolbar" style={{ 
+                    display: 'flex', 
+                    background: '#c0c0c0', 
+                    padding: '2px', 
+                    borderBottom: '1px solid #000',
+                    gap: '4px',
+                    alignItems: 'center'
+                }}>
+                    <select style={{ fontSize: '11px', height: '20px', width: '60px' }}>
+                        <option>Auto</option>
+                        <option>7 x 12</option>
+                        <option>8 x 12</option>
+                        <option>10 x 18</option>
+                    </select>
+                    
+                    {/* Toolbar Icons (Mocked with simple styles for now) */}
+                    {['Mark', 'Copy', 'Paste', 'FullScreen', 'Properties', 'Background', 'Font'].map((item, idx) => (
+                        <div key={idx} style={{ 
+                            width: '20px', height: '20px', 
+                            border: '1px solid white', 
+                            borderRightColor: '#808080', 
+                            borderBottomColor: '#808080',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'pointer'
+                        }} title={item}>
+                           {/* Simple SVGs or chars for icons */}
+                           <div style={{ width: '12px', height: '12px', background: '#808080' }}></div>
+                        </div>
+                    ))}
+                     <div style={{ 
+                            width: '20px', height: '20px', 
+                            border: '1px solid white', 
+                            borderRightColor: '#808080', 
+                            borderBottomColor: '#808080',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'pointer', fontWeight: 'bold', fontFamily: 'serif'
+                        }} title="Font">
+                           A
                     </div>
                 </div>
 

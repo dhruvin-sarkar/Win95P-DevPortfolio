@@ -209,6 +209,20 @@ export default function Footer() {
                 setResumejectStartBar(false);
                 setProjectStartBar(false);
             },
+        },
+        {
+            className: "msdos",
+            imgSrc: imageMapping('MS-DOS Prompt'),
+            imgAlt: "msdos",
+            spanText: "MS-DOS Prompt",
+            onClick: () => {
+                handleShow('Terminal');
+                setStartActive(false);
+            },
+            onmouseenter: () => {
+                setResumejectStartBar(false);
+                setProjectStartBar(false);
+            },
         }
     ];
 
