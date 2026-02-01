@@ -5,11 +5,13 @@ import { motion } from 'framer-motion';
 import '../css/MyComputer.css';
 import undoIcon from '../assets/arrowback.png'
 import { BsCaretDownFill } from "react-icons/bs";
+import { useSounds } from '../hooks/useSounds';
 
 function MyComputer() {
 
   const iconRefs = useRef([]);
   const [popUpFolder, setPopUpFolder] = useState(false)
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     setCurrentRightClickFolder,
@@ -92,19 +94,37 @@ function MyComputer() {
   }
 
   function handleExpandStateToggle() {
-    setMyComputerExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand,
-    }));
+    setMyComputerExpand(prevState => {
+      const willExpand = !prevState.expand;
+      // Play maximize sound when expanding, minimize sound when restoring
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-      setMyComputerExpand(prevState => ({
-        ...prevState,
-        expand: !prevState.expand,
-      }));
+      setMyComputerExpand(prevState => {
+        const willExpand = !prevState.expand;
+        // Play maximize sound when expanding, minimize sound when restoring
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
@@ -219,11 +239,13 @@ function MyComputer() {
           <div className="folder_barbtn">
             <div onClick={ !isTouchDevice ? (e) => {
               e.stopPropagation();
+              playWindowMinimize();
               setMyComputerExpand(prev => ({ ...prev, hide: true, focusItem: false }));
               StyleHide('MyComputer'); 
             } : undefined}
             onTouchEnd={(e) => {
               e.stopPropagation()
+              playWindowMinimize();
               setMyComputerExpand(prev => ({...prev, hide: true, focusItem: false}))
               StyleHide('MyComputer')
             }}

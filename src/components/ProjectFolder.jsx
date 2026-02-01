@@ -4,9 +4,11 @@ import Draggable from 'react-draggable';
 import { motion } from 'framer-motion';
 import Project from '../assets/regFolder.png';
 import '../css/ProjectFolder.css';
+import { useSounds } from '../hooks/useSounds';
 
 function ProjectFolder() {
   const iconRefs = useRef([]);
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const {
     setCurrentRightClickFolder,
@@ -54,19 +56,35 @@ function ProjectFolder() {
   }
 
   function handleExpandStateToggle() {
-    setProjectExpand((prevState) => ({
-      ...prevState,
-      expand: !prevState.expand,
-    }));
+    setProjectExpand((prevState) => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-      setProjectExpand((prevState) => ({
-        ...prevState,
-        expand: !prevState.expand,
-      }));
+      setProjectExpand((prevState) => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
@@ -118,11 +136,13 @@ function ProjectFolder() {
             <div
               onClick={!isTouchDevice ? (e) => {
                 e.stopPropagation();
+                playWindowMinimize();
                 setProjectExpand((prev) => ({ ...prev, hide: true, focusItem: false }));
                 StyleHide('Project');
               } : undefined}
               onTouchEnd={(e) => {
                 e.stopPropagation();
+                playWindowMinimize();
                 setProjectExpand((prev) => ({ ...prev, hide: true, focusItem: false }));
                 StyleHide('Project');
               }}

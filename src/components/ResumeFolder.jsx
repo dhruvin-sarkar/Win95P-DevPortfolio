@@ -4,10 +4,12 @@ import Draggable from 'react-draggable';
 import { motion } from 'framer-motion';
 import Resume from '../assets/folder.png';
 import '../css/ResumeFolder.css';
+import { useSounds } from '../hooks/useSounds';
 
 function ResumeFolder() {
 
   const iconRefs = useRef([]);
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     setCurrentRightClickFolder,
@@ -51,19 +53,35 @@ function ResumeFolder() {
   }
 
   function handleExpandStateToggle() {
-    setResumeExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand,
-    }));
+    setResumeExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-      setResumeExpand(prevState => ({
-        ...prevState,
-        expand: !prevState.expand,
-      }));
+      setResumeExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
@@ -114,11 +132,13 @@ function ResumeFolder() {
           <div className="folder_barbtn">
             <div onClick={ !isTouchDevice ? (e) => {
               e.stopPropagation();
+              playWindowMinimize();
               setResumeExpand(prev => ({ ...prev, hide: true, focusItem: false }));
               StyleHide('Resume'); 
             } : undefined}
             onTouchEnd={(e) => {
               e.stopPropagation()
+              playWindowMinimize();
               setResumeExpand(prev => ({...prev, hide: true, focusItem: false}))
               StyleHide('Resume')
             }}
