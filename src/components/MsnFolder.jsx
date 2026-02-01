@@ -7,8 +7,11 @@ import chat from '../assets/chat.png';
 import nudge from '../assets/nudge.png';
 import nudgeSound from '../assets/nudgeSound.mp3';
 import '../css/MSN.css';
+import { useSounds } from '../hooks/useSounds';
 
 function MsnFolder() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const {
     handleShow,
@@ -128,19 +131,35 @@ useEffect(() => {
   }
 
   function handleExpandStateToggle() {
-    setMSNExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setMSNExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-      setMSNExpand(prevState => ({
-        ...prevState,
-        expand: !prevState.expand
-      }));
+      setMSNExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
@@ -235,11 +254,13 @@ useEffect(() => {
             <div className="folder_barbtn-MSN">
               <div onClick={!isTouchDevice ? (e) => {
                 e.stopPropagation();
+                playWindowMinimize();
                 setMSNExpand(prev => ({ ...prev, hide: true, focusItem: false }));
                 StyleHide('MSN');
               } : undefined}
                 onTouchEnd={(e) => {
                   e.stopPropagation();
+                  playWindowMinimize();
                   setMSNExpand(prev => ({ ...prev, hide: true, focusItem: false }));
                   StyleHide('MSN');
                 }}

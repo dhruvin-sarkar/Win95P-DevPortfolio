@@ -3,12 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
 import '../css/Store.css'
+import { useSounds } from '../hooks/useSounds';
 import { imageMapping } from './function/AppFunctions';
 import { BsChevronUp, BsChevronDown } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
 import iconInfo from '../icon.json'
 
 function Store() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
   const [storeSearchValue, setStoreSearchValue] = useState('')
   const [catagoryHide, setCatagoryHide] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('1')
@@ -181,25 +184,42 @@ function Store() {
   }
 
   function handleExpandStateToggle() {
-    setStoreExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setStoreExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-      setStoreExpand(prevState => ({
-        ...prevState,
-        expand: !prevState.expand
-      }));
+      setStoreExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
 
   function handleMinimize(e) {
     e.stopPropagation()
+    playWindowMinimize();
     setStoreExpand(prev => ({...prev, hide: true, focusItem: false}))
     StyleHide('Store')
   }

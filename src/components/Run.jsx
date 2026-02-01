@@ -1,15 +1,19 @@
 import ErrorBtn from './ErrorBtn';
 import UseContext from '../Context'
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import Draggable from 'react-draggable'
-import RunIcon from '../assets/run.png'
+import { motion } from 'framer-motion';
+import Run from '../assets/regFile.png'
 import '../css/Run.css'
+import { useSounds } from '../hooks/useSounds';
 import { BsCaretDownFill } from "react-icons/bs";
 import {imageMapping} from './function/AppFunctions' 
 
 
 
-function Run() {
+function RunFunc() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     desktopIcon,

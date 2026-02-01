@@ -3,11 +3,14 @@ import emailjs from '@emailjs/browser';
 import { useContext, useRef } from "react";
 import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
-import Mail from '../assets/mail.png'
+import Mail from '../assets/mailOff.png'
 import '../css/MailFolder.css'
+import { useSounds } from '../hooks/useSounds';
 
 
 function MailFolder() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const focusName = useRef();
   const focusEmail = useRef();
@@ -63,22 +66,38 @@ const form = useRef();
       }
 
    function handleExpandStateToggle() {
-    setMailExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setMailExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setMailExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setMailExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
   return (
     <>
@@ -112,19 +131,20 @@ const form = useRef();
               <span>Mail</span>
             </div>
             <div className="folder_barbtn-mail">
-              <div onClick={ !isTouchDevice? (e) => {
-                e.stopPropagation()
-                setMailExpand(prev => ({...prev, hide: true, focusItem: false}))
-                StyleHide('Mail') 
-              } : undefined
-            }
-                   onTouchEnd={(e) => {
-                    e.stopPropagation()
-                    setMailExpand(prev => ({...prev, hide: true, focusItem: false}))
-                    StyleHide('Mail')
-                  }}
-                  onTouchStart={(e) => e.stopPropagation()}
-              >
+              <div onClick={!isTouchDevice ? (e) => {
+              e.stopPropagation();
+              playWindowMinimize();
+              setMailExpand(prev => ({ ...prev, hide: true, focusItem: false }));
+              StyleHide('Mail');
+            } : undefined}
+              onTouchEnd={(e) => {
+                e.stopPropagation();
+                playWindowMinimize();
+                setMailExpand(prev => ({ ...prev, hide: true, focusItem: false }));
+                StyleHide('Mail');
+              }}
+              onTouchStart={(e) => e.stopPropagation()}
+            >
                 <p className='dash-mail'></p>
               </div>
               <div
