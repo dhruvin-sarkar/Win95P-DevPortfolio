@@ -1627,7 +1627,7 @@ function handleShow(name) {
     return;
   }
 
-  const lowerCaseName = name.toLowerCase().trim().split(' ').join('');
+  const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
   const allSetItems = ObjectState();
 
   if (lowerCaseName === 'vscode') {
@@ -1876,7 +1876,7 @@ function handleShowMobile(name) {
   }
 
   function handleSetFocusItemTrue(name) {
-    const LowerCaseName = name.toLowerCase().split(' ').join('');
+    const LowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
     const setState = ObjectState();
 
     const newZIndex = (maxZindexRef.current || 0) + 1;

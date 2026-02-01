@@ -68,23 +68,25 @@
     font-size: 16px;
     font-weight: bold;
     color: black;
-    line-height: 1;
-    margin-top: -1px;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .folder_barbtn .dash {
-    width: 6px;
+    width: 7px;
     height: 2px;
     background: black;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 .folder_barbtn .expand {
-    width: 9px;
+    width: 10px;
     height: 9px;
     border: 1px solid black;
     border-top: 2px solid black;
-    margin-top: 0;
+    box-sizing: border-box;
 }
 
 .vscode_menu_bar {

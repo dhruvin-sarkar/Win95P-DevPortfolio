@@ -86,7 +86,6 @@ export default function VSCode() {
                             e.stopPropagation();
                             playMin();
                             setVSCodeExpand(prev => ({ ...prev, hide: true, focusItem: false }));
-                            StyleHide('VS Code');
                         }}>
                             <p className='dash'></p>
                         </div>
