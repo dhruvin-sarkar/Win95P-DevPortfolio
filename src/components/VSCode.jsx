@@ -100,6 +100,17 @@ export default function VSCode() {
                     </div>
                 </div>
 
+                <div className="vscode_menu_bar">
+                    <span>File</span>
+                    <span>Edit</span>
+                    <span>Selection</span>
+                    <span>View</span>
+                    <span>Go</span>
+                    <span>Run</span>
+                    <span>Terminal</span>
+                    <span>Help</span>
+                </div>
+
                 <div className="vscode_main_content">
                     <iframe 
                         src="https://github1s.com/dhruvin-sarkar/Win95P-DevPortfolio" 

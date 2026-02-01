@@ -84,6 +84,27 @@
     border-top: 2px solid black;
 }
 
+.vscode_menu_bar {
+    display: flex;
+    background-color: #c0c0c0;
+    padding: 2px 5px;
+    gap: 12px;
+    border-bottom: 1px solid #808080;
+    box-shadow: inset 1px 1px #dfdfdf;
+    font-size: 13px;
+    color: black;
+    cursor: default;
+}
+
+.vscode_menu_bar span {
+    padding: 2px 4px;
+}
+
+.vscode_menu_bar span:hover {
+    background-color: #000080;
+    color: white;
+}
+
 .vscode_main_content {
     flex: 1;
     display: flex;
