@@ -369,8 +369,7 @@ export default function Footer() {
     function handleHideFolder(index) { // unhide icon from tap
 
         const lowerCaseName = tap[index].toLowerCase().trim().replace(/\s/g, '');
-
-        const allSetItems =  ObjectState() // all the usestate name to toggle
+        const allSetItems = ObjectState(); 
 
 
         allSetItems.forEach((item) => {
@@ -385,8 +384,8 @@ export default function Footer() {
           if(itemName === lowerCaseName) {
             if(item.usestate.hide) {
                 // Restore from taskbar
-                item.setter(prev => ({...prev, hide: false, focusItem: true, zIndex: maxZindexRef.current + 1}));
                 maxZindexRef.current += 1;
+                item.setter(prev => ({...prev, hide: false, focusItem: true, zIndex: maxZindexRef.current}));
                 sounds?.playWindowMaximize();
                 
                 if(lowerCaseName === 'winamp') {
@@ -404,8 +403,8 @@ export default function Footer() {
                 sounds?.playWindowMinimize();
             } else {
                 // Visible but not focused - Focus it
-                item.setter(prev => ({...prev, focusItem: true, zIndex: maxZindexRef.current + 1}));
                 maxZindexRef.current += 1;
+                item.setter(prev => ({...prev, focusItem: true, zIndex: maxZindexRef.current}));
             }
           }
 

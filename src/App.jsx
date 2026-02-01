@@ -1598,10 +1598,10 @@ function iconFocusIcon(name) { // if focus on one, the rest goes unfocus
   console.log('iconFocusIcon called for:', name);
   const allSetItems = ObjectState();
 
-  const passedName = name.toLowerCase().split(' ').join('');
+  const passedName = name.toLowerCase().trim().replace(/\s/g, '');
 
   const updateddesktopIcon = desktopIcon.map(icon => {
-    const iconName = icon.name.toLowerCase().split(' ').join('');
+    const iconName = icon.name.toLowerCase().trim().replace(/\s/g, '');
     if ('focus' in icon) { // check if focus is in the object
       return { ...icon, focus: iconName === passedName }; // return new focus if matched
     }
@@ -1611,7 +1611,7 @@ function iconFocusIcon(name) { // if focus on one, the rest goes unfocus
 
   ///need to be fixed, this logic
   allSetItems.forEach(item => { // set same to folder to distinct from iconName
-    const itemName = item.name.toLowerCase().split(' ').join('') + 'folder'
+    const itemName = item.name.toLowerCase().trim().replace(/\s/g, '') + 'folder'
       item.setter(prev => ({ ...prev, focus: passedName === itemName }));
   });
 }
@@ -1739,11 +1739,11 @@ function handleShowMobile(name) {
 
     if(name === '' || !name) return;
   
-    const lowerCaseName = name.toLowerCase().split(' ').join('');
+    const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
   
     const allSetItems = ObjectState() // call all usestate object
   
-    const itemExists = allSetItems.some(item => item.name.toLowerCase().split(' ').join('') === lowerCaseName);
+    const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().replace(/\s/g, '') === lowerCaseName);
   
     const pictureMatch = allPicture.find(picture => name.includes(picture.name));
     
@@ -1924,7 +1924,7 @@ function handleShowMobile(name) {
 
 
   function inlineStyleExpand (name) {
-    const passedName = name.split(' ').join('').toLowerCase();
+    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
     const setState = ObjectState();
 
     const item = setState.find(item => {
@@ -1951,7 +1951,7 @@ function handleShowMobile(name) {
 
   function inlineStyle(name) {
     const setState = ObjectState();
-    const passedName = name.split(' ').join('').toLowerCase();
+    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
 
     const item = setState.find(item => {
         const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
