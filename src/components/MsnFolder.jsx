@@ -1,7 +1,7 @@
 import UseContext from '../Context';
 import { useContext, useState, useRef, useEffect } from "react";
 import Draggable from 'react-draggable';
-import { motion } from 'framer-motion';
+
 import msnPic from '../assets/msn.png';
 import chat from '../assets/chat.png';
 import nudge from '../assets/nudge.png';
@@ -266,36 +266,27 @@ useEffect(() => {
                 }}
                 onTouchStart={(e) => e.stopPropagation()}
               >
-                <p className='dash-MSN'></p>
+                <span className='dash'></span>
               </div>
               <div
                 onClick={!isTouchDevice ? () => handleExpandStateToggle() : undefined}
                 onTouchEnd={handleExpandStateToggle}
               >
-                <motion.div className={`expand-MSN ${MSNExpand.expand ? 'full' : ''}`}>
-                </motion.div>
-                {MSNExpand.expand ?
-                  (
-                    <div className="expand_2-MSN"></div>
-                  )
-                  :
-                  (null)}
+                <div className={`expand ${MSNExpand.expand ? 'full' : ''}`} />
               </div>
-              <div>
-                <p className='x-MSN'
-                  onClick={!isTouchDevice ? () => {
-                    deleteTap('MSN');
-                    setUserName(false);
-                    setChatValue('')
-                  } : undefined}
-                  onTouchEnd={() => {
-                    deleteTap('MSN');
-                    setUserName(false);
-                    setChatValue('')
-                  }}
-                >
-                  ×
-                </p>
+              <div
+                onClick={!isTouchDevice ? () => {
+                  deleteTap('MSN');
+                  setUserName(false);
+                  setChatValue('')
+                } : undefined}
+                onTouchEnd={() => {
+                  deleteTap('MSN');
+                  setUserName(false);
+                  setChatValue('')
+                }}
+              >
+                <span className='x'>×</span>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import UseContext from '../Context'
 import { useContext } from "react";
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion';
+
 import file4 from '../assets/file4.png'
 import folder from '../assets/regFolder.png'
 import '../css/ResumeFolder.css'
@@ -15,7 +15,6 @@ function NoteFolder() {
   const { 
     themeDragBar,
     handleShow, handleShowMobile,
-    projectname,
     handleDoubleClickiframe, handleDoubleTapiframeMobile,
     setOpenProjectExpand,
     setProjectUrl,
@@ -23,8 +22,6 @@ function NoteFolder() {
     lastTapTime, setLastTapTime,
     StyleHide,
     isTouchDevice,
-    handleDoubleTapEnterMobile,
-    handleDoubleClickEnterLink,
     handleSetFocusItemTrue,
     inlineStyleExpand,
     inlineStyle,
@@ -126,22 +123,15 @@ function NoteFolder() {
                     StyleHide('Note')
                   }}
               >
-                <p className='dash'></p>
+                <span className='dash'></span>
               </div>
               <div
                 onClick={ !isTouchDevice ? () => handleExpandStateToggle() : undefined}
                 onTouchEnd={handleExpandStateToggle}
               >
-                <motion.div className={`expand ${NoteExpand.expand ? 'full' : ''}`}>
-                </motion.div>
-                {NoteExpand.expand ? 
-                (
-                <div className="expand_2"></div>
-                )
-                :
-                (null)}
+                <div className={`expand ${NoteExpand.expand ? 'full' : ''}`} />
               </div>
-              <div><p className='x'
+              <div
                  onClick={!isTouchDevice ? () => {
                   deleteTap('Note')
                  }: undefined
@@ -149,7 +139,9 @@ function NoteFolder() {
                 onTouchEnd={() => {
                   deleteTap('Note')
               }}
-              >x</p></div>
+              >
+                <span className='x'>×</span>
+              </div>
             </div>
           </div>
 

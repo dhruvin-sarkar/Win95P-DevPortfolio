@@ -1,7 +1,7 @@
 import UseContext from '../Context';
 import { useContext, useRef } from "react";
 import Draggable from 'react-draggable';
-import { motion } from 'framer-motion';
+
 import Project from '../assets/regFolder.png';
 import '../css/ProjectFolder.css';
 import { useSounds } from '../hooks/useSounds';
@@ -148,23 +148,19 @@ function ProjectFolder() {
               }}
               onTouchStart={(e) => e.stopPropagation()}
             >
-              <p className="dash-project"></p>
+              <span className="dash"></span>
             </div>
             <div
               onClick={!isTouchDevice ? handleExpandStateToggle : undefined}
               onTouchEnd={handleExpandStateToggle}
             >
-              <motion.div className={`expand-project ${ProjectExpand.expand ? 'full' : ''}`}></motion.div>
-              {ProjectExpand.expand && <div className="expand_2-project"></div>}
+              <div className={`expand ${ProjectExpand.expand ? 'full' : ''}`} />
             </div>
-            <div>
-              <p
-                className="x-project"
-                onClick={!isTouchDevice ? () => deleteTap('Project') : undefined}
-                onTouchEnd={() => deleteTap('Project')}
-              >
-                ×
-              </p>
+            <div
+              onClick={!isTouchDevice ? () => deleteTap('Project') : undefined}
+              onTouchEnd={() => deleteTap('Project')}
+            >
+              <span className="x">×</span>
             </div>
           </div>
         </div>

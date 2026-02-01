@@ -312,11 +312,27 @@ function BgSetting() {
               }}
                 onTouchStart={(e) => e.stopPropagation()}
               >
-                <p className='dash'></p>
+                <span className='dash'></span>
               </div>
 
-                <div>
-                <p className='x'
+              <div
+                onClick={!isTouchDevice ? () => {
+                   setBgSettingExpand(prevState => ({
+                     ...prevState,
+                     expand: !prevState.expand,
+                   }));
+                } : undefined}
+                onTouchEnd={() => {
+                   setBgSettingExpand(prevState => ({
+                     ...prevState,
+                     expand: !prevState.expand,
+                   }));
+                }}
+              >
+                <div className={`expand ${BgSettingExpand.expand ? 'full' : ''}`} />
+              </div>
+
+              <div
                   onClick={!isTouchDevice ? () => {
                     cancelBg()
                     deleteTap('Settings')
@@ -327,8 +343,8 @@ function BgSetting() {
                     cancelBg()
                     deleteTap('Settings')
                   }}
-                >×
-                </p>
+                >
+                <span className='x'>×</span>
               </div>
             </div>
           </div>

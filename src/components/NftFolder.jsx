@@ -1,7 +1,7 @@
 import UseContext from '../Context'
 import { useContext } from "react";
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion';
+
 import file4 from '../assets/file4.png'
 import folder from '../assets/regFolder.png'
 import '../css/ResumeFolder.css'
@@ -15,7 +15,6 @@ function NftFolder() {
   const { 
     themeDragBar,
     handleShow, handleShowMobile,
-    projectname,
     handleDoubleClickiframe, handleDoubleTapiframeMobile,
     setOpenProjectExpand,
     setProjectUrl,
@@ -123,22 +122,15 @@ function NftFolder() {
                     StyleHide('Nft')
                   }}
               >
-                <p className='dash'></p>
+                <span className='dash'></span>
               </div>
               <div
                 onClick={ !isTouchDevice ? () => handleExpandStateToggle() : undefined}
                 onTouchEnd={handleExpandStateToggle}
               >
-                <motion.div className={`expand ${NftExpand.expand ? 'full' : ''}`}>
-                </motion.div>
-                {NftExpand.expand ? 
-                (
-                <div className="expand_2"></div>
-                )
-                :
-                (null)}
+                <div className={`expand ${NftExpand.expand ? 'full' : ''}`} />
               </div>
-              <div><p className='x'
+              <div
                  onClick={!isTouchDevice ? () => {
                   deleteTap('Nft')
                  }: undefined
@@ -146,7 +138,9 @@ function NftFolder() {
                 onTouchEnd={() => {
                   deleteTap('Nft')
               }}
-              >x</p></div>
+              >
+                <span className='x'>×</span>
+              </div>
             </div>
           </div>
 

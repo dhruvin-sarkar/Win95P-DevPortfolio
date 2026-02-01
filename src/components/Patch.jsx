@@ -1,7 +1,7 @@
 import UseContext from '../Context'
 import { useContext } from "react";
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion';
+
 import bulb from '../assets/bulb.png'
 import '../css/Patch.css'
 import patchNotes from '../../patchNotes';
@@ -84,22 +84,25 @@ function Patch() {
                   }}
                   onTouchStart={(e) => e.stopPropagation()}
               >
-                <p className='dash-resumefile'></p>
+                <span className='dash'></span>
               </div>
-              <div>
-                <motion.div className={`expand-resumefile ${PatchExpand.expand ? 'full' : ''}`}
-                    style={{borderColor: 'grey'}} 
-                >
-                </motion.div>
-                {PatchExpand.expand ? 
-                (
-                <div className="expand_2-resumefile"></div>
-                )
-                :
-                (null)}
+              <div
+                onClick={ !isTouchDevice ? () => {
+                   setPatchExpand(prevState => ({
+                     ...prevState,
+                     expand: !prevState.expand,
+                   }));
+                } : undefined}
+                onTouchEnd={() => {
+                   setPatchExpand(prevState => ({
+                     ...prevState,
+                     expand: !prevState.expand,
+                   }));
+                }}
+              >
+                <div className={`expand ${PatchExpand.expand ? 'full' : ''}`} />
               </div>
-              <div>
-                <p className='x-resumefile'
+              <div
                  onClick={!isTouchDevice ? () => {
                   deleteTap('Patch')
                  }: undefined
@@ -107,7 +110,8 @@ function Patch() {
                 onTouchEnd={() => {
                   deleteTap('Patch')
               }}
-                >×</p>
+              >
+                <span className='x'>×</span>
               </div>
             </div>
           </div>
