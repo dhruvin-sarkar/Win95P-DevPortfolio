@@ -1612,6 +1612,11 @@ function handleShow(name) {
 
   if(name === '' || !name) return;
 
+  if (name === 'MS-DOS Prompt') {
+    handleShow('Terminal');
+    return;
+  }
+
   const lowerCaseName = name.toLowerCase().split(' ').join('');
   const allSetItems = ObjectState();
 
