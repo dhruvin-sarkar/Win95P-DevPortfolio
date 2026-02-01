@@ -2,7 +2,6 @@ import UseContext from '../Context'
 import emailjs from '@emailjs/browser';
 import { useContext, useRef } from "react";
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion';
 import Mail from '../assets/mail.png'
 import '../css/MailFolder.css'
 import { useSounds } from '../hooks/useSounds';
@@ -132,41 +131,35 @@ const form = useRef();
             </div>
             <div className="folder_barbtn-mail">
               <div onClick={!isTouchDevice ? (e) => {
-              e.stopPropagation();
-              playWindowMinimize();
-              setMailExpand(prev => ({ ...prev, hide: true, focusItem: false }));
-              StyleHide('Mail');
-            } : undefined}
-              onTouchEnd={(e) => {
                 e.stopPropagation();
                 playWindowMinimize();
                 setMailExpand(prev => ({ ...prev, hide: true, focusItem: false }));
                 StyleHide('Mail');
-              }}
-              onTouchStart={(e) => e.stopPropagation()}
-            >
-                <p className='dash-mail'></p>
+              } : undefined}
+                onTouchEnd={(e) => {
+                  e.stopPropagation();
+                  playWindowMinimize();
+                  setMailExpand(prev => ({ ...prev, hide: true, focusItem: false }));
+                  StyleHide('Mail');
+                }}
+                onTouchStart={(e) => e.stopPropagation()}
+              >
+                <span className="dash"></span>
               </div>
               <div
-                onClick={ !isTouchDevice ? () => handleExpandStateToggle() : undefined}
+                onClick={!isTouchDevice ? () => handleExpandStateToggle() : undefined}
                 onTouchEnd={handleExpandStateToggle}
               >
-                <motion.div className={`expand-mail ${MailExpand.expand ? 'full' : ''}`}>
-                </motion.div>
-                {MailExpand.expand ? 
-                (
-                <div className="expand_2-mail"></div>
-                )
-                :
-                (null)}
+                <div className={`expand ${MailExpand.expand ? 'full' : ''}`} />
               </div>
-              <div><p className='x-mail'
-                 onClick={!isTouchDevice ? () => {
-                  deleteTap('Mail')}
-                  : undefined
-                }
+              <div
+                onClick={!isTouchDevice ? () => {
+                  deleteTap('Mail')
+                } : undefined}
                 onTouchEnd={() => deleteTap('Mail')}
-              >×</p></div>
+              >
+                <span className="x">×</span>
+              </div>
             </div>
           </div>
 

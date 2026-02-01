@@ -308,7 +308,7 @@ const Terminal = () => {
                         <img src={terminalIcon} alt="cmd" style={{ width: '16px', height: '16px' }}/>
                         <span>MS-DOS Prompt</span>
                     </div>
-                    <div className="folder_barbtn_terminal">
+                    <div className="terminal_barbtn">
                         <div 
                             onClick={(e) => {
                                 e.stopPropagation();

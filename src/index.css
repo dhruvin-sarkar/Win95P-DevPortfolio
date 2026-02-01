@@ -1057,7 +1057,11 @@ body {
 .run_barbtn,
 .msn_barbtn,
 .minesweeper_barbtn,
-.mail_barbtn {
+.mail_barbtn,
+.folder_barbtn-mail,
+.folder_barbtn_terminal,
+.folder_barbtn-MSN,
+.folder_barbtn-resumefile {
     display: flex !important;
     position: relative;
     margin-right: 4px;
@@ -1076,7 +1080,11 @@ body {
 .run_barbtn div,
 .msn_barbtn div,
 .minesweeper_barbtn div,
-.mail_barbtn div {
+.mail_barbtn div,
+.folder_barbtn-mail div,
+.folder_barbtn_terminal div,
+.folder_barbtn-MSN div,
+.folder_barbtn-resumefile div {
     display: flex !important;
     justify-content: center;
     align-items: center;
@@ -1103,7 +1111,11 @@ body {
 .run_barbtn div:active,
 .msn_barbtn div:active,
 .minesweeper_barbtn div:active,
-.mail_barbtn div:active {
+.mail_barbtn div:active,
+.folder_barbtn-mail div:active,
+.folder_barbtn_terminal div:active,
+.folder_barbtn-MSN div:active,
+.folder_barbtn-resumefile div:active {
     border-top-color: black;
     border-left-color: black;
     border-bottom-color: white;
@@ -1111,56 +1123,28 @@ body {
     box-shadow: inset -1px -1px #ffffff, -1px -1px #000000dd;
 }
 
-.folder_barbtn .x,
-.bio_barbtn .x,
-.folder_barbtn-project .x-project,
-.folder_barbtn-resume .x-resume,
-.barbtn-vscode .x,
-.terminal_barbtn .x,
-.taskmanager_barbtn .x,
-.store_barbtn .x,
-.run_barbtn .x,
-.msn_barbtn .x-msn,
-.minesweeper_barbtn .x,
-.mail_barbtn .x {
-    position: relative;
-    text-align: center;
-    font-size: 16px;
-    line-height: normal;
-    margin-top: -1px;
-}
-
-.folder_barbtn .dash,
-.bio_barbtn .dash,
-.folder_barbtn-project .dash-project,
-.folder_barbtn-resume .dash-resume,
-.barbtn-vscode .dash,
-.terminal_barbtn .dash,
-.taskmanager_barbtn .dash,
-.store_barbtn .dash,
-.run_barbtn .dash,
-.msn_barbtn .dash-msn,
-.minesweeper_barbtn .dash,
-.mail_barbtn .dash {
+/* Universal symbols for all window control buttons */
+.dash,
+.dash-project,
+.dash-resume,
+.dash-msn,
+.dash-mail,
+.dash-resumefile {
     position: relative;
     width: 8px;
     height: 0;
     border-bottom: 2px solid black;
     margin-top: 6px;
+    margin-bottom: 0px !important;
+    /* Ensure no bottom margin pushes it up */
 }
 
-.folder_barbtn .expand,
-.bio_barbtn .expand,
-.folder_barbtn-project .expand-project,
-.folder_barbtn-resume .expand-resume,
-.barbtn-vscode .expand,
-.terminal_barbtn .expand,
-.taskmanager_barbtn .expand,
-.store_barbtn .expand,
-.run_barbtn .expand,
-.msn_barbtn .expand-msn,
-.minesweeper_barbtn .expand,
-.mail_barbtn .expand {
+.expand,
+.expand-project,
+.expand-resume,
+.expand-msn,
+.expand-mail,
+.expand-resumefile {
     position: relative;
     width: 10px;
     height: 10px;
@@ -1170,18 +1154,26 @@ body {
     margin-top: 1px;
 }
 
-.folder_barbtn .expand.full,
-.bio_barbtn .expand.full,
-.folder_barbtn-project .expand-project.full,
-.folder_barbtn-resume .expand-resume.full,
-.barbtn-vscode .expand.full,
-.terminal_barbtn .expand.full,
-.taskmanager_barbtn .expand.full,
-.store_barbtn .expand.full,
-.run_barbtn .expand.full,
-.msn_barbtn .expand-msn.full,
-.minesweeper_barbtn .expand.full,
-.mail_barbtn .expand.full {
+.expand.full,
+.expand-project.full,
+.expand-resume.full,
+.expand-msn.full,
+.expand-mail.full,
+.expand-resumefile.full {
     width: 8px;
     height: 8px;
+}
+
+.x,
+.x-project,
+.x-resume,
+.x-msn,
+.x-mail,
+.x-resumefile {
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+    line-height: normal;
+    margin-top: -1px;
+    color: black !important;
 }

@@ -266,7 +266,7 @@ useEffect(() => {
                 }}
                 onTouchStart={(e) => e.stopPropagation()}
               >
-                <span className='dash'></span>
+                <span className="dash"></span>
               </div>
               <div
                 onClick={!isTouchDevice ? () => handleExpandStateToggle() : undefined}
@@ -286,7 +286,7 @@ useEffect(() => {
                   setChatValue('')
                 }}
               >
-                <span className='x'>×</span>
+                <span className="x">×</span>
               </div>
             </div>
           </div>
