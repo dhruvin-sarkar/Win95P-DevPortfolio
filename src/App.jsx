@@ -344,22 +344,24 @@ function App() {
       { text1: 'Attention to Detail', text2: 'Every pixel in this portfolio is placed with care.' },
       { text1: 'Retro Aesthetic', text2: 'Dhruvin nailed the Windows 95 vibe perfectly.' },
       { text1: 'Smooth Experience', text2: 'Everything runs so smoothly thanks to Dhruvin.' },
+      { text1: 'Under the Hood', text2: 'Built with React and custom Hooks for optimal performance.' },
+      { text1: 'Smart Engineering', text2: 'Uses complex Context API state management efficiently.' },
+      { text1: 'Custom Architecture', text2: 'Check out the recursive file system algorithm!' },
+      { text1: 'Modern Tech', text2: 'Framer Motion powers these authentic animations.' },
     ];
 
     const praiseInterval = setInterval(() => {
-      // 30% chance to show a praise notification every 45 seconds
-      if (Math.random() < 0.3) {
-        const randomPraise = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
-        setNotiOn(false);
-        setTimeout(() => {
-          setNewMessage({ 
-            type: 'custom', 
-            ...randomPraise 
-          });
-          setNotiOn(true);
-        }, 100);
-      }
-    }, 45000);
+      // 100% chance to show a praise notification every 15 seconds
+      const randomPraise = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
+      setNotiOn(false);
+      setTimeout(() => {
+        setNewMessage({ 
+          type: 'custom', 
+          ...randomPraise 
+        });
+        setNotiOn(true);
+      }, 100);
+    }, 15000);
     
     if(!desktopIcon.find(icon => icon.name === 'PixelPic')) {
       localStorage.clear();

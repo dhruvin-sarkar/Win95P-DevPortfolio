@@ -11,8 +11,11 @@ export const clippyPhrase = {
     inspiration: [
         { phrase: "I'm Clippy, Dhruvin's portfolio assistant! Need help?", animation: clippy1 },
         { phrase: "Dhruvin custom edited the startup sound himself! Pixel perfect audio!", animation: clippy7 },
+        { phrase: "Built with React Hooks for optimized performance!", animation: clippy1 },
+        { phrase: "Clean code structure allows for easy scalability.", animation: clippy2 },
         { phrase: "Notice the attention to detail? Dhruvin's design is flawless!", animation: clippy3 },
         { phrase: "Dhruvin strives for pixel perfection in every window!", animation: clippy5 },
+        { phrase: "Uses advanced Context API for global state management!", animation: clippy4 },
         { phrase: "Welcome to Dhruvin's Windows 95 portfolio! Pretty cool, huh?", animation: clippy7 },
         { phrase: "Dhruvin is an AI and Design Thinking student - check out his bio!", animation: clippy3 },
         { phrase: "Want to see Dhruvin's projects? Click the Project folder!", animation: clippy1 },
@@ -49,5 +52,8 @@ export const clippySuggest =
     'Connect with Dhruvin on LinkedIn for professional networking!',
     'Dhruvin spent hours perfecting that startup sound!',
     'Everything you see is pixel-perfectly designed by Dhruvin.',
-    'The attention to detail in this portfolio is just amazing.'
+    'The attention to detail in this portfolio is just amazing.',
+    'Did you know? The file system uses a recursive algorithm!',
+    'This portfolio runs on a custom-built React architecture.',
+    'Optimized asset loading ensures a smooth experience.'
 ]
