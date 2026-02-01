@@ -32,7 +32,7 @@ import loadingSpin from './assets/loading.gif'
 import NewsApp from './components/NewsApp'
 import SpinningCat from './components/SpinningCat';
 import Patch from './components/Patch';
-import Link from './components/WindowsDragLogin';
+import WindowsDragLogin from './components/WindowsDragLogin';
 import TaskManager from './components/TaskManager';
 import Terminal from './components/Terminal';
 import { StyleHide, imageMapping,
@@ -1549,6 +1549,7 @@ function ObjectState() {
     { name: 'Internet',    setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(0, 159, 186, 0.85)', size: 'small' },
     { name: 'Settings',    setter: setBgSettingExpand,  usestate: BgSettingExpand,  color: 'rgba(140, 140, 140, 0.85)', size: 'small' },
     { name: 'Run',         setter: setRunExpand,        usestate: RunExpand,        color: 'rgba(86, 114, 122, 0.85)', size: 'small' },
+    { name: 'Terminal',    setter: setTerminalExpand,   usestate: TerminalExpand,   color: 'rgba(12, 12, 12, 0.85)',   size: 'small' },
     { name: 'MyComputer',  setter: setMyComputerExpand, usestate: MyComputerExpand, color: 'rgba(31, 122, 206, 0.85)', size: 'small' },
     { name: 'Patch',       setter: setPatchExpand,      usestate: PatchExpand,      color: 'rgba(86, 114, 122, 0.85)', size: 'small' },
     { name: 'Photo',       setter: setPhotoOpenExpand,  usestate: photoOpenExpand,  color: 'rgba(0, 120, 93, 0.85)', size: 'small' },
