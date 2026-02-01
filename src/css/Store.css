@@ -1,0 +1,349 @@
+/* ------------ Folders ---------------- */
+
+.folder_folder-open-store {
+    display: none;
+    position: fixed;
+    width: 520px;
+    min-width: 600px;
+    min-height: 340px;
+    height: 55%;
+    background: #c5c4c4;
+    border: 2px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    outline: 1px solid white;
+    overflow: hidden;
+    resize: both;
+}
+
+   
+
+@media screen and (max-width: 450px) {
+    .folder_folder-open-store {
+        width: 95%;
+        min-width: 320px;
+        height: 55%;
+    }
+}
+
+.folder_folder-open-store .folder_barbtn{
+    display: flex;
+    position: relative;
+    margin-right: 4px;
+    gap: 2px;
+}
+
+.folder_folder-open-store .folder_dragbar {
+   display: flex;
+   position: relative;
+   height: 24px;
+   width: 100%;
+   margin-bottom: 1px;
+   align-items: center;
+   justify-content: space-between;
+   -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.folder_folder-open-store .file_edit_container {
+    display: flex;
+    gap: 5px;
+    font-size: 15px;
+    padding-left: 10px;
+    cursor: default;
+}
+
+.folder_folder-open-project .x {
+    position: relative;
+    bottom: 6px;
+}
+
+
+/* support only safari */
+@supports (-webkit-touch-callout: none) {
+    .folder_folder-open-store .x {
+        bottom: 7px; 
+        left: 1.5px;
+    }
+}
+
+
+
+.store_content {
+    display: flex;
+    position: relative;
+    width: calc(100% - 18px);
+    height: calc(100% - 64px);
+    margin: 0 auto;
+    top: 6px;
+    background: white;
+    gap: 8px;
+    background: #c5c4c4;
+}
+
+.store_content > div {
+    border: 2px solid black;
+    border-bottom-color: white;
+    border-right-color: white;
+    background: white;
+}
+
+.store_sec_2, .store_sec_3 {
+    flex: 1 1 0;
+}
+
+
+.store_sec_1 {
+    flex: 0 0 136px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.store_sec_1 .store_search {
+    position: relative;
+    height: 30px;
+    border: 2px solid black;
+    border-bottom-color: white;
+    border-right-color: white;
+    background: white;
+}
+.store_sec_1 .store_catagory {
+    position: relative;
+    height: 100%;
+    border: 2px solid black;
+    border-bottom-color: white;
+    border-right-color: white;
+    background: white;
+}
+
+.store_sec_1 .store_search input {
+    position: relative;
+    border: none;
+    outline: none;
+    width: 95%;
+    height: 100%;
+    padding: 2px;
+    font-size: 13px;
+    padding-left: 6px;
+    color: rgb(25, 22, 22);
+}
+
+.store_sec_1 .store_search span {
+    position: absolute;
+    font-size: 14px;
+    right: 10px;
+    top: 2px;
+    color: #6d6c6c;
+    rotate: 90deg;
+}
+
+.store_sec_1 .store_catagory div {
+    position: relative;
+    height: 28px;
+    padding-left: 1.2rem;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    cursor: pointer;
+    border: none;
+    
+}
+
+.store_sec_1 .store_catagory :first-child {
+    padding-left: 0.5rem;
+    font-weight: bold;
+}
+
+.store_sec_1 .store_catagory div:hover {
+    background: #040482;
+    color: white;
+}
+
+.store_sec_1 .store_catagory div .show_hide_cat {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cat_dot {
+    position: absolute;
+    left: 1px;
+    bottom: 4px;
+    font-size: 24px;
+    color: black;
+}
+
+.store_sec_1 .store_catagory div:hover > .cat_dot {
+    color: white;
+}
+
+ /*------- section 2 styles ------- */
+
+
+ .store_sec_2::-webkit-scrollbar {
+    width: 0px;
+}
+
+.store_sec_2 {
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+}
+
+
+.item_section_two {
+    display: flex;
+    padding: 0.3rem 0.5rem;
+    gap: 10px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+.item_section_two:hover {
+    background: #040482;
+}
+
+.item_section_two:hover > .section_two_text p {
+    color: #ebe9e9;
+}
+
+.item_section_two .section_two_img {
+    flex-shrink: 0;
+}
+
+.item_section_two .section_two_img img {
+    position: relative;
+    width: 32px;
+}
+
+.item_section_two .section_two_text {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.item_section_two .section_two_text_name {
+    font-size: 13px;
+    margin: 2px 0;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item_section_two .section_two_text_des {
+    font-size: 11px;
+    color: rgb(59, 57, 57);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/*-------------- section 3 -------------- */
+
+.store_sec_3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0.5rem;
+    gap: 0.4rem;
+    padding-bottom: 0;
+}
+
+
+.store_sec_3 img {
+    width: 46px;
+}
+
+.store_sec_3 h3 {
+    font-size: 15px;
+    margin: 0;
+}
+
+.store_sec_3 p {
+    font-size: 13px;
+    text-align: center;
+}
+
+.store_sec_3 .section_3_des {
+    font-size: 12px;
+}
+
+.store_sec_3 button {
+    position: relative;
+    width: 100px;
+    height: 32px;
+    border: 2px solid white;
+    border-bottom-color: black;
+    border-right-color: black;
+    background: #e0e0e0;
+    cursor: pointer;
+    margin-top: 4px;
+    border-radius: 0px;
+    font-size: 13px;
+}
+
+.store_sec_3 button:active {
+    border: 2px solid black;
+    border-bottom-color: white;
+    border-right-color: white;
+}
+
+.progress_bar_store {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: #4d5b4a47;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: progressBar 15s linear forwards;
+}
+
+.progress_bar_store_uninstall {
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background: #4d5b4a47;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: progressBar 5s linear forwards;
+}
+
+
+@keyframes progressBar {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 450px) {
+    .store_content > div {
+        flex: 1 1 0;
+    }
+    .item_section_two .section_two_text_des {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .item_section_two .section_two_img img {
+        width: 24px;
+    }
+    .item_section_two .section_two_text_name {
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

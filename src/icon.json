@@ -1,0 +1,334 @@
+[
+    {
+        "name": "About",
+        "pic": "About",
+        "folderId": "Desktop",
+        "size": 4,
+        "type": ".exe",
+        "x": 1,
+        "y": 1
+    },
+    {
+        "name": "MyComputer",
+        "pic": "MyComputer",
+        "folderId": "Desktop",
+        "size": 4,
+        "type": "Drive",
+        "x": 1.5,
+        "y": 1.5
+    },
+    {
+        "name": "Resume",
+        "pic": "Resume",
+        "folderId": "Desktop",
+        "size": 30,
+        "type": "folder",
+        "x": 2,
+        "y": 2
+    },
+    {
+        "name": "Project",
+        "pic": "Project",
+        "folderId": "Desktop",
+        "size": 2000,
+        "type": "folder",
+        "x": 3,
+        "y": 3
+    },
+    {
+        "name": "Mail",
+        "pic": "Mail",
+        "folderId": "Desktop",
+        "size": 12,
+        "type": ".exe",
+        "x": 4,
+        "y": 4,
+        "category": "Productivity",
+        "description": "Email client for sending and receiving emails."
+
+    },
+    {
+        "name": "MineSweeper",
+        "pic": "MineSweeper",
+        "folderId": "Project",
+        "size": 250,
+        "type": ".exe",
+        "x": 5,
+        "y": 5,
+        "category": "Games",
+        "description": "Classic puzzle game where you clear mines without detonating them."
+    },
+    {
+        "name": "MSN",
+        "pic": "MSN",
+        "folderId": "Desktop",
+        "size": 1500,
+        "type": ".exe",
+        "x": 6,
+        "y": 6,
+        "category": "Utilities",
+        "description": "Instant messaging application for chatting with friends."
+    },
+    {
+        "name": "Winamp",
+        "pic": "Winamp",
+        "folderId": "Utility",
+        "size": 4300,
+        "type": ".exe",
+        "x": 7,
+        "y": 7,
+        "category": "Utilities",
+        "description": "Media player for playing music and audio files."
+    },
+    {
+        "name": "Hard Disk (C:)",
+        "pic": "Hard Disk (C:)",
+        "folderId": "MyComputer",
+        "size": 4000,
+        "type": "Drive",
+        "x": 11,
+        "y": 11
+    },
+    {
+        "name": "Hard Disk (D:)",
+        "pic": "Hard Disk (D:)",
+        "folderId": "MyComputer",
+        "size": 1000,
+        "type": "Drive",
+        "x": 12,
+        "y": 12
+    },
+    {
+        "name": "CD-ROM",
+        "pic": "CD-ROM",
+        "folderId": "MyComputer",
+        "size": 500,
+        "type": "Drive",
+        "x": 13,
+        "y": 13
+    },
+    {
+        "name": "Picture",
+        "pic": "Picture",
+        "folderId": "DiskC",
+        "size": 1000,
+        "type": "folder",
+        "x": 14,
+        "y": 14
+    },
+    {
+        "name": "Bitcoin",
+        "pic": "Bitcoin",
+        "folderId": "Utility",
+        "size": 500,
+        "type": ".exe",
+        "x": 15,
+        "y": 15,
+        "category": "Utilities",
+        "description": "Crypto tracking and wallet utility tool."
+    },
+    {
+        "name": "001",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 16,
+        "y": 16
+    },
+    {
+        "name": "002",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 17,
+        "y": 17
+    },
+    {
+        "name": "003",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 18,
+        "y": 18
+    },
+    {
+        "name": "004",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 19,
+        "y": 19
+    },
+    {
+        "name": "005",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 20,
+        "y": 20
+    },
+    {
+        "name": "006",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 21,
+        "y": 21
+    },
+    {
+        "name": "007",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 22,
+        "y": 22
+    },
+    {
+        "name": "008",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 23,
+        "y": 23
+    },
+    {
+        "name": "009",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 24,
+        "y": 24
+    },
+    {
+        "name": "010",
+        "pic": "Jpeg",
+        "folderId": "RecycleBin",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 25,
+        "y": 25
+    },
+    {
+        "name": "011",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 26,
+        "y": 26
+    },
+    {
+        "name": "Github",
+        "pic": "Github",
+        "folderId": "Resume",
+        "size": 15,
+        "type": ".exe",
+        "x": 27,
+        "y": 27,
+        "category": "Productivity",
+        "description": "Tool for accessing and managing code repositories online."
+    },
+    {
+        "name": "AiAgent",
+        "pic": "AiAgent",
+        "folderId": "Desktop",
+        "size": 10000,
+        "type": ".exe",
+        "x": 29,
+        "y": 29,
+        "category": "Productivity",
+        "description": "AI-powered personal assistant for answering questions."
+    },
+    {
+        "name": "Cat",
+        "pic": "Cat",
+        "folderId": "Desktop",
+        "size": 5000,
+        "type": ".exe",
+        "x": 30,
+        "y": 30,
+        "category": "Games",
+        "description": "Virtual pet simulation game featuring a cute cat spinning."
+    },
+    {
+        "name": "RecycleBin",
+        "pic": "RecycleBin",
+        "folderId": "Desktop",
+        "size": 250,
+        "type": "ReCycleBin",
+        "x": 31,
+        "y": 31
+    },
+    {
+        "name": "ResetStorage",
+        "pic": "ResetStorage",
+        "folderId": "Utility",
+        "size": 20,
+        "type": ".exe",
+        "x": 32,
+        "y": 32,
+        "category": "Utilities",
+        "description": "Clears or resets storage data to free up system space."
+    },
+    {
+        "name": "Paint",
+        "pic": "Paint",
+        "folderId": "Utility",
+        "size": 200,
+        "type": ".exe",
+        "x": 33,
+        "y": 33,
+        "category": "Utilities",
+        "description": "Basic drawing program for creating and editing images."
+    },
+    {
+        "name": "Utility",
+        "pic": "Utility",
+        "folderId": "DiskD",
+        "size": 2500,
+        "type": "folder",
+        "x": 34,
+        "y": 34
+    },
+    {
+        "name": "Patch",
+        "pic": "Patch",
+        "folderId": "Utility",
+        "size": 500,
+        "type": ".exe",
+        "x": 35,
+        "y": 35,
+        "category": "Utilities",
+        "description": "Software patch used to fix bugs or apply updates."
+    },
+    {
+        "name": "TaskManager",
+        "pic": "TaskManager",
+        "folderId": "Utility",
+        "size": 3500,
+        "type": ".exe",
+        "x": 38,
+        "y": 38,
+        "category": "Utilities",
+        "description": "System tool to monitor active processes and performance."
+    },
+    {
+        "name": "Store",
+        "pic": "Store",
+        "folderId": "Desktop",
+        "size": 5500,
+        "type": ".exe",
+        "x": 39,
+        "y": 39
+    }
+
+]

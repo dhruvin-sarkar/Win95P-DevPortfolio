@@ -1,0 +1,453 @@
+/* ------------ Folders ---------------- */
+
+.bio_folder {
+    display: none;
+    position: fixed;
+    width: 420px;
+    height: 475px;
+    min-height: 320px;
+    background: #c5c4c4;
+    border: 2px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    outline: 1px solid white;
+    overflow: hidden;
+    resize: none;
+}
+
+
+.bio_folder .folder_dragbar {
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bio_barname img {
+    position: relative;
+    width: 16px;
+    top: 3px;
+    margin-left: 5px;
+}
+
+.bio_barname span {
+    position: relative;
+    font-size: 15px;
+    color: white;
+    margin-left: 5px;
+}
+
+.bio_folder .bio_barbtn {
+    display: flex;
+    position: relative;
+    margin-right: 4px;
+    gap: 2px;
+}
+
+.bio_barbtn div {
+    width: 17px;
+    height: 17px;
+    background: #c9c9c9;
+    font-weight: bold;
+    border: 1px solid black;
+    border-top-color: rgb(198, 198, 198);
+    border-left-color: rgb(198, 198, 198);
+    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
+    cursor: default;
+}
+
+.bio_barbtn div:not(.expand):active {
+    border-top-color: black;
+    border-left-color: black;
+    border-bottom-color: white;
+    border-right-color: white;
+}
+
+.bio_barbtn .x {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    bottom: 5px;
+}
+
+/* support only safari */
+@supports (-webkit-touch-callout: none) {
+    .bio_barbtn .x {
+        bottom: 7px;
+        left: 1px;
+    }
+}
+
+.bio_barbtn .dash {
+    position: relative;
+    width: 8px;
+    top: 11px;
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+
+.bio_barbtn .expand {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    top: 3px;
+    z-index: 1;
+}
+
+.bio_barbtn .expand.full {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    top: 5px;
+    right: 2px;
+    z-index: 1;
+}
+
+.bio_barbtn .expand_2 {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    bottom: 6px;
+    left: 1.5px;
+}
+
+.file_tap_container-bio {
+    display: flex;
+    position: relative;
+    margin-top: 12px;
+    font-size: 15px;
+    margin-left: 9px;
+    cursor: default;
+}
+
+.file_tap_container-bio p {
+    position: relative;
+    padding: 0px 8px;
+    padding-top: 1px;
+    font-size: 13px;
+    border: 2px solid black;
+    border-top-color: #f0efef;
+    border-left-color: #f0efef;
+    border-right-color: rgb(53, 52, 52);
+    z-index: 1;
+    cursor: pointer;
+}
+
+
+.bio_folder .folder_content {
+    position: relative;
+    top: -3.5px;
+    margin: 0 auto;
+    width: calc(100% - 8px);
+    height: calc(100% - 4px);
+    overflow: hidden;
+    touch-action: none;
+    z-index: 2;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .bio_folder .folder_content {
+        top: -4px
+    }
+}
+
+.folder_content .folder_content-bio {
+    display: grid;
+    position: relative;
+    width: calc(100% - 10px);
+    height: calc(100% - 95px);
+    grid-template-columns: 1/2;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgb(53, 52, 52);
+    border-top-color: #f0efef;
+    border-left-color: #f0efef;
+    margin: 0 auto;
+    margin-top: 0;
+    background: #c5c4c4;
+    overflow: hidden;
+    word-break: break-word;
+    grid-template-areas:
+        /* 'bio_h1 bio_h1' */
+        'bio_img biotext_container'
+        /* 'cv_container cv_container'; */
+}
+
+.folder_content .biotext_container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
+/* Windows 95 style scrollbar */
+.biotext_container::-webkit-scrollbar {
+    width: 16px;
+}
+
+.biotext_container::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border-left: 1px solid #808080;
+    border-top: 1px solid #808080;
+}
+
+.biotext_container::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    box-shadow: inset 1px 1px 0 0 #dfdfdf, inset -1px -1px 0 0 #808080;
+}
+
+.biotext_container::-webkit-scrollbar-thumb:hover {
+    background: #d4d4d4;
+}
+
+.biotext_container::-webkit-scrollbar-button {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    height: 16px;
+}
+
+.biotext_container::-webkit-scrollbar-button:vertical:decrement {
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 2 L1 6 L7 6 Z" fill="black"/></svg>') center no-repeat;
+}
+
+.biotext_container::-webkit-scrollbar-button:vertical:increment {
+    background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 6 L1 2 L7 2 Z" fill="black"/></svg>') center no-repeat;
+}
+
+.biotext_container::-webkit-scrollbar-button:active {
+    border-color: #000000 #ffffff #ffffff #000000;
+}
+
+.biotext_container p {
+    color: #1f1e1e;
+    white-space: normal;
+}
+
+.folder_content-bio .bio_img {
+    position: relative;
+    width: 180px;
+    margin-left: -1.5rem;
+    top: 1.2rem;
+}
+
+.folder_content-bio .bio_img_other {
+    position: relative;
+    width: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* .folder_content-bio h1 {
+    grid-area: bio_h1;
+    position: relative;
+    font-size: 23px;
+    text-decoration: underline;
+    left: .5rem;
+} */
+
+.folder_content-bio .bio_text_1 {
+    position: relative;
+    font-size: 12px;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    left: 1.2rem;
+}
+
+.folder_content-bio .bio_text_1 strong {
+    color: #1f1e1e;
+}
+
+.folder_content-bio .bio_text_1 span {
+    padding-left: 10px;
+    color: #2b2828;
+}
+
+
+.folder_content-bio .bio_text_1_other {
+    position: relative;
+    font-size: 12px;
+    padding-left: 1rem;
+
+}
+
+.folder_content-bio .bio_text_1_other span {
+    background: rgb(181, 181, 181);
+    font-weight: bold;
+    padding: 0px 3px;
+    color: #292727;
+}
+
+
+
+.folder_content-bio .bio_text_2 {
+    grid-area: bio_text_2;
+    height: fit-content;
+    font-size: 12px;
+    margin-top: -.3rem;
+    padding-left: 2.5rem;
+    white-space: nowrap;
+}
+
+
+
+
+.cv_container {
+    grid-area: cv_container;
+    display: grid;
+    height: fit-content;
+    position: relative;
+    gap: .6rem;
+    left: .5rem;
+    top: 1rem;
+}
+
+.folder_content-bio a {
+    text-decoration: underline;
+    color: blue;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.folder_content-bio a:hover {
+    color: rgb(73, 73, 237);
+    text-decoration-color: rgb(73, 73, 237);
+}
+
+.bio_btn_container {
+    display: flex;
+    position: absolute;
+    gap: 6px;
+    right: 5px;
+    margin-top: 6px;
+
+}
+
+.bio_btn_container div {
+    position: relative;
+    width: 70px;
+    text-align: center;
+    border: 2px solid black;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.bio_btn_container span {
+    font-size: 13px;
+}
+
+.bio_btn_container .bio_btn_ok {
+    border-top-color: #f0efef;
+    border-left-color: #f0efef;
+    cursor: pointer;
+}
+
+.bio_btn_container .bio_btn_cancel {
+    border-top-color: #f0efef;
+    border-left-color: #f0efef;
+    cursor: pointer;
+}
+
+.bio_btn_container .bio_btn_cancel:active,
+.bio_btn_container .bio_btn_ok:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-bottom-color: #f0efef;
+    border-right-color: #f0efef;
+}
+
+
+/* @media screen and (width <= 500px) {
+    .folder_content-bio img {
+        width: 150px;
+    }
+    .folder_content .folder_content-bio {
+        display: block;
+        place-items: center;
+        text-align: center;
+    }
+    .folder_content-bio img {
+        margin: auto;
+        margin-top: -.5rem;
+        padding-bottom: 1rem;
+    }
+
+    .folder_content-bio h1 {
+        left: 0rem;
+        height: fit-content;
+        margin-bottom: .5rem;
+
+    }
+
+    .folder_content-bio .bio_text_1 {
+        padding: 0;
+        padding-left: .5rem;
+        text-align: left;
+        margin-top: -2.1rem;
+    }
+
+    .folder_content-bio .bio_text_2 {
+        display: none;
+    }
+
+    .cv_container {
+        position: relative;
+        margin-top: .5rem;
+        bottom: 0;
+        left: 0;
+        top: 0;
+    }
+
+    .bio_folder {
+        width: 80%;
+    }
+    .folder_content .folder_content-bio {
+        padding: 1rem 1.5rem;
+    }
+} */
+
+@media screen and (width <=500px) {
+    .bio_folder {
+        width: 380px;
+    }
+
+    .folder_content-bio .bio_img {
+        width: 160px;
+    }
+
+    .folder_content-bio .bio_text_1 {
+        left: .5rem;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
+    .x {
+        left: 1px;
+    }
+}

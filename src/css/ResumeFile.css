@@ -1,0 +1,327 @@
+/* ------------ Folders ---------------- */
+
+.folder_folder-resumefile {
+    display: none;
+    position: fixed;
+    width: 400px;
+    min-width: 300px;
+    min-height: 250px;
+    height: 620px;
+    background: #c5c4c4;
+    border: 2px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    outline: 1px solid white;
+    overflow: hidden;
+    resize: both;
+}
+   
+
+@media screen and (max-width: 450px) {
+    .folder_folder-resumefile {
+        width: 80%;
+        min-width: 300px;
+        height: 70%;
+    }
+}
+
+.folder_folder-resumefile .folder_dragbar-resumefile {
+   display: flex;
+   position: relative;
+   height: 24px;
+   width: 100%;
+   margin-bottom: 1px;
+   align-items: center;
+   justify-content: space-between;
+   -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.folder_barname-resumefile img {
+    position: relative;
+    width: 16px;
+    top: 2px;
+    margin-left: 5px;
+}
+
+.folder_barname-resumefile span {
+    position: relative;
+    font-size: 15px;
+    color: white;
+    margin-left: 5px;
+    top: 1px;
+    right: 2px;
+}
+
+.folder_folder-resumefile .folder_barbtn-resumefile {
+    display: flex;
+    position: relative;
+    margin-right: 4px;
+    gap: 2px;
+}
+
+.folder_barbtn-resumefile div {
+    width: 17px;
+    height: 17px;
+    background: #c9c9c9;
+    font-weight: bold;
+    border: 1px solid black;
+    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
+    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
+    cursor: default;
+}
+
+.folder_barbtn-resumefile div:not(.expand-resumefile):active {
+    border-top-color: black;border-left-color: black;
+    border-bottom-color: white;border-right-color: white;
+}
+
+.folder_barbtn-resumefile .x-resumefile {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    bottom: 6px;
+}
+
+/* support only safari */
+@supports (-webkit-touch-callout: none) {
+    .folder_barbtn-resumefile .x-resumefile {
+        bottom: 7px; 
+    }
+}
+
+.folder_barbtn-resumefile .dash-resumefile {
+    position: relative;
+    width: 8px;
+    top: 11px;
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+.folder_barbtn-resumefile .expand-resumefile {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    top: 3px;
+}
+
+.folder_barbtn-resumefile .expand-resumefile.full {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    top: 5px;
+    right: 2px;
+    z-index: 1;
+}
+
+.folder_barbtn-resumefile .expand_2-resumefile {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid black;
+    border-left-color: black;
+    box-shadow: none;
+    margin: 0 auto;
+    bottom: 6px;
+    left: 1.5px;
+}
+
+.folder_folder-resumefile .file_edit_container-resumefile {
+    display: flex;
+    gap: 5px;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    cursor: default;
+}
+
+
+.folder_folder-resumefile .folder_content-resumefile {
+    position: relative;
+    width: calc(100% - 8px);
+    height: calc(100% - 33px);
+    border: 2px solid black;
+    border-right-color: white;
+    border-bottom-color: white;
+    margin: 0 auto;
+    margin-top: 5px;
+    background: rgb(255, 255, 255);
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.btn_option_btm_container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 35px;
+    gap: 5px;
+    padding-left: 4px;
+    bottom: 1px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.btn_option_btm_container .download_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 105px;
+    height: 26px;
+    border: 2px solid white;
+    border-right-color: black;
+    border-bottom-color: black;
+}
+
+.btn_option_btm_container .download_icon:active {
+    border: 1px solid black;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.btn_option_btm_container .download_icon span {
+    position: relative;
+    font-size: 12px;
+    white-space: nowrap;
+    right: 9px;
+    top: 2px;
+    cursor: pointer;
+}
+
+.btn_option_btm_container .download_icon img {
+    position: relative;
+    width: 36px;
+    right: 6px;
+    bottom: 0px;
+}
+
+.btn_option_btm_container .file_resume_select-show {
+    display: grid;
+    position: absolute;
+    place-items: center;
+    padding: 6px 0px;
+    width: 155px;
+    height: fit-content;
+    top: 2.3rem;
+    left: 5px;
+    overflow: hidden;
+    background: #c5c4c4;
+    border: 1px solid white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    gap: 1px;
+    z-index: 99;
+    
+}
+
+.btn_option_btm_container .file_resume_select-hide {
+    display: none;
+}
+
+.btn_option_btm_container .btn_download_conainer {
+    display: flex;
+    position: relative;
+    width: 93%;
+    padding: 3px 9px;
+    background: #c5c4c4;
+    box-shadow: inset 1.5px 1.5px #fdfdfddd, 1.5px 1.5px #000;
+    cursor: pointer;
+    z-index: 9998;
+}
+
+.btn_option_btm_container .btn_download_conainer img {
+    position: relative;
+    width: 20px;
+    right: 5px;
+}
+
+.btn_option_btm_container .btn_download_conainer p {
+    position: relative;
+    font-size: 12px;
+    top: 1px;
+}
+
+.btn_option_btm_container .btn_download_conainer p:hover {
+    color: white;
+}
+
+
+.btn_option_btm_container .btn_Open_conainer {
+    display: flex;
+    position: relative;
+    width: 93%;
+    padding: 3px 9px;
+    background: #c5c4c4;
+    box-shadow: inset 1.5px 1.5px #fdfdfddd, 1.5px 1.5px #000;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+.btn_option_btm_container .btn_Open_conainer img {
+    position: relative;
+    width: 20px;
+    right: 4.5px;
+}
+
+.btn_option_btm_container .btn_Open_conainer p {
+    position: relative;
+    font-size: 12px;
+    top: 1px;
+}
+
+.btn_option_btm_container .btn_Open_conainer p:hover {
+    color: white;
+}
+
+.btn_download_conainer:active,
+.btn_Open_conainer:active {
+    box-shadow: inset 1.5px 1.5px #000, 2px 2px #ebeaeadd;
+}
+
+@media screen and (width <= 500px) {
+    .folder_folder-resumefile {
+        width: 85%;
+    }
+}
+
+@media screen and (width >= 500px) {
+    .folder_folder-resumefile {
+        width: 500px;
+    }
+}
+@media screen and (width >= 1000px) {
+    .folder_folder-resumefile {
+        width: 650px;
+    }
+}
+
+
+iframe {
+    position: absolute;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
+    .folder_barbtn-resumefile .x-resumefile {      
+        left: 1px;
+    }
+}
+
+
+
+
+

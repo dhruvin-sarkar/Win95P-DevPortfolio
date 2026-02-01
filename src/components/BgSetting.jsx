@@ -1,0 +1,517 @@
+import UseContext from '../Context'
+import { useContext, useEffect, useState } from "react";
+import Draggable from 'react-draggable'
+import { motion } from 'framer-motion';
+import { SketchPicker } from 'react-color';
+import settingIcon from '../assets/setting.png'
+import bgPic from '../assets/bgpc.png'
+import bg0 from '../assets/bg0.png'
+import bg1 from '../assets/bg1.png'
+import bg2 from '../assets/bg2.jpg'
+import bg3 from '../assets/bg3.jpg'
+import bg5 from '../assets/bg5.png'
+import bg6 from '../assets/bg6.jpg'
+import bg7 from '../assets/bg7.png'
+import bg8 from '../assets/bg8.png'
+import bg9 from '../assets/bg9.jpg'
+import bg10 from '../assets/live_grey.gif'
+import bg11 from '../assets/live_light_grey.gif'
+import bg12 from '../assets/Computer_bg.png'
+import bg13 from '../assets/90s.jpg'
+import bg14 from '../assets/Jap.jpg'
+import bg15 from '../assets/Jap Synth.jpg'
+import bg16 from '../assets/Retro.jpg'
+import bg17 from '../assets/wallpaperflare.com_wallpaper.jpg'
+import bg18 from '../assets/wallpaperflare.com_wallpaper (1).jpg'
+import bg19 from '../assets/win7.jpg'
+import bg20 from '../assets/win_xp.jpg'
+import bg21 from '../assets/zebra.jpg'
+import eff1 from '../assets/noise.png'
+import eff2 from '../assets/glitch2.jpg'
+import eff3 from '../assets/brokenTV.jpg'
+import eff4 from '../assets/DarkTV.jpg'
+import eff5 from '../assets/glitch.gif'
+import eff6 from '../assets/glitch2.gif'
+import '../css/BgSetting.css'
+
+
+
+function BgSetting() {
+  
+  const [pickerPanel, setPickerPanel] = useState(false)
+  const [userPickedColor, setUserPickedColor] = useState('')
+  const [bgTap, setBgTap] = useState(true)
+  const [effectTap, setEffectTap] = useState(false)
+  const [ barcolor, setBarcolor ] = useState(null)
+  const [ ImgBgPreview, setImgBgPreview ] = useState(null)
+  const [ ImgBgPreviewEffect, setImgBgPreviewEffect ] = useState(null)
+  
+  const [ localBg, setLocalBg ] = useState(() => {
+    const prevBg = localStorage.getItem('background')
+    // Force 90s.jpg as default if nothing is saved
+    if (!prevBg) {
+      localStorage.setItem('background', bg13);
+      localStorage.setItem('theme', '#098684');
+      return bg13;
+    }
+    return prevBg;
+  })
+  const [ localEffect, setLocalEffect ] = useState(() => {
+    const prevEffect = localStorage.getItem('effect')
+    return prevEffect? prevEffect : null
+  })
+
+  const [ themeColor, setThemeColor ] = useState(null)
+  const [ localtheme, setLocalTheme ] = useState(() => {
+    const prevTheme = localStorage.getItem('theme')
+    // Force teal as default if nothing is saved
+    if (!prevTheme) {
+      return '#14ece9ff';
+    }
+    return prevTheme;
+  })
+  const [ selectedBg2, setSelectedBg2 ] = useState(null)
+  const [ selectedBg2Effect, setSelectedBg2Effect ] = useState(null)
+
+  const { 
+    setTileBG,
+    themeDragBar, setThemeDragBar,
+    BgSettingExpand ,setBgSettingExpand,
+    StyleHide,
+    isTouchDevice,
+    handleSetFocusItemTrue,
+    inlineStyleExpand,
+    inlineStyle,
+    deleteTap,
+   } = useContext(UseContext);
+
+      function handleDragStop(event, data) {
+        const positionX = data.x 
+        const positionY = data.y
+        setBgSettingExpand(prev => ({
+          ...prev,
+          x: positionX,
+          y: positionY
+        }))
+      }
+
+      const colorOptions = [
+        { value: 1, label: '(None)', color: '#098684', image: bg0, barColor: '#14045c'},
+        { value: 13, label: 'Choose your favorite color', color: userPickedColor, image: userPickedColor, barColor: userPickedColor},
+        { value: 2, label: 'Purple Summer', color: '#3F4565', image: bg1, barColor: '#3F4565'},
+        { value: 3, label: 'Matt Blue', color: '#456EA6', image: bg2, barColor: '#456EA6'},
+        { value: 4, label: 'Matt Green', color: '#008081', image: bg3, barColor: '#008081'},
+        { value: 6, label: 'Blue Sky', color: '#4B6894', image: bg5, barColor: '#4B6894'},
+        { value: 7, label: 'Dark Tone', color: '#313439', image: bg6, barColor: '#313439'},
+        { value: 8, label: 'Light Pink', color: '#f3aac0', image: bg7, barColor: '#1c1719'},
+        { value: 9, label: 'Deep Ocean', color: '#3F4565', image: bg8, barColor: '#3F4565'},
+        { value: 10, label: 'Purple Blue', color: '#354092', image: bg9, barColor: '#354092'},
+        { value: 11, label: 'Live Wavy Grey', color: '#3C3C3C', image: bg10, barColor: '#3C3C3C'},
+        { value: 12, label: 'Live Wavy Light Grey', color: '#828890', image: bg11, barColor: '#4a4a4a'},
+        { value: 14, label: 'Computer Disk', color: '#098684', image: bg12, barColor: '#14045c'},
+        { value: 15, label: '90s Aesthetic', color: '#ff6b9d', image: bg13, barColor: '#ff1493'},
+        { value: 16, label: 'Japanese Street', color: '#1a1a2e', image: bg14, barColor: '#16213e'},
+        { value: 17, label: 'Japanese Synth', color: '#2d1b69', image: bg15, barColor: '#5b2c6f'},
+        { value: 18, label: 'Retro Wave', color: '#1a1a2e', image: bg16, barColor: '#0f3460'},
+        { value: 19, label: 'Neon City', color: '#1a1a2e', image: bg17, barColor: '#16213e'},
+        { value: 20, label: 'Cyber Punk', color: '#0a0e27', image: bg18, barColor: '#1a1a2e'},
+        { value: 21, label: 'Windows 7', color: '#1e3a5f', image: bg19, barColor: '#1e3a5f'},
+        { value: 22, label: 'Windows XP', color: '#5a9fd4', image: bg20, barColor: '#245edc'},
+        { value: 23, label: 'Zebra Pattern', color: '#000000', image: bg21, barColor: '#1a1a1a'},
+      ];
+      
+      
+      const effectOptions = [
+        { value: 1, label: '(None)', image: 'none'},
+        { value: 2, label: 'Noise', image: eff1},
+        { value: 3, label: 'Glitch noise', image: eff2},
+        { value: 4, label: 'Broken TV', image: eff3},
+        { value: 5, label: 'Noise 2', image: eff4},
+        { value: 6, label: 'Glitch', image: eff5},
+        { value: 7, label: 'Glitch Two', image: eff6},
+      ];
+
+      useEffect(() => { // force set background and effect when app opened for color picker
+        if (userPickedColor) {
+          setThemeColor(userPickedColor);
+          setBarcolor(userPickedColor);
+          setImgBgPreview(userPickedColor);
+        }
+      }, [userPickedColor]);
+
+
+      
+      function setbgColorFunction2(index) {
+        const selectedOption = colorOptions.find(option => option.value === index);
+        
+        if (selectedOption) {
+          setSelectedBg2(index);
+          setImgBgPreview(selectedOption.image);
+          setThemeColor(selectedOption.color);
+          setBarcolor(selectedOption.barColor)
+        }
+      }
+
+      function setbgColorFunction2Effect(index) {
+        const selectedOption = effectOptions.find(option => option.value === index);
+        
+        if (selectedOption) {
+          setSelectedBg2Effect(index);
+          setImgBgPreviewEffect(selectedOption.image);
+        }
+      }
+
+      useEffect(() => { // when exited app, make set everything to null to prevent bug when reopen
+
+        if(!BgSettingExpand.show) {
+          setImgBgPreview(null) // set default preview to teal green
+          setImgBgPreviewEffect(null)
+          setSelectedBg2(null)
+          setSelectedBg2Effect(null)
+          setEffectTap(false)
+          setBgTap(true)
+        }
+
+      },[BgSettingExpand])
+      
+
+      useEffect(() => {
+        const bodyBG = document.getElementsByTagName('body')[0];
+        const rootEffect = document.getElementById('root');
+
+        if (localEffect) { // for effect
+          rootEffect.style.setProperty('--before-bg-image', `url(${localEffect})`);
+
+        }
+
+        if (localBg) { // for background
+          bodyBG.style.backgroundColor = localtheme
+          bodyBG.style.backgroundImage = `url(${localBg})`;
+          setTileBG(localtheme)
+        } else {
+          // Set default 90s.jpg background
+          bodyBG.style.backgroundColor = '#098684'
+          bodyBG.style.backgroundImage = 'url(/src/assets/90s.jpg)';
+          setTileBG('#098684')
+        }
+      },[])
+
+      function appleBG() {
+        const bodyBG = document.getElementsByTagName('body')[0];
+        const rootEffect = document.getElementById('root');
+
+        if (ImgBgPreviewEffect) { // for Effect
+          rootEffect.style.setProperty('--before-bg-image', `url(${ImgBgPreviewEffect})`);
+          
+        } 
+
+        if (ImgBgPreview) { // for background
+          bodyBG.style.backgroundColor = themeColor
+          bodyBG.style.backgroundImage = `url(${ImgBgPreview})`; 
+          setThemeDragBar(barcolor)
+        } else {
+          return;
+        }
+      }
+      
+      function cancelBg() {
+        const bodyBG = document.getElementsByTagName('body')[0];
+        const rootEffect = document.getElementById('root');
+        const localBarColor = localStorage.getItem('barcolor')
+
+        if (localEffect) { // for Effect
+          rootEffect.style.setProperty('--before-bg-image', `url(${localEffect})`);
+        } 
+      
+        if (localBg) { // for background
+          bodyBG.style.backgroundColor = localtheme
+          bodyBG.style.backgroundImage = `url(${localBg})`;
+          setThemeDragBar(localBarColor)
+        } else {
+          // Set default 90s.jpg background
+          bodyBG.style.backgroundColor = '#098684'
+          bodyBG.style.backgroundImage = 'url(/src/assets/90s.jpg)';
+        }
+      }
+      
+
+      function okBg() {
+
+        const bodyBG = document.getElementsByTagName('body')[0]
+        const rootEffect = document.getElementById('root');
+
+
+        if (ImgBgPreviewEffect) { // for effect
+          rootEffect.style.setProperty('--before-bg-image', `url(${ImgBgPreviewEffect})`);
+        }
+        
+        if (ImgBgPreviewEffect) { // for effect
+          localStorage.setItem('effect', ImgBgPreviewEffect); // set background in localstroage
+          setLocalEffect(ImgBgPreviewEffect)
+          setLocalEffect(localEffect)
+        } 
+
+        if (ImgBgPreview) { // for background
+          bodyBG.style.backgroundColor = themeColor
+          bodyBG.style.backgroundImage = `url(${ImgBgPreview})`; 
+          setThemeDragBar(barcolor)
+        }
+        
+        if (ImgBgPreview) { // for background
+          localStorage.setItem('theme', themeColor); // set theme in localstroage
+          localStorage.setItem('background', ImgBgPreview); // set background in localstroage
+          localStorage.setItem('barcolor', barcolor); // set barcolor in localstroage
+          setLocalBg(ImgBgPreview)
+          setLocalTheme(themeColor)
+          setTileBG(themeColor)
+        } 
+        return;
+      }
+
+  return (
+    <>
+      <Draggable
+        axis="both" 
+        handle={'.folder_dragbar_bgsetting'}
+        grid={[1, 1]}
+        scale={1}
+        disabled={BgSettingExpand.expand}
+        bounds={{top: 0}}
+        defaultPosition={{ 
+          x: window.innerWidth <= 500 ? 35 : 70,
+          y: window.innerWidth <= 500 ? 35 : 40,
+        }}
+        onStop={(event, data) => handleDragStop(event, data)}
+        onStart={() => handleSetFocusItemTrue('Settings')}
+      >
+        <motion.div className='bgsetting_folder' 
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSetFocusItemTrue('Settings');
+              setPickerPanel(false)
+            }}
+            style={ BgSettingExpand.expand ? inlineStyleExpand('Settings') : inlineStyle('Settings')}>
+          <div className="folder_dragbar_bgsetting"
+             style={{ background: BgSettingExpand.focusItem? themeDragBar : '#757579'}}
+          >
+            <div className="bgsetting_barname">
+              <img src={settingIcon} alt="" />
+              <span>Settings</span>
+            </div>
+            <div className="bgsetting_barbtn">
+              <div onClick={ !isTouchDevice ? (e) => {
+                e.stopPropagation()
+                setBgSettingExpand(prev => ({...prev, hide: true, focusItem: false}))
+                StyleHide('Settings')
+              } : undefined
+              }   
+                onTouchEnd={(e) => {
+                e.stopPropagation()
+                setBgSettingExpand(prev => ({...prev, hide: true, focusItem: false}))
+                StyleHide('Settings')
+              }}
+                onTouchStart={(e) => e.stopPropagation()}
+              >
+                <p className='dash'></p>
+              </div>
+
+                <div>
+                <p className='x'
+                  onClick={!isTouchDevice ? () => {
+                    cancelBg()
+                    deleteTap('Settings')
+                    setPickerPanel(false);
+                  }
+                  : undefined}
+                  onTouchEnd={() => {
+                    cancelBg()
+                    deleteTap('Settings')
+                  }}
+                >×
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="file_tap_container-bgsetting">
+          <p 
+            style={{ 
+              borderBottomColor: bgTap ? '' : '#f0efef',
+              bottom: bgTap? '2px' : '',
+            }}
+            onClick={() => {
+              setBgTap(true)
+              setEffectTap(false)
+            }}
+          >
+            <span style={{
+              border: bgTap? '1px dotted black' :''
+            }}>
+              Background
+            </span>
+            
+          </p>
+          <p
+            style={{ 
+              borderBottomColor: effectTap ? '' : '#f0efef',
+              bottom: effectTap? '2px' : '',
+            }}
+            onClick={() => {
+              setBgTap(false)
+              setEffectTap(true)
+            }}
+          >
+            <span style={{
+                    border: effectTap? '1px dotted black' :''
+                  }}>
+            Effect
+            </span>
+          </p>
+          
+          </div>
+          <div className="folder_content">
+          {/* Background Section */}
+          {bgTap && (
+            <div className="folder_content-bgsetting">
+              <img
+                alt="bgsettingPC"
+                className='bgsetting_img'
+                src={bgPic}
+              />
+              <div className="preview_bg"
+                style={{ backgroundColor: userPickedColor ? userPickedColor : '' }}
+              >
+                {ImgBgPreview && (
+                  <img src={ImgBgPreview} alt='' />
+                )}
+              </div>
+              {pickerPanel && (
+                <div className='color_picker_container'
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <SketchPicker
+                    color={userPickedColor}
+                    onChange={color => {
+                      const newColor = color.hex
+                      setUserPickedColor(newColor)
+                    }}
+                  />
+                </div>
+)}
+              <div className="bgsettingtext_container">
+                <div className="wallpaper">
+                  <p>Wallpaper</p>
+                  <p>Select an HTML Element or Picture</p>
+                  <div className="wallpaper_container">
+                    {colorOptions.map((option) => (
+                      <ul
+                        key={option.value}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setbgColorFunction2(option.value)
+                          option.value === 13 ? setPickerPanel(true)
+                        : setPickerPanel(false)
+                        }}
+                        style={
+                          selectedBg2 === option.value
+                            ? { background: '#040482', color: 'white' }
+                            : {}
+                        }
+                      >
+                        {option.label}
+                        {option.value === 13 && (
+                          <span 
+                            style={{ position: 'relative', left: '8px'}}>
+                            {userPickedColor}
+                          </span>
+                        )}
+                      </ul>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Effect Section */}
+          {effectTap && (
+            <div className="folder_content-bgsetting">
+            <img
+              alt="bgsettingPC"
+              className='bgsetting_img'
+              src={bgPic}
+            />
+            <div className="preview_bg">
+              {ImgBgPreviewEffect && (
+                <img src={ImgBgPreviewEffect} alt='' />
+              )}
+            </div>
+            <div className="bgsettingtext_container">
+              <div className="wallpaper">
+                <p>
+                  Effect
+                </p>
+                <p>Select desired Effect</p>
+                <div className="wallpaper_container">
+                  {effectOptions.map((option) => (
+                    <ul
+                      key={option.value}
+                      onClick={() => setbgColorFunction2Effect(option.value)}
+                      style={
+                        selectedBg2Effect === option.value
+                          ? { background: '#040482', color: 'white' }
+                          : {}
+                      }
+                    >
+                      {option.label}
+                    </ul>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          )}
+{/* ------------------------ EFFECT END ----------------------------- */}
+          <div className="bgsetting_btn_container">
+            <div className="bgsetting_btn_ok"
+              onClick={!isTouchDevice ? () => {
+                deleteTap('Settings')
+                okBg()
+              } : undefined
+              }
+              onTouchEnd={() => {
+                deleteTap('Settings')
+                okBg()
+              }}
+            >
+              <span>OK</span>
+            </div>
+
+            <div className="bgsetting_btn_cancel"
+              onClick={!isTouchDevice ? () => { 
+                deleteTap('Settings') 
+                cancelBg()
+              } : undefined
+              }
+              onTouchEnd={() => {
+                deleteTap('Settings')
+                cancelBg()
+              }}
+            >
+              <span>Cancel</span>
+            </div>
+
+            <div className="bgsetting_btn_cancel"
+              onClick={appleBG}
+            >
+              <span>Apply</span>
+            </div>
+          </div>
+        </div>
+
+        </motion.div>
+      </Draggable>
+    </>
+  )
+}          
+
+export default BgSetting

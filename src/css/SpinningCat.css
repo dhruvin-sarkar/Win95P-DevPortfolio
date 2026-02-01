@@ -1,0 +1,156 @@
+
+.cat_container {
+    position: absolute;
+    width: 100svw;
+    height: 100svh;
+    z-index: 99999999999999999999999999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    animation: bgFlicker 1s forwards;
+    animation-delay: 4s;
+
+}
+
+.cat_container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    animation: videoAppear 1s ease-in-out forwards;
+    animation-delay: 8s;
+}
+
+.cat_container .catgif {
+    will-change: opacity, transform;
+    width: 20%;
+    min-width: 400px;
+    object-fit: cover;
+    position: absolute;
+    z-index: 4;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: catAppear 6s ease forwards;
+}
+
+.exit_btn {
+    display: grid;
+    position: absolute;
+    width: 52px;
+    height: 45px;
+    border: 2px solid #00000060;
+    z-index: 10;
+    cursor: pointer;
+    text-align: center;
+    place-items: center;
+    border-radius: 4px;
+    left: 50%;
+    transform: translate(-50%);
+    background: #0000007f;
+    color: white;
+    opacity: 0;
+    animation: btnAppear 0.4s ease-in-out forwards;
+    animation-delay: 1s;
+    transition: ease-in-out 0.3s;
+    top: 1rem;
+}
+
+.exit_btn span {
+    position: relative;
+    left: 1px;
+}
+
+.exit_btn.hide {
+    opacity: 1;
+    top: -3rem;
+    transition: ease-in-out 0.3s;
+}
+
+
+
+.exit_btn:hover{
+    background: black;
+}
+
+.exit_btn:active {
+    width: 47px;
+    height: 43px;
+}
+
+
+@keyframes catAppear {
+    0%{
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        
+        
+    }
+}
+
+@keyframes btnAppear {
+    0%{
+        opacity: 0;
+
+    }
+    100%{
+        opacity: 1;
+
+    }
+}
+
+@keyframes videoAppear {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes bgFlicker {
+    0% {
+        background: transparent;
+    }
+    10% {
+        background: #FF5733; /* Red-orange */
+    }
+    20% {
+        background: #FF4500; /* Orange-red */
+    }
+    30% {
+        background: #00FD0A; /* Green */
+    }
+    40% {
+        background: #33C1FF; /* Light blue */
+    }
+    50% {
+        background: #FFD700; /* Yellow */
+    }
+    60% {
+        background: #8A2BE2; /* Blue-violet */
+    }
+    70% {
+        background: #FF1493; /* Deep pink */
+    }
+    80% {
+        background: #ADFF2F; /* Green-yellow */
+    }
+    90% {
+        background: #FF6347; /* Tomato red */
+    }
+    100% {
+        background: #00FD0A; /* Final green */
+    }
+}
