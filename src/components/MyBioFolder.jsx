@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
 import About from '../assets/ipng.png'
-import bioPC from '../assets/bio_pc.png'
+import bioPC from '../assets/pfp.jpg'
 import tech from '../assets/tech.png'
 import hobby from '../assets/hobby.png'
 import '../css/MyBioFolder.css'
