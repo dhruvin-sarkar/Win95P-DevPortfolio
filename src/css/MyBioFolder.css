@@ -203,27 +203,62 @@
     color: #1a1a1a;
 }
 
-.folder_content-bio .bio_img_other {
-    position: relative;
-    width: 150px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 1rem;
+/* Technology Tab Specific Styling */
+.technology-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.folder_content-bio .bio_text_1 {
-    position: relative;
-    font-size: 12px;
+.technology-tab .tech_img {
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 100px;
+    height: auto;
+    position: static;
+}
+
+.tech_section {
+    margin-bottom: 1.8rem;
+    width: 100%;
+}
+
+.tech_header {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000080;
+    /* Classic Win95 Navy */
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #808080;
+    padding-bottom: 2px;
+}
+
+.tech_section:first-of-type .tech_header {
+    margin-top: 0.5rem;
+}
+
+.tech_prose {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.tech_badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 0.5rem;
+}
+
+.tech_badges img {
+    height: 20px;
+    width: auto;
+}
+
+.tech_text_container {
     padding: 0;
-}
-
-.folder_content-bio .bio_text_1 strong {
-    color: #1f1e1e;
-}
-
-.folder_content-bio .bio_text_1 span {
-    padding-left: 0;
-    color: #2b2828;
 }
 
 .folder_content-bio .bio_text_1_other {
