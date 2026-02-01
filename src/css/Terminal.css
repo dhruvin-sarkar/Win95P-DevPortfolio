@@ -33,9 +33,8 @@
     font-size: 14px;
 }
 
-.folder_barbtn_terminal {
-    display: flex;
-    gap: 2px;
+.terminal_barbtn {
+    margin-right: 4px;
 }
 
 .terminal_content {

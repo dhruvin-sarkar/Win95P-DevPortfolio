@@ -15,21 +15,22 @@
     resize: both;
 }
 
-@media screen and (width <= 500px) {
-    .folder_folder-mail  {
+@media screen and (width <=500px) {
+    .folder_folder-mail {
         width: 80%;
         height: 350px;
     }
 }
 
-@media screen and (width >= 500px) {
-    .folder_folder-mail  {
+@media screen and (width >=500px) {
+    .folder_folder-mail {
         width: 450px;
         height: 400px;
     }
 }
-@media screen and (width >= 1000px) {
-    .folder_folder-mail  {
+
+@media screen and (width >=1000px) {
+    .folder_folder-mail {
         width: 500px;
         height: 450px;
     }
@@ -37,14 +38,14 @@
 
 
 .folder_folder-mail .folder_dragbar-mail {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -65,27 +66,16 @@
 }
 
 .folder_folder-mail .folder_barbtn-mail {
-    display: flex;
-    position: relative;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn-mail div {
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
 .folder_barbtn-mail div:not(.expand-mail):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-    
+    border-top-color: black;
+    border-left-color: black;
+    border-bottom-color: white;
+    border-right-color: white;
+
 
 }
 
@@ -97,45 +87,8 @@
 
 }
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn-mail .x-mail {
-        bottom: 7px; 
-        left: 1px;
-    }
-}
 
-.folder_barbtn-mail .dash-mail {
-    position: relative;
-    width: 8px;
-    top: 11px;
-    margin: 0 auto;
-    border-bottom: 2px solid black;
-}
-.folder_barbtn-mail .expand-mail {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 3px;
-    z-index: 2;
-}
 
-.folder_barbtn-mail .expand-mail.full {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 5px;
-    right: 2px;
-    z-index: 1;
-}
 
 .folder_barbtn-mail .expand_2-mail {
     position: relative;
@@ -149,6 +102,7 @@
     left: 1.5px;
 
 }
+
 .folder_folder-mail .file_edit_container-mail {
     display: flex;
     gap: 5px;
@@ -188,7 +142,7 @@
     margin: 0 auto;
     margin-top: 4px;
     cursor: default;
-} 
+}
 
 .btm_bar_container-mail .object_bar-mail {
     width: 80%;
@@ -196,6 +150,7 @@
     border-right-color: white;
     border-bottom-color: white;
 }
+
 .btm_bar_container-mail .size_bar-mail {
     width: 55%;
     border: 1px solid black;
@@ -254,13 +209,13 @@
     font-weight: 500;
     font-size: 14px;
     color: rgb(108, 105, 105);
-  }
+}
 
 
 .to_container {
     display: flex;
     width: calc(100% - 2px);
-    gap: 10px;  
+    gap: 10px;
 }
 
 .to_container .to_icon {
@@ -305,7 +260,7 @@
     top: 3px;
     left: 6px;
     letter-spacing: .7px;
-    
+
 }
 
 .sendmail_icon {
@@ -351,8 +306,8 @@
 
 @supports (-webkit-touch-callout: none) {
     .sendmail_icon .sendmail_img_container {
-     padding-top: 3px;
-        
+        padding-top: 3px;
+
     }
 }
 
@@ -363,12 +318,3 @@
 .sendmail_icon .sendmail_img_container:active {
     box-shadow: inset 1.5px 1.5px #000, 1px 1px #ffffffdd;
 }
-
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
-    .folder_barbtn-mail .x-mail {      
-        left: 1px;
-    }
-}
-
-
-

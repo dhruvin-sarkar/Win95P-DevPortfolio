@@ -16,7 +16,7 @@
     resize: both;
 }
 
-   
+
 
 @media screen and (max-width: 450px) {
     .folder_folder-open-store {
@@ -26,22 +26,19 @@
     }
 }
 
-.folder_folder-open-store .folder_barbtn{
-    display: flex;
-    position: relative;
+.folder_folder-open-store .folder_barbtn {
     margin-right: 4px;
-    gap: 2px;
 }
 
 .folder_folder-open-store .folder_dragbar {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -64,7 +61,7 @@
 /* support only safari */
 @supports (-webkit-touch-callout: none) {
     .folder_folder-open-store .x {
-        bottom: 7px; 
+        bottom: 7px;
         left: 1.5px;
     }
 }
@@ -83,14 +80,15 @@
     background: #c5c4c4;
 }
 
-.store_content > div {
+.store_content>div {
     border: 2px solid black;
     border-bottom-color: white;
     border-right-color: white;
     background: white;
 }
 
-.store_sec_2, .store_sec_3 {
+.store_sec_2,
+.store_sec_3 {
     flex: 1 1 0;
 }
 
@@ -110,6 +108,7 @@
     border-right-color: white;
     background: white;
 }
+
 .store_sec_1 .store_catagory {
     position: relative;
     height: 100%;
@@ -149,7 +148,7 @@
     font-size: 13px;
     cursor: pointer;
     border: none;
-    
+
 }
 
 .store_sec_1 .store_catagory :first-child {
@@ -178,14 +177,14 @@
     color: black;
 }
 
-.store_sec_1 .store_catagory div:hover > .cat_dot {
+.store_sec_1 .store_catagory div:hover>.cat_dot {
     color: white;
 }
 
- /*------- section 2 styles ------- */
+/*------- section 2 styles ------- */
 
 
- .store_sec_2::-webkit-scrollbar {
+.store_sec_2::-webkit-scrollbar {
     width: 0px;
 }
 
@@ -210,7 +209,7 @@
     background: #040482;
 }
 
-.item_section_two:hover > .section_two_text p {
+.item_section_two:hover>.section_two_text p {
     color: #ebe9e9;
 }
 
@@ -322,6 +321,7 @@
     0% {
         width: 0%;
     }
+
     100% {
         width: 100%;
     }
@@ -329,17 +329,20 @@
 
 
 @media screen and (max-width: 450px) {
-    .store_content > div {
+    .store_content>div {
         flex: 1 1 0;
     }
+
     .item_section_two .section_two_text_des {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .item_section_two .section_two_img img {
         width: 24px;
     }
+
     .item_section_two .section_two_text_name {
         font-size: 12px;
         white-space: nowrap;

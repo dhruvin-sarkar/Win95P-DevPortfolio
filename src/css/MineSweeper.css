@@ -18,14 +18,14 @@
 
 
 .folder_folder-MineSweeper .folder_dragbar-MineSweeper {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -46,76 +46,14 @@
 }
 
 .folder_folder-MineSweeper .folder_barbtn-MineSweeper {
-    display: flex;
-    position: relative;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn-MineSweeper div {
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
-.folder_barbtn-MineSweeper div:not(.expand-MineSweeper):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-}
 
-.folder_barbtn-MineSweeper .x-MineSweeper {
-    position: relative;
-    text-align: center;
-    font-size: 18px;
-    bottom: 5px;
-}
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn-MineSweeper .x-MineSweeper {
-        bottom: 7px; 
-        left: 1px;
-    }
-}
 
-.folder_barbtn-MineSweeper .dash-MineSweeper {
-    position: relative;
-    width: 8px;
-    top: 11px;
-    margin: 0 auto;
-    border-bottom: 2px solid black;
-}
-.folder_barbtn-MineSweeper .expand-MineSweeper {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid #7b7b7b;
-    border-left-color: #7b7b7b;
-    border-right-color: #7b7b7b;
-    border-bottom-color: #7b7b7b;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 3px;
-    z-index: 2;
-}
 
-.folder_barbtn-MineSweeper .expand-MineSweeper.full {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 5px;
-    right: 2px;
-    z-index: 1;
-}
 
 .folder_barbtn-MineSweeper .expand_2-MineSweeper {
     position: relative;
@@ -129,6 +67,7 @@
     left: 1.5px;
 
 }
+
 .folder_folder-MineSweeper .file_edit_container-MineSweeper {
     display: flex;
     gap: 5px;
@@ -166,7 +105,7 @@
     margin: 0 auto;
     margin-top: 4px;
     cursor: default;
-} 
+}
 
 .btm_bar_container-MineSweeper .object_bar-MineSweeper {
     width: 80%;
@@ -174,6 +113,7 @@
     border-right-color: white;
     border-bottom-color: white;
 }
+
 .btm_bar_container-MineSweeper .size_bar-MineSweeper {
     width: 55%;
     border: 1px solid black;
@@ -212,18 +152,14 @@
 }
 
 
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
-    .folder_barbtn-MineSweeper .x-MineSweeper {      
-        left: 1px;
-    }
-}
 
 .row {
     display: flex;
     position: relative;
     justify-content: center;
-  }
-  .square {
+}
+
+.square {
     width: 30px;
     height: 30px;
     box-sizing: border-box;
@@ -237,36 +173,45 @@
     justify-content: center;
     font-weight: bold;
     cursor: default;
-  }
-  .square--revealed {
-    border: 1px solid #777;
-  }
-  .square--revealed[data-value="1"] {
-    color: #0000ff;
-  }
-  .square--revealed[data-value="2"] {
-    color: #027b00;
-  }
-  .square--revealed[data-value="3"] {
-    color: #ff0000;
-  }
-  .square--revealed[data-value="4"] {
-    color: #00007b;
-  }
-  .square--revealed[data-value="5"] {
-    color: #00007b;
-  }
-  .square--revealed[data-value="6"] {
-    color: #00007b;
-  }
-  .square--revealed[data-value="7"] {
-    color: #000000;
-  }
-  .square--revealed[data-value="8"] {
-    color: #7b7b7b;
-  }
+}
 
-  
+.square--revealed {
+    border: 1px solid #777;
+}
+
+.square--revealed[data-value="1"] {
+    color: #0000ff;
+}
+
+.square--revealed[data-value="2"] {
+    color: #027b00;
+}
+
+.square--revealed[data-value="3"] {
+    color: #ff0000;
+}
+
+.square--revealed[data-value="4"] {
+    color: #00007b;
+}
+
+.square--revealed[data-value="5"] {
+    color: #00007b;
+}
+
+.square--revealed[data-value="6"] {
+    color: #00007b;
+}
+
+.square--revealed[data-value="7"] {
+    color: #000000;
+}
+
+.square--revealed[data-value="8"] {
+    color: #7b7b7b;
+}
+
+
 .mine_reveal {
     position: absolute;
     width: 14%;
@@ -320,19 +265,20 @@
     height: 30px;
     width: fit-content;
     background: rgb(12, 11, 11);
-    font-size: 30px;    
-    margin: 0px .6rem;                                   
+    font-size: 30px;
+    margin: 0px .6rem;
 }
 
 .count p {
     position: relative;
-    color: red;  
+    color: red;
     top: 1px;
     left: 1px;
     font-size: 36px;
     padding: 0px 2px;
     font-family: 'Digital Dismay', sans-serif;
 }
+
 .count p::before {
     content: "000";
     position: absolute;

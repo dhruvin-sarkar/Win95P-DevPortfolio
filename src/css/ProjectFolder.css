@@ -27,14 +27,14 @@
 }
 
 .folder_folder-project .folder_dragbar-project {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -55,86 +55,15 @@
 }
 
 .folder_folder-project .folder_barbtn-project {
-    display: flex;
-    position: relative;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn-project div {
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
-.folder_barbtn-project div:not(.expand-project):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-}
 
-.folder_barbtn-project .x-project {
-    position: relative;
-    text-align: center;
-    font-size: 18px;
-    bottom: 5px;
-}
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn-project .x-project {
-        bottom: 7px; 
-        left: 1px;
-    }
-}
 
-.folder_barbtn-project .dash-project {
-    position: relative;
-    width: 8px;
-    top: 11px;
-    margin: 0 auto;
-    border-bottom: 2px solid black;
-}
-.folder_barbtn-project .expand-project {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 3px;
-    z-index: 2;
-}
 
-.folder_barbtn-project .expand-project.full {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 5px;
-    right: 2px;
-    z-index: 1;
-}
 
-.folder_barbtn-project .expand_2-project {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    bottom: 6px;
-    left: 1.5px;
-}
 
 .folder_folder-project .file_edit_container-project {
     display: flex;
@@ -163,7 +92,7 @@
 .parent_container-project {
     height: calc(100%);
     overflow-y: auto;
-    
+
 }
 
 .parent_container-project .item_container-project {
@@ -198,7 +127,7 @@
 }
 
 .item_container-project .p_normal {
-    color: black!important;
+    color: black !important;
 }
 
 .item_1_p_focus-project {
@@ -206,7 +135,7 @@
     height: 15px;
     border: 1px dotted white;
     color: white;
-  }
+}
 
 
 
@@ -218,7 +147,7 @@
     margin: 0 auto;
     margin-top: 4px;
     cursor: default;
-} 
+}
 
 .btm_bar_container-project .object_bar-project {
     width: 80%;
@@ -226,6 +155,7 @@
     border-right-color: white;
     border-bottom-color: white;
 }
+
 .btm_bar_container-project .size_bar-project {
     width: 55%;
     border: 1px solid black;
@@ -241,13 +171,7 @@
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
-    .folder_barbtn-project .x-project {      
+    .folder_barbtn-project .x-project {
         left: 1px;
     }
 }
-
-
-
-
-
-

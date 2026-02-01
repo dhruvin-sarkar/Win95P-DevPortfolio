@@ -1,4 +1,3 @@
-
 /* ------------ Folders ---------------- */
 
 .folder_folder-open-project {
@@ -16,7 +15,7 @@
     overflow: hidden;
     resize: both;
 }
-   
+
 
 @media screen and (max-width: 450px) {
     .folder_folder-open-project {
@@ -25,22 +24,19 @@
     }
 }
 
-.folder_folder-open-project .folder_barbtn{
-    display: flex;
-    position: relative;
+.folder_folder-open-project .folder_barbtn {
     margin-right: 4px;
-    gap: 2px;
 }
 
 .folder_folder-open-project .folder_dragbar {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -54,19 +50,8 @@
     cursor: default;
 }
 
-.folder_folder-open-project .x {
-    position: relative;
-    bottom: 6px;
-}
 
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_folder-open-project .x {
-        bottom: 7px; 
-        left: 1.5px;
-    }
-}
 
 
 
@@ -98,10 +83,12 @@
     border-right: none;
     cursor: default;
 }
+
 .address_container .address {
     position: relative;
     top: 1px;
 }
+
 .address_box {
     width: 100%;
     padding-left: 4px;

@@ -39,25 +39,9 @@
 }
 
 .folder_barbtn {
-    display: flex;
-    align-items: center;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    border: 1px solid black;
-    border-top-color: #dfdfdf;
-    border-left-color: #dfdfdf;
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
 .folder_barbtn div p {
     margin: 0;
@@ -74,20 +58,7 @@
     justify-content: center;
 }
 
-.folder_barbtn .dash {
-    width: 7px;
-    height: 2px;
-    background: black;
-    margin-top: 6px;
-}
 
-.folder_barbtn .expand {
-    width: 10px;
-    height: 9px;
-    border: 1px solid black;
-    border-top: 2px solid black;
-    box-sizing: border-box;
-}
 
 .vscode_menu_bar {
     display: flex;

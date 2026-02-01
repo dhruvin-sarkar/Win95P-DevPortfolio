@@ -19,21 +19,22 @@
     animation-delay: 0.1s;
 }
 
-@media screen and (width <= 500px) {
-    .folder_folder-MSN  {
+@media screen and (width <=500px) {
+    .folder_folder-MSN {
         width: 85%;
         height: 440px;
     }
 }
 
-@media screen and (width >= 500px) {
-    .folder_folder-MSN  {
+@media screen and (width >=500px) {
+    .folder_folder-MSN {
         width: 400px;
         height: 440px;
     }
 }
-@media screen and (width >= 1000px) {
-    .folder_folder-MSN  {
+
+@media screen and (width >=1000px) {
+    .folder_folder-MSN {
         width: 450px;
         height: 440px;
     }
@@ -41,14 +42,14 @@
 
 
 .folder_folder-MSN .folder_dragbar-MSN {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -71,75 +72,14 @@
 }
 
 .folder_folder-MSN .folder_barbtn-MSN {
-    display: flex;
-    position: relative;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn-MSN div {
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
-.folder_barbtn-MSN div:not(.expand-MSN):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-}
 
-.folder_barbtn-MSN .x-MSN {
-    position: relative;
-    text-align: center;
-    font-size: 18px;
-    bottom: 5px;
-}
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn-MSN .x-MSN {
-        position: relative;
-        bottom: 7px; 
-        left: 1.2px !important;
-    }
-}
 
-.folder_barbtn-MSN .dash-MSN {
-    position: relative;
-    width: 8px;
-    top: 11px;
-    margin: 0 auto;
-    border-bottom: 2px solid black;
-}
-.folder_barbtn-MSN .expand-MSN {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 3px;
-    z-index: 2;
-}
 
-.folder_barbtn-MSN .expand-MSN.full {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 5px;
-    right: 2px;
-    z-index: 1;
-}
 
 .folder_barbtn-MSN .expand_2-MSN {
     position: relative;
@@ -153,6 +93,7 @@
     left: 1.5px;
 
 }
+
 .folder_folder-MSN .file_edit_container-MSN {
     display: flex;
     position: relative;
@@ -193,7 +134,7 @@
     margin: 0 auto;
     margin-top: 4px;
     cursor: default;
-} 
+}
 
 .btm_bar_container-MSN .object_bar-MSN {
     width: 80%;
@@ -201,6 +142,7 @@
     border-right-color: white;
     border-bottom-color: white;
 }
+
 .btm_bar_container-MSN .size_bar-MSN {
     width: 55%;
     border: 1px solid black;
@@ -266,7 +208,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
 }
 
 .activate_bot {
@@ -278,14 +220,14 @@
     border-right-color: black;
     border-bottom-color: black;
     color: grey;
-    
-    
+
+
 }
 
 .activate_bot.active {
     border: 2px solid black;
     border-right-color: white;
-    border-bottom-color: white;  
+    border-bottom-color: white;
     color: black;
 }
 
@@ -335,7 +277,7 @@
     margin: 0 auto;
     margin-top: .7rem;
     gap: 4px;
-    
+
 }
 
 .enter_text_div textarea {
@@ -416,16 +358,16 @@
 }
 
 .Username_input_div_active .form_banner {
-   width: calc(100% - 20px);
-   height: 25px;
+    width: calc(100% - 20px);
+    height: 25px;
 }
 
 .form_banner {
     display: flex;
     align-items: center;
     position: relative;
-    height: 22px!important;
-    width: 100%!important;
+    height: 22px !important;
+    width: 100% !important;
 }
 
 .form_banner img {
@@ -468,6 +410,7 @@
     left: 0.5px;
     font-size: 16px;
 }
+
 @supports (-webkit-touch-callout: none) {
     .form_banner .close_form_banner p {
         bottom: 7px;
@@ -537,6 +480,7 @@
     text-align: center;
     z-index: 55555555555555555;
 }
+
 .reconnect_container p {
     position: relative;
     top: 1rem;
@@ -549,11 +493,6 @@
     color: rgb(41, 41, 237);
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) and (min-width: 0px) {
-    .folder_barbtn-MSN .x-MSN {      
-        left: 1px;
-    }
-}
 
 .shake_message {
     display: grid;
@@ -580,17 +519,55 @@
 }
 
 @keyframes msnShake {
-  0%   { margin-left: 0; }
-  5%   { margin-left: -10px; }
-  10%  { margin-left: 10px; }
-  15%  { margin-left: -10px; }
-  20%  { margin-left: 10px; }
-  35%  { margin-left: -8px; }
-  40%  { margin-left: 8px; }
-  45%  { margin-left: -6px; }
-  50%  { margin-left: 6px; }
-  70%  { margin-left: -4px; }
-  80%  { margin-left: 4px; }
-  90%  { margin-left: -2px; }
-  100% { margin-left: 0; }
+    0% {
+        margin-left: 0;
+    }
+
+    5% {
+        margin-left: -10px;
+    }
+
+    10% {
+        margin-left: 10px;
+    }
+
+    15% {
+        margin-left: -10px;
+    }
+
+    20% {
+        margin-left: 10px;
+    }
+
+    35% {
+        margin-left: -8px;
+    }
+
+    40% {
+        margin-left: 8px;
+    }
+
+    45% {
+        margin-left: -6px;
+    }
+
+    50% {
+        margin-left: 6px;
+    }
+
+    70% {
+        margin-left: -4px;
+    }
+
+    80% {
+        margin-left: 4px;
+    }
+
+    90% {
+        margin-left: -2px;
+    }
+
+    100% {
+        margin-left: 0;
+    }
 }

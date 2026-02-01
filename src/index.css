@@ -1043,3 +1043,145 @@ body {
 .search_bar span:hover {
     opacity: 1;
 }
+
+/* ------------------ Global Window Buttons ----------------- */
+
+.folder_barbtn,
+.bio_barbtn,
+.folder_barbtn-project,
+.folder_barbtn-resume,
+.barbtn-vscode,
+.terminal_barbtn,
+.taskmanager_barbtn,
+.store_barbtn,
+.run_barbtn,
+.msn_barbtn,
+.minesweeper_barbtn,
+.mail_barbtn {
+    display: flex !important;
+    position: relative;
+    margin-right: 4px;
+    gap: 2px;
+    align-items: center;
+}
+
+.folder_barbtn div,
+.bio_barbtn div,
+.folder_barbtn-project div,
+.folder_barbtn-resume div,
+.barbtn-vscode div,
+.terminal_barbtn div,
+.taskmanager_barbtn div,
+.store_barbtn div,
+.run_barbtn div,
+.msn_barbtn div,
+.minesweeper_barbtn div,
+.mail_barbtn div {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 17px;
+    height: 17px;
+    background: #c9c9c9;
+    font-weight: bold;
+    border: 1px solid black;
+    border-top-color: rgb(198, 198, 198);
+    border-left-color: rgb(198, 198, 198);
+    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
+    cursor: default;
+    overflow: hidden;
+}
+
+.folder_barbtn div:active,
+.bio_barbtn div:active,
+.folder_barbtn-project div:active,
+.folder_barbtn-resume div:active,
+.barbtn-vscode div:active,
+.terminal_barbtn div:active,
+.taskmanager_barbtn div:active,
+.store_barbtn div:active,
+.run_barbtn div:active,
+.msn_barbtn div:active,
+.minesweeper_barbtn div:active,
+.mail_barbtn div:active {
+    border-top-color: black;
+    border-left-color: black;
+    border-bottom-color: white;
+    border-right-color: white;
+    box-shadow: inset -1px -1px #ffffff, -1px -1px #000000dd;
+}
+
+.folder_barbtn .x,
+.bio_barbtn .x,
+.folder_barbtn-project .x-project,
+.folder_barbtn-resume .x-resume,
+.barbtn-vscode .x,
+.terminal_barbtn .x,
+.taskmanager_barbtn .x,
+.store_barbtn .x,
+.run_barbtn .x,
+.msn_barbtn .x-msn,
+.minesweeper_barbtn .x,
+.mail_barbtn .x {
+    position: relative;
+    text-align: center;
+    font-size: 16px;
+    line-height: normal;
+    margin-top: -1px;
+}
+
+.folder_barbtn .dash,
+.bio_barbtn .dash,
+.folder_barbtn-project .dash-project,
+.folder_barbtn-resume .dash-resume,
+.barbtn-vscode .dash,
+.terminal_barbtn .dash,
+.taskmanager_barbtn .dash,
+.store_barbtn .dash,
+.run_barbtn .dash,
+.msn_barbtn .dash-msn,
+.minesweeper_barbtn .dash,
+.mail_barbtn .dash {
+    position: relative;
+    width: 8px;
+    height: 0;
+    border-bottom: 2px solid black;
+    margin-top: 6px;
+}
+
+.folder_barbtn .expand,
+.bio_barbtn .expand,
+.folder_barbtn-project .expand-project,
+.folder_barbtn-resume .expand-resume,
+.barbtn-vscode .expand,
+.terminal_barbtn .expand,
+.taskmanager_barbtn .expand,
+.store_barbtn .expand,
+.run_barbtn .expand,
+.msn_barbtn .expand-msn,
+.minesweeper_barbtn .expand,
+.mail_barbtn .expand {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border: 2px solid black;
+    border-top-width: 2px;
+    box-shadow: none;
+    margin-top: 1px;
+}
+
+.folder_barbtn .expand.full,
+.bio_barbtn .expand.full,
+.folder_barbtn-project .expand-project.full,
+.folder_barbtn-resume .expand-resume.full,
+.barbtn-vscode .expand.full,
+.terminal_barbtn .expand.full,
+.taskmanager_barbtn .expand.full,
+.store_barbtn .expand.full,
+.run_barbtn .expand.full,
+.msn_barbtn .expand-msn.full,
+.minesweeper_barbtn .expand.full,
+.mail_barbtn .expand.full {
+    width: 8px;
+    height: 8px;
+}

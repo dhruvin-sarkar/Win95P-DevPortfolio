@@ -47,27 +47,10 @@
 }
 
 .folder_folder_run .folder_barbtn_run {
-    display: flex;
-    position: relative;
     margin-right: 3px;
-    gap: 2px;
 }
 
-.folder_barbtn_run div {
-    width: 15px;
-    height: 15px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
-.folder_barbtn_run div:not(.expand):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-}
 
 .folder_barbtn_run .x {
     position: relative;
@@ -77,13 +60,6 @@
 
 }
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn_run .x {
-        bottom: 5.5px;
-        left: 1px;
-    }
-}
 
 .run_top_container {
     display: flex;

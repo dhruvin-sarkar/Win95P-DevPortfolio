@@ -308,53 +308,32 @@ const Terminal = () => {
                         <img src={terminalIcon} alt="cmd" style={{ width: '16px', height: '16px' }}/>
                         <span>MS-DOS Prompt</span>
                     </div>
-                    <div className="folder_barbtn_terminal" style={{ display: 'flex', gap: '2px' }}>
-                         <div 
-                            className='minimize-btn'
-                             style={{ 
-                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
-                                display:'flex', justifyContent:'center', alignItems:'end', cursor:'pointer', 
-                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
-                                boxShadow:'1px 1px 0px black', fontSize: '10px', fontWeight: 'bold'
-                            }}
+                    <div className="folder_barbtn_terminal">
+                        <div 
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setTerminalExpand(prev => ({ ...prev, hide: true, startActive: false }));
                                 playWindowMinimize();
                             }}
                         >
-                            <span style={{ marginBottom: '2px' }}>_</span>
+                            <span className="dash"></span>
                         </div>
-                         <div 
-                            className='maximize-btn'
-                             style={{ 
-                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
-                                display:'flex', justifyContent:'center', alignItems:'center', cursor:'pointer', 
-                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
-                                boxShadow:'1px 1px 0px black', fontSize: '10px'
-                            }}
+                        <div 
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleExpandStateToggle();
                             }}
                         >
-                            <div style={{ width: '10px', height: '9px', borderTop: '2px solid black', borderBottom: '1px solid black', borderLeft: '1px solid black', borderRight: '1px solid black' }}></div>
+                            <div className={`expand ${TerminalExpand.expand ? 'full' : ''}`} />
                         </div>
                         <div 
-                            className='x' 
-                             style={{ 
-                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
-                                display:'flex', justifyContent:'center', alignItems:'center', cursor:'pointer', 
-                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
-                                boxShadow:'1px 1px 0px black', marginLeft: '2px', fontSize: '10px', fontWeight: 'bold'
-                            }}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setTerminalExpand(prev => ({ ...prev, hide: true, show: false }));
                                 deleteTap('Terminal');
                             }}
                         >
-                            X
+                            <span className="x">×</span>
                         </div>
                     </div>
                 </div>

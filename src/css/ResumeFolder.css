@@ -37,10 +37,12 @@
         width: 84%;
         min-width: 300px;
     }
+
     .folder_folder.photo_mode {
         width: 90%;
         height: 300px;
     }
+
     .folder_folder.paint_mode {
         width: 90%;
         height: 370px;
@@ -48,14 +50,14 @@
 }
 
 .folder_folder .folder_dragbar {
-   display: flex;
-   position: relative;
-   height: 24px;
-   width: 100%;
-   margin-bottom: 1px;
-   align-items: center;
-   justify-content: space-between;
-   -webkit-user-select: none;
+    display: flex;
+    position: relative;
+    height: 24px;
+    width: 100%;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: space-between;
+    -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -76,85 +78,15 @@
 }
 
 .folder_folder .folder_barbtn {
-    display: flex;
-    position: relative;
     margin-right: 4px;
-    gap: 2px;
 }
 
-.folder_barbtn div {
-    width: 17px;
-    height: 17px;
-    background: #c9c9c9;
-    font-weight: bold;
-    border: 1px solid black;
-    border-top-color: rgb(198, 198, 198);border-left-color: rgb(198, 198, 198);
-    box-shadow: inset 1px 1px #ffffff, 1px 1px #000000dd;
-    cursor: default;
-}
 
-.folder_barbtn div:not(.expand):active {
-    border-top-color: black;border-left-color: black;
-    border-bottom-color: white;border-right-color: white;
-}
 
-.folder_barbtn .x {
-    position: relative;
-    text-align: center;
-    font-size: 18px;
-    bottom: 5px;
-}
 
-/* support only safari */
-@supports (-webkit-touch-callout: none) {
-    .folder_barbtn .x {
-        bottom: 7px; 
-        left: 1px;
-    }
-}
 
-.folder_barbtn .dash {
-    position: relative;
-    width: 8px;
-    top: 11px;
-    margin: 0 auto;
-    border-bottom: 2px solid black;
-}
-.folder_barbtn .expand {
-    position: relative;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 3px;
-}
 
-.folder_barbtn .expand.full {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    top: 5px;
-    right: 2px;
-    z-index: 1;
-}
 
-.folder_barbtn .expand_2 {
-    position: relative;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid black;
-    border-left-color: black;
-    box-shadow: none;
-    margin: 0 auto;
-    bottom: 6px;
-    left: 1.5px;
-}
 
 .folder_folder .file_edit_container {
     display: flex;
@@ -184,7 +116,7 @@
 .parent_item_container {
     height: calc(100%);
     overflow-y: auto;
-    
+
 }
 
 
@@ -212,14 +144,14 @@
 
 
 .item_container .p_normal {
-    color: black!important;
+    color: black !important;
 }
 
 .item_container .item_1_p_focus {
     background: #091558;
     border: 1px dotted white;
     color: white;
-  }
+}
 
 
 
@@ -231,7 +163,7 @@
     margin: 0 auto;
     margin-top: 4px;
     cursor: default;
-} 
+}
 
 .btm_bar_container .object_bar {
     width: 80%;
@@ -239,6 +171,7 @@
     border-right-color: white;
     border-bottom-color: white;
 }
+
 .btm_bar_container .size_bar {
     width: 55%;
     border: 1px solid black;
@@ -252,6 +185,3 @@
     padding-top: 2px;
     margin-left: 2px;
 }
-
-
-
