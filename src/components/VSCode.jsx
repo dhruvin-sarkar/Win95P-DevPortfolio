@@ -160,7 +160,7 @@ const FileIcon = ({ name, type, expanded }) => {
     }
 };
 
-const SyntaxHighlightedCode = ({ code }) => {
+const SyntaxHighlightedCode = ({ file, code }) => {
     if (!code) return <div style={{ color: '#858585', fontStyle: 'italic' }}>// Select a file to view its content</div>;
 
     const lines = code.split('\n');
@@ -315,29 +315,37 @@ export default function VSCode() {
 
     return (
         <Draggable
+            nodeRef={VSCodeRef}
             axis="both"
-            handle=".folder_dragbar"
+            handle=".vscode_drag_bar"
             grid={[1, 1]}
             scale={1}
             disabled={VSCodeExpand.expand}
             bounds={{ top: 0 }}
+            defaultPosition={{ 
+                x: window.innerWidth <= 500 ? 10 : 100,
+                y: window.innerWidth <= 500 ? 40 : 100,
+            }}
             onStart={() => handleSetFocusItemTrue('VS Code')}
+            onStop={(e, data) => {
+                setVSCodeExpand(prev => ({ ...prev, x: data.x, y: data.y }));
+            }}
         >
             <motion.div
                 ref={VSCodeRef}
-                className="folder_folder"
+                className="vscode_window"
+                style={{
+                    ...(VSCodeExpand.expand ? inlineStyleExpand('VS Code') : inlineStyle('VS Code')),
+                    zIndex: VSCodeExpand.hide ? '-1' : (VSCodeExpand.focusItem ? '999' : VSCodeExpand.zIndex),
+                    display: VSCodeExpand.hide ? 'none' : 'flex',
+                    flexDirection: 'column'
+                }}
                 onClick={(e) => {
                     e.stopPropagation();
                     handleSetFocusItemTrue('VS Code');
                 }}
-                style={{
-                    ...(VSCodeExpand.expand ? inlineStyleExpand('VS Code') : inlineStyle('VS Code')),
-                    zIndex: VSCodeExpand.zIndex,
-                    display: VSCodeExpand.hide ? 'none' : 'flex',
-                    flexDirection: 'column'
-                }}
             >
-                <div className="folder_dragbar"
+                <div className="vscode_drag_bar"
                     onDoubleClick={handleExpandStateToggle}
                     onTouchStart={handleExpandStateToggleMobile}
                     style={{ background: VSCodeExpand.focusItem ? themeDragBar : '#757579' }}
@@ -365,28 +373,32 @@ export default function VSCode() {
                     </div>
                 </div>
 
-                <div className="vscode_window">
+                <div className="vscode_main_content">
                     <div className="vscode_content_container">
                         <div className="vscode_activity_bar">
                             <VscFiles className="vscode_activity_icon active" />
                             <VscSearch className="vscode_activity_icon" />
                             <VscSourceControl className="vscode_activity_icon" />
                             <VscExtensions className="vscode_activity_icon" />
-                            <div style={{ flex: 1 }}></div>
+                            <div style={{ flex: 1 }} />
                             <VscAccount className="vscode_activity_icon" />
                             <VscSettingsGear className="vscode_activity_icon" />
                         </div>
-                        
+
                         <div className="vscode_sidebar">
-                            <div className="vscode_sidebar_header">
-                                EXPLORER
-                                <VscChevronDown />
+                            <div className="vscode_sidebar_header">EXPLORER</div>
+                            <div className="vscode_sidebar_content">
+                                <div className="vscode_section">
+                                    <div className="vscode_section_header">
+                                        <VscChevronDown /> WIN95-PORTFOLIO
+                                    </div>
+                                    <RenderTree items={FILE_TREE} />
+                                </div>
                             </div>
-                            <RenderTree items={FILE_TREE} />
                         </div>
 
-                        <div className="vscode_editor_area">
-                            <div className="vscode_tab_bar">
+                        <div className="vscode_editor_container">
+                            <div className="vscode_tabs_container">
                                 {openFiles.map(file => (
                                     <div 
                                         key={file} 
@@ -394,34 +406,55 @@ export default function VSCode() {
                                         onClick={() => setActiveFile(file)}
                                     >
                                         <FileIcon name={file} type="file" />
-                                        <span className="vscode_tab_title">{file}</span>
+                                        {file}
                                         <span className="vscode_tab_close" onClick={(e) => closeFile(e, file)}>×</span>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="vscode_editor_content_wrapper">
-                                <div className="vscode_editor_viewport">
-                                    <div className="vscode_gutter">
-                                        {Array.from({ length: Math.max(lineCount, 30) }).map((_, i) => (
-                                            <div key={i}>{i + 1}</div>
-                                        ))}
-                                    </div>
-                                    <div className="vscode_code_display">
-                                        <SyntaxHighlightedCode code={currentCode} />
-                                    </div>
+                            <div className="vscode_editor">
+                                <div className="vscode_gutter">
+                                    {Array.from({ length: lineCount }).map((_, i) => (
+                                        <div key={i}>{i + 1}</div>
+                                    ))}
+                                </div>
+                                <div className="vscode_code_area">
+                                    <SyntaxHighlightedCode file={activeFile || ''} code={currentCode} />
                                 </div>
                                 <div className="vscode_minimap">
-                                    {Array.from({ length: 100 }).map((_, i) => (
-                                        <div 
-                                            key={i} 
-                                            className="minimap-line" 
-                                            style={{ 
-                                                width: `${Math.random() * 40 + 10}px`,
-                                                backgroundColor: ['#569cd6', '#ce9178', '#6a9955', '#d4d4d4'][Math.floor(Math.random() * 4)]
-                                            }}
-                                        />
-                                    ))}
+                                    <div className="vscode_minimap_slider" />
+                                    <pre>{currentCode}</pre>
+                                </div>
+                            </div>
+
+                            <div className="vscode_terminal_panel">
+                                <div className="vscode_terminal_tabs">
+                                    <span className="active">TERMINAL</span>
+                                    <span>OUTPUT</span>
+                                    <span>DEBUG CONSOLE</span>
+                                    <span>PROBLEMS</span>
+                                </div>
+                                <div className="vscode_terminal_content">
+                                    <div className="vscode_terminal_line">
+                                        <span className="vscode_prompt">C:\Users\DS\Portfolio\win95&gt;</span>
+                                        <span className="vscode_typed">npm run dev</span>
+                                    </div>
+                                    <div className="vscode_terminal_line success">
+                                        &gt; win95-portfolio@1.0.0 dev
+                                    </div>
+                                    <div className="vscode_terminal_line success">
+                                        &gt; vite
+                                    </div>
+                                    <div className="vscode_terminal_line">
+                                        VITE v5.0.0  ready in 128 ms
+                                    </div>
+                                    <div className="vscode_terminal_line">
+                                        ➜  Local:   http://localhost:5173/
+                                    </div>
+                                    <div className="vscode_terminal_gemini">
+                                        <span className="vscode_gemini_sparkle">✧</span>
+                                        <input type="text" placeholder="Ask Gemini to help with your code..." readOnly />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -429,14 +462,14 @@ export default function VSCode() {
 
                     <div className="vscode_status_bar">
                         <div className="vscode_status_left">
-                            <div className="vscode_status_item"><VscSourceControl /> main*</div>
-                            <div className="vscode_status_item">0 Δ 2t</div>
+                            <span>main*</span>
+                            <span>0 ⚠ 0</span>
                         </div>
                         <div className="vscode_status_right">
-                            <div className="vscode_status_item">Ln 1, Col 1</div>
-                            <div className="vscode_status_item">Spaces: 2</div>
-                            <div className="vscode_status_item">UTF-8</div>
-                            <div className="vscode_status_item">JSX</div>
+                            <span>Spaces: 4</span>
+                            <span>UTF-8</span>
+                            <span>{activeFile?.endsWith('.jsx') ? 'JavaScript React' : 'Markdown'}</span>
+                            <span>Ln 1, Col 1</span>
                         </div>
                     </div>
                 </div>
