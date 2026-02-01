@@ -56,10 +56,10 @@ export function StyleHide(index, tap, ObjectState) {
 
   const setState = ObjectState();
 
-  const namePassed = tap[index].split(' ').join('').toLowerCase();
+  const namePassed = tap[index].toLowerCase().trim().replace(/\s/g, '');
 
   const foundItem = setState.find(item => {
-    const itemName = item.name.split(' ').join('').toLowerCase();
+    const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
 
     return itemName === namePassed
   })

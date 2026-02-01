@@ -1634,7 +1634,7 @@ function handleShow(name) {
       console.log('Special case: VS Code matched');
   }
 
-  const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().split(' ').join('') === lowerCaseName);
+  const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().replace(/\s/g, '') === lowerCaseName);
 
   const pictureMatch = allPicture.find(picture => name.includes(picture.name));
   
@@ -1651,7 +1651,7 @@ function handleShow(name) {
   }
 
   allSetItems.forEach((item) => {
-    const itemName = item.name.toLowerCase().trim().split(' ').join('');
+    const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
 
     if(itemName === lowerCaseName) {
       setTimeout(() => {
@@ -1928,7 +1928,7 @@ function handleShowMobile(name) {
     const setState = ObjectState();
 
     const item = setState.find(item => {
-      const itemName = item.name.split(' ').join('').toLowerCase();
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
       return itemName === passedName;
     });
 
@@ -1954,7 +1954,7 @@ function handleShowMobile(name) {
     const passedName = name.split(' ').join('').toLowerCase();
 
     const item = setState.find(item => {
-        const itemName = item.name.split(' ').join('').toLowerCase();
+        const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
         return itemName === passedName;
     });
 
@@ -1973,10 +1973,10 @@ function handleShowMobile(name) {
   function deleteTap(name) {
 
     const setState = ObjectState();
-    const passedName = name.toLowerCase().split(' ').join('');
+    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
 
     setState.forEach(item => {
-      const itemName = item.name.toLowerCase().split(' ').join('');
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
 
       if (itemName === passedName) {
         item.setter(prev => ({
@@ -1995,7 +1995,7 @@ function handleShowMobile(name) {
           });
         }
         setTap(prevTap => prevTap.filter(tapItem => { // get prevTap to prevent error
-          const tapItemName = tapItem.toLowerCase().split(' ').join('');
+          const tapItemName = tapItem.toLowerCase().trim().replace(/\s/g, '');
           return tapItemName !== passedName;
         }));
       }

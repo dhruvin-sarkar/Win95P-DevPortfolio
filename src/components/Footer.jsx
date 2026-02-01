@@ -368,14 +368,14 @@ export default function Footer() {
 
     function handleHideFolder(index) { // unhide icon from tap
 
-        const lowerCaseName = tap[index].toLowerCase().split(' ').join('');
+        const lowerCaseName = tap[index].toLowerCase().trim().replace(/\s/g, '');
 
         const allSetItems =  ObjectState() // all the usestate name to toggle
 
 
         allSetItems.forEach((item) => {
 
-          const itemName = item.name.toLowerCase().trim();
+          const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
           if(item.type === 'userCreatedFolder') { // for user created folder
           item.setter({
             focusItem: tap[index] === item.name,
@@ -383,18 +383,29 @@ export default function Footer() {
           });
         }
           if(itemName === lowerCaseName) {
-            item.setter(prev => ({...prev, focusItem: true}));
             if(item.usestate.hide) {
-                item.setter(prev => ({...prev, hide: false}));
+                // Restore from taskbar
+                item.setter(prev => ({...prev, hide: false, focusItem: true, zIndex: maxZindexRef.current + 1}));
+                maxZindexRef.current += 1;
+                sounds?.playWindowMaximize();
+                
                 if(lowerCaseName === 'winamp') {
                     const webampElement = document.querySelector('#webamp');
                     if (webampElement) {
                         webampElement.style.opacity = 1;
                         webampElement.style.pointerEvents = 'auto';
-                        webampElement.style.touchAction = 'auto'
+                        webampElement.style.touchAction = 'auto';
                         setWinampExpand(prev => ({...prev, hide: false}));
                     }
                 }
+            } else if (item.usestate.focusItem) {
+                // Already focused and visible - Minimize to taskbar
+                item.setter(prev => ({...prev, hide: true, focusItem: false}));
+                sounds?.playWindowMinimize();
+            } else {
+                // Visible but not focused - Focus it
+                item.setter(prev => ({...prev, focusItem: true, zIndex: maxZindexRef.current + 1}));
+                maxZindexRef.current += 1;
             }
           }
 
