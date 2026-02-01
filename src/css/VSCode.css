@@ -1,0 +1,200 @@
+.vscode_window {
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vscode_editor_container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.vscode_sidebar {
+    width: 48px;
+    background-color: #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    gap: 20px;
+}
+
+.vscode_sidebar_icon {
+    width: 24px;
+    height: 24px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.vscode_sidebar_icon:hover {
+    opacity: 1;
+}
+
+.vscode_sidebar_icon.active {
+    opacity: 1;
+    border-left: 2px solid #ffffff;
+}
+
+.vscode_main_area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+}
+
+.vscode_tabs {
+    height: 35px;
+    background-color: #252526;
+    display: flex;
+    overflow-x: auto;
+}
+
+.vscode_tab {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background-color: #2d2d2d;
+    border-right: 1px solid #1e1e1e;
+    font-size: 13px;
+    height: 100%;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.vscode_tab.active {
+    background-color: #1e1e1e;
+    border-top: 1px solid #007acc;
+}
+
+.vscode_tab_close {
+    margin-left: 10px;
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.vscode_editor {
+    flex: 1;
+    padding: 15px;
+    overflow: auto;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.vscode_line {
+    display: flex;
+}
+
+.vscode_line_number {
+    width: 40px;
+    color: #858585;
+    text-align: right;
+    padding-right: 15px;
+    user-select: none;
+}
+
+.vscode_code {
+    white-space: pre;
+}
+
+/* Syntax Highlighting */
+.vscode_keyword {
+    color: #569cd6;
+}
+
+/* Blue */
+.vscode_string {
+    color: #ce9178;
+}
+
+/* Orange/Greenish depending on theme, using standard dark */
+.vscode_function {
+    color: #dcdcaa;
+}
+
+/* Yellow */
+.vscode_comment {
+    color: #6a9955;
+}
+
+/* Green */
+.vscode_variable {
+    color: #9cdcfe;
+}
+
+/* Light Blue */
+.vscode_tag {
+    color: #569cd6;
+}
+
+/* Blue */
+.vscode_attr {
+    color: #9cdcfe;
+}
+
+/* Light Blue */
+
+.vscode_terminal_panel {
+    height: 180px;
+    background-color: #1e1e1e;
+    border-top: 1px solid #333333;
+    display: flex;
+    flex-direction: column;
+}
+
+.vscode_panel_header {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    gap: 20px;
+    font-size: 11px;
+    color: #858585;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vscode_panel_item.active {
+    color: #e7e7e7;
+    border-bottom: 2px solid #e7e7e7;
+}
+
+.vscode_terminal_content {
+    flex: 1;
+    padding: 10px 15px;
+    overflow: auto;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 13px;
+    background-color: #000;
+    margin: 5px;
+    border: 1px solid #333;
+}
+
+.vscode_prompt_text {
+    color: #d4d4d4;
+    margin-bottom: 10px;
+}
+
+.vscode_copy_btn {
+    background-color: #0e639c;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 10px;
+    align-self: flex-start;
+}
+
+.vscode_copy_btn:hover {
+    background-color: #1177bb;
+}
+
+.vscode_copy_btn:active {
+    background-color: #094771;
+}

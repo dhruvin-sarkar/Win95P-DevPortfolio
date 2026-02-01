@@ -341,5 +341,16 @@
         "y": 1,
         "category": "Utilities",
         "description": "Command line interface for system operations."
+    },
+    {
+        "name": "VS Code",
+        "pic": "VS Code",
+        "folderId": "Desktop",
+        "size": 15000,
+        "type": ".exe",
+        "x": 3,
+        "y": 1,
+        "category": "Productivity",
+        "description": "Powerful code editor for developers."
     }
 ]

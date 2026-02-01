@@ -20,6 +20,7 @@ import binEmp from '../assets/bin2.png'
 import bin from '../assets/bin.png'
 import news from '../assets/news.png'
 import speaker from '../assets/speaker.png'
+import vscIcon from '../assets/vscode.png';
 
 
 export default function Footer() {
@@ -217,6 +218,20 @@ export default function Footer() {
             spanText: "MS-DOS Prompt",
             onClick: () => {
                 handleShow('Terminal');
+                setStartActive(false);
+            },
+            onmouseenter: () => {
+                setResumejectStartBar(false);
+                setProjectStartBar(false);
+            },
+        },
+        {
+            className: "vscode",
+            imgSrc: vscIcon,
+            imgAlt: "vscode",
+            spanText: "VS Code",
+            onClick: () => {
+                handleShow('VS Code');
                 setStartActive(false);
             },
             onmouseenter: () => {

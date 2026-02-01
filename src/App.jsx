@@ -35,6 +35,7 @@ import Patch from './components/Patch';
 import WindowsDragLogin from './components/WindowsDragLogin';
 import TaskManager from './components/TaskManager';
 import Terminal from './components/Terminal';
+import VSCode from './components/VSCode';
 import { StyleHide, imageMapping,
   handleDoubleClickEnterLink,handleDoubleTapEnterMobile,
   handleDoubleClickiframe, handleDoubleTapiframeMobile,
@@ -141,6 +142,7 @@ function App() {
   const DiskRef = useRef(null);
   const PictureRef = useRef(null)
   const UtilityRef = useRef(null)
+  const VSCodeRef = useRef(null);
   const [draggedIcon, setDraggedIcon] = useState(null);
   const [dropTargetFolder, setDropTargetFolder] = useState(null);
   const [reMountRun, setReMountRun] = useState(0)
@@ -272,6 +274,9 @@ function App() {
   const [StoreExpand, setStoreExpand] = useState(
     {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
   
+  const [VSCodeExpand, setVSCodeExpand] = useState(
+    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
+
   const [btcShow, setBtcShow] = useState(
     {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
 
@@ -947,6 +952,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     itemBeingSelected, setItemBeingSelected,
     installIcon, setInstallIcon,
     StoreExpand, setStoreExpand,
+    VSCodeExpand, setVSCodeExpand,
     deletepermanently,
     currentRightClickFolder, setCurrentRightClickFolder,
     ringMsnOff,
@@ -1021,6 +1027,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     ProjectFolderRef,
     ResumeFolderRef,
     DiskRef,
+    VSCodeRef,
     handleDrop,
     dropTargetFolder, setDropTargetFolder,
     draggedIcon, setDraggedIcon,
@@ -1244,6 +1251,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
         <BgSetting/>
         <Run/>
         <Terminal/>
+        <VSCode/>
         <BTC/>
         <Dragdrop/>
         <Footer/>
@@ -1559,6 +1567,7 @@ function ObjectState() {
     { name: 'TaskManager', setter: setTaskManagerExpand,usestate: TaskManagerExpand,color: 'rgba(218, 160, 109, 0.85)', size: 'small' },
     { name: 'Store',       setter: setStoreExpand,      usestate: StoreExpand,      color: 'rgba(132, 140, 207, 0.85)', size: 'small' },
     { name: 'Bitcoin',     setter: setBtcShow,          usestate: btcShow,          color: 'rgba(132, 140, 207, 0.85)', size: 'small' },
+    { name: 'VS Code',     setter: setVSCodeExpand,     usestate: VSCodeExpand,     color: 'rgba(0, 122, 204, 0.85)', size: 'small' },
     
     // Add user folders dynamically with individual state management
     ...UserCreatedFolder.map(folder => ({

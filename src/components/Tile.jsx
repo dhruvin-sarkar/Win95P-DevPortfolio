@@ -45,6 +45,7 @@ import newsicon from '../assets/newstile.png';
 import task from '../assets/task.png'
 import store from '../assets/store_tile.png'
 import layer from '../assets/layer_tile.png'
+import vscIcon from '../assets/vscode.png';
 
 
 
@@ -182,6 +183,13 @@ export default function Tile({ id, content, index, size, color, moveTile, imageM
           backgroundImage: `url(${tileCooldown.current ? loading : random})`,
           backgroundPosition: '50% 60%',
           backgroundSize: tileCooldown.current ? '26px' : '48px',
+          backgroundRepeat: 'no-repeat',
+        };
+      case 'VS Code':
+        return {
+          backgroundImage: `url(${vscIcon})`,
+          backgroundPosition: '50% 58%',
+          backgroundSize: '40px',
           backgroundRepeat: 'no-repeat',
         };
       case 'Mail':
