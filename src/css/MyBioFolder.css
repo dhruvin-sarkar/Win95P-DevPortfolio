@@ -97,11 +97,10 @@
 }
 
 .folder_content .folder_content-bio {
-    display: grid;
+    display: block;
     position: relative;
     width: calc(100% - 10px);
     height: calc(100% - 95px);
-    grid-template-columns: 1/2;
     padding: 1rem 1.5rem;
     border: 2px solid rgb(53, 52, 52);
     border-top-color: #f0efef;
@@ -109,12 +108,9 @@
     margin: 0 auto;
     margin-top: 0;
     background: #c5c4c4;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     word-break: break-word;
-    grid-template-areas:
-        /* 'bio_h1 bio_h1' */
-        'bio_img biotext_container'
-        /* 'cv_container cv_container'; */
 }
 
 .folder_content .biotext_container {
@@ -122,49 +118,47 @@
     display: flex;
     flex-direction: column;
     row-gap: 3px;
-    overflow-y: auto;
-    overflow-x: hidden;
     padding-right: 5px;
 }
 
-/* Windows 95 style scrollbar */
-.biotext_container::-webkit-scrollbar {
+/* Windows 95 style scrollbar for the bio content container */
+.folder_content-bio::-webkit-scrollbar {
     width: 16px;
 }
 
-.biotext_container::-webkit-scrollbar-track {
+.folder_content-bio::-webkit-scrollbar-track {
     background: #c0c0c0;
     border-left: 1px solid #808080;
     border-top: 1px solid #808080;
 }
 
-.biotext_container::-webkit-scrollbar-thumb {
+.folder_content-bio::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     box-shadow: inset 1px 1px 0 0 #dfdfdf, inset -1px -1px 0 0 #808080;
 }
 
-.biotext_container::-webkit-scrollbar-thumb:hover {
+.folder_content-bio::-webkit-scrollbar-thumb:hover {
     background: #d4d4d4;
 }
 
-.biotext_container::-webkit-scrollbar-button {
+.folder_content-bio::-webkit-scrollbar-button {
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     height: 16px;
 }
 
-.biotext_container::-webkit-scrollbar-button:vertical:decrement {
+.folder_content-bio::-webkit-scrollbar-button:vertical:decrement {
     background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 2 L1 6 L7 6 Z" fill="black"/></svg>') center no-repeat;
 }
 
-.biotext_container::-webkit-scrollbar-button:vertical:increment {
+.folder_content-bio::-webkit-scrollbar-button:vertical:increment {
     background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 6 L1 2 L7 2 Z" fill="black"/></svg>') center no-repeat;
 }
 
-.biotext_container::-webkit-scrollbar-button:active {
+.folder_content-bio::-webkit-scrollbar-button:active {
     border-color: #000000 #ffffff #ffffff #000000;
 }
 
@@ -173,11 +167,40 @@
     white-space: normal;
 }
 
-.folder_content-bio .bio_img {
-    position: relative;
-    width: 180px;
-    margin-left: -1.5rem;
-    top: 1.2rem;
+/* Bio Content Specific Styling */
+.who-i-am-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.who-i-am-tab .bio_img {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 120px;
+    height: auto;
+    position: static;
+    transform: none;
+}
+
+.bio_section {
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.bio_section_header {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #808080;
+    padding-bottom: 2px;
+}
+
+.bio_section p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #1a1a1a;
 }
 
 .folder_content-bio .bio_img_other {
@@ -185,22 +208,13 @@
     width: 150px;
     left: 50%;
     transform: translateX(-50%);
+    margin-bottom: 1rem;
 }
-
-/* .folder_content-bio h1 {
-    grid-area: bio_h1;
-    position: relative;
-    font-size: 23px;
-    text-decoration: underline;
-    left: .5rem;
-} */
 
 .folder_content-bio .bio_text_1 {
     position: relative;
     font-size: 12px;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    left: 1.2rem;
+    padding: 0;
 }
 
 .folder_content-bio .bio_text_1 strong {
@@ -208,16 +222,14 @@
 }
 
 .folder_content-bio .bio_text_1 span {
-    padding-left: 10px;
+    padding-left: 0;
     color: #2b2828;
 }
-
 
 .folder_content-bio .bio_text_1_other {
     position: relative;
     font-size: 12px;
-    padding-left: 1rem;
-
+    padding-left: 0;
 }
 
 .folder_content-bio .bio_text_1_other span {
