@@ -1,15 +1,11 @@
 import ErrorBtn from './ErrorBtn';
 import UseContext from '../Context'
-import { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Draggable from 'react-draggable'
-import { motion } from 'framer-motion';
-import Run from '../assets/regFile.png'
+import RunIcon from '../assets/run.png'
 import '../css/Run.css'
 import { useSounds } from '../hooks/useSounds';
 import { BsCaretDownFill } from "react-icons/bs";
-import {imageMapping} from './function/AppFunctions' 
-
-
 
 function Run() {
 
@@ -35,9 +31,7 @@ function Run() {
     deleteTap,
     setRegErrorPopUp,
     setRegErrorPopUpVal,
-    setCurrentFolder,
-    setSelectedFolder,
-   } = useContext(UseContext);
+  } = useContext(UseContext);
 
   const cannotOpenFile = ['internet', 'type', 'run', 'hard disk (c:)', 'hard disk (d:)', 'cd-rom' ]; // files that should not be opened by RUN
 
@@ -213,9 +207,7 @@ function Run() {
             </div>
           </div>
           <div className="run_top_container">
-           <div className="run_top_container">
               <img src={RunIcon} alt="Run" />
-              <p>
               <p>
                 Type the name of a program, folder, or document, and
                 <br />

@@ -70,10 +70,18 @@ function EmptyFolder({state, setState, refState, folderName, photoMode, paintMod
     if(userCreatedFolderMode) { // for user created folder
       setState({expand: !state.expand});
     }
-    setState(prevState => ({
-      ...prevState,
-      expand: !prevState.expand,
-    }));
+    setState(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
@@ -84,10 +92,18 @@ function EmptyFolder({state, setState, refState, folderName, photoMode, paintMod
       setState({expand: !state.expand});
     }
 
-      setState(prevState => ({
-        ...prevState,
-        expand: !prevState.expand,
-      }));
+      setState(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
   }
@@ -166,21 +182,21 @@ function EmptyFolder({state, setState, refState, folderName, photoMode, paintMod
             <span>{photoMode? currentPhoto.name : folderName}</span>
           </div>
           <div className="folder_barbtn">
-             <div onClick={ !isTouchDevice ? (e) => {
-               e.stopPropagation();
-               playWindowMinimize();
-               setState(prev => ({ ...prev, hide: true, focusItem: false }));
-               userCreatedFolderMode && setState({hide: true, focusItem: false});
-               StyleHide(folderName); 
-             } : undefined}
-             onTouchEnd={(e) => {
-               e.stopPropagation()
-               playWindowMinimize();
-               setState(prev => ({...prev, hide: true, focusItem: false}))
-               userCreatedFolderMode && setState({hide: true, focusItem: false});
-               StyleHide(folderName)
-             }}
-             onTouchStart={(e) => e.stopPropagation()}
+            <div onClick={ !isTouchDevice ? (e) => {
+              e.stopPropagation();
+              playWindowMinimize();
+              setState(prev => ({ ...prev, hide: true, focusItem: false }));
+              userCreatedFolderMode && setState({hide: true, focusItem: false});
+              StyleHide(folderName); 
+            } : undefined}
+            onTouchEnd={(e) => {
+              e.stopPropagation()
+              playWindowMinimize();
+              setState(prev => ({...prev, hide: true, focusItem: false}))
+              userCreatedFolderMode && setState({hide: true, focusItem: false});
+              StyleHide(folderName)
+            }}
+            onTouchStart={(e) => e.stopPropagation()}
             >
               <p className='dash'></p>
             </div>
@@ -383,6 +399,8 @@ EmptyFolder.propTypes = {
   folderName: PropTypes.string.isRequired,
   photoMode: PropTypes.bool,
   paintMode: PropTypes.bool,
+  type: PropTypes.string,
+  userCreatedFolderMode: PropTypes.bool
 };
 
 export default EmptyFolder;
