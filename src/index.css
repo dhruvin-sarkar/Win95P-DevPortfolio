@@ -784,8 +784,8 @@ body {
     display: grid;
     position: relative;
     place-items: center;
-    height: 70px;
-    width: 65px;
+    height: 90px;
+    width: 85px;
     gap: 4px;
     margin-bottom: .9rem;
     cursor: default;
@@ -805,7 +805,7 @@ body {
 
 .icon img {
     position: relative;
-    width: 35px;
+    width: 55px;
     pointer-events: none;
 }
 
