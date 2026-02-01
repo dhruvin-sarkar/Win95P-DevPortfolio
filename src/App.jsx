@@ -1651,7 +1651,7 @@ function handleShow(name) {
   }
 
   allSetItems.forEach((item) => {
-    const itemName = item.name.toLowerCase().trim();
+    const itemName = item.name.toLowerCase().trim().split(' ').join('');
 
     if(itemName === lowerCaseName) {
       setTimeout(() => {
