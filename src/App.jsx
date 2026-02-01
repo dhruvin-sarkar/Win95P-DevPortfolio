@@ -324,11 +324,49 @@ function App() {
     setTimeout(() => {
       handleShow('Patch');
     }, 2500);
+
+    // Startup sound praise
+    setTimeout(() => {
+      setNotiOn(false);
+      setTimeout(() => {
+        setNewMessage({ 
+          type: 'custom', 
+          text1: 'Did you hear that startup sound?',
+          text2: 'Dhruvin custom edited it to perfection!' 
+        });
+        setNotiOn(true);
+      }, 100);
+    }, 12000); // 12 seconds after load
+
+    // Random praise notifications
+    const praiseMessages = [
+      { text1: 'Dhruvin\'s Design skills', text2: 'Are simply top-notch and pixel perfect!' },
+      { text1: 'Attention to Detail', text2: 'Every pixel in this portfolio is placed with care.' },
+      { text1: 'Retro Aesthetic', text2: 'Dhruvin nailed the Windows 95 vibe perfectly.' },
+      { text1: 'Smooth Experience', text2: 'Everything runs so smoothly thanks to Dhruvin.' },
+    ];
+
+    const praiseInterval = setInterval(() => {
+      // 30% chance to show a praise notification every 45 seconds
+      if (Math.random() < 0.3) {
+        const randomPraise = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
+        setNotiOn(false);
+        setTimeout(() => {
+          setNewMessage({ 
+            type: 'custom', 
+            ...randomPraise 
+          });
+          setNotiOn(true);
+        }, 100);
+      }
+    }, 45000);
     
     if(!desktopIcon.find(icon => icon.name === 'PixelPic')) {
       localStorage.clear();
       //ocation.reload();
     }
+
+    return () => clearInterval(praiseInterval);
   },[])
 
 

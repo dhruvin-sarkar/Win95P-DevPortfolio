@@ -45,7 +45,7 @@ function Notification() {
       sounds?.playChimes();
     } else if (newMessage?.type === 'appInstalled') {
       sounds?.playTada();
-    } else if (newMessage?.type === 'appInstalling' || newMessage?.type === 'unIntallingApp') {
+    } else if (newMessage?.type === 'appInstalling' || newMessage?.type === 'unIntallingApp' || newMessage?.type === 'custom') {
       sounds?.playDing();
     } else {
       // Default notification sound
@@ -104,6 +104,13 @@ function Notification() {
           img,
           text1: `${safeName} is now uninstalled`,
           text2: '',
+          function: '',
+        };
+      case 'custom':
+        return {
+          img,
+          text1: message.text1 || 'Notification',
+          text2: message.text2 || '',
           function: '',
         };
       default:

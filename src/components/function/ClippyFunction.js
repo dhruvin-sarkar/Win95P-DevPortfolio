@@ -10,6 +10,9 @@ import clippyNo from '../../assets/clippyNo.gif';
 export const clippyPhrase = {
     inspiration: [
         { phrase: "I'm Clippy, Dhruvin's portfolio assistant! Need help?", animation: clippy1 },
+        { phrase: "Dhruvin custom edited the startup sound himself! Pixel perfect audio!", animation: clippy7 },
+        { phrase: "Notice the attention to detail? Dhruvin's design is flawless!", animation: clippy3 },
+        { phrase: "Dhruvin strives for pixel perfection in every window!", animation: clippy5 },
         { phrase: "Welcome to Dhruvin's Windows 95 portfolio! Pretty cool, huh?", animation: clippy7 },
         { phrase: "Dhruvin is an AI and Design Thinking student - check out his bio!", animation: clippy3 },
         { phrase: "Want to see Dhruvin's projects? Click the Project folder!", animation: clippy1 },
@@ -43,6 +46,8 @@ export const clippySuggest =
     'Try playing Minesweeper - a classic Windows 95 game!',
     'Dhruvin\'s projects showcase his full-stack development skills!',
     'Love the retro UI? Dhruvin designed it with attention to detail!',
-    'Connect with Dhruvin on LinkedIn for professional networking!'
-
+    'Connect with Dhruvin on LinkedIn for professional networking!',
+    'Dhruvin spent hours perfecting that startup sound!',
+    'Everything you see is pixel-perfectly designed by Dhruvin.',
+    'The attention to detail in this portfolio is just amazing.'
 ]
