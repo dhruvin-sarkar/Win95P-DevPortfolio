@@ -1,6 +1,6 @@
 .folder_folder_terminal {
+    display: none;
     position: absolute;
-    display: flex;
     flex-direction: column;
     background-color: black;
     border: 2px solid white;
@@ -28,7 +28,8 @@
     gap: 5px;
     color: white;
     font-weight: bold;
-    font-family: 'MS Sans Serif', 'Segoe UI', sans-serif; /* Keep title bar standard */
+    font-family: 'MS Sans Serif', 'Segoe UI', sans-serif;
+    /* Keep title bar standard */
     font-size: 14px;
 }
 
@@ -40,7 +41,8 @@
 .terminal_content {
     flex-grow: 1;
     padding: 5px;
-    color: #c0c0c0; /* Classic DOS gray/white */
+    color: #c0c0c0;
+    /* Classic DOS gray/white */
     overflow-y: auto;
     font-size: 16px;
     line-height: 1.2;

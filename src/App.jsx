@@ -306,7 +306,7 @@ function App() {
 
   const textError = ( // error message
       <>
-          Cannot find the file '{RunInputVal || regErrorPopUpVal}' (or one of its component). 
+          Cannot find the file &apos;{RunInputVal || regErrorPopUpVal}&apos; (or one of its component). 
           Make sure the path and filename are correct and that all required 
           libraries are available.
       </>
@@ -1920,7 +1920,7 @@ function handleShowMobile(name) {
 
     if (item) {
       return {
-        display: item.usestate.show ? 'block' : '',
+        display: item.usestate.show ? (name === 'Terminal' ? 'flex' : 'block') : 'none',
         maxWidth: 'none',
         width: '100%',
         height: 'calc(100% - 37px)',
@@ -1946,7 +1946,7 @@ function handleShowMobile(name) {
 
     if (item) {
         return {
-            display: item.usestate.show ? 'block' : '',
+            display: item.usestate.show ? (name === 'Terminal' ? 'flex' : 'block') : 'none',
             opacity: item.usestate.hide ? '0' : '1',
             zIndex: item.usestate.hide ? '-1' : (item.usestate.focusItem ? '999' : item.usestate.zIndex),
             pointerEvents: item.usestate.hide ? 'none' : 'auto',
