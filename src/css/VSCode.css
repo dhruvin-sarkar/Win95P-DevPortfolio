@@ -65,23 +65,26 @@
 }
 
 .folder_barbtn .x {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: black;
+    line-height: 1;
+    margin-top: -1px;
 }
 
 .folder_barbtn .dash {
-    width: 8px;
+    width: 6px;
     height: 2px;
     background: black;
-    margin-top: 4px;
+    margin-top: 8px;
 }
 
 .folder_barbtn .expand {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border: 1px solid black;
     border-top: 2px solid black;
+    margin-top: 0;
 }
 
 .vscode_menu_bar {
