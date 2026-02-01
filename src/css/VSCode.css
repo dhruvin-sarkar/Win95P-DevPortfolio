@@ -1,20 +1,18 @@
+/* VS Code Window Container */
 .vscode_window {
-    width: 100%;
-    height: 100%;
-    background-color: #1e1e1e;
-    color: #d4d4d4;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #cccccc;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.vscode_editor_container {
-    flex: 1;
-    display: flex;
     overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.vscode_sidebar {
+/* Activity Bar (Far Left) */
+.vscode_activity_bar {
     width: 48px;
     background-color: #333333;
     display: flex;
@@ -22,179 +20,290 @@
     align-items: center;
     padding-top: 10px;
     gap: 20px;
+    border-right: 1px solid #2b2b2b;
 }
 
-.vscode_sidebar_icon {
-    width: 24px;
-    height: 24px;
-    opacity: 0.6;
+.vscode_activity_icon {
+    font-size: 24px;
+    color: #858585;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
-.vscode_sidebar_icon:hover {
-    opacity: 1;
+.vscode_activity_icon:hover {
+    color: #ffffff;
 }
 
-.vscode_sidebar_icon.active {
-    opacity: 1;
+.vscode_activity_icon.active {
+    color: #ffffff;
     border-left: 2px solid #ffffff;
+    padding-left: 2px;
 }
 
-.vscode_main_area {
+/* Main Content Area */
+.vscode_content_container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Sidebar (Explorer) */
+.vscode_sidebar {
+    width: 260px;
+    background-color: #252526;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #2b2b2b;
+    overflow-y: auto;
+}
+
+.vscode_sidebar_header {
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #bbbbbb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vscode_file_tree {
+    padding-left: 0;
+}
+
+.vscode_tree_item {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #cccccc;
+    white-space: nowrap;
+}
+
+.vscode_tree_item:hover {
+    background-color: #2a2d2e;
+}
+
+.vscode_tree_item.active {
+    background-color: #37373d;
+    color: #ffffff;
+}
+
+.vscode_tree_icon {
+    margin-right: 6px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.vscode_chevron {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    transition: transform 0.2s;
+}
+
+.vscode_chevron.expanded {
+    transform: rotate(90deg);
+}
+
+/* Editor Area */
+.vscode_editor_area {
     flex: 1;
     display: flex;
     flex-direction: column;
     background-color: #1e1e1e;
+    overflow: hidden;
 }
 
-.vscode_tabs {
+/* Tab Bar */
+.vscode_tab_bar {
     height: 35px;
     background-color: #252526;
     display: flex;
     overflow-x: auto;
+    scrollbar-width: none;
+    /* Hide scrollbar Firefox */
+}
+
+.vscode_tab_bar::-webkit-scrollbar {
+    display: none;
+    /* Hide scrollbar Chrome/Safari */
 }
 
 .vscode_tab {
     display: flex;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 12px;
+    height: 100%;
+    min-width: 120px;
+    max-width: 200px;
     background-color: #2d2d2d;
     border-right: 1px solid #1e1e1e;
-    font-size: 13px;
-    height: 100%;
     cursor: pointer;
-    white-space: nowrap;
+    font-size: 13px;
+    color: #969696;
+    transition: background 0.2s;
 }
 
 .vscode_tab.active {
     background-color: #1e1e1e;
-    border-top: 1px solid #007acc;
+    color: #ffffff;
+}
+
+.vscode_tab_title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 8px;
 }
 
 .vscode_tab_close {
-    margin-left: 10px;
     font-size: 14px;
-    opacity: 0.5;
+    color: #969696;
+    padding: 2px;
+    border-radius: 3px;
 }
 
-.vscode_editor {
+.vscode_tab_close:hover {
+    background-color: #454545;
+    color: #ffffff;
+}
+
+/* Code Editor Content */
+.vscode_editor_content_wrapper {
     flex: 1;
-    padding: 15px;
-    overflow: auto;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    line-height: 1.5;
-    font-size: 14px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
 }
 
-.vscode_line {
+.vscode_editor_viewport {
+    flex: 1;
+    overflow: auto;
+    background-color: #1e1e1e;
     display: flex;
 }
 
-.vscode_line_number {
-    width: 40px;
+/* Line Numbers & Gutter */
+.vscode_gutter {
+    width: 50px;
+    background-color: #1e1e1e;
     color: #858585;
+    padding-top: 10px;
     text-align: right;
     padding-right: 15px;
-    user-select: none;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    flex-shrink: 0;
 }
 
-.vscode_code {
+.vscode_code_display {
+    padding-top: 10px;
+    padding-left: 10px;
+    flex: 1;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d4d4d4;
     white-space: pre;
 }
 
 /* Syntax Highlighting */
-.vscode_keyword {
+.syntax-keyword {
     color: #569cd6;
 }
 
-/* Blue */
-.vscode_string {
+/* blue */
+.syntax-string {
     color: #ce9178;
 }
 
-/* Orange/Greenish depending on theme, using standard dark */
-.vscode_function {
+/* orange/brown */
+.syntax-function {
     color: #dcdcaa;
 }
 
-/* Yellow */
-.vscode_comment {
+/* yellow */
+.syntax-class {
+    color: #4ec9b0;
+}
+
+/* greenish cyan */
+.syntax-comment {
     color: #6a9955;
+    font-style: italic;
 }
 
-/* Green */
-.vscode_variable {
-    color: #9cdcfe;
-}
-
-/* Light Blue */
-.vscode_tag {
+/* green */
+.syntax-tag {
     color: #569cd6;
 }
 
-/* Blue */
-.vscode_attr {
+/* blue for tags */
+.syntax-attr {
     color: #9cdcfe;
 }
 
-/* Light Blue */
+/* light blue */
+.syntax-number {
+    color: #b5cea8;
+}
 
-.vscode_terminal_panel {
-    height: 180px;
+/* light green */
+.syntax-const {
+    color: #4fc1ff;
+}
+
+/* neon blue */
+
+/* Minimap */
+.vscode_minimap {
+    width: 60px;
     background-color: #1e1e1e;
-    border-top: 1px solid #333333;
+    border-left: 1px solid #2b2b2b;
+    opacity: 0.4;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
-.vscode_panel_header {
-    height: 30px;
+.minimap-line {
+    height: 1px;
+    margin-left: 5px;
+    border-radius: 1px;
+}
+
+/* Status Bar */
+.vscode_status_bar {
+    height: 22px;
+    background-color: #007acc;
+    color: #ffffff;
     display: flex;
     align-items: center;
-    padding: 0 15px;
-    gap: 20px;
-    font-size: 11px;
-    color: #858585;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.vscode_panel_item.active {
-    color: #e7e7e7;
-    border-bottom: 2px solid #e7e7e7;
-}
-
-.vscode_terminal_content {
-    flex: 1;
-    padding: 10px 15px;
-    overflow: auto;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 13px;
-    background-color: #000;
-    margin: 5px;
-    border: 1px solid #333;
-}
-
-.vscode_prompt_text {
-    color: #d4d4d4;
-    margin-bottom: 10px;
-}
-
-.vscode_copy_btn {
-    background-color: #0e639c;
-    color: white;
-    border: none;
-    padding: 5px 15px;
-    cursor: pointer;
+    justify-content: space-between;
+    padding: 0 10px;
     font-size: 12px;
-    margin-top: 10px;
-    align-self: flex-start;
 }
 
-.vscode_copy_btn:hover {
-    background-color: #1177bb;
+.vscode_status_left,
+.vscode_status_right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.vscode_copy_btn:active {
-    background-color: #094771;
+.vscode_status_item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: default;
 }
