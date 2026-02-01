@@ -171,6 +171,7 @@ export function imageMapping (name, type) {
       return Fortune;
 
     case "Run":
+    case "Terminal":
       return run;
 
     case "Exit":

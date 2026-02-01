@@ -32,8 +32,9 @@ import loadingSpin from './assets/loading.gif'
 import NewsApp from './components/NewsApp'
 import SpinningCat from './components/SpinningCat';
 import Patch from './components/Patch';
-import WindowsDragLogin from './components/WindowsDragLogin';
+import Link from './components/WindowsDragLogin';
 import TaskManager from './components/TaskManager';
+import Terminal from './components/Terminal';
 import { StyleHide, imageMapping,
   handleDoubleClickEnterLink,handleDoubleTapEnterMobile,
   handleDoubleClickiframe, handleDoubleTapiframeMobile,
@@ -248,6 +249,9 @@ function App() {
     {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
 
   const [RunExpand, setRunExpand] = useState(
+    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
+
+  const [TerminalExpand, setTerminalExpand] = useState(
     {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
   
   const [BinExpand, setBinExpand] = useState(
@@ -1089,6 +1093,8 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     remountRunPosition,
     // Sound system
     sounds,
+    // Terminal
+    TerminalExpand, setTerminalExpand,
   }
 
 
@@ -1237,6 +1243,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
         <OpenProject/>
         <BgSetting/>
         <Run/>
+        <Terminal/>
         <BTC/>
         <Dragdrop/>
         <Footer/>
