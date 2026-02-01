@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import file4 from '../assets/file4.png'
 import folder from '../assets/regFolder.png'
 import '../css/ResumeFolder.css'
+import { useSounds } from '../hooks/useSounds';
 
 
 function NftFolder() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     themeDragBar,
@@ -40,22 +43,38 @@ function NftFolder() {
       }
 
    function handleExpandStateToggle() {
-    setNftExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setNftExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setNftExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setNftExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
 
   return (
@@ -92,12 +111,14 @@ function NftFolder() {
             <div className="folder_barbtn">
               <div onClick={ !isTouchDevice? (e) => {
                 e.stopPropagation()
+                playWindowMinimize();
                 setNftExpand(prev => ({...prev, hide: true, focusItem: false}))
                 StyleHide('Nft') 
               } : undefined
             }
                    onTouchEnd={(e) => {
                     e.stopPropagation()
+                    playWindowMinimize();
                     setNftExpand(prev => ({...prev, hide: true, focusItem: false}))
                     StyleHide('Nft')
                   }}

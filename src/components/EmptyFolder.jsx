@@ -2,15 +2,18 @@ import UseContext from '../Context';
 import { Fragment, useContext, useEffect, useRef, useState} from "react";
 import Draggable from 'react-draggable';
 import {motion} from 'framer-motion';
+import partition from '../assets/partition.png';
 import '../css/ResumeFolder.css';
 import PropTypes from 'prop-types';
 import photoicon from '../assets/jpeg.png';
 import binEmp from '../assets/bin2.png'
 import bin from '../assets/bin.png'
+import { useSounds } from '../hooks/useSounds';
 
 function EmptyFolder({state, setState, refState, folderName, photoMode, paintMode, userCreatedFolderMode, type}) {
 
   const iconRefs = useRef([]);
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     setCurrentRightClickFolder,
@@ -163,19 +166,21 @@ function EmptyFolder({state, setState, refState, folderName, photoMode, paintMod
             <span>{photoMode? currentPhoto.name : folderName}</span>
           </div>
           <div className="folder_barbtn">
-            <div onClick={ !isTouchDevice ? (e) => {
-              e.stopPropagation();
-              setState(prev => ({ ...prev, hide: true, focusItem: false }));
-              userCreatedFolderMode && setState({hide: true, focusItem: false});
-              StyleHide(folderName); 
-            } : undefined}
-            onTouchEnd={(e) => {
-              e.stopPropagation()
-              setState(prev => ({...prev, hide: true, focusItem: false}))
-              userCreatedFolderMode && setState({hide: true, focusItem: false});
-              StyleHide(folderName)
-            }}
-            onTouchStart={(e) => e.stopPropagation()}
+             <div onClick={ !isTouchDevice ? (e) => {
+               e.stopPropagation();
+               playWindowMinimize();
+               setState(prev => ({ ...prev, hide: true, focusItem: false }));
+               userCreatedFolderMode && setState({hide: true, focusItem: false});
+               StyleHide(folderName); 
+             } : undefined}
+             onTouchEnd={(e) => {
+               e.stopPropagation()
+               playWindowMinimize();
+               setState(prev => ({...prev, hide: true, focusItem: false}))
+               userCreatedFolderMode && setState({hide: true, focusItem: false});
+               StyleHide(folderName)
+             }}
+             onTouchStart={(e) => e.stopPropagation()}
             >
               <p className='dash'></p>
             </div>

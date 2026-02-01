@@ -11,7 +11,7 @@ import {imageMapping} from './function/AppFunctions'
 
 
 
-function RunFunc() {
+function Run() {
 
   const { playWindowMaximize, playWindowMinimize } = useSounds();
 
@@ -114,22 +114,38 @@ function RunFunc() {
       }
 
    function handleExpandStateToggle() {
-    setRunExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setRunExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setRunExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setRunExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
 
     useEffect(() => { 
@@ -197,7 +213,9 @@ function RunFunc() {
             </div>
           </div>
           <div className="run_top_container">
+           <div className="run_top_container">
               <img src={RunIcon} alt="Run" />
+              <p>
               <p>
                 Type the name of a program, folder, or document, and
                 <br />

@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import file4 from '../assets/file4.png'
 import folder from '../assets/regFolder.png'
 import '../css/ResumeFolder.css'
+import { useSounds } from '../hooks/useSounds';
 
 
 function NoteFolder() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     themeDragBar,
@@ -42,22 +45,38 @@ function NoteFolder() {
       }
 
    function handleExpandStateToggle() {
-    setNoteExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setNoteExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setNoteExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setNoteExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
 
 
@@ -95,12 +114,14 @@ function NoteFolder() {
             <div className="folder_barbtn">
               <div onClick={ !isTouchDevice? (e) => {
                 e.stopPropagation()
+                playWindowMinimize();
                 setNoteExpand(prev => ({...prev, hide: true, focusItem: false}))
                 StyleHide('Note') 
               } : undefined
             }
                    onTouchEnd={(e) => {
                     e.stopPropagation()
+                    playWindowMinimize();
                     setNoteExpand(prev => ({...prev, hide: true, focusItem: false}))
                     StyleHide('Note')
                   }}

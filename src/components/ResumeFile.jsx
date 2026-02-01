@@ -4,10 +4,13 @@ import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
 import resumefile from '../assets/resume.png'
 import '../css/ResumeFile.css'
+import { useSounds } from '../hooks/useSounds';
 
 
 
 function ResumeFile() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     themeDragBar,
@@ -36,22 +39,38 @@ function ResumeFile() {
       }
 
    function handleExpandStateToggle() {
-    setResumeFileExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setResumeFileExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setResumeFileExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setResumeFileExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
   return (
     <>
@@ -87,12 +106,14 @@ function ResumeFile() {
             <div className="folder_barbtn-resumefile">
               <div onClick={ !isTouchDevice? (e) => {
                 e.stopPropagation()
+                playWindowMinimize();
                 setResumeFileExpand(prev => ({...prev, hide: true, focusItem: false}))
                 StyleHide('ResumeFile') 
               } : undefined
             }
                    onTouchEnd={(e) => {
                     e.stopPropagation()
+                    playWindowMinimize();
                     setResumeFileExpand(prev => ({...prev, hide: true, focusItem: false}))
                     StyleHide('ResumeFile')
                   }}

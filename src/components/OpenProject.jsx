@@ -4,9 +4,12 @@ import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
 import ie from '../assets/ie.png'
 import '../css/OpenProject.css'
+import { useSounds } from '../hooks/useSounds';
 
 
 function OpenProject() {
+
+  const { playWindowMaximize, playWindowMinimize } = useSounds();
 
   const { 
     themeDragBar,
@@ -38,22 +41,38 @@ function OpenProject() {
       }
 
    function handleExpandStateToggle() {
-    setOpenProjectExpand(prevState => ({
-      ...prevState,
-      expand: !prevState.expand
-    }));
+    setOpenProjectExpand(prevState => {
+      const willExpand = !prevState.expand;
+      if (willExpand) {
+        playWindowMaximize();
+      } else {
+        playWindowMinimize();
+      }
+      return {
+        ...prevState,
+        expand: willExpand,
+      };
+    });
   }
 
   function handleExpandStateToggleMobile() {
     const now = Date.now();
     if (now - lastTapTime < 300) {
-        setOpenProjectExpand(prevState => ({
-            ...prevState,
-            expand: !prevState.expand
-        }));
+      setOpenProjectExpand(prevState => {
+        const willExpand = !prevState.expand;
+        if (willExpand) {
+          playWindowMaximize();
+        } else {
+          playWindowMinimize();
+        }
+        return {
+          ...prevState,
+          expand: willExpand,
+        };
+      });
     }
     setLastTapTime(now);
-}
+  }
 
   return (
     <>
@@ -91,12 +110,14 @@ function OpenProject() {
             <div className="folder_barbtn">
               <div onClick={ !isTouchDevice? (e) => {
                 e.stopPropagation()
+                playWindowMinimize();
                 setOpenProjectExpand(prev => ({...prev, hide: true, focusItem: false}))
                 StyleHide('Internet') 
               } : undefined
             }
                    onTouchEnd={(e) => {
                     e.stopPropagation()
+                    playWindowMinimize();
                     setOpenProjectExpand(prev => ({...prev, hide: true, focusItem: false}))
                     StyleHide('Internet')
                   }}
