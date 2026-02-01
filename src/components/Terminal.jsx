@@ -59,12 +59,23 @@ const Terminal = () => {
     const [input, setInput] = useState('');
     const [history, setHistory] = useState([
         { output: 'Microsoft(R) Windows 95' },
-        { output: '   (C)Copyright Microsoft Corp 1981-1996.' },
+        { output: '   (C)Copyright Dhruvin Sarkar 2009-2026.' },
         { output: '' }
     ]);
     const [cwd, setCwd] = useState(['C:', 'Users', 'Dhruvin']); // Current Working Directory path array
     const [matrixMode, setMatrixMode] = useState(false);
     
+    // Commands implementation helpers
+    const getFormattedDate = () => {
+        const date = new Date();
+        return `Current date is ${date.toLocaleDateString()}`;
+    };
+
+    const getFormattedTime = () => {
+        const date = new Date();
+        return `Current time is ${date.toLocaleTimeString()}`;
+    };
+
     const inputRef = useRef(null);
     const bottomRef = useRef(null);
 
@@ -81,36 +92,10 @@ const Terminal = () => {
     };
 
     const getPrompt = () => {
-        // Construct path string, e.g., C:\Users\Dhruvin>
         return `${cwd.join('\\')}>`;
     };
 
-    const getCurrentDir = () => {
-        let current = fileSystem;
-        for (const part of cwd) {
-            if (current[part] && current[part].children) {
-                current = current[part].children;
-            } else if (current.children && current.children[part]) { // Handle navigating down
-                 current = current.children[part].children;
-            } else {
-                 return null; // Error
-            }
-        }
-        return current;
-    };
-    
-    // Helper to traverse to a specific path array from root
     const getDirFromPath = (pathArray) => {
-        let current = fileSystem;
-        // The first element of cwd is 'C:', which is at the root of fileSystem['C:']? 
-        // Wait, fileSystem structure is { 'C:': ... }. 
-        // So cwd=['C:'] means we are inside fileSystem['C:'].children? 
-        // Let's adjust logic.
-        
-        // Actually, let's say root is the object containing 'C:'.
-        // cwd=['C:'] -> fileSystem['C:'].children
-        
-        // Let's rewrite traversal:
         let node = fileSystem;
         for (const part of pathArray) {
              if (node[part]) {
@@ -127,33 +112,45 @@ const Terminal = () => {
         const args = cmd.trim().split(' ');
         const command = args[0].toLowerCase();
         const param = args[1];
+        const restParams = args.slice(1).join(' ');
 
         const newHistory = [...history, { command: getPrompt(), input: cmd }];
 
         switch (command) {
             case 'help':
-                newHistory.push({ output: 'Supported commands:\n  DIR    List files in current directory.\n  CD     Change directory.\n  CLS    Clear screen.\n  TYPE   View file content.\n  WHOAMI Display user info.\n  EXIT   Close terminal.\n  HELP   Show this list.' });
+                newHistory.push({ output: 'Supported commands:\n  DIR    List files in current directory.\n  CD     Change directory.\n  MKDIR  Create a directory.\n  TYPE   View file content.\n  ECHO   Display messages.\n  CLS    Clear screen.\n  DATE   Display current date.\n  TIME   Display current time.\n  VER    Display Windows version.\n  WHOAMI Display user info.\n  EXIT   Close terminal.\n  MATRIX Toggle Matrix mode.' });
                 break;
             case 'cls':
             case 'clear':
                 setHistory([]);
                 setInput('');
-                return; // Return early so we don't append to cleared history
+                return;
             case 'whoami':
                 newHistory.push({ output: 'Dhruvin Sarkar\nFull Stack Developer & AI Enthusiast' });
+                break;
+            case 'ver':
+                newHistory.push({ output: 'Microsoft Windows 95 [Version 4.00.950]\n(C) Copyright Dhruvin Sarkar 2009-2026' });
+                break;
+            case 'date':
+                newHistory.push({ output: getFormattedDate() });
+                break;
+            case 'time':
+                newHistory.push({ output: getFormattedTime() });
+                break;
+            case 'echo':
+                newHistory.push({ output: restParams });
                 break;
             case 'exit':
                 setTerminalExpand(prev => ({ ...prev, hide: true, show: false }));
                 deleteTap('Terminal');
                 return;
             case 'dir':
-            case 'ls':
+            case 'ls': {
                 const dir = getDirFromPath(cwd);
                 if (dir) {
                     const lines = Object.keys(dir).map(name => {
                         const isDir = dir[name].type === 'dir';
-                        const size = isDir ? '<DIR>' : Math.floor(Math.random() * 10000);
-                        // Formatting like DOS: DATE TIME <DIR> NAME
+                        // Formatting like DOS: DATE TIME <DIR> NAME (Simplified)
                         return `${isDir ? '       ' : '       '} ${isDir ? '<DIR>    ' : '         '} ${name}`;
                     });
                     newHistory.push({ output: lines.join('\n') });
@@ -162,9 +159,10 @@ const Terminal = () => {
                    newHistory.push({ output: 'Error reading directory.' }); 
                 }
                 break;
+            }
             case 'cd':
                 if (!param) {
-                    newHistory.push({ output: getPrompt() }); // Just print pwd
+                    newHistory.push({ output: getPrompt() }); 
                 } else if (param === '..') {
                     if (cwd.length > 1) {
                          setCwd(prev => prev.slice(0, -1));
@@ -175,6 +173,24 @@ const Terminal = () => {
                         setCwd(prev => [...prev, param]);
                     } else {
                         newHistory.push({ output: 'The system cannot find the path specified.' });
+                    }
+                }
+                break;
+            case 'mkdir':
+            case 'md':
+                if (!param) {
+                    newHistory.push({ output: 'The syntax of the command is incorrect.' });
+                } else {
+                    const currentDir = getDirFromPath(cwd);
+                    if (currentDir) {
+                        if (currentDir[param]) {
+                            newHistory.push({ output: 'A subdirectory or file already exists.' });
+                        } else {
+                            currentDir[param] = { type: 'dir', children: {} };
+                            newHistory.push({ output: '' }); // Success, check with dir
+                        }
+                    } else {
+                         newHistory.push({ output: 'Error creating directory.' });
                     }
                 }
                 break;
@@ -257,17 +273,53 @@ const Terminal = () => {
                         <img src={terminalIcon} alt="cmd" style={{ width: '16px', height: '16px' }}/>
                         <span>MS-DOS Prompt</span>
                     </div>
-                    <div className="folder_barbtn_terminal">
+                    <div className="folder_barbtn_terminal" style={{ display: 'flex', gap: '2px' }}>
+                         <div 
+                            className='minimize-btn'
+                             style={{ 
+                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
+                                display:'flex', justifyContent:'center', alignItems:'end', cursor:'pointer', 
+                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
+                                boxShadow:'1px 1px 0px black', fontSize: '10px', fontWeight: 'bold'
+                            }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setTerminalExpand(prev => ({ ...prev, hide: true, startActive: false }));
+                                playWindowMinimize();
+                            }}
+                        >
+                            <span style={{ marginBottom: '2px' }}>_</span>
+                        </div>
+                         <div 
+                            className='maximize-btn'
+                             style={{ 
+                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
+                                display:'flex', justifyContent:'center', alignItems:'center', cursor:'pointer', 
+                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
+                                boxShadow:'1px 1px 0px black', fontSize: '10px'
+                            }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleExpandStateToggle();
+                            }}
+                        >
+                            <div style={{ width: '10px', height: '9px', borderTop: '2px solid black', borderBottom: '1px solid black', borderLeft: '1px solid black', borderRight: '1px solid black' }}></div>
+                        </div>
                         <div 
                             className='x' 
-                             style={{ color: 'black', background: '#c0c0c0', width: '16px', height: '14px', display:'flex', justifyContent:'center', alignItems:'center', cursor:'pointer', border:'1px solid white', boxShadow:'1px 1px 0px black'}}
+                             style={{ 
+                                color: 'black', background: '#c0c0c0', width: '16px', height: '14px', 
+                                display:'flex', justifyContent:'center', alignItems:'center', cursor:'pointer', 
+                                border:'1px solid white', borderRightColor: 'black', borderBottomColor: 'black',
+                                boxShadow:'1px 1px 0px black', marginLeft: '2px', fontSize: '10px', fontWeight: 'bold'
+                            }}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setTerminalExpand(prev => ({ ...prev, hide: true, show: false }));
                                 deleteTap('Terminal');
                             }}
                         >
-                            x
+                            X
                         </div>
                     </div>
                 </div>
