@@ -4,8 +4,6 @@ Windows 95 Portfolio
 
 Live: https://Dhruvin-Sarkar.com
 
-![Portfolio Screenshot](https://github.com/dhruvin-sarkar/Win95P-DevPortfolio/blob/main/src/assets/markdown.png?raw=true)
-
 ## Featured Functionality
 
 - Log in
