@@ -1,17 +1,4 @@
 import msDosIcon from '../../assets/Msdos-icon.svg'
-
-// ... existing imports
-
-// Mapping image function
-export function imageMapping (name, type) { 
-  switch(name) {
-
-    case 'MS-DOS Prompt':
-    case 'ms-dos prompt':
-      return msDosIcon;
-
-    case 'About':
-// ... existing cases
 import Resume from '../../assets/folder.png'
 import Mail from '../../assets/mail.png'
 import Project from '../../assets/regFolder.png'
@@ -53,6 +40,8 @@ import taskmanager from '../../assets/taskmanager.png'
 import notepad from '../../assets/notepad.png'
 import store from '../../assets/store.png'
 import layer from '../../assets/layer.png'
+import About from '../../assets/ipng.png'
+import MyComputer from '../../assets/pcicon.png'
 
 
 
