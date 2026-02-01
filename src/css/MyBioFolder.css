@@ -261,6 +261,70 @@
     padding: 0;
 }
 
+/* Hobby Tab Specific Styling */
+.hobby-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hobby-tab .hobby_img {
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 100px;
+    height: auto;
+    position: static;
+}
+
+.hobby_section {
+    margin-bottom: 1.8rem;
+    width: 100%;
+}
+
+.hobby_section_accented {
+    border-left: 3px solid rgba(0, 0, 128, 0.25);
+    /* Muted Win95 Navy */
+    padding-left: 1rem;
+    margin-left: 2px;
+}
+
+.hobby_header {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000080;
+    /* Classic Win95 Navy */
+    margin-top: 1.2rem;
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid #808080;
+    padding-bottom: 2px;
+}
+
+.hobby_header_intro {
+    font-size: 17px;
+    color: #000;
+    border-bottom: 2px solid #000080;
+}
+
+.hobby_header_outro {
+    font-style: italic;
+    color: #444;
+}
+
+.hobby_section:first-of-type .hobby_header {
+    margin-top: 0.5rem;
+}
+
+.hobby_prose {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.hobby_text_container {
+    padding: 0;
+}
+
 .folder_content-bio .bio_text_1_other {
     position: relative;
     font-size: 12px;
