@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import { useContext, useRef } from "react";
 import Draggable from 'react-draggable'
 import { motion } from 'framer-motion';
-import Mail from '../assets/mailOff.png'
+import Mail from '../assets/mail.png'
 import '../css/MailFolder.css'
 import { useSounds } from '../hooks/useSounds';
 
