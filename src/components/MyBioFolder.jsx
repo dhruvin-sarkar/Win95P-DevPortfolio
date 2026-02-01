@@ -155,53 +155,59 @@ function MyBioFolder() {
   const hobbyText = (
     <div className="hobby-content">
       <div className="hobby_section">
-        <h3 className="hobby_header hobby_header_intro">Hobbies</h3>
+        <h3 className="hobby_header hobby_header_intro">Hobbies — A Lifetime of Obsession, Curiosity, and Overcommitment</h3>
         <p className="hobby_prose">I&apos;ve never been someone who dabbles. When something captures my interest, it doesn&apos;t stay a hobby for long — it becomes something I fully immerse myself in. Over time, this has led me into an unusually wide range of interests. To some, it might look like I&apos;m spread too thin. To me, it&apos;s simply how I experience the world: through deep curiosity, obsession, and a constant desire to understand how things work at every level.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Competitive FPS</h3>
-        <p className="hobby_prose">First-person shooters were one of my earliest and most formative influences. I grew up playing Counter-Strike with my dad — starting from CS 1.6 and Source, long before ranked ladders and esports were mainstream. Those early sessions weren&apos;t just about playing a game; they taught me fundamentals like precision, patience, spatial awareness, and mechanical discipline. As I grew older, that interest turned into long-term commitment. I spent thousands of hours mastering games that reward consistency and punishment equally. Reaching Global Elite in CS:GO and Champion in Rainbow Six Siege wasn&apos;t the result of natural talent — it came from relentless practice, reviewing mistakes, refining micro-decisions, and chasing marginal gains. I&apos;m drawn to mechanically demanding games even when I&apos;m bad at them — Valorant included — because I value the ceiling more than immediate success. I enjoy knowing that there&apos;s always more to learn.</p>
+        <h3 className="hobby_header">Competitive FPS — Precision, Discipline, and Mastery</h3>
+        <p className="hobby_prose">First-person shooters were one of my earliest and most formative influences. I grew up playing Counter-Strike with my dad — starting from CS 1.6 and Source, long before ranked ladders and esports were mainstream. Those early sessions weren&apos;t just about playing a game; they taught me fundamentals like precision, patience, spatial awareness, and mechanical discipline.</p>
+        <p className="hobby_prose">As I grew older, that interest turned into long-term commitment. I spent thousands of hours mastering games that reward consistency and punishment equally. Reaching Global Elite in CS:GO and Champion in Rainbow Six Siege wasn&apos;t the result of natural talent — it came from relentless practice, reviewing mistakes, refining micro-decisions, and chasing marginal gains. I&apos;m drawn to mechanically demanding games even when I&apos;m bad at them — Valorant included — because I value the ceiling more than immediate success. I enjoy knowing that there&apos;s always more to learn.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Roguelikes</h3>
-        <p className="hobby_prose">Where FPS games sharpen reflexes, roguelikes and roguelites sharpen my thinking. I&apos;m obsessed with systems — how individual mechanics interact, compound, and occasionally break. I love the process of building the &quot;perfect&quot; run: optimizing builds, micromanaging resources, adapting to randomness, and making the most out of imperfect conditions. This fascination spans genres — from traditional roguelikes and deck-builders to platformers like Hollow Knight, Celeste, and Dead Cells, and even chaotic, gambling-heavy roguelites where risk management becomes part of the strategy. The constant loop of experimentation, failure, and refinement feels incredibly natural to me — it&apos;s the same mindset I bring into coding, design, and problem-solving.</p>
+        <h3 className="hobby_header">Roguelikes — Systems Thinking and Controlled Chaos</h3>
+        <p className="hobby_prose">Where FPS games sharpen reflexes, roguelikes and roguelites sharpen my thinking. I&apos;m obsessed with systems — how individual mechanics interact, compound, and occasionally break. I love the process of building the &quot;perfect&quot; run: optimizing builds, micromanaging resources, adapting to randomness, and making the most out of imperfect conditions.</p>
+        <p className="hobby_prose">This fascination spans genres — from traditional roguelikes and deck-builders to platformers like Hollow Knight, Celeste, and Dead Cells, and even chaotic, gambling-heavy roguelites where risk management becomes part of the strategy. The constant loop of experimentation, failure, and refinement feels incredibly natural to me — it&apos;s the same mindset I bring into coding, design, and problem-solving.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Modding & Tinkering</h3>
+        <h3 className="hobby_header">Modding & Tinkering — Curiosity Without Boundaries</h3>
         <p className="hobby_prose">I&apos;ve always enjoyed modding, even if I haven&apos;t had the time to fully dive into it yet. Whether it&apos;s Roblox scripting, Minecraft modding, or tweaking systems to behave differently than intended, I&apos;m fascinated by how games and platforms expose their internals — and how far those boundaries can be pushed.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">PC Hardware</h3>
-        <p className="hobby_prose">PC modding and hardware curiosity were etched into my life early on. My dad built PCs regularly, and I grew up watching components come together into functioning systems. That exposure turned into genuine fascination. I don&apos;t just like hardware — I like understanding it. I enjoy learning about GPU architectures, CPU designs, thermals, power delivery, and performance tradeoffs. I&apos;ll gladly sit through long-form breakdowns explaining why one component is marginally better than another, just to grasp the engineering decisions behind it. That appreciation for human ingenuity — how we design complex systems under constraints — heavily influences how I approach software as well.</p>
+        <h3 className="hobby_header">PC Hardware — Engineering Appreciation at Its Purest</h3>
+        <p className="hobby_prose">PC modding and hardware curiosity were etched into my life early on. My dad built PCs regularly, and I grew up watching components come together into functioning systems. That exposure turned into genuine fascination. I don&apos;t just like hardware — I like understanding it.</p>
+        <p className="hobby_prose">I enjoy learning about GPU architectures, CPU designs, thermals, power delivery, and performance tradeoffs. I&apos;ll gladly sit through long-form breakdowns explaining why one component is marginally better than another, just to grasp the engineering decisions behind it. That appreciation for human ingenuity — how we design complex systems under constraints — heavily influences how I approach software as well.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Cars</h3>
-        <p className="hobby_prose">Car modding scratches the same itch as PC hardware, but with more emotion attached. I love both performance tuning and aesthetics — from engine mods to full-on ricing. Old JDM cars especially capture my imagination. My ideal combination would be the exterior of a 1996 Acura NSX-T paired with the interior of a 300ZX Turbo. Cars represent the intersection of engineering, design, and personal identity — the same intersection I&apos;m constantly drawn to in technology.</p>
+        <h3 className="hobby_header">Cars — Expression Through Engineering</h3>
+        <p className="hobby_prose">Car modding scratches the same itch as PC hardware, but with more emotion attached. I love both performance tuning and aesthetics — from engine mods to full-on ricing. Old JDM cars especially capture my imagination. My ideal combination would be the exterior of a 1996 Acura NSX-T paired with the interior of a 300ZX Turbo.</p>
+        <p className="hobby_prose">Cars represent the intersection of engineering, design, and personal identity — the same intersection I&apos;m constantly drawn to in technology.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Archery</h3>
+        <h3 className="hobby_header">Archery — Focus, Control, and Precision</h3>
         <p className="hobby_prose">Archery is one of the few physical activities I&apos;ve truly stuck with. It doesn&apos;t rely on endurance or speed — things I don&apos;t naturally excel at — but instead demands control, awareness, and precision. Breathing, posture, grip, and muscle tension all matter. It&apos;s quiet, meditative, and intensely technical in its own way.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Music</h3>
-        <p className="hobby_prose">Music is omnipresent in my life. I listen to it everywhere — in class sometimes in secret, at home, while coding, studying, eating, and even sleeping. I gravitate toward pop, hip-hop, and rap, and music heavily influences my pacing, focus, and creative energy. It shapes the rhythm of how I work.</p>
+        <h3 className="hobby_header">Music — The Constant Companion</h3>
+        <p className="hobby_prose">Music is omnipresent in my life. I listen to it everywhere — in class (sometimes in secret), at home, while coding, studying, eating, and even sleeping. I gravitate toward pop, hip-hop, and rap, and music heavily influences my pacing, focus, and creative energy. It shapes the rhythm of how I work.</p>
       </div>
 
       <div className="hobby_section hobby_section_accented">
-        <h3 className="hobby_header">Anime, Manga & Manhwa</h3>
-        <p className="hobby_prose">Anime is easily one of my deepest rabbit holes. I&apos;ve been watching since I was nine and have consumed hundreds of series, ranging from rom-coms to shounen to seinen. Manga and manhwa came later, but just as intensely — I&apos;ve read close to a thousand titles across every imaginable subgenre. I&apos;m fully aware that I enjoy predictable tropes, regression stories, and generic slop — and I don&apos;t see that as a flaw. There&apos;s comfort in familiarity, joy in execution, and inspiration even in repetition. These stories fuel my imagination, visual taste, and narrative instincts.</p>
+        <h3 className="hobby_header">Anime, Manga & Manhwa — Endless Worlds</h3>
+        <p className="hobby_prose">Anime is easily one of my deepest rabbit holes. I&apos;ve been watching since I was nine and have consumed hundreds of series, ranging from rom-coms to shounen to seinen. Manga and manhwa came later, but just as intensely — I&apos;ve read close to a thousand titles across every imaginable subgenre.</p>
+        <p className="hobby_prose">I&apos;m fully aware that I enjoy predictable tropes, regression stories, and generic slop — and I don&apos;t see that as a flaw. There&apos;s comfort in familiarity, joy in execution, and inspiration even in repetition. These stories fuel my imagination, visual taste, and narrative instincts.</p>
       </div>
 
       <div className="hobby_section">
         <h3 className="hobby_header hobby_header_outro">Why So Many Things?</h3>
-        <p className="hobby_prose">I don&apos;t have a clean answer for why I&apos;m into so many things or why I immerse myself so deeply in each one. I spread myself thin, chase too many niches, and refuse to let go — but at this point, they&apos;re etched into my personality. Every interest feeds another. Every obsession sharpens a different part of how I think. What looks like distraction from the outside is, for me, creative density — a constant cross-pollination of ideas that shapes how I design, build, and solve problems.</p>
+        <p className="hobby_prose">I don&apos;t have a clean answer for why I&apos;m into so many things or why I immerse myself so deeply in each one. I spread myself thin, chase too many niches, and refuse to let go — but at this point, they&apos;re etched into my personality. Every interest feeds another. Every obsession sharpens a different part of how I think.</p>
+        <p className="hobby_prose">What looks like distraction from the outside is, for me, creative density — a constant cross-pollination of ideas that shapes how I design, build, and solve problems.</p>
       </div>
     </div>
   );
