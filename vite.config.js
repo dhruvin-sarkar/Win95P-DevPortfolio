@@ -7,5 +7,8 @@ export default defineConfig({
   base: "/Win95P-DevPortfolio/",
   build: {
     sourcemap: false,  // Disable sourcemaps
+  },
+  define: {
+    global: 'globalThis'
   }
 })

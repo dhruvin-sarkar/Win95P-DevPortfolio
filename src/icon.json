@@ -330,6 +330,17 @@
         "x": 39,
         "y": 39
     },
+    {
+        "name": "DOOM",
+        "pic": "DOOM",
+        "folderId": "Desktop",
+        "size": 15000,
+        "type": ".exe",
+        "x": 40,
+        "y": 40,
+        "category": "Games",
+        "description": "Classic first-person shooter game from 1993."
+    },
 
     {
         "name": "MS-DOS Prompt",

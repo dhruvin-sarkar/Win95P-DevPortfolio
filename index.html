@@ -45,6 +45,19 @@
     <link rel="preload" href="/src/assets/95icon.png" as="image" />
     <link rel="preload" href="/src/main.jsx" as="script" />
 
+    <!-- js-dos CDN fallback for DOOM game -->
+    <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+    <script>
+      // Debug: Check if js-dos loaded properly
+      window.addEventListener('load', function() {
+        console.log('Window.Dos available:', !!window.Dos);
+        console.log('Window object keys:', Object.keys(window).filter(key => key.toLowerCase().includes('dos')));
+        if (window.Dos) {
+          console.log('Dos object:', window.Dos);
+        }
+      });
+    </script>
+
     <!-- Title -->
     <title>Dhruvin Sarkar | Windows 95 Developer Portfolio</title>
 

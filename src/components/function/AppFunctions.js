@@ -40,6 +40,7 @@ import taskmanager from '../../assets/taskmanager.png'
 import notepad from '../../assets/notepad.png'
 import store from '../../assets/store.png'
 import layer from '../../assets/layer.png'
+import game from '../../assets/doom.png'
 import About from '../../assets/ipng.png'
 import MyComputer from '../../assets/pc.png'
 import VSCode from '../../assets/vscode.png'
@@ -211,6 +212,10 @@ export function imageMapping (name, type) {
     case "PixelPic":
     case "pixelpic":
       return layer
+
+    case "DOOM":
+    case "doom":
+      return game
 
     default:
       if(type === 'folder') {

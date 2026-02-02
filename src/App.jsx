@@ -16,6 +16,7 @@ import ResumeFile from './components/ResumeFile';
 import Shutdown from './components/Shutdown';
 import MineSweeper from './components/MineSweeper'
 import MsnFolder from './components/MsnFolder';
+import DoomGame from './components/DoomGame';
 import iconInfo from './icon.json'
 import Login from './components/Login';
 import OpenProject from './components/OpenProject';
@@ -242,6 +243,9 @@ function App() {
 });
 
   const [MineSweeperExpand, setMineSweeperExpand] = useState(
+  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
+
+  const [DoomExpand, setDoomExpand] = useState(
   {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
 
   const [MSNExpand, setMSNExpand] = useState(
@@ -1079,6 +1083,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     deleteTap,
     shutdownWindow, setShutdownWindow,
     MineSweeperExpand, setMineSweeperExpand,
+    DoomExpand, setDoomExpand,
     MSNExpand, setMSNExpand,
     chatData, setChatData,
     chatValue, setChatValue,
@@ -1247,6 +1252,7 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
         <ResumeFile/>
         <WebampPlayer/>
         <MineSweeper/>
+        <DoomGame/>
         <MsnFolder/>
         <OpenProject/>
         <BgSetting/>
@@ -1554,6 +1560,7 @@ function ObjectState() {
     { name: '3dObject',    setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(0, 159, 186, 0.85)', size: 'small' },
     { name: 'Winamp',      setter: setWinampExpand,     usestate: WinampExpand,     color: 'rgba(105, 136, 145, 0.85)', size: 'small' },
     { name: 'MineSweeper', setter: setMineSweeperExpand,usestate: MineSweeperExpand,color: 'rgba(187, 51, 48, 0.85)', size: 'small' },
+    { name: 'DOOM',        setter: setDoomExpand,       usestate: DoomExpand,       color: 'rgba(139, 0, 0, 0.85)', size: 'small' },
     { name: 'MSN',         setter: setMSNExpand,        usestate: MSNExpand,        color: 'rgba(52, 70, 143, 0.85)', size: 'small' },
     { name: 'Internet',    setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(0, 159, 186, 0.85)', size: 'small' },
     { name: 'Settings',    setter: setBgSettingExpand,  usestate: BgSettingExpand,  color: 'rgba(140, 140, 140, 0.85)', size: 'small' },
@@ -1938,7 +1945,7 @@ function handleShowMobile(name) {
         display: item.usestate.show ? (name === 'Terminal' ? 'flex' : 'block') : 'none',
         maxWidth: 'none',
         width: '100%',
-        height: 'calc(100% - 37px)',
+        height: 'calc(100vh - 50px)',
         left: `${item.usestate.x <= 0 ? Math.abs(item.usestate.x) * 2 + item.usestate.x : -item.usestate.x}px`,
         top: `${item.usestate.y <= 0 ? Math.abs(item.usestate.y) * 2 + item.usestate.y : -item.usestate.y}px`,
         opacity: item.usestate.hide ? '0' : '1',

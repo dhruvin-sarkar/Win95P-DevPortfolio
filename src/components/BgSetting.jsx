@@ -51,7 +51,7 @@ function BgSetting() {
     // Force 90s.jpg as default if nothing is saved
     if (!prevBg) {
       localStorage.setItem('background', bg13);
-      localStorage.setItem('theme', '#098684');
+      localStorage.setItem('barcolor', '#098684');
       return bg13;
     }
     return prevBg;
@@ -66,7 +66,8 @@ function BgSetting() {
     const prevTheme = localStorage.getItem('theme')
     // Force teal as default if nothing is saved
     if (!prevTheme) {
-      return '#14ece9ff';
+      localStorage.setItem('theme', '#098684');
+      return '#098684';
     }
     return prevTheme;
   })
@@ -181,19 +182,13 @@ function BgSetting() {
 
         if (localEffect) { // for effect
           rootEffect.style.setProperty('--before-bg-image', `url(${localEffect})`);
-
         }
 
-        if (localBg) { // for background
-          bodyBG.style.backgroundColor = localtheme
-          bodyBG.style.backgroundImage = `url(${localBg})`;
-          setTileBG(localtheme)
-        } else {
-          // Set default 90s.jpg background
-          bodyBG.style.backgroundColor = '#098684'
-          bodyBG.style.backgroundImage = 'url(/src/assets/90s.jpg)';
-          setTileBG('#098684')
-        }
+        // Always set background - localBg will have default value from useState
+        bodyBG.style.backgroundColor = localtheme
+        bodyBG.style.backgroundImage = `url(${localBg})`;
+        setTileBG(localtheme)
+        setThemeDragBar(localStorage.getItem('barcolor') || '#098684')
       },[])
 
       function appleBG() {

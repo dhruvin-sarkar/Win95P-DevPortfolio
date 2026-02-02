@@ -81,6 +81,7 @@ export default function Footer() {
         ClearTOclippyUsernameFunction,
         clippyUsername,
         sounds,
+        maxZindexRef,
      } = useContext(UseContext);
 
      
