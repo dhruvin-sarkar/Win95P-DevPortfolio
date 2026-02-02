@@ -315,19 +315,46 @@ function MyBioFolder() {
           </p>
           </div>
           <div className="folder_content">
-            <div className={`folder_content-bio ${generalTap ? 'who-i-am-tab' : (technologyTap ? 'technology-tab' : (hobbTap ? 'hobby-tab' : ''))}`}
-              style={{ display: generalTap || technologyTap || hobbTap ? 'block' : 'block' }}
+            {/* Who I Am Tab */}
+            <div className={`folder_content-bio who-i-am-tab ${generalTap ? 'active' : ''}`}
+              style={{ display: generalTap ? 'flex' : 'none' }}
             >
               <img
                 alt="bioPC"
-                className={generalTap ? 'bio_img' : (technologyTap ? 'tech_img' : (hobbTap ? 'hobby_img' : 'bio_img_other'))}
-                src={generalTap? bioPC : (technologyTap ? tech : hobby)}
+                className="bio_img"
+                src={bioPC}
               />
-              <div className="biotext_container">
-                <div className={generalTap? 'bio_text_1' : (technologyTap ? 'tech_text_container' : (hobbTap ? 'hobby_text_container' : 'bio_text_1_other'))}>
-                  {generalTap? bioText : technologyTap? technologyText : hobbyText}
-                </div>   
-              </div>
+              <div className="bio_text_1 bio-scroll-container">
+                {bioText}
+              </div>   
+            </div>
+
+            {/* Technology Tab */}
+            <div className={`folder_content-bio technology-tab ${technologyTap ? 'active' : ''}`}
+              style={{ display: technologyTap ? 'flex' : 'none' }}
+            >
+              <img
+                alt="tech"
+                className="tech_img"
+                src={tech}
+              />
+              <div className="tech_text_container bio-scroll-container">
+                {technologyText}
+              </div>   
+            </div>
+
+            {/* Hobby Tab */}
+            <div className={`folder_content-bio hobby-tab ${hobbTap ? 'active' : ''}`}
+              style={{ display: hobbTap ? 'flex' : 'none' }}
+            >
+              <img
+                alt="hobby"
+                className="hobby_img"
+                src={hobby}
+              />
+              <div className="hobby_text_container bio-scroll-container">
+                {hobbyText}
+              </div>   
             </div>
             <div className="bio_btn_container">
               <div className="bio_btn_ok"

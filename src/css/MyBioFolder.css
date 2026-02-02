@@ -97,7 +97,7 @@
 }
 
 .folder_content .folder_content-bio {
-    display: block;
+    display: none;
     position: relative;
     width: calc(100% - 10px);
     height: calc(100% - 95px);
@@ -108,9 +108,14 @@
     margin: 0 auto;
     margin-top: 0;
     background: #c5c4c4;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
     word-break: break-word;
+}
+
+.folder_content .folder_content-bio.active {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .folder_content .biotext_container {
@@ -121,44 +126,66 @@
     padding-right: 5px;
 }
 
+/* Individual scroll containers for each tab */
+.bio-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+    min-height: 0;
+    width: 100%;
+}
+
+.bio_text_1.bio-scroll-container {
+    padding: 0;
+}
+
+.tech_text_container.bio-scroll-container {
+    padding: 0;
+}
+
+.hobby_text_container.bio-scroll-container {
+    padding: 0;
+}
+
 /* Windows 95 style scrollbar for the bio content container */
-.folder_content-bio::-webkit-scrollbar {
+.bio-scroll-container::-webkit-scrollbar {
     width: 16px;
 }
 
-.folder_content-bio::-webkit-scrollbar-track {
+.bio-scroll-container::-webkit-scrollbar-track {
     background: #c0c0c0;
     border-left: 1px solid #808080;
     border-top: 1px solid #808080;
 }
 
-.folder_content-bio::-webkit-scrollbar-thumb {
+.bio-scroll-container::-webkit-scrollbar-thumb {
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     box-shadow: inset 1px 1px 0 0 #dfdfdf, inset -1px -1px 0 0 #808080;
 }
 
-.folder_content-bio::-webkit-scrollbar-thumb:hover {
+.bio-scroll-container::-webkit-scrollbar-thumb:hover {
     background: #d4d4d4;
 }
 
-.folder_content-bio::-webkit-scrollbar-button {
+.bio-scroll-container::-webkit-scrollbar-button {
     background: #c0c0c0;
     border: 2px solid;
     border-color: #ffffff #000000 #000000 #ffffff;
     height: 16px;
 }
 
-.folder_content-bio::-webkit-scrollbar-button:vertical:decrement {
+.bio-scroll-container::-webkit-scrollbar-button:vertical:decrement {
     background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 2 L1 6 L7 6 Z" fill="black"/></svg>') center no-repeat;
 }
 
-.folder_content-bio::-webkit-scrollbar-button:vertical:increment {
+.bio-scroll-container::-webkit-scrollbar-button:vertical:increment {
     background: #c0c0c0 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M4 6 L1 2 L7 2 Z" fill="black"/></svg>') center no-repeat;
 }
 
-.folder_content-bio::-webkit-scrollbar-button:active {
+.bio-scroll-container::-webkit-scrollbar-button:active {
     border-color: #000000 #ffffff #ffffff #000000;
 }
 
