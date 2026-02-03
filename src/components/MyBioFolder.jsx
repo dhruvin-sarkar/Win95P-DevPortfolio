@@ -7,6 +7,7 @@ import bioPC from '../assets/pfp.jpg'
 import tech from '../assets/tech.png'
 import hobby from '../assets/hobby.png'
 import linux from '../assets/Tux linux.png'
+import job from '../assets/job.png'
 import '../css/MyBioFolder.css'
 
 
@@ -16,6 +17,7 @@ function MyBioFolder() {
   const [technologyTap, setTechnologyTap] = useState(false)
   const [linuxTap, setLinuxTap] = useState(false)
   const [hobbTap, setHobbTap] = useState(false)
+  const [employmentTap, setEmploymentTap] = useState(false)
 
   const { 
     themeDragBar,
@@ -31,14 +33,41 @@ function MyBioFolder() {
    const technologyText = (
     <div className="technology-content">
       <div className="tech_section">
-        <h3 className="tech_header">Web & Frontend</h3>
-        <p className="tech_prose">I gravitate toward tools that let me design, iterate, and ship experiences that feel good to use. On the web, I enjoy crafting responsive, interactive interfaces using React, Vue, Angular, and modern CSS, with Tailwind CSS helping me move fast without sacrificing polish. I care deeply about spacing, motion, responsiveness, and consistency — not just how something looks, but how it behaves across devices and interactions.</p>
+        <h3 className="tech_header">Languages</h3>
+        <p className="tech_prose">I gravitate toward languages that give me direct control over behavior and performance. C and C++ are my foundation - they taught me how systems work at the lowest levels and instilled in me a respect for memory management and optimization. JavaScript and TypeScript are where I spend most of my time now, building interactive web experiences with the type safety and tooling that modern development demands. I appreciate CSS for its ability to bring designs to life, and I turn to Bash when I need to automate or script system-level tasks. Lua, Dart, and Kotlin each serve specific purposes in my toolkit - Lua for game scripting, Dart for Flutter development, and Kotlin when I'm working in the Android ecosystem.</p>
+        <div className="tech_badges">
+          <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C" />
+          <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++" />
+          <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+          <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+          <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS" />
+          <img src="https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white" alt="Lua" />
+          <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash" />
+          <img src="https://img.shields.io/badge/Dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
+          <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" />
+        </div>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Operating Systems</h3>
+        <p className="tech_prose">My relationship with operating systems is defined by a balance between necessity and preference. Windows 11 remains my daily driver by necessity - it's where gaming, certain development tools, and compatibility requirements keep me anchored. But my heart belongs to Linux. I've spent countless hours distro-hopping through Pop!_OS, Linux Mint, Kali, Fedora, and ultimately settling on Arch Linux. Each distribution taught me something different about system architecture, package management, and the philosophy of open source. Arch Linux, in particular, gave me complete control over my environment and forced me to understand every component of my system from the ground up.</p>
+        <div className="tech_badges">
+          <img src="https://img.shields.io/badge/Windows_11-0078D4?style=for-the-badge&logo=windows-11&logoColor=white" alt="Windows 11" />
+          <img src="https://img.shields.io/badge/Pop!_OS-48B9C7?style=for-the-badge&logo=pop!_os&logoColor=white" alt="Pop!_OS" />
+          <img src="https://img.shields.io/badge/Linux_Mint-87CF3E?style=for-the-badge&logo=linux-mint&logoColor=white" alt="Linux Mint" />
+          <img src="https://img.shields.io/badge/Kali_Linux-268BEE?style=for-the-badge&logo=kali-linux&logoColor=white" alt="Kali Linux" />
+          <img src="https://img.shields.io/badge/Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white" alt="Fedora" />
+          <img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white" alt="Arch Linux" />
+        </div>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Frontend & Design</h3>
+        <p className="tech_prose">Frontend development is where my technical skills and creative instincts converge. I love crafting interfaces that feel intuitive and responsive, using React as my primary framework for building complex interactive experiences. HTML5 and CSS3 form the foundation, but Tailwind CSS has become my go-to for rapid prototyping without sacrificing design consistency. I'm equally comfortable working in design tools - Figma for planning and prototyping, Framer for adding sophisticated animations, and Canva for quick visual assets. What drives me here is the immediate feedback loop - I can see and interact with what I'm building in real-time, which makes the development process incredibly engaging and iterative.</p>
         <div className="tech_badges">
           <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-          <img src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D" alt="Vue.js" />
-          <img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" />
           <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
-          <img src="https://img.shields.io/badge/css-%23663399.svg?style=for-the-badge&logo=css&logoColor=white" alt="CSS" />
+          <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
           <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
           <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma" />
           <img src="https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue" alt="Framer" />
@@ -47,37 +76,50 @@ function MyBioFolder() {
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">Backend & Databases</h3>
-        <p className="tech_prose">When building websites and applications, I naturally lean frontend-first, but I&apos;m comfortable working full-stack when the product demands it. I use Node.js with Express, NestJS, and Next.js to build scalable backends and performant web apps, pairing them with databases like MongoDB, PostgreSQL, and MySQL depending on the problem. I don&apos;t just wire things together — I like understanding the tradeoffs between tools, architectures, and data models so I can choose what actually fits the project.</p>
+        <h3 className="tech_header">Frameworks</h3>
+        <p className="tech_prose">Frameworks are the scaffolding that lets me build bigger ideas faster. Flutter has become my framework of choice for cross-platform mobile development - I love how it lets me create beautiful, performant apps from a single codebase. On the web, I work fluidly between Angular and Vue.js depending on the project needs, and Electron.js when I need to break out of the browser. For backend work, Django provides the structure and security I need for robust applications, while Express.js and Next.js give me the flexibility to build everything from APIs to full-stack applications. Node.js ties it all together as my runtime environment of choice for JavaScript-based development.</p>
         <div className="tech_badges">
-          <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-          <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="Express.js" />
-          <img src="https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
-          <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
-          <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-          <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-          <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+          <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
+          <img src="https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" />
+          <img src="https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D" alt="Vue.js" />
+          <img src="https://img.shields.io/badge/Electron-2B2E3A?style=for-the-badge&logo=electron&logoColor=white" alt="Electron.js" />
           <img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white" alt="Django" />
-          <img src="https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi" alt="FastAPI" />
-          <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
+          <img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB" alt="Express.js" />
+          <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+          <img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+        </div>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Backend & Databases</h3>
+        <p className="tech_prose">While I naturally lean frontend-first, I'm comfortable building complete full-stack applications when the project demands it. Python has become my go-to for backend scripting and data processing, though I'm equally proficient with Java and C# for enterprise-level applications. PHP still has its place in my toolkit for certain web applications. When it comes to data persistence, I choose based on the use case - MongoDB for flexible document storage, MySQL for traditional relational needs, and PostgreSQL when I need advanced features and robustness. I don't just connect these technologies; I think deeply about data architecture, scalability, and the trade-offs between different approaches.</p>
+        <div className="tech_badges">
+          <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" />
+          <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
+          <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#" />
+          <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP" />
+          <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+          <img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+          <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
         </div>
       </div>
 
       <div className="tech_section">
         <h3 className="tech_header">Game Development</h3>
-        <p className="tech_prose">Game development is where my technical curiosity and creative side collide. I enjoy building both 2D and 3D experiences, working with Unity, Unreal Engine, and Godot, and using Blender for asset creation and iteration. What excites me most about games is the combination of systems, mechanics, visuals, and player experience — every small technical decision directly affects how something feels to play.</p>
+        <p className="tech_prose">Game development is where my technical curiosity and creative passion collide. I spend countless hours in Unity and Unreal Engine, building both 2D and 3D experiences that challenge my understanding of performance, physics, and player psychology. Blender has become an essential part of my workflow for creating and iterating on assets. Godot Engine, with its GDScript, offers a refreshing alternative when I need something more lightweight. I even dabble in Roblox development - it's surprisingly sophisticated and teaches valuable lessons about multiplayer architecture and user-generated content. What I love most about game dev is how every technical decision directly impacts the player experience.</p>
         <div className="tech_badges">
           <img src="https://img.shields.io/badge/Unity-100000?style=for-the-badge&logo=unity&logoColor=white" alt="Unity" />
           <img src="https://img.shields.io/badge/Unreal_Engine-313131?style=for-the-badge&logo=unreal-engine&logoColor=white" alt="Unreal Engine" />
-          <img src="https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine" alt="Godot" />
           <img src="https://img.shields.io/badge/Blender-%23F5792A.svg?style=for-the-badge&logo=blender&logoColor=white" alt="Blender" />
+          <img src="https://img.shields.io/badge/GDScript-%2374267B.svg?style=for-the-badge&logo=godotengine&logoColor=white" alt="GDScript" />
+          <img src="https://img.shields.io/badge/GODOT-%23FFFFFF.svg?style=for-the-badge&logo=godot-engine" alt="Godot Engine" />
           <img src="https://img.shields.io/badge/Roblox-%230a0b0b.svg?style=for-the-badge&logo=Roblox&logoColor=white" alt="Roblox" />
         </div>
       </div>
 
       <div className="tech_section">
         <h3 className="tech_header">Hardware & Electronics</h3>
-        <p className="tech_prose">I also spend time working closer to the hardware, experimenting with Arduino and Raspberry Pi to understand how software interacts with the physical world. That hands-on experience helps ground my thinking and improves how I design systems at higher levels.</p>
+        <p className="tech_prose">I love working closer to the metal, where software meets the physical world. Arduino projects taught me the fundamentals of embedded systems and how code can directly control physical components. Raspberry Pi became my playground for more complex projects, from home automation to network services. This hands-on experience with hardware has fundamentally changed how I think about software - it makes me more conscious of resource constraints, power consumption, and the real-world impact of my code. There's something deeply satisfying about writing code that makes an LED blink or a motor turn, and that satisfaction keeps me coming back to hardware projects.</p>
         <div className="tech_badges">
           <img src="https://img.shields.io/badge/Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white" alt="Arduino" />
           <img src="https://img.shields.io/badge/Raspberry%20Pi-A22846?style=for-the-badge&logo=Raspberry%20Pi&logoColor=white" alt="Raspberry Pi" />
@@ -86,30 +128,12 @@ function MyBioFolder() {
 
       <div className="tech_section">
         <h3 className="tech_header">Tools & DevOps</h3>
-        <p className="tech_prose">Across all of this, I rely heavily on Git, GitHub, Docker, Linux environments, and Firebase to keep my workflow clean, reproducible, and scalable. I&apos;m comfortable moving between Windows and multiple Linux distributions, and I treat tooling as part of the craft, not an afterthought.</p>
+        <p className="tech_prose">My development workflow is built around a core set of tools that keep me productive and organized. Git and GitHub are non-negotiable - version control isn't just a safety net, it's how I think about code evolution and collaboration. Docker has revolutionized how I approach development environments, ensuring consistency across different machines and deployment targets. Firebase handles my backend-as-a-service needs when I need to move quickly without managing infrastructure. These tools aren't just utilities; they're extensions of my development philosophy - automated, reproducible, and scalable. I'm constantly refining my workflow to eliminate friction and focus on what matters: building great software.</p>
         <div className="tech_badges">
           <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
           <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
           <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-          <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
-          <img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt="NPM" />
-        </div>
-      </div>
-
-      <div className="tech_section">
-        <h3 className="tech_header">Languages</h3>
-        <p className="tech_prose">As for languages, I enjoy working most with JavaScript, TypeScript, C and C++, C#, and game-oriented languages like GDScript — tools that give me direct control over behavior, performance, and interaction. I use Python when it&apos;s the right tool, especially for scripting or backend tasks, but it&apos;s not where my passion lies. I prefer languages and ecosystems that let me build visually rich, interactive systems and iterate quickly on ideas.</p>
-        <div className="tech_badges">
-          <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-          <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-          <img src="https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white" alt="C" />
-          <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" alt="C++" />
-          <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" alt="C#" />
-          <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python" />
-          <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
-          <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" />
-          <img src="https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white" alt="Dart" />
-          <img src="https://img.shields.io/badge/GDScript-%2374267B.svg?style=for-the-badge&logo=godotengine&logoColor=white" alt="GDScript" />
+          <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
         </div>
       </div>
     </div>
@@ -119,7 +143,7 @@ function MyBioFolder() {
     <div className="technology-content">
       <div className="tech_section">
         <h3 className="tech_header">Linux, Ricing, and Living Inside My OS</h3>
-        <p className="tech_prose">My relationship with Linux started early — earlier than most people even realize what an operating system is. In the 4th grade, my school issued us dedicated PCs that came preinstalled with Ubuntu, and that was my first real exposure to Linux. At the time, I didn&apos;t fully understand what made it different, but I lived with it for almost a year, learning its quirks and limitations simply by using it every day. Eventually, curiosity got the better of me, and I installed Fedora, diving headfirst into customization — which, unsurprisingly, got me into trouble at school.</p>
+        <p className="tech_prose">My relationship with Linux started early. In the 4th grade, my school issued us dedicated PCs that came preinstalled with Ubuntu, and that was my first real exposure to Linux. At the time, I didn&apos;t fully understand what made it different, but I lived with it for almost a year, learning its quirks and limitations simply by using it every day. Eventually, curiosity got the better of me, and I installed Fedora, diving headfirst into customization — which, unsurprisingly, got me into trouble at school.</p>
       </div>
 
       <div className="tech_section">
@@ -145,7 +169,7 @@ function MyBioFolder() {
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">The Headspace</h3>
+        <h3 className="tech_header">The</h3>
         <p className="tech_prose">Today, I maintain multiple iterations of my dotfiles, each representing a different aesthetic, workflow, and mindset — all version-controlled and documented on my GitHub. Every setup is a distinct experience, shaped by experimentation, iteration, and obsession with detail. Ricing taught me patience, problem-solving, and an appreciation for systems at every level.</p>
         <p className="tech_prose">Linux isn&apos;t just an operating system to me — it&apos;s a sandbox, a learning tool, and a creative medium. It&apos;s where my love for documentation, systems thinking, and customization truly came together, and it remains one of the strongest influences on how I approach technology as a whole.</p>
         <div className="tech_badges">
@@ -159,7 +183,6 @@ function MyBioFolder() {
           <img src="https://img.shields.io/badge/KDE-1D99F3?style=for-the-badge&logo=kde&logoColor=white" alt="KDE" />
           <img src="https://img.shields.io/badge/i3wm-223344?style=for-the-badge&logo=i3wm&logoColor=white" alt="i3wm" />
           <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Bash" />
-          <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Actions" />
         </div>
       </div>
     </div>
@@ -264,6 +287,25 @@ function MyBioFolder() {
     </div>
   );
 
+  const employmentText = (
+    <div className="employment-content">
+      <div className="employment_section">
+        <h3 className="employment_header">Professional Journey</h3>
+        <p className="employment_prose">As an 11th grade AI and Design Thinking student, I'm at the exciting intersection of academic learning and professional exploration. While I haven't entered the traditional workforce yet, I approach every project and learning opportunity with the mindset of a professional - treating deadlines seriously, communicating clearly, and delivering quality work that exceeds expectations. My extensive technical background and diverse skill set position me uniquely for future opportunities in software development, game design, and emerging technologies.</p>
+      </div>
+
+      <div className="employment_section">
+        <h3 className="employment_header">Skills for the Future</h3>
+        <p className="employment_prose">The technology landscape I've immersed myself in - from full-stack development to game engines, from hardware tinkering to DevOps practices - has prepared me for the multifaceted challenges of modern tech careers. I understand that being employable isn't just about knowing technologies; it's about understanding how they fit together, how to solve real problems, and how to work effectively with others. My competitive programming background has taught me discipline and algorithmic thinking, while my design sensibilities ensure I build products that people actually want to use.</p>
+      </div>
+
+      <div className="employment_section">
+        <h3 className="employment_header">Looking Ahead</h3>
+        <p className="employment_prose">I'm actively seeking opportunities to apply my skills in meaningful ways - whether through internships, freelance projects, or collaborative open-source contributions. I'm particularly drawn to roles that combine technical challenges with creative problem-solving, where I can continue learning while making tangible contributions. My goal isn't just to find a job, but to find environments where my curiosity, technical depth, and design thinking can create real value.</p>
+      </div>
+    </div>
+  );
+
       function handleDragStop(event, data) {
         const positionX = data.x 
         const positionY = data.y
@@ -281,6 +323,7 @@ function MyBioFolder() {
     setTechnologyTap(name === 'technology');
     setLinuxTap(name === 'linux');
     setHobbTap(name === 'hobby');
+    setEmploymentTap(name === 'employment');
   }
 
   const activeBtnStyle = {
@@ -370,6 +413,10 @@ function MyBioFolder() {
                   style={hobbTap ? activeBtnStyle : {}}
           >Hobby
           </p>
+          <p onClick={() => handleBiotap('employment')}
+                  style={employmentTap ? activeBtnStyle : {}}
+          >Being Employed
+          </p>
           </div>
           <div className="folder_content">
             {/* Who I Am Tab */}
@@ -425,6 +472,20 @@ function MyBioFolder() {
               />
               <div className="hobby_text_container bio-scroll-container">
                 {hobbyText}
+              </div>   
+            </div>
+
+            {/* Employment Tab */}
+            <div className={`folder_content-bio MyBioFolderEmploymentTap ${employmentTap ? 'active' : ''}`}
+              style={{ display: employmentTap ? 'flex' : 'none' }}
+            >
+              <img
+                alt="job"
+                className="hobby_img"
+                src={job}
+              />
+              <div className="hobby_text_container bio-scroll-container">
+                {employmentText}
               </div>   
             </div>
             <div className="bio_btn_container">
