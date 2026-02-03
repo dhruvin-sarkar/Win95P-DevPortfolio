@@ -303,6 +303,14 @@
     position: static;
 }
 
+.linux-tab .tech_img {
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 100px;
+    height: auto;
+    position: static;
+}
+
 .hobby_section {
     margin-bottom: 1.8rem;
     width: 100%;
