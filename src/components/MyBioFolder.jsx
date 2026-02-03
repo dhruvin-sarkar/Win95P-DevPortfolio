@@ -288,20 +288,45 @@ function MyBioFolder() {
   );
 
   const employmentText = (
-    <div className="employment-content">
-      <div className="employment_section">
-        <h3 className="employment_header">Professional Journey</h3>
-        <p className="employment_prose">As an 11th grade AI and Design Thinking student, I'm at the exciting intersection of academic learning and professional exploration. While I haven't entered the traditional workforce yet, I approach every project and learning opportunity with the mindset of a professional - treating deadlines seriously, communicating clearly, and delivering quality work that exceeds expectations. My extensive technical background and diverse skill set position me uniquely for future opportunities in software development, game design, and emerging technologies.</p>
+    <div className="technology-content">
+      <div className="tech_section">
+        <h3 className="tech_header">Hardware Beginnings</h3>
+        <p className="tech_prose">My experience is rooted in building things from the ground up, often starting with hardware before moving deeper into software and systems. One of my earliest hands-on ventures was Game Boy modding, where I sourced components from suppliers like JayBoyModz and transformed aging handhelds into fully customized, functional devices. From shell swaps and screen upgrades to internal repairs and tuning, I handled the entire process end-to-end and sold custom units independently. That work taught me precision, patience, and how small technical decisions can dramatically affect user experience.</p>
       </div>
 
-      <div className="employment_section">
-        <h3 className="employment_header">Skills for the Future</h3>
-        <p className="employment_prose">The technology landscape I've immersed myself in - from full-stack development to game engines, from hardware tinkering to DevOps practices - has prepared me for the multifaceted challenges of modern tech careers. I understand that being employable isn't just about knowing technologies; it's about understanding how they fit together, how to solve real problems, and how to work effectively with others. My competitive programming background has taught me discipline and algorithmic thinking, while my design sensibilities ensure I build products that people actually want to use.</p>
+      <div className="tech_section">
+        <h3 className="tech_header">PC Builds & Device Repair</h3>
+        <p className="tech_prose">Beyond retro hardware, I've spent significant time working on PC builds and general device repair. I've assembled custom desktops, troubleshot laptops, and handled repairs for phones and other consumer electronics. This exposure to real-world hardware failures sharpened my diagnostic thinking and gave me an intuitive understanding of how software performance, thermals, power delivery, and physical constraints all intersect in practical systems.</p>
       </div>
 
-      <div className="employment_section">
-        <h3 className="employment_header">Looking Ahead</h3>
-        <p className="employment_prose">I'm actively seeking opportunities to apply my skills in meaningful ways - whether through internships, freelance projects, or collaborative open-source contributions. I'm particularly drawn to roles that combine technical challenges with creative problem-solving, where I can continue learning while making tangible contributions. My goal isn't just to find a job, but to find environments where my curiosity, technical depth, and design thinking can create real value.</p>
+      <div className="tech_section">
+        <h3 className="tech_header">Professional Software Experience</h3>
+        <p className="tech_prose">On the professional software side, I interned at Anthropic as a model tuner, where I worked closer to large-scale AI systems and gained insight into how modern models are evaluated, refined, and aligned. That experience exposed me to production-grade workflows, experimentation discipline, and the responsibility that comes with working on systems used by real people at scale.</p>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Client Work & Web Development</h3>
+        <p className="tech_prose">I've also built and shipped numerous websites for real clients, ranging from product landing pages to internal tools and B2B SaaS-style applications. These projects pushed me to think beyond aesthetics and focus on performance, usability, and maintainability. All of this work is documented across my GitHub and projects portfolio, reflecting a consistent habit of shipping real, working products rather than isolated demos.</p>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Game Development</h3>
+        <p className="tech_prose">Game development has been another long-running thread in my work. I've explored amateur and experimental game development across Godot, Unity, Unreal Engine, and Roblox, learning how gameplay systems, rendering, scripting, and tooling come together. While not every project was commercial, each taught me how to iterate quickly, balance technical constraints, and design experiences that feel good to interact with.</p>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Open Source & System Configuration</h3>
+        <p className="tech_prose">Outside of client and professional work, I actively maintain several open-source Arch Linux rice configurations. These setups focus on usability, aesthetics, and performance, and are publicly available and maintained over time. This work reflects my deeper interest in operating systems, workflows, and how environment design can meaningfully impact productivity.</p>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Competitions & Team Experience</h3>
+        <p className="tech_prose">I've also participated in various competitions, hackathons, and game-focused events, collaborating under tight deadlines and learning how to work effectively in fast-paced team environments. On the competitive side, I've taken part in scrims for titles like CS2, CS:GO, and Rainbow Six Siege, experiences that reinforced communication, discipline, and strategic thinking under pressure.</p>
+      </div>
+
+      <div className="tech_section">
+        <h3 className="tech_header">Overall Philosophy</h3>
+        <p className="tech_prose">Overall, my experience isn't confined to a single role or title — it's shaped by constant experimentation, real-world problem solving, and a habit of learning by building, breaking, and improving systems across both hardware and software.</p>
       </div>
     </div>
   );
@@ -481,10 +506,10 @@ function MyBioFolder() {
             >
               <img
                 alt="job"
-                className="hobby_img"
+                className="tech_img"
                 src={job}
               />
-              <div className="hobby_text_container bio-scroll-container">
+              <div className="tech_text_container bio-scroll-container">
                 {employmentText}
               </div>   
             </div>

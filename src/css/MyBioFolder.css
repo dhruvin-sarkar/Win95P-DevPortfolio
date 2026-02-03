@@ -288,6 +288,21 @@
     padding: 0;
 }
 
+/* Employment Tab Specific Styling */
+.MyBioFolderEmploymentTap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.MyBioFolderEmploymentTap .tech_img {
+    display: block;
+    margin: 0 auto 1rem auto;
+    width: 100px;
+    height: auto;
+    position: static;
+}
+
 /* Hobby Tab Specific Styling */
 .hobby-tab {
     display: flex;
