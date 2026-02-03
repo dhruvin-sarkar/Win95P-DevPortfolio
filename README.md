@@ -174,3 +174,62 @@ All the Windows 95 icons and others can be found here:
 
 Special thanks to whoever owns this website.
 
+To Do:
+win 95 inside win 95 using a emulator iframe
+comick iframe 
+steam iframe
+Solitaire
+snake
+tetris
+browser i frame
+ Full Nintendo 64 Emulator 
+
+Use mupen64plus-ui-console compiled to WebAssembly
+Run actual N64 ROMs (Mario 64, Zelda OoT)
+Public domain ROMs to avoid legal issues
+Save states, controller mapping
+"Super Mario 64 running in a Windows 95 window" = INSTANT viral
+Shows: WebAssembly, emulation, low-level programming understanding
+Libraries: mupen64plus, compiled with Emscripten
+2. PlayStation 1 Emulator 
+
+PCSX-ReARMed in WebAssembly
+Run actual PS1 games (Crash Bandicoot, FF7)
+Memory card saves
+"PS1 in Win95" is chef's kiss
+Shows: Console emulation, 3D graphics
+Libraries: pcsx-rearmed compiled to WASM
+3. Game Boy / Game Boy Color / Game Boy Advance 
+
+Multiple emulators in one window
+Switch between systems
+Pokemon Red/Blue, Link's Awakening, etc.
+Link cable emulation (trade Pokemon between instances!)
+Shows: Multiple system emulation
+Libraries: mGBA, SameBoy compiled to WASM
+4. Sega Genesis/Mega Drive
+
+Run Sonic, Streets of Rage
+Save states, rewind feature
+Shows: 16-bit emulation
+Libraries: BlastEm or Genesis Plus GX
+5. NES Emulator
+
+Super Mario Bros, Contra, Metroid
+More lightweight than N64
+Easier to implement but still impressive
+Shows: 8-bit emulation fundamentals
+Libraries: JSNES (pure JavaScript!)
+6. Quake Full 3D FPS
+
+Original Quake engine in WebAssembly
+Full 3D, multiplayer capable
+"Quake running in Windows 95 window in browser"
+Shows: 3D game engines, networking
+Libraries: Quake.js (exists!), QuakeSpasm compiled to WASM
+ Wolfenstein 3D 
+
+Predecessor to DOOM, raycasting engine
+Easier than full 3D but still impressive
+Shows: Raycasting, retro 3D
+Libraries: Wolf4SDL compiled to WASM
