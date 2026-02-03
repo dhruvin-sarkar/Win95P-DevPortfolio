@@ -199,7 +199,7 @@ function DoomGame() {
   };
 
   const handleMaximize = () => {
-    setDoomExpand(prev => ({...prev, expand: !prev.expand}))
+    handleFullscreen(); // Call fullscreen instead of window expansion
   };
 
   if (!DoomExpand.show) return null;
@@ -252,9 +252,9 @@ function DoomGame() {
                 className="doom-title-button" 
                 onClick={!isTouchDevice ? handleMaximize : undefined}
                 onTouchEnd={handleMaximize}
-                title={DoomExpand.expand ? "Restore" : "Maximize"}
+                title={document.fullscreenElement ? "Exit Fullscreen" : "Fullscreen"}
               >
-                <span>{DoomExpand.expand ? "❐" : "□"}</span>
+                <span>⛶</span>
               </button>
               <button 
                 className="doom-title-button doom-close-button" 
@@ -312,22 +312,19 @@ function DoomGame() {
             )}
 
             {/* Canvas for js-dos - js-dos will create its own canvas */}
-            <div 
-              ref={canvasRef}
-              className="doom-canvas"
-              style={{ display: isLoading || error ? 'none' : 'block' }}
-            />
+            <div className="doom-canvas-wrapper">
+              <div className="doom-canvas-container">
+                <div 
+                  ref={canvasRef}
+                  className="doom-canvas"
+                  style={{ display: isLoading || error ? 'none' : 'block' }}
+                />
+              </div>
+            </div>
 
             {/* Control Instructions */}
             {isRunning && (
               <div className="doom-controls-hint">
-                <button
-                  className="doom-fullscreen-button"
-                  onClick={handleFullscreen}
-                  title="Fullscreen (F11)"
-                >
-                  ⛶ Fullscreen
-                </button>
                 <div className="doom-controls-text">
                   Arrow Keys: Move • Ctrl: Fire • F: Use/Open • Alt+Arrow: Strafe • Esc: Menu
                 </div>
