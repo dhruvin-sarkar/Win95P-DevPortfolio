@@ -123,29 +123,29 @@ function MyBioFolder() {
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">The Distro-Hopping Journey</h3>
+        <h3 className="tech_header">Distro-Hopping</h3>
         <p className="tech_prose">That experience kicked off a long period of distro-hopping. Over the years, I&apos;ve used and extensively customized Pop!_OS, Linux Mint, Fedora, Kali, and several others. Each distribution taught me something different — from stability and workflow to security, package management, and system structure. But more importantly, they all introduced me to ricing.</p>
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">Ricing: Control and Creativity</h3>
+        <h3 className="tech_header">Ricing</h3>
         <p className="tech_prose">Ricing quickly became one of my favorite hobbies. To me, ricing isn&apos;t just about aesthetics — it&apos;s about control. It&apos;s the process of shaping an operating system into something that feels personally engineered. Through ricing, I learned bash scripting, configuration management, window managers, keybinding systems, and Linux internals purely out of necessity. Every rice meant hours of tweaking icons, bars, sounds, animations, interactions, keybinds, and workflows. By the time a setup was &quot;done,&quot; it looked and felt like a completely different operating system.</p>
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">Arch Linux: The Painful Reward</h3>
+        <h3 className="tech_header">Arch Linux</h3>
         <p className="tech_prose">Eventually, I found my way to Arch Linux — the OS that has stuck with me for the past two years. I&apos;m fully aware of the memes surrounding Arch, and honestly, they&apos;re not wrong. Installing and maintaining Arch was, by far, the most painful yet rewarding experience I&apos;ve had with an operating system. Display issues, graphics drivers, audio problems, keyboard layouts, Bluetooth failures — I&apos;ve fought all of them. I&apos;ve spent countless hours every day buried in the Arch Wiki and documentation, troubleshooting, breaking my system, fixing it, and breaking it again.</p>
         <p className="tech_prose">Even now, with the Arch install script making setup significantly easier, I still believe the real Arch experience comes from understanding why everything works the way it does. That&apos;s what I loved most: the freedom. Absolute control over my system — nothing installed unless I wanted it, nothing running unless I allowed it. Every part of the OS felt intentional because I built it that way.</p>
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">Windows vs Linux: Freedom vs Frustration</h3>
+        <h3 className="tech_header">Windows vs Linux</h3>
         <p className="tech_prose">Windows has always been my main OS by necessity, not by choice. From Windows 95 to Windows 10 and 11, it&apos;s been unavoidable due to software support, drivers, and gaming. But over time, my frustration with Windows grew — limited customization, bloated systems, poor file search, forced ads, locked-down features, and heavy reliance on third-party tools just to achieve basic control. Features being locked behind Pro versions, aggressive telemetry, and invasive additions like Recall and Copilot only pushed me further away.</p>
         <p className="tech_prose">Linux, in contrast, gives me freedom. If something bothers me, I can remove it. If something feels slow, I can reconfigure it. If I want my system to behave or look differently, I can change it — completely. That level of ownership fundamentally changed how I think about software. It made me value transparency, configurability, and user agency, and it directly influences how I design and build my own projects.</p>
       </div>
 
       <div className="tech_section">
-        <h3 className="tech_header">The Linux Mindset</h3>
+        <h3 className="tech_header">The Headspace</h3>
         <p className="tech_prose">Today, I maintain multiple iterations of my dotfiles, each representing a different aesthetic, workflow, and mindset — all version-controlled and documented on my GitHub. Every setup is a distinct experience, shaped by experimentation, iteration, and obsession with detail. Ricing taught me patience, problem-solving, and an appreciation for systems at every level.</p>
         <p className="tech_prose">Linux isn&apos;t just an operating system to me — it&apos;s a sandbox, a learning tool, and a creative medium. It&apos;s where my love for documentation, systems thinking, and customization truly came together, and it remains one of the strongest influences on how I approach technology as a whole.</p>
         <div className="tech_badges">
