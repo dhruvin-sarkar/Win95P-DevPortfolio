@@ -42,6 +42,14 @@ Live: https://Dhruvin-Sarkar.com
 
 ![Mine Sweeper](https://github.com/dhruvin-sarkar/Win95P-DevPortfolio/blob/main/src/assets/game.gif?raw=true)
 
+- Enhanced Bio Folder
+
+![Bio Folder](https://github.com/dhruvin-sarkar/Win95P-DevPortfolio/blob/main/src/assets/bio.gif?raw=true)
+
+- DOOM Game
+
+![DOOM Game](https://github.com/dhruvin-sarkar/Win95P-DevPortfolio/blob/main/src/assets/doom.gif?raw=true)
+
 - Shutting Down
 
 ![Shutdown](https://github.com/dhruvin-sarkar/Win95P-DevPortfolio/blob/main/src/assets/shutdown.gif?raw=true)
@@ -140,6 +148,17 @@ Live: https://Dhruvin-Sarkar.com
 - All apps are now able to install and uninstall in the store
 - Now icon will be added and deleted dynamically, and width will be adjusted automatically
 - New icon will be able to be added on the footer bottom right corner
+- Enhanced Bio Folder with consistent tab styling and new "Being Employed" section
+  - Updated technology stack with categorized sections
+  - Improved tab formatting with consistent CSS classes
+  - Added employment experience section with professional content
+- DOOM Game Integration
+  - Fully playable DOOM game with js-dos emulator
+  - Fullscreen mode with proper 4:3 aspect ratio maintenance
+  - Enhanced maximize button functionality for true fullscreen experience
+  - Automatic letterboxing with black bars for authentic retro display
+  - Improved canvas scaling and display optimization
+  - Removed redundant fullscreen button for cleaner interface
 
 ## Library Used
 

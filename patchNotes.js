@@ -1,5 +1,27 @@
 const patchNotes = [
   {
+    head: "**DOOM Game Integration**",
+    date: "Latest",
+    notes: [
+      "Fully playable DOOM game with js-dos emulator integration",
+      "Fullscreen mode with proper 4:3 aspect ratio maintenance",
+      "Enhanced maximize button functionality for true fullscreen experience",
+      "Automatic letterboxing with black bars for authentic retro display",
+      "Improved canvas scaling and display optimization",
+      "Removed redundant fullscreen button for cleaner interface"
+    ]
+  },
+  {
+    head: "**Enhanced Bio Folder**",
+    date: "Latest",
+    notes: [
+      "Updated technology stack with categorized sections for better organization",
+      "Improved tab formatting with consistent CSS classes across all sections",
+      "Added new 'Being Employed' section with professional experience content",
+      "Enhanced visual consistency and readability throughout bio sections"
+    ]
+  },
+  {
     head: "**Footer**",
         notes: [
       "Now icon will be added and delete dynamically, and width will be adjusted automatically",
