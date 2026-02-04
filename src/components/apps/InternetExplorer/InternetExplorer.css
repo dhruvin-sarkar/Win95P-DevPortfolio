@@ -2,7 +2,7 @@
    INTERNET EXPLORER WINDOW
    ============================================ */
 
-.ie-window {
+.folder_folder-InternetExplorer {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -13,24 +13,18 @@
   font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
   font-size: 11px;
   user-select: none;
+  -webkit-user-select: none;
   min-width: 400px;
   min-height: 300px;
-}
-
-.ie-window.ie-maximized {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: calc(100vh - 40px) !important;
-  transform: none !important;
+  width: 800px;
+  height: 600px;
 }
 
 /* ============================================
-   TITLE BAR
+   TITLE BAR (Drag Bar)
    ============================================ */
 
-.ie-titlebar {
+.folder_dragbar-InternetExplorer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,7 +36,7 @@
   flex-shrink: 0;
 }
 
-.ie-titlebar-text {
+.folder_barname-InternetExplorer {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -51,17 +45,17 @@
   pointer-events: none;
 }
 
-.ie-titlebar-icon {
+.folder_barname-InternetExplorer img {
   width: 16px;
   height: 16px;
 }
 
-.ie-titlebar-controls {
+.folder_barbtn-InternetExplorer {
   display: flex;
   gap: 2px;
 }
 
-.ie-titlebar-button {
+.folder_barbtn-InternetExplorer div {
   width: 16px;
   height: 14px;
   background: #c0c0c0;
@@ -77,18 +71,80 @@
   justify-content: center;
 }
 
-.ie-titlebar-button:hover {
+.folder_barbtn-InternetExplorer div:hover {
   background: #d0d0d0;
 }
 
-.ie-titlebar-button:active {
+.folder_barbtn-InternetExplorer div:active {
   border-color: #000000 #ffffff #ffffff #000000;
   background: #a0a0a0;
 }
 
-.ie-close-button:hover {
+.folder_barbtn-InternetExplorer .x-InternetExplorer:hover {
   background: #e00000;
   color: white;
+}
+
+.dash-InternetExplorer {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.expand-InternetExplorer {
+  width: 12px;
+  height: 12px;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  position: relative;
+}
+
+.expand-InternetExplorer.full {
+  background: #c0c0c0;
+}
+
+.expand-InternetExplorer.full::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border: 1px solid #000;
+  border-right: none;
+  border-bottom: none;
+}
+
+.expand_2-InternetExplorer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border: 1px solid #000;
+  border-left: none;
+  border-top: none;
+}
+
+.x-InternetExplorer {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+}
+
+/* ============================================
+   CONTENT WRAPPER
+   ============================================ */
+
+.ie-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
 }
 
 /* ============================================
@@ -600,8 +656,13 @@
    ============================================ */
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* ============================================

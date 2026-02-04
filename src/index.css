@@ -1,10 +1,14 @@
+/* Import Internet Explorer CSS */
+@import './components/apps/InternetExplorer/InternetExplorer.css';
+
 @font-face {
     font-family: 'win95';
     src: url('../src/assets/win95.ttf') format('truetype');
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-
-/* Import Internet Explorer CSS */
-@import './components/apps/InternetExplorer/InternetExplorer.css';
 
 #root {
     position: absolute;
