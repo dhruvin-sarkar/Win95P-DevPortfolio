@@ -13,11 +13,13 @@ import StatusBar from './components/StatusBar';
 import BrowserFrame from './components/BrowserFrame';
 import FavoritesPanel from './components/FavoritesPanel';
 import HistoryPanel from './components/HistoryPanel';
+import QuickLinks from './components/QuickLinks';
 
 // Import utilities
 import { browserHistory } from './utils/browserHistory';
 import { bookmarks } from './utils/bookmarks';
 import { validateUrl } from './utils/urlValidator';
+import { handleSpecialUrls, isKnownToBlock } from './utils/urlHandler';
 
 function InternetExplorer() {
   const iframeRef = useRef(null);
@@ -121,9 +123,17 @@ function InternetExplorer() {
     console.log('Navigating to:', url);
     const formattedUrl = validateAndFormatUrl(url);
     
+    // Check if site is known to block iframes
+    if (isKnownToBlock(formattedUrl)) {
+      console.log(`⚠️ ${url} is known to block iframe embedding. The site may not display correctly.`);
+    }
+    
+    // Try to use special URL handling for better compatibility
+    const finalUrl = handleSpecialUrls(formattedUrl);
+    
     // Add to history
     const newHistory = {
-      items: [...history.items.slice(0, history.currentIndex + 1), formattedUrl],
+      items: [...history.items.slice(0, history.currentIndex + 1), finalUrl],
       currentIndex: history.currentIndex + 1
     };
     setHistory(newHistory);
@@ -131,7 +141,7 @@ function InternetExplorer() {
     // Update browser state
     setBrowserState(prev => ({
       ...prev, 
-      currentUrl: formattedUrl, 
+      currentUrl: finalUrl, 
       isLoading: true,
       canGoBack: newHistory.currentIndex > 0,
       canGoForward: false
@@ -139,7 +149,7 @@ function InternetExplorer() {
     
     // Load URL in iframe
     if (iframeRef.current) {
-      iframeRef.current.src = formattedUrl;
+      iframeRef.current.src = finalUrl;
     }
   };
 
@@ -386,9 +396,13 @@ function InternetExplorer() {
 
             {/* Browser Frame */}
             <div className="ie-browser-container">
+              {/* Quick Links - only show on about:blank */}
+              {browserState.currentUrl === 'about:blank' && (
+                <QuickLinks onNavigate={navigate} />
+              )}
+              
               <BrowserFrame 
-                ref={iframeRef}
-                src={browserState.currentUrl}
+                url={browserState.currentUrl}
                 onLoad={handlePageLoad}
                 onError={handlePageError}
               />

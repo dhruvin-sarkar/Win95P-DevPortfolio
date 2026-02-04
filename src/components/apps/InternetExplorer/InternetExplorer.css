@@ -1,41 +1,312 @@
 /* ------------ Internet Explorer Window ---------------- */
 
+/* Main window container */
 .ie-window {
-    position: fixed;
-    width: 800px;
-    height: 600px;
+    display: flex;
+    flex-direction: column;
+    border: 2px outset #dfdfdf;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     background: #c0c0c0;
-    border: 2px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
-    box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
-    overflow: hidden;
-    resize: none;
     font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
-    font-size: 11px;
+    overflow: hidden;
+    min-width: 400px;
+    min-height: 300px;
 }
 
-/* Title Bar */
+.ie-window.maximized {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - 40px) !important;
+    border: none;
+}
+
+/* Title bar - 18px */
 .ie-title-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2px 2px 2px 4px;
     background: linear-gradient(to right, #000080, #1084d0);
     color: white;
     height: 18px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-weight: bold;
     font-size: 11px;
-    cursor: move;
     -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
+    cursor: move;
+    flex-shrink: 0;
+}
+
+/* Menu bar - 20px */
+.ie-menu-bar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 4px;
+    display: flex;
+    gap: 8px;
+    height: 20px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Navigation bar - 28px */
+.ie-navigation-bar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 3px;
+    display: flex;
+    gap: 2px;
+    height: 28px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Address bar - 26px */
+.ie-address-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 4px;
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    height: 26px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    /* Ensure it's above other elements */
+}
+
+/* Browser frame - takes remaining space */
+.ie-browser-frame {
+    flex: 1;
+    /* This makes it take all remaining vertical space */
+    background: white;
+    border: 2px inset #dfdfdf;
+    overflow: hidden;
+    position: relative;
+    min-height: 0;
+    /* Important for flex child */
+}
+
+.ie-browser-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background: white;
+}
+
+/* Status bar - 22px */
+.ie-status-bar {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* Fix for blank page */
+.ie-blank-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #000;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    padding: 20px;
+    text-align: center;
+}
+
+.ie-blank-page h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+    color: #000080;
+}
+
+.ie-blank-page p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.ie-blank-page .examples {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Error page styling */
+.ie-error-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 40px 20px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.ie-error-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.ie-error-page h2 {
+    font-size: 20px;
+    color: #c00;
+    margin-bottom: 16px;
+}
+
+.ie-error-message {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+.ie-error-details {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 12px;
+    margin: 16px 0;
+    max-width: 500px;
+    text-align: left;
+}
+
+.ie-error-details p {
+    margin: 4px 0;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.ie-error-actions {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ie-error-button {
+    padding: 6px 16px;
+    background: #c0c0c0;
+    border: 2px outset #dfdfdf;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+}
+
+.ie-error-button:hover {
+    background: #d4d0c8;
+}
+
+.ie-error-button:active {
+    border: 2px inset #808080;
+    background: #b0b0b0;
+}
+
+.ie-working-sites {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #ccc;
+    max-width: 500px;
+}
+
+.ie-working-sites p {
+    font-size: 12px;
+    color: #666;
+    margin: 4px 0;
+}
+
+/* Loading overlay */
+.ie-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.ie-loading-spinner {
+    font-size: 16px;
+    color: #000080;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Quick Links */
+.ie-quick-links {
+    padding: 12px;
+    background: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.ie-quick-links-header {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #000080;
+}
+
+.ie-quick-links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.ie-quick-link {
+    padding: 4px 10px;
+    background: #c0c0c0;
+    border: 1px outset #dfdfdf;
+    cursor: pointer;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.ie-quick-link:hover {
+    background: #d4d0c8;
+}
+
+.ie-quick-link:active {
+    border: 1px inset #808080;
 }
 
 .ie-title-content {
     display: flex;
     align-items: center;
     gap: 4px;
+    padding-left: 2px;
+    flex: 1;
+    pointer-events: none;
+    /* Allow drag through this area */
 }
 
 .ie-title-icon {
