@@ -217,11 +217,6 @@ export function imageMapping (name, type) {
     case "doom":
       return game
 
-    case "Internet Explorer":
-    case "Internet-Explorer":
-    case "ie":
-      return ie
-
     default:
       if(type === 'folder') {
         return Project;

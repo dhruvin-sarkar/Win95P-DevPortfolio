@@ -3,9 +3,6 @@
     src: url('../src/assets/win95.ttf') format('truetype');
 }
 
-/* Import Internet Explorer CSS */
-@import './components/apps/InternetExplorer/InternetExplorer.css';
-
 #root {
     position: absolute;
     width: 100%;
