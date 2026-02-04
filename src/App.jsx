@@ -29,7 +29,6 @@ import BTC from "./components/BTC";
 import EmptyFolder from "./components/EmptyFolder";
 import ErrorBtn from "./components/ErrorBtn";
 import RightClickWindows from "./components/RightClickWindows";
-import InternetExplorer from "./components/InternetExplorer";
 import axios from "axios";
 import loadingSpin from "./assets/loading.gif";
 import NewsApp from "./components/NewsApp";
