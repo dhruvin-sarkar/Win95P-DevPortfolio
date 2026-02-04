@@ -1,0 +1,462 @@
+/* ------------ Internet Explorer Window ---------------- */
+
+.ie-window {
+    display: none;
+    position: fixed;
+    width: 800px;
+    height: 600px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+    overflow: hidden;
+    resize: none;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    font-size: 11px;
+}
+
+/* Title Bar */
+.ie-title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 2px 2px 4px;
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: white;
+    height: 18px;
+    font-weight: bold;
+    font-size: 11px;
+    cursor: move;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ie-title-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.ie-title-icon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+}
+
+.ie-title-text {
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+}
+
+.ie-title-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.ie-title-button {
+    width: 16px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    color: #000;
+}
+
+.ie-title-button:active {
+    border-color: #000000 #ffffff #ffffff #000000;
+    background: #7f7f7f;
+}
+
+.ie-close-button span {
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Menu Bar */
+.ie-menu-bar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 4px;
+    display: flex;
+    gap: 8px;
+    height: 20px;
+    align-items: center;
+}
+
+.ie-menu-item {
+    padding: 2px 8px;
+    cursor: pointer;
+    position: relative;
+    font-size: 11px;
+}
+
+.ie-menu-item:hover {
+    background: #000080;
+    color: white;
+}
+
+.ie-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    padding: 2px;
+    min-width: 150px;
+    z-index: 1000;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.ie-menu-item-dropdown {
+    padding: 4px 16px;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ie-menu-item-dropdown:hover {
+    background: #000080;
+    color: white;
+}
+
+.ie-menu-separator {
+    height: 1px;
+    background: #808080;
+    margin: 2px 4px;
+}
+
+/* Toolbar */
+.ie-toolbar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 3px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    height: 28px;
+}
+
+.ie-toolbar-button {
+    width: 24px;
+    height: 22px;
+    border: 1px solid transparent;
+    background: #c0c0c0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #000;
+}
+
+.ie-toolbar-button:hover {
+    border: 1px outset #dfdfdf;
+}
+
+.ie-toolbar-button:active {
+    border: 1px inset #808080;
+}
+
+.ie-toolbar-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ie-toolbar-separator {
+    width: 1px;
+    height: 20px;
+    background: #808080;
+    margin: 0 2px;
+}
+
+/* Address Bar */
+.ie-address-bar {
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    height: 28px;
+}
+
+.ie-address-label {
+    margin-right: 4px;
+    font-size: 11px;
+    color: #000;
+}
+
+.ie-address-input {
+    flex: 1;
+    height: 20px;
+    border: 1px inset #dfdfdf;
+    padding: 0 4px;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    background: white;
+}
+
+.ie-address-input:focus {
+    outline: 1px solid #000080;
+    outline-offset: -1px;
+}
+
+.ie-go-button {
+    width: 40px;
+    height: 20px;
+    margin-left: 4px;
+    border: 1px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    background: #c0c0c0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ie-go-button:active {
+    border-color: #000000 #ffffff #ffffff #000000;
+    background: #7f7f7f;
+}
+
+/* Content Area */
+.ie-content-area {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.ie-browser-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ie-browser-frame {
+    flex: 1;
+    border: 2px inset #dfdfdf;
+    background: white;
+    overflow: hidden;
+}
+
+.ie-browser-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+/* Side Panels */
+.ie-side-panel {
+    width: 250px;
+    background: #c0c0c0;
+    border-right: 1px solid #808080;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ie-side-panel-header {
+    background: #000080;
+    color: white;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20px;
+}
+
+.ie-side-panel-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+}
+
+.ie-side-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px;
+}
+
+.ie-favorites-item,
+.ie-history-item {
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ie-favorites-item:hover,
+.ie-history-item:hover {
+    background: #000080;
+    color: white;
+}
+
+.ie-favorites-icon,
+.ie-history-icon {
+    width: 16px;
+    height: 16px;
+    font-size: 12px;
+}
+
+.ie-favorites-title,
+.ie-history-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ie-history-date {
+    font-size: 10px;
+    color: #666;
+}
+
+/* Status Bar */
+.ie-status-bar {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    height: 20px;
+}
+
+.ie-status-text {
+    flex: 1;
+    border: 1px inset #dfdfdf;
+    padding: 1px 4px;
+    margin-right: 4px;
+    background: white;
+}
+
+.ie-status-zone {
+    border: 1px inset #dfdfdf;
+    padding: 1px 8px;
+    min-width: 80px;
+    text-align: center;
+    background: white;
+}
+
+.ie-status-progress {
+    width: 100px;
+    height: 12px;
+    border: 1px inset #dfdfdf;
+    background: white;
+    margin-right: 4px;
+    overflow: hidden;
+}
+
+.ie-status-progress-bar {
+    height: 100%;
+    background: #000080;
+    transition: width 0.2s ease;
+}
+
+/* Loading indicator */
+.ie-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #000080;
+    border-radius: 50%;
+    animation: ie-spin 1s linear infinite;
+    margin-right: 4px;
+}
+
+@keyframes ie-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ie-window {
+        width: 95vw;
+        height: 80vh;
+    }
+    
+    .ie-side-panel {
+        width: 200px;
+    }
+    
+    .ie-title-text {
+        max-width: 150px;
+    }
+}
+
+/* Fullscreen mode */
+.ie-window.fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+    border: none;
+}
+
+.ie-window.fullscreen .ie-title-bar {
+    display: none;
+}
+
+.ie-window.fullscreen .ie-browser-container {
+    height: 100vh;
+}
+
+/* Context menu */
+.ie-context-menu {
+    position: absolute;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    padding: 2px;
+    min-width: 150px;
+    z-index: 1000;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.ie-context-menu-item {
+    padding: 4px 16px;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ie-context-menu-item:hover {
+    background: #000080;
+    color: white;
+}
+
+.ie-context-menu-separator {
+    height: 1px;
+    background: #808080;
+    margin: 2px 4px;
+}
