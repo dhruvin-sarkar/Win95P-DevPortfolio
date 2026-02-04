@@ -343,6 +343,18 @@
     },
 
     {
+        "name": "Internet Explorer",
+        "pic": "Internet-Explorer",
+        "folderId": "Desktop",
+        "size": 8000,
+        "type": ".exe",
+        "x": 41,
+        "y": 41,
+        "category": "Utilities",
+        "description": "Web browser for navigating the internet."
+    },
+
+    {
         "name": "MS-DOS Prompt",
         "pic": "MS-DOS Prompt",
         "folderId": "Desktop",

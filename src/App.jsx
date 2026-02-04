@@ -17,6 +17,7 @@ import Shutdown from "./components/Shutdown";
 import MineSweeper from "./components/MineSweeper";
 import MsnFolder from "./components/MsnFolder";
 import DoomGame from "./components/DoomGame";
+import InternetExplorer from "./components/apps/InternetExplorer/InternetExplorer";
 import iconInfo from "./icon.json";
 import Login from "./components/Login";
 import OpenProject from "./components/OpenProject";
@@ -353,6 +354,7 @@ function App() {
     focusItem: false,
     x: 0,
     y: 0,
+    zIndex: 1,
   });
 
   const [DoomExpand, setDoomExpand] = useState({
@@ -1416,6 +1418,8 @@ function App() {
     setShutdownWindow,
     MineSweeperExpand,
     setMineSweeperExpand,
+    IEExpand,
+    setIEExpand,
     DoomExpand,
     setDoomExpand,
     MSNExpand,
@@ -1601,6 +1605,7 @@ function App() {
         <ResumeFile />
         <WebampPlayer />
         <MineSweeper />
+        <InternetExplorer />
         <DoomGame />
         <MsnFolder />
         <OpenProject />
@@ -1951,6 +1956,13 @@ function App() {
         setter: setMineSweeperExpand,
         usestate: MineSweeperExpand,
         color: "rgba(187, 51, 48, 0.85)",
+        size: "small",
+      },
+      {
+        name: "InternetExplorer",
+        setter: setIEExpand,
+        usestate: IEExpand,
+        color: "rgba(0, 100, 200, 0.85)",
         size: "small",
       },
       {
