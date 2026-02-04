@@ -117,7 +117,7 @@
     padding: 2px;
     min-width: 150px;
     z-index: 1000;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .ie-menu-item-dropdown {
@@ -213,6 +213,39 @@
 .ie-address-input:focus {
     outline: 1px solid #000080;
     outline-offset: -1px;
+}
+
+.ie-address-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ie-address-suggestion-item {
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 11px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ie-address-suggestion-item:hover {
+    background: #000080;
+    color: white;
+}
+
+.ie-address-suggestion-item:last-child {
+    border-bottom: none;
 }
 
 .ie-go-button {
@@ -392,8 +425,13 @@
 }
 
 @keyframes ie-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Responsive adjustments */
@@ -402,11 +440,11 @@
         width: 95vw;
         height: 80vh;
     }
-    
+
     .ie-side-panel {
         width: 200px;
     }
-    
+
     .ie-title-text {
         max-width: 150px;
     }
@@ -438,7 +476,7 @@
     padding: 2px;
     min-width: 150px;
     z-index: 1000;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .ie-context-menu-item {
