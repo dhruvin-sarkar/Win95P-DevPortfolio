@@ -10,7 +10,7 @@ const BrowserFrame = ({
   onLoadError 
 }) => {
   const iframeRef = useRef(null);
-  const [iframeKey, setIframeKey] = useState(0);
+  const [mounted, setMounted] = useState(true);
   
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -18,44 +18,58 @@ const BrowserFrame = ({
     
     // Check if this is a known blocked site
     if (isKnownBlockedSite(url) && !url.startsWith('about:')) {
-      setTimeout(() => {
-        onLoadError({
-          type: 'BLOCKED_SITE',
-          url: url,
-          message: 'This site cannot be displayed in an iframe.',
-          reason: 'This website is known to block iframe embedding for security reasons. This is a common practice for major websites to prevent clickjacking attacks.',
-        });
-        onLoadEnd();
+      const timeoutId = setTimeout(() => {
+        if (mounted) {
+          onLoadError({
+            type: 'BLOCKED_SITE',
+            url: url,
+            message: 'This site cannot be displayed in an iframe.',
+            reason: 'This website is known to block iframe embedding for security reasons. This is a common practice for major websites to prevent clickjacking attacks.',
+          });
+          onLoadEnd();
+        }
       }, 1000);
-      return;
+      
+      return () => clearTimeout(timeoutId);
     }
     
     onLoadStart();
     
     const handleLoad = () => {
-      onLoadEnd();
+      if (mounted) {
+        onLoadEnd();
+        
+        // Try to detect if iframe loaded successfully
+        // Cross-origin iframes will throw error when accessing contentWindow
+        try {
+          const iframeDoc = iframe.contentWindow.document;
+          // If we can access it, it loaded successfully
+        } catch (e) {
+          // Cross-origin - this is actually expected and OK
+          // Site loaded but we can't access it due to same-origin policy
+        }
+      }
     };
     
     const handleError = () => {
-      onLoadEnd();
-      onLoadError({
-        type: 'LOAD_ERROR',
-        url: url,
-        message: 'This site cannot be displayed in an iframe.',
-        reason: 'Modern websites use security headers (X-Frame-Options, CSP) to prevent embedding and protect against clickjacking attacks.',
-      });
+      if (mounted) {
+        onLoadEnd();
+        onLoadError({
+          type: 'LOAD_ERROR',
+          url: url,
+          message: 'This site cannot be displayed in an iframe.',
+          reason: 'Modern websites use security headers (X-Frame-Options, CSP) to prevent embedding and protect against clickjacking attacks.',
+        });
+      }
     };
     
     // Set up event listeners
     iframe.addEventListener('load', handleLoad);
     iframe.addEventListener('error', handleError);
     
-    // Force iframe reload by changing key
-    setIframeKey(prev => prev + 1);
-    
     // Detect X-Frame-Options blocking with timeout
     const timeoutId = setTimeout(() => {
-      if (url !== 'about:start' && url !== 'about:blank') {
+      if (mounted && url !== 'about:start' && url !== 'about:blank') {
         try {
           // If we can't access contentWindow.location, it might be blocked
           const iframeContent = iframe.contentWindow;
@@ -68,18 +82,30 @@ const BrowserFrame = ({
           if (e.name === 'SecurityError') {
             // This is expected for cross-origin sites, but if it's been a while, might be blocked
             console.log('Cross-origin iframe detected (normal for most sites)');
+            
+            // For non-about URLs, if we get a security error, it might be blocked
+            if (!url.startsWith('about:') && mounted) {
+              onLoadError({
+                type: 'SECURITY_ERROR',
+                url: url,
+                message: 'This site cannot be displayed in an iframe due to security restrictions.',
+                reason: 'The site sent security headers that prevent embedding. This is a common security feature to protect against clickjacking attacks.',
+              });
+              onLoadEnd();
+            }
           }
         }
       }
     }, 3000);
     
     return () => {
+      setMounted(false);
       iframe.removeEventListener('load', handleLoad);
       iframe.removeEventListener('error', handleError);
       clearTimeout(timeoutId);
     };
-  }, [url, onLoadStart, onLoadEnd, onLoadError]);
-  
+  }, [url, onLoadStart, onLoadEnd, onLoadError, mounted]);
+
   return (
     <div className="ie-browser-frame">
       {isLoading && (
@@ -88,7 +114,7 @@ const BrowserFrame = ({
         </div>
       )}
       <iframe
-        key={iframeKey}
+        key={url}
         ref={iframeRef}
         src={url === 'about:start' ? 'about:blank' : url}
         className="ie-iframe"

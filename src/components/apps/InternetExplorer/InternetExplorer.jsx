@@ -190,8 +190,8 @@ const InternetExplorer = () => {
           y: window.innerWidth <= 500 ? 40 : 100,
         }}
         position={{ 
-          x: IEExpand.x || (window.innerWidth <= 500 ? 20 : 100),
-          y: IEExpand.y || (window.innerWidth <= 500 ? 40 : 100)
+          x: IEExpand.x ?? (window.innerWidth <= 500 ? 20 : 100),
+          y: IEExpand.y ?? (window.innerWidth <= 500 ? 40 : 100)
         }}
         onStop={handleDragStop}
         onStart={() => handleSetFocusItemTrue('InternetExplorer')}

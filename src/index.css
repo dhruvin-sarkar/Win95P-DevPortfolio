@@ -4,10 +4,6 @@
 @font-face {
     font-family: 'win95';
     src: url('../src/assets/win95.ttf') format('truetype');
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 #root {
@@ -69,18 +65,30 @@ ol {
 }
 
 body {
+    font-family: 'win95', sans-serif;
+    background: #098684;
+    background-image: url('./assets/90s.jpg');
+    height: 100svh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    overflow: hidden;
+    background-repeat: no-repeat;
     width: 100%;
     min-height: 100svh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
     touch-action: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 a {
     text-decoration: none;
 }
-
 
 a,
 button,
@@ -94,21 +102,6 @@ select {
     }
 }
 
-body {
-    font-family: 'win95', sans-serif;
-    background: #098684;
-    background-image: url('./assets/90s.jpg');
-    height: 100svh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    overflow: hidden;
-    background-repeat: no-repeat;
-}
-
-
-
-
 /* --------------- scroll bar ----------------- */
 
 /* WebKit (Chrome, Safari) */
@@ -117,7 +110,6 @@ body {
     width: 19px;
     height: 19px;
 }
-
 
 *::-webkit-scrollbar-thumb {
     background-color: #bdbdbd;
@@ -136,7 +128,6 @@ body {
 *::-webkit-scrollbar-track {
     background-color: #e0e0e0;
 }
-
 
 *::-webkit-scrollbar-button:vertical:increment {
     background: url('./assets/arrow-down.png') no-repeat center;
@@ -210,9 +201,6 @@ body {
     border-top-color: #676363;
 }
 
-
-
-
 /* Gecko (Firefox) */
 * {
     scrollbar-width: 14px;
@@ -235,8 +223,6 @@ body {
     border: 1px solid #808080;
     box-shadow: inset 1px 1px #fff, inset -1px -1px #272727;
 }
-
-
 
 /* ------------------ Footer ----------------- */
 

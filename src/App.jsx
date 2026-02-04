@@ -1144,15 +1144,6 @@ function App() {
         setTimeout(() => {
           setCurrentFolder("Resume");
         }, 100);
-        setSelectedFolder({ label: "Hard Disk (D:)", img: imageMapping(name) });
-        setUndo((prev) => [...prev, "Resume"]);
-        return;
-      }
-
-      if (name === "Resume") {
-        setTimeout(() => {
-          setCurrentFolder("Resume");
-        }, 100);
         setSelectedFolder({ label: "Resume", img: imageMapping(name) });
         setUndo((prev) => [...prev, "Resume"]);
         return;
@@ -1466,9 +1457,7 @@ function App() {
 
   // show login page
   if (login) {
-    if (!login) {
-      setLoading(true);
-    }
+    setLoading(true);
     return (
       <UserContext.Provider value={contextValue}>
         <Login />
@@ -1869,7 +1858,7 @@ function App() {
 
   // Function to fetch chat data
   async function getChat() {
-    setChatData("");
+    setChatData([]);
     try {
       const response = await axios.get(
         `https://notebackend4.onrender.com/chat/getchat/`,
@@ -2190,9 +2179,6 @@ function App() {
         }, 100);
 
         // Your existing special cases...
-        if (lowerCaseName === "mail") clippySendemailfunction();
-        if (lowerCaseName === "winamp") clippySongFunction();
-        if (lowerCaseName === "msn") clippyUsernameFunction();
         if (lowerCaseName === "mail") clippySendemailfunction();
         if (lowerCaseName === "winamp") clippySongFunction();
         if (lowerCaseName === "msn") clippyUsernameFunction();

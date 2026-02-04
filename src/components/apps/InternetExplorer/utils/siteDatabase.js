@@ -68,7 +68,9 @@ export const isKnownBlockedSite = (url) => {
   try {
     const urlObj = new URL(url);
     const hostname = urlObj.hostname.toLowerCase().replace('www.', '');
-    return BLOCKED_SITES.some(blocked => hostname.includes(blocked));
+    return BLOCKED_SITES.some(blocked => 
+      hostname === blocked || hostname.endsWith('.' + blocked)
+    );
   } catch (_) {
     return false;
   }

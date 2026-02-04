@@ -1,11 +1,12 @@
 import React from 'react';
+import ie from '../../../assets/ie.png';
 
 const TitleBar = () => {
   return (
     <div className="ie-titlebar">
       <div className="ie-titlebar-text">
         <img 
-          src="/assets/ie.png" 
+          src={ie} 
           alt="IE" 
           className="ie-titlebar-icon" 
         />
