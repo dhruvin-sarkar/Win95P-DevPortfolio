@@ -124,10 +124,6 @@ export function imageMapping (name, type) {
     case 'MSN':
       return MSN;
 
-    case 'Internet':
-    case 'WebResume':
-      return ie;
-
     case 'Settings':
       return settings;
 
