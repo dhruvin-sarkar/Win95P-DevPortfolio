@@ -1,166 +1,179 @@
-import React, { useState, useEffect, useRef, } from 'react'
-import UserContext from './Context'
-import { Filter } from 'bad-words';
-import badword from './badword'
-import { useSounds } from './hooks/useSounds';
-import Footer from './components/Footer';
-import Store from './components/Store';
-import Dragdrop from './components/Dragdrop';
-import MyBioFolder from './components/MyBioFolder';
-import MyComputer from './components/MyComputer';
-import ResumeFolder from './components/ResumeFolder';
-import ProjectFolder from './components/ProjectFolder';
-import MailFolder from './components/MailFolder';
-import WebampPlayer from './components/WinampPlayer';
-import ResumeFile from './components/ResumeFile';
-import Shutdown from './components/Shutdown';
-import MineSweeper from './components/MineSweeper'
-import MsnFolder from './components/MsnFolder';
-import DoomGame from './components/DoomGame';
-import iconInfo from './icon.json'
-import Login from './components/Login';
-import OpenProject from './components/OpenProject';
-import WindowsShutdown from './components/WindowsShutdown';
-import BgSetting from './components/BgSetting';
-import Run from './components/Run';
-import Notification from './components/Notification';
-import BTC from './components/BTC';
-import EmptyFolder from './components/EmptyFolder';
-import ErrorBtn from './components/ErrorBtn';
-import RightClickWindows from './components/RightClickWindows';
-import axios from 'axios';
-import loadingSpin from './assets/loading.gif'
-import NewsApp from './components/NewsApp'
-import SpinningCat from './components/SpinningCat';
-import Patch from './components/Patch';
-import WindowsDragLogin from './components/WindowsDragLogin';
-import TaskManager from './components/TaskManager';
-import Terminal from './components/Terminal';
-import VSCode from './components/VSCode';
-import { StyleHide, imageMapping,
-  handleDoubleClickEnterLink,handleDoubleTapEnterMobile,
-  handleDoubleClickiframe, handleDoubleTapiframeMobile,
-  iconContainerSize, iconImgSize, iconTextSize,
+import React, { useState, useEffect, useRef } from "react";
+import UserContext from "./Context";
+import { Filter } from "bad-words";
+import badword from "./badword";
+import { useSounds } from "./hooks/useSounds";
+import Footer from "./components/Footer";
+import Store from "./components/Store";
+import Dragdrop from "./components/Dragdrop";
+import MyBioFolder from "./components/MyBioFolder";
+import MyComputer from "./components/MyComputer";
+import ResumeFolder from "./components/ResumeFolder";
+import ProjectFolder from "./components/ProjectFolder";
+import MailFolder from "./components/MailFolder";
+import WebampPlayer from "./components/WinampPlayer";
+import ResumeFile from "./components/ResumeFile";
+import Shutdown from "./components/Shutdown";
+import MineSweeper from "./components/MineSweeper";
+import MsnFolder from "./components/MsnFolder";
+import DoomGame from "./components/DoomGame";
+import iconInfo from "./icon.json";
+import Login from "./components/Login";
+import OpenProject from "./components/OpenProject";
+import WindowsShutdown from "./components/WindowsShutdown";
+import BgSetting from "./components/BgSetting";
+import Run from "./components/Run";
+import Notification from "./components/Notification";
+import BTC from "./components/BTC";
+import EmptyFolder from "./components/EmptyFolder";
+import ErrorBtn from "./components/ErrorBtn";
+import RightClickWindows from "./components/RightClickWindows";
+import InternetExplorer from "./components/InternetExplorer";
+import axios from "axios";
+import loadingSpin from "./assets/loading.gif";
+import NewsApp from "./components/NewsApp";
+import SpinningCat from "./components/SpinningCat";
+import Patch from "./components/Patch";
+import WindowsDragLogin from "./components/WindowsDragLogin";
+import TaskManager from "./components/TaskManager";
+import Terminal from "./components/Terminal";
+import VSCode from "./components/VSCode";
+import {
+  StyleHide,
+  imageMapping,
+  handleDoubleClickEnterLink,
+  handleDoubleTapEnterMobile,
+  handleDoubleClickiframe,
+  handleDoubleTapiframeMobile,
+  iconContainerSize,
+  iconImgSize,
+  iconTextSize,
   handleDoubleClickPhotoOpen,
- } from './components/function/AppFunctions';
-
+} from "./components/function/AppFunctions";
 
 function App() {
   // Initialize sound system
   const sounds = useSounds();
-  
-  const [itemIsBeingDeleted, setItemIsBeingDeleted] = useState('')
-  const [itemBeingSelected, setItemBeingSelected] = useState(null)
-  const [installIcon, setInstallIcon] = useState(0)
-  const [currentRightClickFolder, setCurrentRightClickFolder] = useState('Desktop')
-  const [ringMsn, setRingMsn] = useState(false)
-  const [showChart, setShowChart] = useState(false)
-  const [keyRef, setKeyRef] = useState(0)
+
+  const [itemIsBeingDeleted, setItemIsBeingDeleted] = useState("");
+  const [itemBeingSelected, setItemBeingSelected] = useState(null);
+  const [installIcon, setInstallIcon] = useState(0);
+  const [currentRightClickFolder, setCurrentRightClickFolder] =
+    useState("Desktop");
+  const [ringMsn, setRingMsn] = useState(false);
+  const [showChart, setShowChart] = useState(false);
+  const [keyRef, setKeyRef] = useState(0);
   const [localBg, setLocalBg] = useState(() => {
-    const prevBg = localStorage.getItem('background')
-    return prevBg? prevBg : null
-  })
+    const prevBg = localStorage.getItem("background");
+    return prevBg ? prevBg : null;
+  });
   const [localEffect, setLocalEffect] = useState(() => {
-    const prevEffect = localStorage.getItem('effect')
-    return prevEffect? prevEffect : null
-  })
-  const [websocketConnection, setWebsocketConnection] = useState(false)
+    const prevEffect = localStorage.getItem("effect");
+    return prevEffect ? prevEffect : null;
+  });
+  const [websocketConnection, setWebsocketConnection] = useState(false);
   const [Cel, setCel] = useState(true); // Celsius or Fahrenheit
   const [weather, setWeather] = useState(() => {
-        const storedTempF = localStorage.getItem('tempF');
-        const storedIconCode = localStorage.getItem('iconCode');
-        if (storedTempF && storedIconCode) {
-            return { temp: JSON.parse(storedTempF), code: parseInt(storedIconCode) };
-        }
-        return null;
-    });
+    const storedTempF = localStorage.getItem("tempF");
+    const storedIconCode = localStorage.getItem("iconCode");
+    if (storedTempF && storedIconCode) {
+      return { temp: JSON.parse(storedTempF), code: parseInt(storedIconCode) };
+    }
+    return null;
+  });
 
   const [city, setCity] = useState(() => {
-        const storedCity = localStorage.getItem('city');
-        return storedCity ? JSON.parse(storedCity) : null;
-    });
+    const storedCity = localStorage.getItem("city");
+    return storedCity ? JSON.parse(storedCity) : null;
+  });
   const [bgRotation, setBgRotation] = useState(() => {
-  const saved = JSON.parse(localStorage.getItem('isWallpaperOn'));
+    const saved = JSON.parse(localStorage.getItem("isWallpaperOn"));
     if (saved?.bgRotation !== undefined) return saved.bgRotation;
-    localStorage.setItem('isWallpaperOn', JSON.stringify({ bgRotation: true }));
+    localStorage.setItem("isWallpaperOn", JSON.stringify({ bgRotation: true }));
     return true;
   });
 
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState('');
-  const [tileBG, setTileBG] = useState('#098684')
-  const [tileScreen, setTileScreen] = useState(false)
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
+  const [tileBG, setTileBG] = useState("#098684");
+  const [tileScreen, setTileScreen] = useState(false);
   const [chatBotActive, setChatBotActive] = useState(false);
-  const [runCatVideo, setRunCatVideo] = useState(false)
-  const [newsPopup, setNewsPopup] = useState(false)
-  const [onlineUser, setOnlineUser] = useState(0)
-  const [sortedIcon, setSortedIcon] = useState([])
-  const [sortIconTrigger, setSortIconTrigger] = useState(0)
-  const [deleteIcon, setDeleteIcon] = useState(0)
-  const refBeingClicked = useRef(null)
+  const [runCatVideo, setRunCatVideo] = useState(false);
+  const [newsPopup, setNewsPopup] = useState(false);
+  const [onlineUser, setOnlineUser] = useState(0);
+  const [sortedIcon, setSortedIcon] = useState([]);
+  const [sortIconTrigger, setSortIconTrigger] = useState(0);
+  const [deleteIcon, setDeleteIcon] = useState(0);
+  const refBeingClicked = useRef(null);
   const maxZindexRef = useRef(2);
-  const [inFolder, setInFolder] = useState('')
-  const [refresh, setRefresh] = useState(0)
+  const [inFolder, setInFolder] = useState("");
+  const [refresh, setRefresh] = useState(0);
   const timerRef = useRef(null); // time counter for long press
   const [binRestoreArr, setBinRestoreArr] = useState(() => {
-    const getRestoreArr = localStorage.getItem('restoreArray');
+    const getRestoreArr = localStorage.getItem("restoreArray");
     return getRestoreArr ? JSON.parse(getRestoreArr) : [];
   });
-  const [rightClickBin, setRightClickBin] = useState(false) // right click icon in bin folder
+  const [rightClickBin, setRightClickBin] = useState(false); // right click icon in bin folder
   const [iconBeingRightClicked, setIconBeingRightClicked] = useState({}); // right click Icon
   const [rightClickIcon, setRightClickIcon] = useState(false); // right click Icon
   const [rightClickDefault, setRightClickDefault] = useState(false); // right click bg
   const [rightClickPosition, setRightClickPosition] = useState({ x: 0, y: 0 });
   const [loadedMessages, setLoadedMessages] = useState([]);
   const [currentPhoto, setCurrentPhoto] = useState({});
-  const [regErrorPopUp, setRegErrorPopUp] = useState(false)
-  const [regErrorPopUpVal, setRegErrorPopUpVal] = useState('')
-  const [runItemBox, setRunItemBox] = useState(false)
-  const [RunInputVal, setRunInputVal] = useState('')
-  const [undo, setUndo] = useState(['MyComputer'])
-  const [selectedFolder, setSelectedFolder] = useState({label: 'MyComputer', img: imageMapping('MyComputer')})
-  const [currentFolder, setCurrentFolder] = useState('MyComputer')
-  const [loading, setLoading] = useState(true)
-  const [resumeStartBar, setResumejectStartBar] = useState(false)
-  const [projectStartBar, setProjectStartBar] = useState(false)
-  const [calenderToggle, setCalenderToggle] = useState(false)
-  const [iconScreenSize, setIconScreenSize] = useState(() => {
-    const savedIconSize = localStorage.getItem('iconSize');
-    return savedIconSize ? Number(savedIconSize) : 0
+  const [regErrorPopUp, setRegErrorPopUp] = useState(false);
+  const [regErrorPopUpVal, setRegErrorPopUpVal] = useState("");
+  const [runItemBox, setRunItemBox] = useState(false);
+  const [RunInputVal, setRunInputVal] = useState("");
+  const [undo, setUndo] = useState(["MyComputer"]);
+  const [selectedFolder, setSelectedFolder] = useState({
+    label: "MyComputer",
+    img: imageMapping("MyComputer"),
   });
-  const [iconSize, setIconSize] = useState(false)
-  const [allowNoti, setAllowNoti] = useState(false)
+  const [currentFolder, setCurrentFolder] = useState("MyComputer");
+  const [loading, setLoading] = useState(true);
+  const [resumeStartBar, setResumejectStartBar] = useState(false);
+  const [projectStartBar, setProjectStartBar] = useState(false);
+  const [calenderToggle, setCalenderToggle] = useState(false);
+  const [iconScreenSize, setIconScreenSize] = useState(() => {
+    const savedIconSize = localStorage.getItem("iconSize");
+    return savedIconSize ? Number(savedIconSize) : 0;
+  });
+  const [iconSize, setIconSize] = useState(false);
+  const [allowNoti, setAllowNoti] = useState(false);
   const socket = useRef(null);
-  const [clearNotiTimeOut, setClearNotiTimeOut] = useState(null)
-  const [newMessage, setNewMessage] = useState('');
+  const [clearNotiTimeOut, setClearNotiTimeOut] = useState(null);
+  const [newMessage, setNewMessage] = useState("");
   const [notiOn, setNotiOn] = useState(false);
-  const [chatDown, setChatDown] = useState(false)
-  const [key, setKey] = useState(0)
-  const [dragging, setDragging] = useState(false)
+  const [chatDown, setChatDown] = useState(false);
+  const [key, setKey] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const DesktopRef = useRef(null);
   const ProjectFolderRef = useRef(null);
   const ResumeFolderRef = useRef(null);
   const BinRef = useRef(null);
   const DiskRef = useRef(null);
-  const PictureRef = useRef(null)
-  const UtilityRef = useRef(null)
+  const PictureRef = useRef(null);
+  const UtilityRef = useRef(null);
   const VSCodeRef = useRef(null);
   const [draggedIcon, setDraggedIcon] = useState(null);
   const [dropTargetFolder, setDropTargetFolder] = useState(null);
-  const [reMountRun, setReMountRun] = useState(0)
-  const [ErrorPopup, setErrorPopup] = useState(false)
-  const [themeDragBar, setThemeDragBar] = useState(() => localStorage.getItem('barcolor') || '#14045c')
-  const [login, setLogin] = useState(true) 
-  const [windowsShutDownAnimation, setWindowsShutDownAnimation] = useState(false)
-  const [detectMouse, setDetectMouse] = useState(false)
+  const [reMountRun, setReMountRun] = useState(0);
+  const [ErrorPopup, setErrorPopup] = useState(false);
+  const [themeDragBar, setThemeDragBar] = useState(
+    () => localStorage.getItem("barcolor") || "#14045c",
+  );
+  const [login, setLogin] = useState(true);
+  const [windowsShutDownAnimation, setWindowsShutDownAnimation] =
+    useState(false);
+  const [detectMouse, setDetectMouse] = useState(false);
   const endOfMessagesRef = useRef(null);
-  const [KeyChatSession, setKeyChatSession] = useState('')
-  const [sendDisable, setSendDisable] = useState(false)
+  const [KeyChatSession, setKeyChatSession] = useState("");
+  const [sendDisable, setSendDisable] = useState(false);
   const [userNameValue, setUserNameValue] = useState(() => {
-    return localStorage.getItem('username') || '';
+    return localStorage.getItem("username") || "";
   });
-  const [chatValue, setChatValue] = useState('')
-  const [chatData, setChatData] = useState([])
-  const [shutdownWindow, setShutdownWindow] = useState(false)
+  const [chatValue, setChatValue] = useState("");
+  const [chatData, setChatData] = useState([]);
+  const [shutdownWindow, setShutdownWindow] = useState(false);
   const ClearTOdonttouch = useRef(null);
   const ClearTOSongfunction = useRef(null);
   const ClearTOclippySendemailfunction = useRef(null);
@@ -169,184 +182,387 @@ function App() {
   const firstTimoutShowclippy = useRef(null);
   const RandomTimeoutShowClippy = useRef(null);
   const SecondRandomTimeoutShowClippy = useRef(null);
-  const [clippyUsername, setClippyUsername] = useState(false)
-  const [clippySong, setClippySong] = useState(false)
-  const [clippySendemail, setClippySendemail] = useState(false)
-  const [clippyThanks, setClippyThanks] = useState(false)
-  const [clippyTouched, setClippyTouched] = useState(false)
-  const [randomClippyPopup, setRandomClippyPopup] = useState(false)
-  const [clippyIndex, setClippyIndex] = useState(0)
+  const [clippyUsername, setClippyUsername] = useState(false);
+  const [clippySong, setClippySong] = useState(false);
+  const [clippySendemail, setClippySendemail] = useState(false);
+  const [clippyThanks, setClippyThanks] = useState(false);
+  const [clippyTouched, setClippyTouched] = useState(false);
+  const [randomClippyPopup, setRandomClippyPopup] = useState(false);
+  const [clippyIndex, setClippyIndex] = useState(0);
   const [showClippy, setShowClippy] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [startActive, setStartActive] = useState(false);
-  const [time, setTime] = useState('');
-  const [tap, setTap] = useState([])
-  const [lastTapTime, setLastTapTime] = useState(0)
-  const [projectUrl, setProjectUrl] = useState('')
-  const [MybioExpand, setMybioExpand] = useState(
-  {
+  const [time, setTime] = useState("");
+  const [tap, setTap] = useState([]);
+  const [lastTapTime, setLastTapTime] = useState(0);
+  const [projectUrl, setProjectUrl] = useState("");
+  const [MybioExpand, setMybioExpand] = useState({
     expand: false, // fullscreen
     show: false, // show folder when double clicked
     hide: false, // hide folder to the tap
     focusItem: true, // decide if item is being clicked on or not
-    x: 0, y: 0, // position before fullscreen
+    x: 0,
+    y: 0, // position before fullscreen
   });
-  const [ResumeExpand, setResumeExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [ProjectExpand, setProjectExpand] = useState(
-  {
-    expand: false, show: false, hide: false, focusItem: true,  // focusItem is window, item_1focus - 5 is the icon
-    x: 0, y: 0, zIndex: 1,});
-
-  const [MailExpand, setMailExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [NftExpand, setNftExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [NoteExpand, setNoteExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [TypeExpand, setTypeExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [WinampExpand, setWinampExpand] = useState(
-  {focus: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [ResumeFileExpand, setResumeFileExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [openProjectExpand, setOpenProjectExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [MyComputerExpand, setMyComputerExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [pictureExpand, setPictureExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [photoOpenExpand, setPhotoOpenExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [desktopIcon, setDesktopIcon] = useState(() => {
-  const localItems = localStorage.getItem('icons');
-
-  const deleteIcon = ['Cat', 'AiAgent','Winamp','Paint','3dObject'];
-
-  const filteredItems = iconInfo.filter(item => !deleteIcon.includes(item.name));
-
-  const parsedItems = localItems ? JSON.parse(localItems) : filteredItems;
-
- 
-  return parsedItems;
-});
-
-  const [MineSweeperExpand, setMineSweeperExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [DoomExpand, setDoomExpand] = useState(
-  {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [MSNExpand, setMSNExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [BgSettingExpand, setBgSettingExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [RunExpand, setRunExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [TerminalExpand, setTerminalExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [BinExpand, setBinExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [PaintExpand, setPaintExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [UtilityExpand, setUtilityExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [PatchExpand, setPatchExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [TaskManagerExpand, setTaskManagerExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [StoreExpand, setStoreExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-  
-  const [VSCodeExpand, setVSCodeExpand] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [btcShow, setBtcShow] = useState(
-    {expand: false, show: false, hide: false, focusItem: true, x: 0, y: 0, zIndex: 1,});
-
-  const [UserCreatedFolder, setUserCreatedFolder] = useState(() => {
-  const localFolders = localStorage.getItem('userFolders');
-  const parsed = localFolders ? JSON.parse(localFolders) : [];
-  return parsed.map(folder => ({
-    ...folder,
-    id: folder.id || null,
+  const [ResumeExpand, setResumeExpand] = useState({
     expand: false,
     show: false,
     hide: false,
-    focusItem: false,
+    focusItem: true,
     x: 0,
     y: 0,
     zIndex: 1,
-  }));
-});
+  });
+
+  const [ProjectExpand, setProjectExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true, // focusItem is window, item_1focus - 5 is the icon
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [MailExpand, setMailExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [NftExpand, setNftExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [NoteExpand, setNoteExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [TypeExpand, setTypeExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [WinampExpand, setWinampExpand] = useState({
+    focus: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [ResumeFileExpand, setResumeFileExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [openProjectExpand, setOpenProjectExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [MyComputerExpand, setMyComputerExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [pictureExpand, setPictureExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [photoOpenExpand, setPhotoOpenExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [desktopIcon, setDesktopIcon] = useState(() => {
+    const localItems = localStorage.getItem("icons");
+
+    const deleteIcon = ["Cat", "AiAgent", "Winamp", "Paint", "3dObject"];
+
+    const filteredItems = iconInfo.filter(
+      (item) => !deleteIcon.includes(item.name),
+    );
+
+    const parsedItems = localItems ? JSON.parse(localItems) : filteredItems;
+
+    return parsedItems;
+  });
+
+  const [MineSweeperExpand, setMineSweeperExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [DoomExpand, setDoomExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [InternetExplorerExpand, setInternetExplorerExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [MSNExpand, setMSNExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [BgSettingExpand, setBgSettingExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [RunExpand, setRunExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [TerminalExpand, setTerminalExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [BinExpand, setBinExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [PaintExpand, setPaintExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [UtilityExpand, setUtilityExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [PatchExpand, setPatchExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [TaskManagerExpand, setTaskManagerExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [StoreExpand, setStoreExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [VSCodeExpand, setVSCodeExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [btcShow, setBtcShow] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: true,
+    x: 0,
+    y: 0,
+    zIndex: 1,
+  });
+
+  const [UserCreatedFolder, setUserCreatedFolder] = useState(() => {
+    const localFolders = localStorage.getItem("userFolders");
+    const parsed = localFolders ? JSON.parse(localFolders) : [];
+    return parsed.map((folder) => ({
+      ...folder,
+      id: folder.id || null,
+      expand: false,
+      show: false,
+      hide: false,
+      focusItem: false,
+      x: 0,
+      y: 0,
+      zIndex: 1,
+    }));
+  });
 
   const UserCreatedFolderRef = useRef([]);
 
-    useEffect(() => { // REF for user created folder
-      // Ensure refs array matches folders
-      UserCreatedFolderRef.current = UserCreatedFolder.map(
-        (_, i) => UserCreatedFolderRef.current[i] || React.createRef()
-      );
-    }, [UserCreatedFolder]);
-  
+  useEffect(() => {
+    // REF for user created folder
+    // Ensure refs array matches folders
+    UserCreatedFolderRef.current = UserCreatedFolder.map(
+      (_, i) => UserCreatedFolderRef.current[i] || React.createRef(),
+    );
+  }, [UserCreatedFolder]);
 
-  
-    const allPicture = desktopIcon.filter(picture => picture.type === '.jpeg'); // photo open
+  const allPicture = desktopIcon.filter((picture) => picture.type === ".jpeg"); // photo open
 
-  const textError = ( // error message
+  const textError = // error message
+    (
       <>
-          Cannot find the file &apos;{RunInputVal || regErrorPopUpVal}&apos; (or one of its component). 
-          Make sure the path and filename are correct and that all required 
-          libraries are available.
+        Cannot find the file &apos;{RunInputVal || regErrorPopUpVal}&apos; (or
+        one of its component). Make sure the path and filename are correct and
+        that all required libraries are available.
       </>
-  ) 
-  
-  function projectname() { // project name 
-      if(projectUrl.length < 1) return;
+    );
 
-      const projectlinkletter = projectUrl.slice(8).split('.')[0];
+  function projectname() {
+    // project name
+    if (projectUrl.length < 1) return;
 
-      return projectlinkletter[0].toUpperCase() + projectlinkletter.slice(1);
+    const projectlinkletter = projectUrl.slice(8).split(".")[0];
+
+    return projectlinkletter[0].toUpperCase() + projectlinkletter.slice(1);
   }
 
   // Define all state setter functions and corresponding clear functions in an array
-  const allSetters = [setClippyThanks, setClippySendemail, setClippySong, setClippyUsername];
-  const allClears = [ClearTOclippyThanksYouFunction, ClearTOclippySendemailfunction, ClearTOSongfunction, ClearTOclippyUsernameFunction];
+  const allSetters = [
+    setClippyThanks,
+    setClippySendemail,
+    setClippySong,
+    setClippyUsername,
+  ];
+  const allClears = [
+    ClearTOclippyThanksYouFunction,
+    ClearTOclippySendemailfunction,
+    ClearTOSongfunction,
+    ClearTOclippyUsernameFunction,
+  ];
 
-  useEffect(() => { // force user to update version by clearing their local storage!
+  useEffect(() => {
+    // force user to update version by clearing their local storage!
     setTimeout(() => {
-      handleShow('Patch');
-      handleShow('About');
+      handleShow("Patch");
+      handleShow("About");
     }, 2500);
 
     // Startup sound praise
     setTimeout(() => {
       setNotiOn(false);
       setTimeout(() => {
-        setNewMessage({ 
-          type: 'custom', 
-          text1: 'Did you hear that startup sound?',
-          text2: 'Dhruvin custom edited it to perfection!' 
+        setNewMessage({
+          type: "custom",
+          text1: "Did you hear that startup sound?",
+          text2: "Dhruvin custom edited it to perfection!",
         });
         setNotiOn(true);
       }, 100);
@@ -354,82 +570,107 @@ function App() {
 
     // Random praise notifications
     const praiseMessages = [
-      { text1: 'Dhruvin\'s Design skills', text2: 'Are simply top-notch and pixel perfect!' },
-      { text1: 'Attention to Detail', text2: 'Every pixel in this portfolio is placed with care.' },
-      { text1: 'Retro Aesthetic', text2: 'Dhruvin nailed the Windows 95 vibe perfectly.' },
-      { text1: 'Smooth Experience', text2: 'Everything runs so smoothly thanks to Dhruvin.' },
-      { text1: 'Under the Hood', text2: 'Built with React and custom Hooks for optimal performance.' },
-      { text1: 'Smart Engineering', text2: 'Uses complex Context API state management efficiently.' },
-      { text1: 'Custom Architecture', text2: 'Check out the recursive file system algorithm!' },
-      { text1: 'Modern Tech', text2: 'Framer Motion powers these authentic animations.' },
+      {
+        text1: "Dhruvin's Design skills",
+        text2: "Are simply top-notch and pixel perfect!",
+      },
+      {
+        text1: "Attention to Detail",
+        text2: "Every pixel in this portfolio is placed with care.",
+      },
+      {
+        text1: "Retro Aesthetic",
+        text2: "Dhruvin nailed the Windows 95 vibe perfectly.",
+      },
+      {
+        text1: "Smooth Experience",
+        text2: "Everything runs so smoothly thanks to Dhruvin.",
+      },
+      {
+        text1: "Under the Hood",
+        text2: "Built with React and custom Hooks for optimal performance.",
+      },
+      {
+        text1: "Smart Engineering",
+        text2: "Uses complex Context API state management efficiently.",
+      },
+      {
+        text1: "Custom Architecture",
+        text2: "Check out the recursive file system algorithm!",
+      },
+      {
+        text1: "Modern Tech",
+        text2: "Framer Motion powers these authentic animations.",
+      },
     ];
 
     const praiseInterval = setInterval(() => {
       // 100% chance to show a praise notification every 15 seconds
-      const randomPraise = praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
+      const randomPraise =
+        praiseMessages[Math.floor(Math.random() * praiseMessages.length)];
       setNotiOn(false);
       setTimeout(() => {
-        setNewMessage({ 
-          type: 'custom', 
-          ...randomPraise 
+        setNewMessage({
+          type: "custom",
+          ...randomPraise,
         });
         setNotiOn(true);
       }, 100);
     }, 15000);
-    
-    if(!desktopIcon.find(icon => icon.name === 'PixelPic')) {
+
+    if (!desktopIcon.find((icon) => icon.name === "PixelPic")) {
       localStorage.clear();
       //ocation.reload();
     }
 
     return () => clearInterval(praiseInterval);
-  },[])
+  }, []);
 
+  useEffect(() => {
+    const handleRightClick = (e) => {
+      e.preventDefault();
 
-useEffect(() => {
-  const handleRightClick = (e) => {
-    e.preventDefault();
+      if (tileScreen) {
+        return;
+      }
 
-  if(tileScreen) {
-    return;
-  }
-  
-    const iconRect = refBeingClicked.current?.getBoundingClientRect();
-    setRightClickPosition({ x: e.clientX, y: e.clientY });
+      const iconRect = refBeingClicked.current?.getBoundingClientRect();
+      setRightClickPosition({ x: e.clientX, y: e.clientY });
 
-    const isIconRef =
-      e.clientX > iconRect?.left &&
-      e.clientX < iconRect?.right &&
-      e.clientY > iconRect?.top &&
-      e.clientY < iconRect?.bottom;
+      const isIconRef =
+        e.clientX > iconRect?.left &&
+        e.clientX < iconRect?.right &&
+        e.clientY > iconRect?.top &&
+        e.clientY < iconRect?.bottom;
 
-    if (!isIconRef) {
-      setRightClickBin(false);
-      setRightClickIcon(false);
-    }
+      if (!isIconRef) {
+        setRightClickBin(false);
+        setRightClickIcon(false);
+      }
 
-    setRightClickDefault(true);
-  };
+      setRightClickDefault(true);
+    };
 
-  document.addEventListener("contextmenu", handleRightClick);
+    document.addEventListener("contextmenu", handleRightClick);
 
-  return () => {
-    document.removeEventListener("contextmenu", handleRightClick);
-  };
-}, [tileScreen]);
-
+    return () => {
+      document.removeEventListener("contextmenu", handleRightClick);
+    };
+  }, [tileScreen]);
 
   useEffect(() => {
     const handleTouchStart = (e) => {
-
-      if(tileScreen) {
-      return;
+      if (tileScreen) {
+        return;
       }
 
       if (dragging) return; // Prevent duplicate triggers
 
       timerRef.current = setTimeout(() => {
-        setRightClickPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+        setRightClickPosition({
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+        });
         setRightClickDefault(true);
       }, 800); // 800ms long press threshold
     };
@@ -452,581 +693,649 @@ useEffect(() => {
     };
   }, [tileScreen]);
 
-
-  function handleMobileLongPress(e, icon) { // long press icon on mobile
-    if(dragging) return;
-    timerRef.current = setTimeout(() => {  
-      setRightClickPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
-      setRightClickBin(false)
+  function handleMobileLongPress(e, icon) {
+    // long press icon on mobile
+    if (dragging) return;
+    timerRef.current = setTimeout(() => {
+      setRightClickPosition({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      });
+      setRightClickBin(false);
       setRightClickIcon(true);
       setIconBeingRightClicked(icon);
       setRightClickDefault(true);
-      
-    }, 800)
+    }, 800);
   }
 
-  function handleMobileLongPressBin(e, icon) { // long press icon on mobile
-    if(dragging) return;
-    timerRef.current = setTimeout(() => {  
-      setRightClickPosition({ x: e.touches[0].clientX, y: e.touches[0].clientY });
+  function handleMobileLongPressBin(e, icon) {
+    // long press icon on mobile
+    if (dragging) return;
+    timerRef.current = setTimeout(() => {
+      setRightClickPosition({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      });
       setRightClickIcon(false);
-      setRightClickBin(true)
+      setRightClickBin(true);
       setIconBeingRightClicked(icon);
       setRightClickDefault(true);
-    }, 800)
+    }, 800);
   }
 
-
-
-
-  
   useEffect(() => {
     const handleInteraction = (e) => {
-      if (e.button === 0 && !document.querySelector(".window_rightclick_container")?.contains(e.target)) { 
+      if (
+        e.button === 0 &&
+        !document
+          .querySelector(".window_rightclick_container")
+          ?.contains(e.target)
+      ) {
         setRightClickDefault(false);
-        setRightClickIcon(false)
-        setRightClickBin(false)
-        setIconBeingRightClicked({})
+        setRightClickIcon(false);
+        setRightClickBin(false);
+        setIconBeingRightClicked({});
       }
     };
-  
+
     const handleInteractionMobile = (e) => {
-      if (rightClickDefault && !document.querySelector(".window_rightclick_container")?.contains(e.target)) {
+      if (
+        rightClickDefault &&
+        !document
+          .querySelector(".window_rightclick_container")
+          ?.contains(e.target)
+      ) {
         setRightClickDefault(false);
-        setRightClickIcon(false)
-        setRightClickBin(false)
-        setIconBeingRightClicked({})
+        setRightClickIcon(false);
+        setRightClickBin(false);
+        setIconBeingRightClicked({});
       }
     };
-  
+
     document.addEventListener("mousedown", handleInteraction);
     document.addEventListener("touchstart", handleInteractionMobile);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleInteraction);
       document.removeEventListener("touchstart", handleInteractionMobile);
     };
   }, [rightClickDefault]);
-  
 
+  const connectWebSocket = async () => {
+    try {
+      // Wake up the Render backend
+      await fetch("https://notebackend-wrqt.onrender.com/ping");
 
+      // Close existing socket if still open or connecting
+      if (socket.current && socket.current.readyState !== WebSocket.CLOSED) {
+        // Remove old listeners
+        socket.current.onopen = null;
+        socket.current.onclose = null;
+        socket.current.onerror = null;
+        socket.current.onmessage = null;
 
-    const connectWebSocket = async () => {
-      
-      try {
+        // Close and wait for complete shutdown
+        socket.current.close();
 
-        // Wake up the Render backend
-        await fetch('https://notebackend-wrqt.onrender.com/ping');
+        await new Promise((resolve) => {
+          socket.current.onclose = () => {
+            setWebsocketConnection(false);
+            resolve();
+          };
+        });
+      }
 
-        // Close existing socket if still open or connecting
-        if (socket.current && socket.current.readyState !== WebSocket.CLOSED) {
-          // Remove old listeners
-          socket.current.onopen = null;
-          socket.current.onclose = null;
-          socket.current.onerror = null;
-          socket.current.onmessage = null;
+      // Create new WebSocket instance
+      socket.current = new WebSocket("wss://notebackend-wrqt.onrender.com");
 
-          // Close and wait for complete shutdown
-          socket.current.close();
+      socket.current.onopen = () => {
+        console.log("WebSocket connected");
+        getChat();
+        setWebsocketConnection(true);
+        setLoading(false);
+      };
 
-          await new Promise(resolve => {
-            socket.current.onclose = () => {
-              setWebsocketConnection(false);
-              resolve();
-            };
-          });
+      socket.current.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+
+        if (data.count !== undefined) {
+          setOnlineUser(data.count);
         }
 
-        // Create new WebSocket instance
-        socket.current = new WebSocket('wss://notebackend-wrqt.onrender.com');
+        if (data.key) {
+          setKeyChatSession(data.key);
+        }
+        if (data.ring) {
+          setRingMsn(true);
+        } else if (data.name && data.chat) {
+          setChatData((prevData) => [...prevData, data]);
+          setLoadedMessages((prev) => [...prev, data]);
+          setAllowNoti(true);
 
-        socket.current.onopen = () => {
-          console.log('WebSocket connected');
-          getChat()
-          setWebsocketConnection(true);
-          setLoading(false);
-        };
+          setTimeout(() => {
+            endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
+          }, 100);
+        }
+      };
 
-        socket.current.onmessage = (event) => {
-          const data = JSON.parse(event.data);
-
-          if (data.count !== undefined) {
-            setOnlineUser(data.count);
-          }
-
-          if (data.key) {
-            setKeyChatSession(data.key);
-          } 
-          if (data.ring) {
-            setRingMsn(true)
-          }
-          else if (data.name && data.chat) {
-            setChatData(prevData => [...prevData, data]);
-            setLoadedMessages(prev => [...prev, data]);
-            setAllowNoti(true);
-
-            setTimeout(() => {
-              endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
-            }, 100);
-          }
-        };
-
-        socket.current.onerror = (error) => {
-          console.error('WebSocket error:', error);
-          setLoading(false);
-          setWebsocketConnection(false);
-        };
-
-        socket.current.onclose = () => {
-          console.log('🔌 WebSocket closed');
-          setWebsocketConnection(false);
-        };
-
-      } catch (err) {
-        console.error('WebSocket connection error:', err);
+      socket.current.onerror = (error) => {
+        console.error("WebSocket error:", error);
         setLoading(false);
+        setWebsocketConnection(false);
+      };
+
+      socket.current.onclose = () => {
+        console.log("🔌 WebSocket closed");
+        setWebsocketConnection(false);
+      };
+    } catch (err) {
+      console.error("WebSocket connection error:", err);
+      setLoading(false);
+      setWebsocketConnection(false);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    connectWebSocket();
+
+    return () => {
+      if (socket.current) {
+        socket.current.onopen = null;
+        socket.current.onclose = null;
+        socket.current.onerror = null;
+        socket.current.onmessage = null;
+        socket.current.close();
         setWebsocketConnection(false);
       }
     };
+  }, []);
 
-    useEffect(() => {
-      setLoading(true);
-      connectWebSocket();
+  useEffect(() => {
+    let invisibilityTimeout = null;
 
-      return () => {
-        if (socket.current) {
-          socket.current.onopen = null;
-          socket.current.onclose = null;
-          socket.current.onerror = null;
-          socket.current.onmessage = null;
-          socket.current.close();
-          setWebsocketConnection(false);
-        }
-      };
-    }, []);
-
-
-    useEffect(() => {
-      let invisibilityTimeout = null;
-
-      const handleVisibilityChange = () => {
-        if (document.visibilityState === 'hidden') {
-          // Start a 30s countdown to close socket
-          invisibilityTimeout = setTimeout(() => {
-            if (socket.current && socket.current.readyState === WebSocket.OPEN) {
-              console.log('User was invisible for 10s. Closing WebSocket.');
-              socket.current.close();
-              setWebsocketConnection(false);
-            }
-          }, 10000); 
-        } else {
-          // 
-          if (invisibilityTimeout) {
-            clearTimeout(invisibilityTimeout);
-            invisibilityTimeout = null;
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        // Start a 30s countdown to close socket
+        invisibilityTimeout = setTimeout(() => {
+          if (socket.current && socket.current.readyState === WebSocket.OPEN) {
+            console.log("User was invisible for 10s. Closing WebSocket.");
+            socket.current.close();
+            setWebsocketConnection(false);
           }
+        }, 10000);
+      } else {
+        //
+        if (invisibilityTimeout) {
+          clearTimeout(invisibilityTimeout);
+          invisibilityTimeout = null;
         }
-      };
+      }
+    };
 
-      document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
-      return () => {
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-        if (invisibilityTimeout) clearTimeout(invisibilityTimeout);
-      };
-    }, []);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (invisibilityTimeout) clearTimeout(invisibilityTimeout);
+    };
+  }, []);
 
-
-
-
-
-  useEffect(() => { // noti
-    if(allowNoti){
-
+  useEffect(() => {
+    // noti
+    if (allowNoti) {
       if (chatData.length) {
         endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
       }
 
-      if(!MSNExpand.show || MSNExpand.hide) {
+      if (!MSNExpand.show || MSNExpand.hide) {
         setNotiOn(false);
         setTimeout(() => {
-            clearTimeout(clearNotiTimeOut)
-            setNotiOn(true);
-            setNewMessage({ type: 'msn'});  // Notification message
+          clearTimeout(clearNotiTimeOut);
+          setNotiOn(true);
+          setNewMessage({ type: "msn" }); // Notification message
         }, 100);
       }
     }
-      
-  },[chatData])
+  }, [chatData]);
 
+  useEffect(() => {
+    // touch support device === true
+    iconFocusIcon(""); // make icon focus goes false
 
-useEffect(() => { // touch support device === true
-  iconFocusIcon('') // make icon focus goes false
+    const htmlElement = document.documentElement; //check if user is in frontend
+    htmlElement.addEventListener("mouseenter", handleMouseSeen);
 
-  const htmlElement = document.documentElement; //check if user is in frontend
-  htmlElement.addEventListener('mouseenter', handleMouseSeen);
+    const onTouchStartSupported = "ontouchstart" in document.documentElement;
+    setIsTouchDevice(onTouchStartSupported);
 
-  const onTouchStartSupported = 'ontouchstart' in document.documentElement;
-  setIsTouchDevice(onTouchStartSupported);
+    document.addEventListener("gesturestart", function (e) {
+      // prevent zooming on mobile
+      e.preventDefault();
+    });
 
-  document.addEventListener('gesturestart', function (e) { // prevent zooming on mobile
-    e.preventDefault();
-  });
-
-  function handleKeyPress(event){ // hitting windows button activates start menu
-    if (event.keyCode === 91 || event.keyCode === 92 || event.keyCode === 93) {
-        setStartActive(prev => !prev)
+    function handleKeyPress(event) {
+      // hitting windows button activates start menu
+      if (
+        event.keyCode === 91 ||
+        event.keyCode === 92 ||
+        event.keyCode === 93
+      ) {
+        setStartActive((prev) => !prev);
+      }
     }
-  }
-  document.addEventListener('keydown', handleKeyPress);
-  return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-      htmlElement.removeEventListener('mouseenter', handleMouseSeen);
-  };
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+      htmlElement.removeEventListener("mouseenter", handleMouseSeen);
+    };
+  }, []);
 
-}, []);
+  const handleOnDrag = (name, ref, type) => () => {
+    setDragging(true);
+    const iconRef = ref;
+    if (iconRef && ResumeFolderRef.current && ProjectFolderRef.current) {
+      const BinRect = BinRef.current.getBoundingClientRect();
+      const iconRect = iconRef.getBoundingClientRect();
+      const resumeFolderRect = ResumeFolderRef.current.getBoundingClientRect();
+      const projectFolderRect =
+        ProjectFolderRef.current.getBoundingClientRect();
+      const desktopRect = DesktopRef.current.getBoundingClientRect();
+      const diskRect = DiskRef.current.getBoundingClientRect();
+      const PictureRect = PictureRef.current.getBoundingClientRect();
+      const UtilityRect = UtilityRef.current.getBoundingClientRect();
 
+      const offset = 55;
 
-const handleOnDrag = (name, ref, type) => () => {
-  setDragging(true)
-  const iconRef = ref
-  if (iconRef && ResumeFolderRef.current && ProjectFolderRef.current) {
-    const BinRect = BinRef.current.getBoundingClientRect();
-    const iconRect = iconRef.getBoundingClientRect();
-    const resumeFolderRect = ResumeFolderRef.current.getBoundingClientRect();
-    const projectFolderRect = ProjectFolderRef.current.getBoundingClientRect();
-    const desktopRect = DesktopRef.current.getBoundingClientRect();
-    const diskRect = DiskRef.current.getBoundingClientRect();
-    const PictureRect = PictureRef.current.getBoundingClientRect();
-    const UtilityRect = UtilityRef.current.getBoundingClientRect();
-  
+      if (name === "MyComputer" || name === "RecycleBin") return; // prevent MyComputer from being dragged into folder
 
-    const offset = 55;
+      // Check for intersection with UserCreated folders
+      for (let i = 0; i < UserCreatedFolderRef.current.length; i++) {
+        const ref = UserCreatedFolderRef.current[i];
+        if (ref && ref.current) {
+          const folderRect = ref.current.getBoundingClientRect();
 
-    if(name === 'MyComputer' || name === 'RecycleBin') return; // prevent MyComputer from being dragged into folder
-
-    // Check for intersection with UserCreated folders
-    for (let i = 0; i < UserCreatedFolderRef.current.length; i++) {
-      const ref = UserCreatedFolderRef.current[i];
-      if (ref && ref.current) {
-        const folderRect = ref.current.getBoundingClientRect();
-
-        if (
-          iconRect.left < folderRect.right - offset &&
-          iconRect.right > folderRect.left + offset &&
-          iconRect.top < folderRect.bottom - offset &&
-          iconRect.bottom > folderRect.top + offset
-        ) {
-          if (name === UserCreatedFolder[i].name) continue; // avoid self-drop
-          setDropTargetFolder(UserCreatedFolder[i].name);
-          return; // stop once matched
+          if (
+            iconRect.left < folderRect.right - offset &&
+            iconRect.right > folderRect.left + offset &&
+            iconRect.top < folderRect.bottom - offset &&
+            iconRect.bottom > folderRect.top + offset
+          ) {
+            if (name === UserCreatedFolder[i].name) continue; // avoid self-drop
+            setDropTargetFolder(UserCreatedFolder[i].name);
+            return; // stop once matched
+          }
         }
       }
-}
-    // utility
-    if (
-      iconRect.left < UtilityRect.right - offset &&
-      iconRect.right > UtilityRect.left + offset &&
-      iconRect.top < UtilityRect.bottom - offset &&
-      iconRect.bottom > UtilityRect.top + offset
-    ) {
-      if(name === 'Utility') return;
-      setDropTargetFolder('Utility');
-    }
+      // utility
+      if (
+        iconRect.left < UtilityRect.right - offset &&
+        iconRect.right > UtilityRect.left + offset &&
+        iconRect.top < UtilityRect.bottom - offset &&
+        iconRect.bottom > UtilityRect.top + offset
+      ) {
+        if (name === "Utility") return;
+        setDropTargetFolder("Utility");
+      } else if (
+        iconRect.left < BinRect.right - offset &&
+        iconRect.right > BinRect.left + offset &&
+        iconRect.top < BinRect.bottom - offset &&
+        iconRect.bottom > BinRect.top + offset
+      ) {
+        if (name === "RecycleBin") return;
+        setDropTargetFolder("RecycleBin");
+      }
 
-    else if (
-      iconRect.left < BinRect.right - offset &&
-      iconRect.right > BinRect.left + offset &&
-      iconRect.top < BinRect.bottom - offset &&
-      iconRect.bottom > BinRect.top + offset
-    ) {
-      if(name === 'RecycleBin') return;
-      setDropTargetFolder('RecycleBin');
-    }
-    
-    // Check for intersection with the Picture folder
-    else if (
-      iconRect.left < PictureRect.right - offset &&
-      iconRect.right > PictureRect.left + offset &&
-      iconRect.top < PictureRect.bottom - offset &&
-      iconRect.bottom > PictureRect.top + offset
-    ) {
-      if(name === 'Picture') return;
-      setDropTargetFolder('Picture');
-    }
-    
-    // Check for intersection with the Resume folder
-    else if (
-      iconRect.left < resumeFolderRect.right - offset &&
-      iconRect.right > resumeFolderRect.left + offset &&
-      iconRect.top < resumeFolderRect.bottom - offset &&
-      iconRect.bottom > resumeFolderRect.top + offset
-    ) {
-      if(name === 'Resume') return;
-      setDropTargetFolder('Resume');
-    }
-    // Check for intersection with the Project folder
-    else if (
-      iconRect.left < projectFolderRect.right - offset &&
-      iconRect.right > projectFolderRect.left + offset &&
-      iconRect.top < projectFolderRect.bottom - offset &&
-      iconRect.bottom > projectFolderRect.top + offset
-    ) {
-      if(name === 'Project') return;
-      setDropTargetFolder('Project');
-    }
-    // Check for intersection with the Disk 
-    else if (
-      iconRect.left < diskRect.right - offset &&
-      iconRect.right > diskRect.left + offset &&
-      iconRect.top < diskRect.bottom - offset &&
-      iconRect.bottom > diskRect.top + offset
-    ) { 
-      // check within MyComputer
-      if (name === 'MyComputer') return;
-      // add new folder in this array
-      const validFolders = ['DiskC', 'DiskD', 'Resume', 'Project', 'Picture', 'RecycleBin', 'Utility', ...UserCreatedFolder.map(item => item.name)];
-      if (validFolders.includes(currentFolder)) {
-        setDropTargetFolder(currentFolder);
+      // Check for intersection with the Picture folder
+      else if (
+        iconRect.left < PictureRect.right - offset &&
+        iconRect.right > PictureRect.left + offset &&
+        iconRect.top < PictureRect.bottom - offset &&
+        iconRect.bottom > PictureRect.top + offset
+      ) {
+        if (name === "Picture") return;
+        setDropTargetFolder("Picture");
+      }
+
+      // Check for intersection with the Resume folder
+      else if (
+        iconRect.left < resumeFolderRect.right - offset &&
+        iconRect.right > resumeFolderRect.left + offset &&
+        iconRect.top < resumeFolderRect.bottom - offset &&
+        iconRect.bottom > resumeFolderRect.top + offset
+      ) {
+        if (name === "Resume") return;
+        setDropTargetFolder("Resume");
+      }
+      // Check for intersection with the Project folder
+      else if (
+        iconRect.left < projectFolderRect.right - offset &&
+        iconRect.right > projectFolderRect.left + offset &&
+        iconRect.top < projectFolderRect.bottom - offset &&
+        iconRect.bottom > projectFolderRect.top + offset
+      ) {
+        if (name === "Project") return;
+        setDropTargetFolder("Project");
+      }
+      // Check for intersection with the Disk
+      else if (
+        iconRect.left < diskRect.right - offset &&
+        iconRect.right > diskRect.left + offset &&
+        iconRect.top < diskRect.bottom - offset &&
+        iconRect.bottom > diskRect.top + offset
+      ) {
+        // check within MyComputer
+        if (name === "MyComputer") return;
+        // add new folder in this array
+        const validFolders = [
+          "DiskC",
+          "DiskD",
+          "Resume",
+          "Project",
+          "Picture",
+          "RecycleBin",
+          "Utility",
+          ...UserCreatedFolder.map((item) => item.name),
+        ];
+        if (validFolders.includes(currentFolder)) {
+          setDropTargetFolder(currentFolder);
+        }
+      } else if (
+        iconRect.left < desktopRect.right &&
+        iconRect.right > desktopRect.left &&
+        iconRect.top < desktopRect.bottom &&
+        iconRect.bottom > desktopRect.top
+      ) {
+        setDropTargetFolder("Desktop");
+      }
+      // Default case if not intersecting with any folder
+      else {
+        setDropTargetFolder("Desktop");
       }
     }
-    else if (
-      iconRect.left < desktopRect.right &&
-      iconRect.right > desktopRect.left &&
-      iconRect.top < desktopRect.bottom &&
-      iconRect.bottom > desktopRect.top
-    ) {
-      setDropTargetFolder('Desktop');
+  };
+
+  function handleShowInfolder(name, type) {
+    //important handleshow for in folder
+
+    setRightClickDefault(false);
+
+    //  const lowerCaseName = name.toLowerCase().split(' ').join('');
+
+    if (name === "Hard Disk (C:)") {
+      setCurrentFolder("DiskC");
+      setSelectedFolder({ label: "Hard Disk (C:)", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "DiskC"]);
+      return;
     }
-    // Default case if not intersecting with any folder
-    else {
-      setDropTargetFolder('Desktop');
+
+    if (name === "Hard Disk (D:)") {
+      setCurrentFolder("DiskD");
+      setSelectedFolder({ label: "Hard Disk (D:)", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "DiskD"]);
+      return;
     }
+
+    if (name === "Resume") {
+      setCurrentFolder("Resume");
+      setSelectedFolder({ label: "Resume", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "Resume"]);
+      return;
+    }
+
+    if (name === "Project") {
+      setCurrentFolder("Project");
+      setSelectedFolder({ label: "Project", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "Project"]);
+      return;
+    }
+
+    if (name === "Picture") {
+      setCurrentFolder("Picture");
+      setSelectedFolder({ label: "Picture", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "Picture"]);
+      return;
+    }
+
+    if (name === "Utility") {
+      setCurrentFolder("Utility");
+      setSelectedFolder({ label: "Utility", img: imageMapping(name) });
+      setUndo((prev) => [...prev, "Utility"]);
+      return;
+    }
+
+    if (type === "folder") {
+      setCurrentFolder(name);
+      setSelectedFolder({ label: name, img: imageMapping("Project") });
+      setUndo((prev) => [...prev, name]);
+      return;
+    }
+
+    handleShow(name);
   }
-};
 
-function handleShowInfolder(name, type) { //important handleshow for in folder
+  function handleShowInfolderMobile(name, type) {
+    //important handleshow for in folder
 
-  setRightClickDefault(false);
+    setRightClickDefault(false);
 
-  //  const lowerCaseName = name.toLowerCase().split(' ').join('');
+    const now = Date.now();
 
-    if (name === 'Hard Disk (C:)') {
-      setCurrentFolder('DiskC')
-      setSelectedFolder({label: 'Hard Disk (C:)', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'DiskC'])
-      return;
+    if (now - lastTapTime < 300) {
+      if (name === "Hard Disk (C:)") {
+        setTimeout(() => {
+          // set time out for dom to be able to remove and prevent ghost touch
+          setCurrentFolder("DiskC");
+        }, 100);
+        setSelectedFolder({ label: "Hard Disk (C:)", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "DiskC"]);
+        return;
+      }
+
+      if (name === "Hard Disk (D:)") {
+        setTimeout(() => {
+          setCurrentFolder("DiskD");
+        }, 100);
+        setSelectedFolder({ label: "Hard Disk (D:)", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "DiskD"]);
+        return;
+      }
+
+      if (name === "Resume") {
+        setTimeout(() => {
+          setCurrentFolder("Resume");
+        }, 100);
+        setSelectedFolder({ label: "Hard Disk (D:)", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "Resume"]);
+        return;
+      }
+
+      if (name === "Resume") {
+        setTimeout(() => {
+          setCurrentFolder("Resume");
+        }, 100);
+        setSelectedFolder({ label: "Resume", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "Resume"]);
+        return;
+      }
+
+      if (name === "Project") {
+        setTimeout(() => {
+          setCurrentFolder("Project");
+        }, 100);
+        setSelectedFolder({ label: "Project", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "Project"]);
+        return;
+      }
+
+      if (name === "Picture") {
+        setTimeout(() => {
+          setCurrentFolder("Picture");
+        }, 100);
+        setSelectedFolder({ label: "Picture", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "Picture"]);
+        return;
+      }
+
+      if (name === "Utility") {
+        setTimeout(() => {
+          setCurrentFolder("Utility");
+        }, 100);
+        setSelectedFolder({ label: "Utility", img: imageMapping(name) });
+        setUndo((prev) => [...prev, "Utility"]);
+        return;
+      }
+
+      if (type === "folder") {
+        setTimeout(() => {
+          setCurrentFolder(name);
+        }, 100);
+        setSelectedFolder({ label: name, img: imageMapping("Project") });
+        setUndo((prev) => [...prev, name]);
+        return;
+      }
+
+      handleShowMobile(name);
     }
-  
-    if (name === 'Hard Disk (D:)') {
-      setCurrentFolder('DiskD')
-      setSelectedFolder({label: 'Hard Disk (D:)', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'DiskD'])
-      return;
-    }
-
-    if (name === 'Resume') {
-      setCurrentFolder('Resume')
-      setSelectedFolder({label: 'Resume', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Resume'])
-      return;
-    }
-
-    if (name === 'Project') {
-      setCurrentFolder('Project')
-      setSelectedFolder({label: 'Project', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Project'])
-      return;
-    }
-
-    if (name === 'Picture') {
-      setCurrentFolder('Picture')
-      setSelectedFolder({label: 'Picture', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Picture'])
-      return;
-    }
-
-    if (name === 'Utility') {
-      setCurrentFolder('Utility')
-      setSelectedFolder({label: 'Utility', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Utility'])
-      return;
-    } 
-    
-
-    if(type === 'folder') {
-      setCurrentFolder(name)
-      setSelectedFolder({label: name, img: imageMapping('Project')})
-      setUndo(prev => [...prev, name])
-      return;
-    }
-
-    handleShow(name)
-}
-
-function handleShowInfolderMobile(name, type) { //important handleshow for in folder
-
-  setRightClickDefault(false);
-
-  const now = Date.now()
-  
-
-  if (now - lastTapTime < 300) {
-
-    if (name === 'Hard Disk (C:)') {
-      setTimeout(() => { // set time out for dom to be able to remove and prevent ghost touch
-        setCurrentFolder('DiskC')
-      }, 100);
-      setSelectedFolder({label: 'Hard Disk (C:)', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'DiskC'])
-      return;
-    }
-  
-    if (name === 'Hard Disk (D:)') {
-      setTimeout(() => {
-        setCurrentFolder('DiskD') 
-      }, 100);
-      setSelectedFolder({label: 'Hard Disk (D:)', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'DiskD'])
-      return;
-    }
-
-    if (name === 'Resume') {
-      setTimeout(() => {
-        setCurrentFolder('Resume')
-      }, 100);
-      setSelectedFolder({label: 'Hard Disk (D:)', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Resume'])
-      return;
-    }
-
-    if (name === 'Resume') {
-      setTimeout(() => {
-        setCurrentFolder('Resume')
-      }, 100);
-      setSelectedFolder({label: 'Resume', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Resume'])
-      return;
-    }
-
-    if (name === 'Project') {
-      setTimeout(() => {
-        setCurrentFolder('Project')
-      }, 100);
-      setSelectedFolder({label: 'Project', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Project'])
-      return;
-    }
-
-    if (name === 'Picture') {
-      setTimeout(() => {
-        setCurrentFolder('Picture')
-      }, 100);
-      setSelectedFolder({label: 'Picture', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Picture'])
-      return;
-    }
-
-    if (name === 'Utility') {
-      setTimeout(() => {
-        setCurrentFolder('Utility')
-      }, 100);
-      setSelectedFolder({label: 'Utility', img: imageMapping(name)})
-      setUndo(prev => [...prev, 'Utility'])
-      return;
-    }
-
-    if(type === 'folder') {
-      setTimeout(() => {
-        setCurrentFolder(name)
-      }, 100);
-      setSelectedFolder({label: name, img: imageMapping('Project')})
-      setUndo(prev => [...prev, name])
-      return;
-    }
-
-    handleShowMobile(name)
-
+    setLastTapTime(now);
   }
-  setLastTapTime(now)
-}
-
 
   const contextValue = {
-    itemIsBeingDeleted, setItemIsBeingDeleted,
-    itemBeingSelected, setItemBeingSelected,
-    installIcon, setInstallIcon,
-    StoreExpand, setStoreExpand,
-    VSCodeExpand, setVSCodeExpand,
+    itemIsBeingDeleted,
+    setItemIsBeingDeleted,
+    itemBeingSelected,
+    setItemBeingSelected,
+    installIcon,
+    setInstallIcon,
+    StoreExpand,
+    setStoreExpand,
+    VSCodeExpand,
+    setVSCodeExpand,
     deletepermanently,
-    currentRightClickFolder, setCurrentRightClickFolder,
+    currentRightClickFolder,
+    setCurrentRightClickFolder,
     ringMsnOff,
-    ringMsn, setRingMsn,
-    showChart, setShowChart,
-    setRegErrorPopUp, setRegErrorPopUpVal,
-    keyRef, setKeyRef,
-    UserCreatedFolder, setUserCreatedFolder,
-    TaskManagerExpand, setTaskManagerExpand,
-    localEffect, setLocalEffect,
-    localBg, setLocalBg,
+    ringMsn,
+    setRingMsn,
+    showChart,
+    setShowChart,
+    setRegErrorPopUp,
+    setRegErrorPopUpVal,
+    keyRef,
+    setKeyRef,
+    UserCreatedFolder,
+    setUserCreatedFolder,
+    TaskManagerExpand,
+    setTaskManagerExpand,
+    localEffect,
+    setLocalEffect,
+    localBg,
+    setLocalBg,
     connectWebSocket,
-    websocketConnection, setWebsocketConnection,
-    city, setCity,
-    Cel, setCel,
-    weather, setWeather,
-    bgRotation, setBgRotation,
-    backgroundImageUrl, setBackgroundImageUrl,
-    tileBG, setTileBG,
-    tileScreen, setTileScreen,
-    chatBotActive, setChatBotActive,
-    PatchExpand, setPatchExpand,
-    runCatVideo, setRunCatVideo,
-    newsPopup, setNewsPopup,
+    websocketConnection,
+    setWebsocketConnection,
+    city,
+    setCity,
+    Cel,
+    setCel,
+    weather,
+    setWeather,
+    bgRotation,
+    setBgRotation,
+    backgroundImageUrl,
+    setBackgroundImageUrl,
+    tileBG,
+    setTileBG,
+    tileScreen,
+    setTileScreen,
+    chatBotActive,
+    setChatBotActive,
+    PatchExpand,
+    setPatchExpand,
+    runCatVideo,
+    setRunCatVideo,
+    newsPopup,
+    setNewsPopup,
     onlineUser,
     UtilityRef,
-    PaintExpand, setPaintExpand,
-    sortedIcon, setSortedIcon,
-    sortIconTrigger, setSortIconTrigger,
+    PaintExpand,
+    setPaintExpand,
+    sortedIcon,
+    setSortedIcon,
+    sortIconTrigger,
+    setSortIconTrigger,
     maxZindexRef,
-    deleteIcon, setDeleteIcon,
+    deleteIcon,
+    setDeleteIcon,
     handleMobileLongPressBin,
     refBeingClicked,
-    binRestoreArr, setBinRestoreArr,
-    rightClickBin, setRightClickBin,
-    inFolder, setInFolder,
-    handleShowInfolderMobile, handleShowInfolder,
+    binRestoreArr,
+    setBinRestoreArr,
+    rightClickBin,
+    setRightClickBin,
+    inFolder,
+    setInFolder,
+    handleShowInfolderMobile,
+    handleShowInfolder,
     handleMobileLongPress,
-    iconBeingRightClicked, setIconBeingRightClicked,
-    rightClickIcon, setRightClickIcon, 
+    iconBeingRightClicked,
+    setIconBeingRightClicked,
+    rightClickIcon,
+    setRightClickIcon,
     BinRef,
-    BinExpand, setBinExpand,
-    refresh, setRefresh,
+    BinExpand,
+    setBinExpand,
+    refresh,
+    setRefresh,
     timerRef,
-    rightClickDefault, setRightClickDefault,
-    rightClickPosition, setRightClickPosition,
-    loadedMessages, setLoadedMessages,
-    currentPhoto, setCurrentPhoto,
+    rightClickDefault,
+    setRightClickDefault,
+    rightClickPosition,
+    setRightClickPosition,
+    loadedMessages,
+    setLoadedMessages,
+    currentPhoto,
+    setCurrentPhoto,
     textError,
-    runItemBox, setRunItemBox,
-    RunInputVal, setRunInputVal,
-    undo, setUndo,
-    selectedFolder, setSelectedFolder,
-    currentFolder, setCurrentFolder,
-    MyComputerExpand, setMyComputerExpand,
-    btcShow, setBtcShow,
-    projectStartBar, setProjectStartBar,
-    resumeStartBar, setResumejectStartBar,
-    calenderToggle, setCalenderToggle,
-    iconContainerSize, iconImgSize, iconTextSize,
-    iconScreenSize, setIconScreenSize,
-    iconSize, setIconSize,
-    clearNotiTimeOut, setClearNotiTimeOut,
-    newMessage, setNewMessage,
-    notiOn, setNotiOn,
+    runItemBox,
+    setRunItemBox,
+    RunInputVal,
+    setRunInputVal,
+    undo,
+    setUndo,
+    selectedFolder,
+    setSelectedFolder,
+    currentFolder,
+    setCurrentFolder,
+    MyComputerExpand,
+    setMyComputerExpand,
+    btcShow,
+    setBtcShow,
+    projectStartBar,
+    setProjectStartBar,
+    resumeStartBar,
+    setResumejectStartBar,
+    calenderToggle,
+    setCalenderToggle,
+    iconContainerSize,
+    iconImgSize,
+    iconTextSize,
+    iconScreenSize,
+    setIconScreenSize,
+    iconSize,
+    setIconSize,
+    clearNotiTimeOut,
+    setClearNotiTimeOut,
+    newMessage,
+    setNewMessage,
+    notiOn,
+    setNotiOn,
     chatDown,
     handleDragStop,
-    key, setKey,
-    dragging, setDragging,
+    key,
+    setKey,
+    dragging,
+    setDragging,
     handleOnDrag,
     DesktopRef,
     ProjectFolderRef,
@@ -1034,35 +1343,58 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     DiskRef,
     VSCodeRef,
     handleDrop,
-    dropTargetFolder, setDropTargetFolder,
-    draggedIcon, setDraggedIcon,
-    startActive, setStartActive,
-    time, setTime,
-    desktopIcon, setDesktopIcon,
-    MybioExpand, setMybioExpand,
-    tap, setTap,
+    dropTargetFolder,
+    setDropTargetFolder,
+    draggedIcon,
+    setDraggedIcon,
+    startActive,
+    setStartActive,
+    time,
+    setTime,
+    desktopIcon,
+    setDesktopIcon,
+    MybioExpand,
+    setMybioExpand,
+    tap,
+    setTap,
     imageMapping,
-    lastTapTime, setLastTapTime,
-    ResumeExpand, setResumeExpand,
-    handleShow, handleShowMobile,
+    lastTapTime,
+    setLastTapTime,
+    ResumeExpand,
+    setResumeExpand,
+    handleShow,
+    handleShowMobile,
     StyleHide,
-    isTouchDevice, setIsTouchDevice,
-    ProjectExpand, setProjectExpand,
-    MailExpand, setMailExpand,
-    NftExpand, setNftExpand,
-    NoteExpand, setNoteExpand,
-    TypeExpand, setTypeExpand,
+    isTouchDevice,
+    setIsTouchDevice,
+    ProjectExpand,
+    setProjectExpand,
+    MailExpand,
+    setMailExpand,
+    NftExpand,
+    setNftExpand,
+    NoteExpand,
+    setNoteExpand,
+    TypeExpand,
+    setTypeExpand,
     handleDoubleTapEnterMobile,
     handleDoubleClickEnterLink,
     handleDoubleClickiframe,
     handleDoubleTapiframeMobile,
-    WinampExpand, setWinampExpand,
-    showClippy, setShowClippy,
-    clippyIndex, setClippyIndex,
-    randomClippyPopup, setRandomClippyPopup,
-    clippyTouched, setClippyTouched,
-    clippyThanks, setClippyThanks,
-    clippySendemail, setClippySendemail,
+    WinampExpand,
+    setWinampExpand,
+    showClippy,
+    setShowClippy,
+    clippyIndex,
+    setClippyIndex,
+    randomClippyPopup,
+    setRandomClippyPopup,
+    clippyTouched,
+    setClippyTouched,
+    clippyThanks,
+    setClippyThanks,
+    clippySendemail,
+    setClippySendemail,
     clippyThanksYouFunction,
     clippySendemailfunction,
     RandomTimeoutShowClippy,
@@ -1070,8 +1402,10 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     SecondRandomTimeoutShowClippy,
     ClearTOclippySendemailfunction,
     ClearTOclippyThanksYouFunction,
-    ResumeFileExpand, setResumeFileExpand,
-    clippySong, setClippySong,
+    ResumeFileExpand,
+    setResumeFileExpand,
+    clippySong,
+    setClippySong,
     clippySongFunction,
     ClearTOSongfunction,
     ClearTOdonttouch,
@@ -1081,78 +1415,99 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
     inlineStyle,
     iconFocusIcon,
     deleteTap,
-    shutdownWindow, setShutdownWindow,
-    MineSweeperExpand, setMineSweeperExpand,
-    DoomExpand, setDoomExpand,
-    MSNExpand, setMSNExpand,
-    chatData, setChatData,
-    chatValue, setChatValue,
+    shutdownWindow,
+    setShutdownWindow,
+    MineSweeperExpand,
+    setMineSweeperExpand,
+    DoomExpand,
+    setDoomExpand,
+    MSNExpand,
+    setMSNExpand,
+    chatData,
+    setChatData,
+    chatValue,
+    setChatValue,
     createChat,
-    userNameValue, setUserNameValue,
+    userNameValue,
+    setUserNameValue,
     endOfMessagesRef,
-    clippyUsername, setClippyUsername,
+    clippyUsername,
+    setClippyUsername,
     ClearTOclippyUsernameFunction,
-    sendDisable, setSendDisable,
-    login, setLogin,
-    openProjectExpand, setOpenProjectExpand,
-    projectUrl, setProjectUrl,
+    sendDisable,
+    setSendDisable,
+    login,
+    setLogin,
+    openProjectExpand,
+    setOpenProjectExpand,
+    projectUrl,
+    setProjectUrl,
     projectname,
-    windowsShutDownAnimation, setWindowsShutDownAnimation,
-    BgSettingExpand, setBgSettingExpand,
-    themeDragBar, setThemeDragBar,
-    RunExpand, setRunExpand,
-    reMountRun, setReMountRun,
-    ErrorPopup, setErrorPopup,
+    windowsShutDownAnimation,
+    setWindowsShutDownAnimation,
+    BgSettingExpand,
+    setBgSettingExpand,
+    themeDragBar,
+    setThemeDragBar,
+    RunExpand,
+    setRunExpand,
+    reMountRun,
+    setReMountRun,
+    ErrorPopup,
+    setErrorPopup,
     remountRunPosition,
     // Sound system
     sounds,
     // Terminal
-    TerminalExpand, setTerminalExpand,
-  }
-
+    TerminalExpand,
+    setTerminalExpand,
+  };
 
   // show login page
-  if(login) {
-    if(!login) {
-      setLoading(true)
+  if (login) {
+    if (!login) {
+      setLoading(true);
     }
-    return(
+    return (
       <UserContext.Provider value={contextValue}>
-        <Login/>
-        <WindowsDragLogin/>
+        <Login />
+        <WindowsDragLogin />
       </UserContext.Provider>
-    )
+    );
   }
 
-  if(windowsShutDownAnimation) {
-    return(
+  if (windowsShutDownAnimation) {
+    return (
       <UserContext.Provider value={contextValue}>
-        <WindowsShutdown/>
+        <WindowsShutdown />
       </UserContext.Provider>
-    )
+    );
   }
 
-  if(loading && !login) {
-    const localThemeBg = localStorage.getItem('theme') || '#098684'; 
+  if (loading && !login) {
+    const localThemeBg = localStorage.getItem("theme") || "#098684";
 
-    return(
-      <div 
-      style={{
-        width: '100%',
-        height: '100svh',
-        background: localThemeBg
-      }}>
-        <img src={loadingSpin} alt="loading" 
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100svh",
+          background: localThemeBg,
+        }}
+      >
+        <img
+          src={loadingSpin}
+          alt="loading"
           style={{
-            width: '30px',
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
+            width: "30px",
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
           }}
         />
       </div>
-    )
+    );
   }
 
   // // show login page
@@ -1167,186 +1522,180 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
   return (
     <>
       <UserContext.Provider value={contextValue}>
-      <WindowsDragLogin/>
-      {regErrorPopUp && (
-        <ErrorBtn
+        <WindowsDragLogin />
+        {regErrorPopUp && (
+          <ErrorBtn
             themeDragBar={themeDragBar}
             stateVal={regErrorPopUpVal}
             setStateVal={setRegErrorPopUp}
             text={textError}
             runOpenFuction={() => null}
-        />  
-    )}
-
-        {UserCreatedFolder.length > 0 && UserCreatedFolder.map((folder, index) => (
-          <EmptyFolder
-            key={folder.id}
-            state={folder} 
-            setState={(newState) => {
-              setUserCreatedFolder(prev => {
-                const updated = prev.map(f => 
-                  f.id === folder.id 
-                    ? { ...f, ...newState }
-                    : f
-                );
-                localStorage.setItem("userFolders", JSON.stringify(updated));
-                return updated;
-              });
-            }}
-            folderName={folder.name}
-            userCreatedFolderMode={true}
-            type='folder'
-            refState={UserCreatedFolderRef.current[index]}
           />
-        ))}
+        )}
 
-
+        {UserCreatedFolder.length > 0 &&
+          UserCreatedFolder.map((folder, index) => (
+            <EmptyFolder
+              key={folder.id}
+              state={folder}
+              setState={(newState) => {
+                setUserCreatedFolder((prev) => {
+                  const updated = prev.map((f) =>
+                    f.id === folder.id ? { ...f, ...newState } : f,
+                  );
+                  localStorage.setItem("userFolders", JSON.stringify(updated));
+                  return updated;
+                });
+              }}
+              folderName={folder.name}
+              userCreatedFolderMode={true}
+              type="folder"
+              refState={UserCreatedFolderRef.current[index]}
+            />
+          ))}
 
         <EmptyFolder
-          state={PaintExpand} 
+          state={PaintExpand}
           setState={setPaintExpand}
-          folderName='Paint'
+          folderName="Paint"
           paintMode={true}
         />
 
         <EmptyFolder
-          state={pictureExpand} 
+          state={pictureExpand}
           setState={setPictureExpand}
           refState={PictureRef}
-          folderName='Picture'
+          folderName="Picture"
         />
 
         <EmptyFolder
-          state={BinExpand} 
+          state={BinExpand}
           setState={setBinExpand}
           refState={BinRef}
-          folderName='RecycleBin'
+          folderName="RecycleBin"
         />
 
         <EmptyFolder
-          state={UtilityExpand} 
+          state={UtilityExpand}
           setState={setUtilityExpand}
           refState={UtilityRef}
-          folderName='Utility'
+          folderName="Utility"
         />
 
         <EmptyFolder
-          state={photoOpenExpand} 
+          state={photoOpenExpand}
           setState={setPhotoOpenExpand}
-          folderName='Photo'
+          folderName="Photo"
           photoMode={true}
         />
-        <Store/>
-        <TaskManager/>
-        <Patch/>
-        <SpinningCat/>
-        <NewsApp/>
-        <RightClickWindows/>
-        <Notification/>
-        <Shutdown/>
-        <MyComputer/>
-        <MyBioFolder/>
-        <ResumeFolder/>
-        <ProjectFolder/>
-        <MailFolder/>
-        <ResumeFile/>
-        <WebampPlayer/>
-        <MineSweeper/>
-        <DoomGame/>
-        <MsnFolder/>
-        <OpenProject/>
-        <BgSetting/>
-        <Run/>
-        <Terminal/>
-        <VSCode/>
-        <BTC/>
-        <Dragdrop/>
-        <Footer/>
+        <Store />
+        <TaskManager />
+        <Patch />
+        <SpinningCat />
+        <NewsApp />
+        <RightClickWindows />
+        <Notification />
+        <Shutdown />
+        <MyComputer />
+        <MyBioFolder />
+        <ResumeFolder />
+        <ProjectFolder />
+        <MailFolder />
+        <ResumeFile />
+        <WebampPlayer />
+        <MineSweeper />
+        <DoomGame />
+        <MsnFolder />
+        <OpenProject />
+        <BgSetting />
+        <Run />
+        <Terminal />
+        <VSCode />
+        <BTC />
+        <Dragdrop />
+        <InternetExplorer />
+        <Footer />
       </UserContext.Provider>
     </>
-  )
-  
-//   function deletepermanently(deleteName) { // move to void folder
-//   const droppedIcon = desktopIcon.find(icon => icon.name === deleteName);
-//   if (droppedIcon) { 
-//     setDesktopIcon(prevIcons => {
-      
-//       const updatedIcons = prevIcons.map(icon => 
-//         icon.name === droppedIcon.name 
-//           ? {...icon, folderId: 'Void'} 
-//           : icon
-//       );
-      
-//       setKey(prev => prev + 1);
-//       localStorage.setItem('icons', JSON.stringify([...updatedIcons]));
-//       return [...updatedIcons];
-//     });
-//   }
-//   setDeleteIcon(prev => prev + 1)
-//   setBinRestoreArr(prev => {
-//     const newBinArr = prev.filter(icon => icon.name !== deleteName);
-//     localStorage.setItem('restoreArray', JSON.stringify(newBinArr));
-//     return newBinArr;
-//   });
-//   const findUserCreatedFolder = UserCreatedFolder.find(
-//     icon => icon.name === deleteName
-//   );
+  );
 
-//   if (findUserCreatedFolder) {
-//     const updatedFolders = UserCreatedFolder.filter(
-//       folder => folder.name !== findUserCreatedFolder.name
-//     );
+  //   function deletepermanently(deleteName) { // move to void folder
+  //   const droppedIcon = desktopIcon.find(icon => icon.name === deleteName);
+  //   if (droppedIcon) {
+  //     setDesktopIcon(prevIcons => {
 
-//     setUserCreatedFolder(updatedFolders);
-//     localStorage.setItem("userFolders", JSON.stringify(updatedFolders));
-//   }
+  //       const updatedIcons = prevIcons.map(icon =>
+  //         icon.name === droppedIcon.name
+  //           ? {...icon, folderId: 'Void'}
+  //           : icon
+  //       );
 
-//   refBeingClicked.current = null;
-// }
+  //       setKey(prev => prev + 1);
+  //       localStorage.setItem('icons', JSON.stringify([...updatedIcons]));
+  //       return [...updatedIcons];
+  //     });
+  //   }
+  //   setDeleteIcon(prev => prev + 1)
+  //   setBinRestoreArr(prev => {
+  //     const newBinArr = prev.filter(icon => icon.name !== deleteName);
+  //     localStorage.setItem('restoreArray', JSON.stringify(newBinArr));
+  //     return newBinArr;
+  //   });
+  //   const findUserCreatedFolder = UserCreatedFolder.find(
+  //     icon => icon.name === deleteName
+  //   );
 
-  function deletepermanently(deleteName) { // delete from desktopIcon
-    if(deleteName === 'Store') return;
-    
-    setItemIsBeingDeleted(deleteName)
-    console.log(deleteName)
-    deleteTap(deleteName)
-    const droppedIcon = desktopIcon.find(icon => icon.name === deleteName);
-    if (droppedIcon) { 
-      setDesktopIcon(prevIcons => {
-        const updatedIcons = prevIcons.filter(icon => icon.name !== droppedIcon.name);
-        setKey(prev => prev + 1); // make folder icon by re-mount
-        localStorage.setItem('icons', JSON.stringify([...updatedIcons]));
+  //   if (findUserCreatedFolder) {
+  //     const updatedFolders = UserCreatedFolder.filter(
+  //       folder => folder.name !== findUserCreatedFolder.name
+  //     );
+
+  //     setUserCreatedFolder(updatedFolders);
+  //     localStorage.setItem("userFolders", JSON.stringify(updatedFolders));
+  //   }
+
+  //   refBeingClicked.current = null;
+  // }
+
+  function deletepermanently(deleteName) {
+    // delete from desktopIcon
+    if (deleteName === "Store") return;
+
+    setItemIsBeingDeleted(deleteName);
+    console.log(deleteName);
+    deleteTap(deleteName);
+    const droppedIcon = desktopIcon.find((icon) => icon.name === deleteName);
+    if (droppedIcon) {
+      setDesktopIcon((prevIcons) => {
+        const updatedIcons = prevIcons.filter(
+          (icon) => icon.name !== droppedIcon.name,
+        );
+        setKey((prev) => prev + 1); // make folder icon by re-mount
+        localStorage.setItem("icons", JSON.stringify([...updatedIcons]));
         return [...updatedIcons];
       });
     }
-    setDeleteIcon(prev => prev + 1) // important link to useEffect
-    setBinRestoreArr(prev => {
-          const newBinArr = prev.filter(icon => icon.name !== deleteName);
-          localStorage.setItem('restoreArray', JSON.stringify(newBinArr)); // Update localStorage
-          return newBinArr;
-        });
+    setDeleteIcon((prev) => prev + 1); // important link to useEffect
+    setBinRestoreArr((prev) => {
+      const newBinArr = prev.filter((icon) => icon.name !== deleteName);
+      localStorage.setItem("restoreArray", JSON.stringify(newBinArr)); // Update localStorage
+      return newBinArr;
+    });
     const findUserCreatedFolder = UserCreatedFolder.find(
-        icon => icon.name === deleteName
+      (icon) => icon.name === deleteName,
+    );
+
+    if (findUserCreatedFolder) {
+      const updatedFolders = UserCreatedFolder.filter(
+        (folder) => folder.name !== findUserCreatedFolder.name,
       );
 
-      if (findUserCreatedFolder) {
-        const updatedFolders = UserCreatedFolder.filter(
-          folder => folder.name !== findUserCreatedFolder.name
-        );
-
-        
-
-        setUserCreatedFolder(updatedFolders);
-        localStorage.setItem("userFolders", JSON.stringify(updatedFolders));
-
-        
+      setUserCreatedFolder(updatedFolders);
+      localStorage.setItem("userFolders", JSON.stringify(updatedFolders));
     }
 
-    
     refBeingClicked.current = null;
-   
   }
-
 
   function sortDesktopIcons(iconArr) {
     if (!Array.isArray(iconArr)) return [];
@@ -1355,493 +1704,706 @@ function handleShowInfolderMobile(name, type) { //important handleshow for in fo
 
     // Sort icons by y value, and then by x value if y values are equal
     const sortedIcons = [...iconArr].sort((a, b) => {
-        if (a.y === b.y) {
-            // Compare x values to determine sort order
-            if (a.x > b.x) {
-                // Push the item with the greater x value to the lesserXItems array
-                if (!lesserXItems.includes(a)) {
-                    lesserXItems.push(a);
-                }
-            }
+      if (a.y === b.y) {
+        // Compare x values to determine sort order
+        if (a.x > b.x) {
+          // Push the item with the greater x value to the lesserXItems array
+          if (!lesserXItems.includes(a)) {
+            lesserXItems.push(a);
+          }
         }
-        return a.y - b.y; // Sort by y value
+      }
+      return a.y - b.y; // Sort by y value
     });
 
     // Remove any items that were pushed to lesserXItems from the sorted array
-    const firstArr = sortedIcons.filter(item => !lesserXItems.includes(item));
+    const firstArr = sortedIcons.filter((item) => !lesserXItems.includes(item));
 
     return [...firstArr, ...lesserXItems]; // Append lesserXItems at the end
-}
-
-
-
-function handleDragStop(data, iconName, ref) {
-  // Capture the actual viewport position of the dragged icon
-  const iconElement = ref; // Get the icon ref using its name
-
-  if (iconElement) {
-    const { x, y } = iconElement.getBoundingClientRect();
-    setDesktopIcon(prevIcons => {
-      // Create updatedIcons based on the previous state
-      const updatedIcons = prevIcons.map(icon =>
-        icon.name === iconName
-          ? { ...icon, x: x, y: y }
-          : icon
-      );
-        
-      const sorted = sortDesktopIcons(updatedIcons)
-      localStorage.setItem('icons', JSON.stringify(sorted));
-      setSortedIcon(sorted) // saved sort icon to state to use when refresh
-      return updatedIcons; // Return the updated state
-    });
-  }
-}
-
-
-
-function handleDrop(e, name, target, oldFolderID) {
-  setDragging(false)
-  e.preventDefault();
-  e.stopPropagation();
-
-  if (!target || name === target) return; // Exit if folder is empty or same as the icon
-
-  const droppedIcon = desktopIcon.find(icon => icon.name === name);
-  
-
-
-  if(droppedIcon.folderId === target) {
-    setKey(prev => prev + 1)
-
-    return; // make sure its not in the same folder
   }
 
+  function handleDragStop(data, iconName, ref) {
+    // Capture the actual viewport position of the dragged icon
+    const iconElement = ref; // Get the icon ref using its name
 
-  if (target === 'RecycleBin') {
-    setBinRestoreArr(prevArr => {
-      const updatedArr = [
-        ...prevArr,
-        {
-          name: name,
-          OldFolder: oldFolderID
-        }
-      ];
-      localStorage.setItem('restoreArray', JSON.stringify(updatedArr));
-      return updatedArr; 
-    });
-  } else {
-    setBinRestoreArr(prev => {
-      const updatedArr = prev.filter(item => item.name !== name);
-      localStorage.setItem('restoreArray', JSON.stringify(updatedArr));
-      return updatedArr;
-    });
-  }
-  
+    if (iconElement) {
+      const { x, y } = iconElement.getBoundingClientRect();
+      setDesktopIcon((prevIcons) => {
+        // Create updatedIcons based on the previous state
+        const updatedIcons = prevIcons.map((icon) =>
+          icon.name === iconName ? { ...icon, x: x, y: y } : icon,
+        );
 
-  if (droppedIcon) {
-      setDesktopIcon(prevIcons => {
-          const updatedIcons = prevIcons.filter(icon => icon.name !== droppedIcon.name);
-          const newIcon = { ...droppedIcon, folderId: target };
-          setDropTargetFolder('')
-          setDraggedIcon('');
-          setKey(prev => prev + 1) //make folder icon by re-mount
-          localStorage.setItem('icons', JSON.stringify([...updatedIcons, newIcon]));
-          return [...updatedIcons, newIcon];
+        const sorted = sortDesktopIcons(updatedIcons);
+        localStorage.setItem("icons", JSON.stringify(sorted));
+        setSortedIcon(sorted); // saved sort icon to state to use when refresh
+        return updatedIcons; // Return the updated state
       });
+    }
   }
-}
 
-    function remountRunPosition() { // make Run go back to the original position by remounting draggable by changing key
-      if(!RunExpand.show && !ErrorPopup) {
-        setReMountRun(prev => prev + 1)
-      }
+  function handleDrop(e, name, target, oldFolderID) {
+    setDragging(false);
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!target || name === target) return; // Exit if folder is empty or same as the icon
+
+    const droppedIcon = desktopIcon.find((icon) => icon.name === name);
+
+    if (droppedIcon.folderId === target) {
+      setKey((prev) => prev + 1);
+
+      return; // make sure its not in the same folder
     }
 
-
-    function handleMouseSeen() { //check if user is on the frontend
-      setDetectMouse(true)
-    }
-
-
-    function ringMsnOff() {
-
-      if(socket.current) {
-        socket.current.send(JSON.stringify({ ring: true }));
-      } else {
-          console.error('WebSocket is not initialized.');
-      }
-    }
-
-  
-    async function createChat() { // create chat
-      const filter = new Filter();
-  
-      setTimeout(() => {
-          setSendDisable(false);
-      }, 20000);
-  
-      setSendDisable(true);
-
-  
-      if (chatValue.trim().length === 0) {
-          setSendDisable(false);
-          return;
-      }
-  
-      const offendedWords = badword(); // imported another file
-      offendedWords.forEach(word => filter.addWords(word));
-  
-      const newChatVal = filter.clean(chatValue);
-      const payload = {
-          chat: newChatVal,
-          key: KeyChatSession,
-          mouse: detectMouse,
-          touch: isTouchDevice,
-          chatBotActive: chatBotActive,
-      };
-
-      if (userNameValue.trim().length < 1) {
-        payload.name = 'Anonymous'
-      }
-  
-      if (userNameValue.trim().length > 0) {
-          const cleanedName = filter.clean(userNameValue);
-          payload.name = cleanedName;
-      }
-  
-      // Send the payload via WebSocket
-      if (socket.current) { // Check if socket is initialized
-          socket.current.send(JSON.stringify(payload));
-          console.log(payload)
-      } else {
-          console.error('WebSocket is not initialized.');
-      }
-  
-      // Clear the chat input field and reset sendDisable
-      setChatValue('');
-      setSendDisable(false);
-      console.log('Chat message sent:', payload);
-  }
-
-
-// Function to fetch chat data
-async function getChat() {
-  setChatData('')
-  try {
-    const response = await axios.get(`https://notebackend4.onrender.com/chat/getchat/`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-    setChatDown(false)
-    setChatData(response.data.chat);
-    setLoadedMessages(response.data.chat.slice(-40))
-    // if(MSNExpand.show){
-    //   endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
-    // }
-    // setKeyChatSession(response.data.key)
-  } catch (error) {
-    setChatDown(true)
-    console.error('Error fetching Chat:', error);
-  }
-}
-
-
-function ObjectState() {
-  return [
-   
-    { name: 'About',       setter: setMybioExpand,      usestate: MybioExpand,      color: 'rgba(46, 108, 176, 0.85)', size: 'small' },
-    { name: 'Resume',      setter: setResumeExpand,     usestate: ResumeExpand,     color: 'rgba(65, 138, 68, 0.85)', size: 'small' },
-    { name: 'Project',     setter: setProjectExpand,    usestate: ProjectExpand,    color: 'rgba(211, 117, 0, 0.85)', size: 'small' },
-    { name: 'Picture',     setter: setPictureExpand,    usestate: pictureExpand,    color: 'rgba(85, 50, 148, 0.85)', size: 'large' },
-    { name: 'Mail',        setter: setMailExpand,       usestate: MailExpand,       color: 'rgba(178, 26, 77, 0.85)', size: 'small' },
-    { name: 'AiAgent',     setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(82, 117, 132, 0.85)', size: 'small' },
-    { name: '3dObject',    setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(0, 159, 186, 0.85)', size: 'small' },
-    { name: 'Winamp',      setter: setWinampExpand,     usestate: WinampExpand,     color: 'rgba(105, 136, 145, 0.85)', size: 'small' },
-    { name: 'MineSweeper', setter: setMineSweeperExpand,usestate: MineSweeperExpand,color: 'rgba(187, 51, 48, 0.85)', size: 'small' },
-    { name: 'DOOM',        setter: setDoomExpand,       usestate: DoomExpand,       color: 'rgba(139, 0, 0, 0.85)', size: 'small' },
-    { name: 'MSN',         setter: setMSNExpand,        usestate: MSNExpand,        color: 'rgba(52, 70, 143, 0.85)', size: 'small' },
-    { name: 'Internet',    setter: setOpenProjectExpand,usestate: openProjectExpand,color: 'rgba(0, 159, 186, 0.85)', size: 'small' },
-    { name: 'Settings',    setter: setBgSettingExpand,  usestate: BgSettingExpand,  color: 'rgba(140, 140, 140, 0.85)', size: 'small' },
-    { name: 'Run',         setter: setRunExpand,        usestate: RunExpand,        color: 'rgba(86, 114, 122, 0.85)', size: 'small' },
-    { name: 'Terminal',    setter: setTerminalExpand,   usestate: TerminalExpand,   color: 'rgba(12, 12, 12, 0.85)',   size: 'small' },
-    { name: 'MyComputer',  setter: setMyComputerExpand, usestate: MyComputerExpand, color: 'rgba(31, 122, 206, 0.85)', size: 'small' },
-    { name: 'Patch',       setter: setPatchExpand,      usestate: PatchExpand,      color: 'rgba(86, 114, 122, 0.85)', size: 'small' },
-    { name: 'Photo',       setter: setPhotoOpenExpand,  usestate: photoOpenExpand,  color: 'rgba(0, 120, 93, 0.85)', size: 'small' },
-    { name: 'RecycleBin',  setter: setBinExpand,        usestate: BinExpand,        color: 'rgba(64, 135, 66, 0.85)', size: 'small' },
-    { name: 'Paint',       setter: setPaintExpand,      usestate: PaintExpand,      color: 'rgba(193, 178, 46, 0.85)', size: 'small' },
-    { name: 'Utility',     setter: setUtilityExpand,    usestate: UtilityExpand,    color: 'rgba(116, 85, 54, 0.85)', size: 'small' },
-    { name: 'TaskManager', setter: setTaskManagerExpand,usestate: TaskManagerExpand,color: 'rgba(218, 160, 109, 0.85)', size: 'small' },
-    { name: 'Store',       setter: setStoreExpand,      usestate: StoreExpand,      color: 'rgba(132, 140, 207, 0.85)', size: 'small' },
-    { name: 'Bitcoin',     setter: setBtcShow,          usestate: btcShow,          color: 'rgba(132, 140, 207, 0.85)', size: 'small' },
-    { name: 'VS Code',     setter: setVSCodeExpand,     usestate: VSCodeExpand,     color: 'rgba(0, 122, 204, 0.85)', size: 'small' },
-    
-    // Add user folders dynamically with individual state management
-    ...UserCreatedFolder.map(folder => ({
-      name: folder.name,
-      setter: (newState) => {
-        setUserCreatedFolder(prev => {
-          const updated = prev.map(f => 
-            f.id === folder.id 
-              ? { ...f, ...newState }
-              : f
-          );
-          localStorage.setItem("userFolders", JSON.stringify(updated));
-          return updated;
-        });
-      },
-      usestate: folder, // Pass the individual folder object
-      color: folder.color || 'rgba(255, 206, 84, 0.85)',
-      size: 'small',
-      type: 'userCreatedFolder' // Add type identifier
-    }))
-  ];
-}
-
-
-
-
-function iconFocusIcon(name) { // if focus on one, the rest goes unfocus
-  console.log('iconFocusIcon called for:', name);
-  const allSetItems = ObjectState();
-
-  const passedName = name.toLowerCase().trim().replace(/\s/g, '');
-
-  const updateddesktopIcon = desktopIcon.map(icon => {
-    const iconName = icon.name.toLowerCase().trim().replace(/\s/g, '');
-    if ('focus' in icon) { // check if focus is in the object
-      return { ...icon, focus: iconName === passedName }; // return new focus if matched
-    }
-    return { ...icon, focus: false }; // return all false if no found
-  });
-  setDesktopIcon(updateddesktopIcon);
-
-  ///need to be fixed, this logic
-  allSetItems.forEach(item => { // set same to folder to distinct from iconName
-    const itemName = item.name.toLowerCase().trim().replace(/\s/g, '') + 'folder'
-      item.setter(prev => ({ ...prev, focus: passedName === itemName }));
-  });
-}
-
-function handleShow(name) {
-  console.log('handleShow called for:', name);
-  setRightClickDefault(false);
-
-  if(name === '' || !name) return;
-
-  if (name === 'MS-DOS Prompt') {
-    handleShow('Terminal');
-    return;
-  }
-
-  const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
-  const allSetItems = ObjectState();
-
-  if (lowerCaseName === 'vscode') {
-      console.log('Special case: VS Code matched');
-  }
-
-  const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().replace(/\s/g, '') === lowerCaseName);
-
-  const pictureMatch = allPicture.find(picture => name.includes(picture.name));
-  
-  if (pictureMatch) {
-    handleDoubleClickPhotoOpen(name, setCurrentPhoto);
-    handleShow('Photo');
-    return;
-  }
-
-  if (!itemExists) {
-    setRegErrorPopUp(true);
-    setRegErrorPopUpVal(name);
-    return;
-  }
-
-  allSetItems.forEach((item) => {
-    const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
-
-    if(itemName === lowerCaseName) {
-      setTimeout(() => {
-        if(item.type === 'userCreatedFolder') {
-          // Handle user-created folders
-          item.setter({
-            show: true, 
-            focusItem: true, 
-            hide: false, 
-            zIndex: maxZindexRef.current + 1
-          });
-        } else {
-          // Handle static folders
-          item.setter(prev => ({
-            ...prev, 
-            show: true, 
-            focusItem: true, 
-            hide: false, 
-            zIndex: maxZindexRef.current + 1
-          }));
-        }
-        maxZindexRef.current += 1;
-      }, 100);
-      
-      // Your existing special cases...
-      if(lowerCaseName === 'mail') clippySendemailfunction();
-      if(lowerCaseName === 'winamp') clippySongFunction();
-      if(lowerCaseName === 'msn') clippyUsernameFunction();
-      if(lowerCaseName === 'mail') clippySendemailfunction();
-        if(lowerCaseName === 'winamp') clippySongFunction();
-        if(lowerCaseName === 'msn') clippyUsernameFunction();
-        if(lowerCaseName === 'nft') {
-          handleDoubleClickiframe('Nft', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
-        }
-        if(lowerCaseName === 'note') {
-          handleDoubleClickiframe('Note', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
-        }
-        if(lowerCaseName === 'aiagent') {
-          handleDoubleClickiframe('AiAgent', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
-        }
-        if(lowerCaseName === '3dobject') {
-        handleDoubleClickiframe('3dObject', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
-        }
-        if(lowerCaseName === 'fortune') {
-        handleDoubleClickiframe('Fortune', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
-        }
-        if(lowerCaseName === 'pixelpic') {
-        handleDoubleClickiframe('PixelPic', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
-      }
+    if (target === "RecycleBin") {
+      setBinRestoreArr((prevArr) => {
+        const updatedArr = [
+          ...prevArr,
+          {
+            name: name,
+            OldFolder: oldFolderID,
+          },
+        ];
+        localStorage.setItem("restoreArray", JSON.stringify(updatedArr));
+        return updatedArr;
+      });
     } else {
-      // Set other items to not focused
-      if(item.type === 'userCreatedFolder') {
-        item.setter({ focusItem: false });
-      } else {
-        item.setter(prev => ({ ...prev, focusItem: false }));
-      }
+      setBinRestoreArr((prev) => {
+        const updatedArr = prev.filter((item) => item.name !== name);
+        localStorage.setItem("restoreArray", JSON.stringify(updatedArr));
+        return updatedArr;
+      });
     }
-  });
 
-  PatchExpand ? null : setTileScreen(false);
-  
-  if(tap.includes(name)) return;
-  setStartActive(false);
+    if (droppedIcon) {
+      setDesktopIcon((prevIcons) => {
+        const updatedIcons = prevIcons.filter(
+          (icon) => icon.name !== droppedIcon.name,
+        );
+        const newIcon = { ...droppedIcon, folderId: target };
+        setDropTargetFolder("");
+        setDraggedIcon("");
+        setKey((prev) => prev + 1); //make folder icon by re-mount
+        localStorage.setItem(
+          "icons",
+          JSON.stringify([...updatedIcons, newIcon]),
+        );
+        return [...updatedIcons, newIcon];
+      });
+    }
+  }
 
-  const notToOpenList = ['Run', 'Nft', 'Note', 'AiAgent', '3dObject', 'Fortune', 'Bitcoin', 'PixelPic'];
-  if (notToOpenList.includes(name)) return;
+  function remountRunPosition() {
+    // make Run go back to the original position by remounting draggable by changing key
+    if (!RunExpand.show && !ErrorPopup) {
+      setReMountRun((prev) => prev + 1);
+    }
+  }
 
-  setTap(prevTap => [...prevTap, name]);
-  setDesktopIcon(prevIcons => prevIcons.map(icon => ({...icon, focus: false})));
-}
+  function handleMouseSeen() {
+    //check if user is on the frontend
+    setDetectMouse(true);
+  }
 
-function handleShowMobile(name) {
+  function ringMsnOff() {
+    if (socket.current) {
+      socket.current.send(JSON.stringify({ ring: true }));
+    } else {
+      console.error("WebSocket is not initialized.");
+    }
+  }
 
-  setRightClickDefault(false);
+  async function createChat() {
+    // create chat
+    const filter = new Filter();
 
-  const now = Date.now()
+    setTimeout(() => {
+      setSendDisable(false);
+    }, 20000);
 
-  if (now - lastTapTime < 300) {
+    setSendDisable(true);
 
-    if(name === '' || !name) return;
-  
-    const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
-  
-    const allSetItems = ObjectState() // call all usestate object
-  
-    const itemExists = allSetItems.some(item => item.name.toLowerCase().trim().replace(/\s/g, '') === lowerCaseName);
-  
-    const pictureMatch = allPicture.find(picture => name.includes(picture.name));
-    
-    if (pictureMatch) {
-      handleDoubleClickPhotoOpen(name, setCurrentPhoto);
-      handleShow('Photo');
+    if (chatValue.trim().length === 0) {
+      setSendDisable(false);
       return;
     }
-  
+
+    const offendedWords = badword(); // imported another file
+    offendedWords.forEach((word) => filter.addWords(word));
+
+    const newChatVal = filter.clean(chatValue);
+    const payload = {
+      chat: newChatVal,
+      key: KeyChatSession,
+      mouse: detectMouse,
+      touch: isTouchDevice,
+      chatBotActive: chatBotActive,
+    };
+
+    if (userNameValue.trim().length < 1) {
+      payload.name = "Anonymous";
+    }
+
+    if (userNameValue.trim().length > 0) {
+      const cleanedName = filter.clean(userNameValue);
+      payload.name = cleanedName;
+    }
+
+    // Send the payload via WebSocket
+    if (socket.current) {
+      // Check if socket is initialized
+      socket.current.send(JSON.stringify(payload));
+      console.log(payload);
+    } else {
+      console.error("WebSocket is not initialized.");
+    }
+
+    // Clear the chat input field and reset sendDisable
+    setChatValue("");
+    setSendDisable(false);
+    console.log("Chat message sent:", payload);
+  }
+
+  // Function to fetch chat data
+  async function getChat() {
+    setChatData("");
+    try {
+      const response = await axios.get(
+        `https://notebackend4.onrender.com/chat/getchat/`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+      );
+      setChatDown(false);
+      setChatData(response.data.chat);
+      setLoadedMessages(response.data.chat.slice(-40));
+      // if(MSNExpand.show){
+      //   endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
+      // }
+      // setKeyChatSession(response.data.key)
+    } catch (error) {
+      setChatDown(true);
+      console.error("Error fetching Chat:", error);
+    }
+  }
+
+  function ObjectState() {
+    return [
+      {
+        name: "About",
+        setter: setMybioExpand,
+        usestate: MybioExpand,
+        color: "rgba(46, 108, 176, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Resume",
+        setter: setResumeExpand,
+        usestate: ResumeExpand,
+        color: "rgba(65, 138, 68, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Project",
+        setter: setProjectExpand,
+        usestate: ProjectExpand,
+        color: "rgba(211, 117, 0, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Picture",
+        setter: setPictureExpand,
+        usestate: pictureExpand,
+        color: "rgba(85, 50, 148, 0.85)",
+        size: "large",
+      },
+      {
+        name: "Mail",
+        setter: setMailExpand,
+        usestate: MailExpand,
+        color: "rgba(178, 26, 77, 0.85)",
+        size: "small",
+      },
+      {
+        name: "AiAgent",
+        setter: setOpenProjectExpand,
+        usestate: openProjectExpand,
+        color: "rgba(82, 117, 132, 0.85)",
+        size: "small",
+      },
+      {
+        name: "3dObject",
+        setter: setOpenProjectExpand,
+        usestate: openProjectExpand,
+        color: "rgba(0, 159, 186, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Winamp",
+        setter: setWinampExpand,
+        usestate: WinampExpand,
+        color: "rgba(105, 136, 145, 0.85)",
+        size: "small",
+      },
+      {
+        name: "MineSweeper",
+        setter: setMineSweeperExpand,
+        usestate: MineSweeperExpand,
+        color: "rgba(187, 51, 48, 0.85)",
+        size: "small",
+      },
+      {
+        name: "DOOM",
+        setter: setDoomExpand,
+        usestate: DoomExpand,
+        color: "rgba(139, 0, 0, 0.85)",
+        size: "small",
+      },
+      {
+        name: "MSN",
+        setter: setMSNExpand,
+        usestate: MSNExpand,
+        color: "rgba(52, 70, 143, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Internet",
+        setter: setOpenProjectExpand,
+        usestate: openProjectExpand,
+        color: "rgba(0, 159, 186, 0.85)",
+        size: "small",
+      },
+      {
+        name: "InternetExplorer",
+        setter: setInternetExplorerExpand,
+        usestate: InternetExplorerExpand,
+        color: "rgba(0, 0, 128, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Settings",
+        setter: setBgSettingExpand,
+        usestate: BgSettingExpand,
+        color: "rgba(140, 140, 140, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Run",
+        setter: setRunExpand,
+        usestate: RunExpand,
+        color: "rgba(86, 114, 122, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Terminal",
+        setter: setTerminalExpand,
+        usestate: TerminalExpand,
+        color: "rgba(12, 12, 12, 0.85)",
+        size: "small",
+      },
+      {
+        name: "MyComputer",
+        setter: setMyComputerExpand,
+        usestate: MyComputerExpand,
+        color: "rgba(31, 122, 206, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Patch",
+        setter: setPatchExpand,
+        usestate: PatchExpand,
+        color: "rgba(86, 114, 122, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Photo",
+        setter: setPhotoOpenExpand,
+        usestate: photoOpenExpand,
+        color: "rgba(0, 120, 93, 0.85)",
+        size: "small",
+      },
+      {
+        name: "RecycleBin",
+        setter: setBinExpand,
+        usestate: BinExpand,
+        color: "rgba(64, 135, 66, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Paint",
+        setter: setPaintExpand,
+        usestate: PaintExpand,
+        color: "rgba(193, 178, 46, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Utility",
+        setter: setUtilityExpand,
+        usestate: UtilityExpand,
+        color: "rgba(116, 85, 54, 0.85)",
+        size: "small",
+      },
+      {
+        name: "TaskManager",
+        setter: setTaskManagerExpand,
+        usestate: TaskManagerExpand,
+        color: "rgba(218, 160, 109, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Store",
+        setter: setStoreExpand,
+        usestate: StoreExpand,
+        color: "rgba(132, 140, 207, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Bitcoin",
+        setter: setBtcShow,
+        usestate: btcShow,
+        color: "rgba(132, 140, 207, 0.85)",
+        size: "small",
+      },
+      {
+        name: "VS Code",
+        setter: setVSCodeExpand,
+        usestate: VSCodeExpand,
+        color: "rgba(0, 122, 204, 0.85)",
+        size: "small",
+      },
+
+      // Add user folders dynamically with individual state management
+      ...UserCreatedFolder.map((folder) => ({
+        name: folder.name,
+        setter: (newState) => {
+          setUserCreatedFolder((prev) => {
+            const updated = prev.map((f) =>
+              f.id === folder.id ? { ...f, ...newState } : f,
+            );
+            localStorage.setItem("userFolders", JSON.stringify(updated));
+            return updated;
+          });
+        },
+        usestate: folder, // Pass the individual folder object
+        color: folder.color || "rgba(255, 206, 84, 0.85)",
+        size: "small",
+        type: "userCreatedFolder", // Add type identifier
+      })),
+    ];
+  }
+
+  function iconFocusIcon(name) {
+    // if focus on one, the rest goes unfocus
+    console.log("iconFocusIcon called for:", name);
+    const allSetItems = ObjectState();
+
+    const passedName = name.toLowerCase().trim().replace(/\s/g, "");
+
+    const updateddesktopIcon = desktopIcon.map((icon) => {
+      const iconName = icon.name.toLowerCase().trim().replace(/\s/g, "");
+      if ("focus" in icon) {
+        // check if focus is in the object
+        return { ...icon, focus: iconName === passedName }; // return new focus if matched
+      }
+      return { ...icon, focus: false }; // return all false if no found
+    });
+    setDesktopIcon(updateddesktopIcon);
+
+    ///need to be fixed, this logic
+    allSetItems.forEach((item) => {
+      // set same to folder to distinct from iconName
+      const itemName =
+        item.name.toLowerCase().trim().replace(/\s/g, "") + "folder";
+      item.setter((prev) => ({ ...prev, focus: passedName === itemName }));
+    });
+  }
+
+  function handleShow(name) {
+    console.log("handleShow called for:", name);
+    setRightClickDefault(false);
+
+    if (name === "" || !name) return;
+
+    if (name === "MS-DOS Prompt") {
+      handleShow("Terminal");
+      return;
+    }
+
+    const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, "");
+    const allSetItems = ObjectState();
+
+    if (lowerCaseName === "vscode") {
+      console.log("Special case: VS Code matched");
+    }
+
+    const itemExists = allSetItems.some(
+      (item) =>
+        item.name.toLowerCase().trim().replace(/\s/g, "") === lowerCaseName,
+    );
+
+    const pictureMatch = allPicture.find((picture) =>
+      name.includes(picture.name),
+    );
+
+    if (pictureMatch) {
+      handleDoubleClickPhotoOpen(name, setCurrentPhoto);
+      handleShow("Photo");
+      return;
+    }
+
     if (!itemExists) {
       setRegErrorPopUp(true);
       setRegErrorPopUpVal(name);
       return;
-  }
-  
+    }
+
     allSetItems.forEach((item) => {
-  
-      const itemName = item.name.toLowerCase().trim();
-  
-      if(itemName === lowerCaseName) {
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, "");
+
+      if (itemName === lowerCaseName) {
         setTimeout(() => {
-        if(item.type === 'userCreatedFolder') {
-          // Handle user-created folders
-          item.setter({
-            show: true, 
-            focusItem: true, 
-            hide: false, 
-            zIndex: maxZindexRef.current + 1
-          });
-        } else {
-          // Handle static folders
-          item.setter(prev => ({
-            ...prev, 
-            show: true, 
-            focusItem: true, 
-            hide: false, 
-            zIndex: maxZindexRef.current + 1
-          }));
+          if (item.type === "userCreatedFolder") {
+            // Handle user-created folders
+            item.setter({
+              show: true,
+              focusItem: true,
+              hide: false,
+              zIndex: maxZindexRef.current + 1,
+            });
+          } else {
+            // Handle static folders
+            item.setter((prev) => ({
+              ...prev,
+              show: true,
+              focusItem: true,
+              hide: false,
+              zIndex: maxZindexRef.current + 1,
+            }));
+          }
+          maxZindexRef.current += 1;
+        }, 100);
+
+        // Your existing special cases...
+        if (lowerCaseName === "mail") clippySendemailfunction();
+        if (lowerCaseName === "winamp") clippySongFunction();
+        if (lowerCaseName === "msn") clippyUsernameFunction();
+        if (lowerCaseName === "mail") clippySendemailfunction();
+        if (lowerCaseName === "winamp") clippySongFunction();
+        if (lowerCaseName === "msn") clippyUsernameFunction();
+        if (lowerCaseName === "nft") {
+          handleDoubleClickiframe("Nft", setOpenProjectExpand, setProjectUrl);
+          handleShow("Internet");
         }
-        maxZindexRef.current += 1;
-      }, 100);
-        if(lowerCaseName === 'mail') clippySendemailfunction();
-        if(lowerCaseName === 'winamp') clippySongFunction();
-        if(lowerCaseName === 'msn') clippyUsernameFunction();
-        if(lowerCaseName === 'nft') {
-          handleDoubleClickiframe('Nft', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
+        if (lowerCaseName === "note") {
+          handleDoubleClickiframe("Note", setOpenProjectExpand, setProjectUrl);
+          handleShow("Internet");
         }
-        if(lowerCaseName === 'note') {
-          handleDoubleClickiframe('Note', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
+        if (lowerCaseName === "aiagent") {
+          handleDoubleClickiframe(
+            "AiAgent",
+            setOpenProjectExpand,
+            setProjectUrl,
+          );
+          handleShow("Internet");
         }
-        if(lowerCaseName === 'aiagent') {
-          handleDoubleClickiframe('AiAgent', setOpenProjectExpand, setProjectUrl)
-          handleShow('Internet');
+        if (lowerCaseName === "3dobject") {
+          handleDoubleClickiframe(
+            "3dObject",
+            setOpenProjectExpand,
+            setProjectUrl,
+          );
+          handleShow("Internet");
         }
-        if(lowerCaseName === '3dobject') {
-        handleDoubleClickiframe('3dObject', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
+        if (lowerCaseName === "fortune") {
+          handleDoubleClickiframe(
+            "Fortune",
+            setOpenProjectExpand,
+            setProjectUrl,
+          );
+          handleShow("Internet");
         }
-        if(lowerCaseName === 'fortune') {
-        handleDoubleClickiframe('Fortune', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
+        if (lowerCaseName === "pixelpic") {
+          handleDoubleClickiframe(
+            "PixelPic",
+            setOpenProjectExpand,
+            setProjectUrl,
+          );
+          handleShow("Internet");
         }
-        if(lowerCaseName === 'pixelpic') {
-        handleDoubleClickiframe('PixelPic', setOpenProjectExpand, setProjectUrl)
-        handleShow('Internet');
-      }
-      }
-      if(item.type === 'userCreatedFolder') {
-        item.setter({ focusItem: false });
       } else {
-        item.setter(prev => ({ ...prev, focusItem: false }));
+        // Set other items to not focused
+        if (item.type === "userCreatedFolder") {
+          item.setter({ focusItem: false });
+        } else {
+          item.setter((prev) => ({ ...prev, focusItem: false }));
+        }
       }
     });
-    PatchExpand ? null : setTileScreen(false)
 
-    if(tap.includes(name)) return;
-    setStartActive(false)
-  
-    const notToOpenList = ['Run', 'Nft', 'Note', 'AiAgent', '3dObject', 'Fortune', 'Bitcoin', 'PixelPic'];
+    PatchExpand ? null : setTileScreen(false);
+
+    if (tap.includes(name)) return;
+    setStartActive(false);
+
+    const notToOpenList = [
+      "Run",
+      "Nft",
+      "Note",
+      "AiAgent",
+      "3dObject",
+      "Fortune",
+      "Bitcoin",
+      "PixelPic",
+    ];
     if (notToOpenList.includes(name)) return;
-  
-    setTap(prevTap => [...prevTap, name]);
-    setDesktopIcon(prevIcons => prevIcons.map(icon => ({...icon, focus: false})));
-  
-  }
-  setLastTapTime(now)
-}
 
+    setTap((prevTap) => [...prevTap, name]);
+    setDesktopIcon((prevIcons) =>
+      prevIcons.map((icon) => ({ ...icon, focus: false })),
+    );
+  }
+
+  function handleShowMobile(name) {
+    setRightClickDefault(false);
+
+    const now = Date.now();
+
+    if (now - lastTapTime < 300) {
+      if (name === "" || !name) return;
+
+      const lowerCaseName = name.toLowerCase().trim().replace(/\s/g, "");
+
+      const allSetItems = ObjectState(); // call all usestate object
+
+      const itemExists = allSetItems.some(
+        (item) =>
+          item.name.toLowerCase().trim().replace(/\s/g, "") === lowerCaseName,
+      );
+
+      const pictureMatch = allPicture.find((picture) =>
+        name.includes(picture.name),
+      );
+
+      if (pictureMatch) {
+        handleDoubleClickPhotoOpen(name, setCurrentPhoto);
+        handleShow("Photo");
+        return;
+      }
+
+      if (!itemExists) {
+        setRegErrorPopUp(true);
+        setRegErrorPopUpVal(name);
+        return;
+      }
+
+      allSetItems.forEach((item) => {
+        const itemName = item.name.toLowerCase().trim();
+
+        if (itemName === lowerCaseName) {
+          setTimeout(() => {
+            if (item.type === "userCreatedFolder") {
+              // Handle user-created folders
+              item.setter({
+                show: true,
+                focusItem: true,
+                hide: false,
+                zIndex: maxZindexRef.current + 1,
+              });
+            } else {
+              // Handle static folders
+              item.setter((prev) => ({
+                ...prev,
+                show: true,
+                focusItem: true,
+                hide: false,
+                zIndex: maxZindexRef.current + 1,
+              }));
+            }
+            maxZindexRef.current += 1;
+          }, 100);
+          if (lowerCaseName === "mail") clippySendemailfunction();
+          if (lowerCaseName === "winamp") clippySongFunction();
+          if (lowerCaseName === "msn") clippyUsernameFunction();
+          if (lowerCaseName === "nft") {
+            handleDoubleClickiframe("Nft", setOpenProjectExpand, setProjectUrl);
+            handleShow("Internet");
+          }
+          if (lowerCaseName === "note") {
+            handleDoubleClickiframe(
+              "Note",
+              setOpenProjectExpand,
+              setProjectUrl,
+            );
+            handleShow("Internet");
+          }
+          if (lowerCaseName === "aiagent") {
+            handleDoubleClickiframe(
+              "AiAgent",
+              setOpenProjectExpand,
+              setProjectUrl,
+            );
+            handleShow("Internet");
+          }
+          if (lowerCaseName === "3dobject") {
+            handleDoubleClickiframe(
+              "3dObject",
+              setOpenProjectExpand,
+              setProjectUrl,
+            );
+            handleShow("Internet");
+          }
+          if (lowerCaseName === "fortune") {
+            handleDoubleClickiframe(
+              "Fortune",
+              setOpenProjectExpand,
+              setProjectUrl,
+            );
+            handleShow("Internet");
+          }
+          if (lowerCaseName === "pixelpic") {
+            handleDoubleClickiframe(
+              "PixelPic",
+              setOpenProjectExpand,
+              setProjectUrl,
+            );
+            handleShow("Internet");
+          }
+        }
+        if (item.type === "userCreatedFolder") {
+          item.setter({ focusItem: false });
+        } else {
+          item.setter((prev) => ({ ...prev, focusItem: false }));
+        }
+      });
+      PatchExpand ? null : setTileScreen(false);
+
+      if (tap.includes(name)) return;
+      setStartActive(false);
+
+      const notToOpenList = [
+        "Run",
+        "Nft",
+        "Note",
+        "AiAgent",
+        "3dObject",
+        "Fortune",
+        "Bitcoin",
+        "PixelPic",
+      ];
+      if (notToOpenList.includes(name)) return;
+
+      setTap((prevTap) => [...prevTap, name]);
+      setDesktopIcon((prevIcons) =>
+        prevIcons.map((icon) => ({ ...icon, focus: false })),
+      );
+    }
+    setLastTapTime(now);
+  }
 
   function handleClippyFunction(setterFunction, clearFunction, allSetters) {
     // Clear all existing timeouts
@@ -1855,24 +2417,34 @@ function handleShowMobile(name) {
     setShowClippy(true);
 
     clearTimeout(clearFunction.current);
-    if (RandomTimeoutShowClippy.current) clearTimeout(RandomTimeoutShowClippy.current);
-    if (firstTimoutShowclippy.current) clearTimeout(firstTimoutShowclippy.current);
-    if (SecondRandomTimeoutShowClippy.current) clearTimeout(SecondRandomTimeoutShowClippy.current);
+    if (RandomTimeoutShowClippy.current)
+      clearTimeout(RandomTimeoutShowClippy.current);
+    if (firstTimoutShowclippy.current)
+      clearTimeout(firstTimoutShowclippy.current);
+    if (SecondRandomTimeoutShowClippy.current)
+      clearTimeout(SecondRandomTimeoutShowClippy.current);
 
     clearFunction.current = setTimeout(() => {
       setterFunction(false);
       setShowClippy(false);
-      setRandomClippyPopup(prev => !prev);
+      setRandomClippyPopup((prev) => !prev);
     }, 8000);
   }
 
-
   function clippyThanksYouFunction() {
-    handleClippyFunction(setClippyThanks, ClearTOclippyThanksYouFunction, allSetters);
+    handleClippyFunction(
+      setClippyThanks,
+      ClearTOclippyThanksYouFunction,
+      allSetters,
+    );
   }
 
   function clippySendemailfunction() {
-    handleClippyFunction(setClippySendemail, ClearTOclippySendemailfunction, allSetters);
+    handleClippyFunction(
+      setClippySendemail,
+      ClearTOclippySendemailfunction,
+      allSetters,
+    );
   }
 
   function clippySongFunction() {
@@ -1880,11 +2452,15 @@ function handleShowMobile(name) {
   }
 
   function clippyUsernameFunction() {
-    handleClippyFunction(setClippyUsername, ClearTOclippyUsernameFunction, allSetters);
+    handleClippyFunction(
+      setClippyUsername,
+      ClearTOclippyUsernameFunction,
+      allSetters,
+    );
   }
 
   function handleSetFocusItemTrue(name) {
-    const LowerCaseName = name.toLowerCase().trim().replace(/\s/g, '');
+    const LowerCaseName = name.toLowerCase().trim().replace(/\s/g, "");
     const setState = ObjectState();
 
     const newZIndex = (maxZindexRef.current || 0) + 1;
@@ -1893,7 +2469,7 @@ function handleShowMobile(name) {
       const itemName = item.name.toLowerCase();
 
       if (itemName === LowerCaseName) {
-        if (item.type === 'userCreatedFolder') {
+        if (item.type === "userCreatedFolder") {
           // mutate directly
           item.setter({
             ...item, // keep existing props
@@ -1902,7 +2478,7 @@ function handleShowMobile(name) {
           });
         } else {
           // safe spread for normal items
-          item.setter(prev => ({
+          item.setter((prev) => ({
             ...prev,
             focusItem: true,
             zIndex: newZIndex,
@@ -1910,48 +2486,53 @@ function handleShowMobile(name) {
         }
         maxZindexRef.current = newZIndex;
       } else {
-        if (item.type === 'userCreatedFolder') {
+        if (item.type === "userCreatedFolder") {
           // direct mutation
           item.setter({
             ...item,
             focusItem: false,
           });
         } else {
-          item.setter(prev => ({ ...prev, focusItem: false }));
+          item.setter((prev) => ({ ...prev, focusItem: false }));
         }
       }
     });
 
     // reset desktop icons focus
-    setDesktopIcon(prevIcons =>
-      prevIcons.map(icon => ({ ...icon, focus: false }))
+    setDesktopIcon((prevIcons) =>
+      prevIcons.map((icon) => ({ ...icon, focus: false })),
     );
   }
 
-
-
-
-  function inlineStyleExpand (name) {
-    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
+  function inlineStyleExpand(name) {
+    const passedName = name.toLowerCase().trim().replace(/\s/g, "");
     const setState = ObjectState();
 
-    const item = setState.find(item => {
-      const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
+    const item = setState.find((item) => {
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, "");
       return itemName === passedName;
     });
 
     if (item) {
       return {
-        display: item.usestate.show ? (name === 'Terminal' ? 'flex' : 'block') : 'none',
-        maxWidth: 'none',
-        width: '100%',
-        height: 'calc(100vh - 50px)',
+        display: item.usestate.show
+          ? name === "Terminal"
+            ? "flex"
+            : "block"
+          : "none",
+        maxWidth: "none",
+        width: "100%",
+        height: "calc(100vh - 50px)",
         left: `${item.usestate.x <= 0 ? Math.abs(item.usestate.x) * 2 + item.usestate.x : -item.usestate.x}px`,
         top: `${item.usestate.y <= 0 ? Math.abs(item.usestate.y) * 2 + item.usestate.y : -item.usestate.y}px`,
-        opacity: item.usestate.hide ? '0' : '1',
-        zIndex: item.usestate.hide ? '-1' : (item.usestate.focusItem ? '999' : item.usestate.zIndex),
-        pointerEvents: item.usestate.hide ? 'none' : 'auto',
-        resize: item.usestate.expand ? 'none' : ''
+        opacity: item.usestate.hide ? "0" : "1",
+        zIndex: item.usestate.hide
+          ? "-1"
+          : item.usestate.focusItem
+            ? "999"
+            : item.usestate.zIndex,
+        pointerEvents: item.usestate.hide ? "none" : "auto",
+        resize: item.usestate.expand ? "none" : "",
       };
     }
     return {};
@@ -1959,57 +2540,67 @@ function handleShowMobile(name) {
 
   function inlineStyle(name) {
     const setState = ObjectState();
-    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
+    const passedName = name.toLowerCase().trim().replace(/\s/g, "");
 
-    const item = setState.find(item => {
-        const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
-        return itemName === passedName;
+    const item = setState.find((item) => {
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, "");
+      return itemName === passedName;
     });
 
     if (item) {
-        return {
-            display: item.usestate.show ? (name === 'Terminal' ? 'flex' : 'block') : 'none',
-            opacity: item.usestate.hide ? '0' : '1',
-            zIndex: item.usestate.hide ? '-1' : (item.usestate.focusItem ? '999' : item.usestate.zIndex),
-            pointerEvents: item.usestate.hide ? 'none' : 'auto',
-        };
+      return {
+        display: item.usestate.show
+          ? name === "Terminal"
+            ? "flex"
+            : "block"
+          : "none",
+        opacity: item.usestate.hide ? "0" : "1",
+        zIndex: item.usestate.hide
+          ? "-1"
+          : item.usestate.focusItem
+            ? "999"
+            : item.usestate.zIndex,
+        pointerEvents: item.usestate.hide ? "none" : "auto",
+      };
     }
 
     return {};
-}
+  }
 
   function deleteTap(name) {
-
     const setState = ObjectState();
-    const passedName = name.toLowerCase().trim().replace(/\s/g, '');
+    const passedName = name.toLowerCase().trim().replace(/\s/g, "");
 
-    setState.forEach(item => {
-      const itemName = item.name.toLowerCase().trim().replace(/\s/g, '');
+    setState.forEach((item) => {
+      const itemName = item.name.toLowerCase().trim().replace(/\s/g, "");
 
       if (itemName === passedName) {
-        item.setter(prev => ({
+        item.setter((prev) => ({
           ...prev,
           show: false,
           expand: false,
-          hide: false
+          hide: false,
         }));
 
-      if(item.type === 'userCreatedFolder') { // delete from user created folder folders
+        if (item.type === "userCreatedFolder") {
+          // delete from user created folder folders
           item.setter({
-            show: false, 
-            focusItem: false, 
-            hide: true, 
-            zIndex: maxZindexRef.current + 1
+            show: false,
+            focusItem: false,
+            hide: true,
+            zIndex: maxZindexRef.current + 1,
           });
         }
-        setTap(prevTap => prevTap.filter(tapItem => { // get prevTap to prevent error
-          const tapItemName = tapItem.toLowerCase().trim().replace(/\s/g, '');
-          return tapItemName !== passedName;
-        }));
+        setTap((prevTap) =>
+          prevTap.filter((tapItem) => {
+            // get prevTap to prevent error
+            const tapItemName = tapItem.toLowerCase().trim().replace(/\s/g, "");
+            return tapItemName !== passedName;
+          }),
+        );
       }
     });
-
   }
 }
 
-export default App
+export default App;

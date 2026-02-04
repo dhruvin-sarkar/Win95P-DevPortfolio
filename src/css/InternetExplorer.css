@@ -1,0 +1,320 @@
+/* Internet Explorer Window Styles */
+.folder_folder-InternetExplorer {
+    border: 2px outset #dfdfdf;
+    box-shadow:
+        inset -1px -1px 0 0 #000,
+        inset 1px 1px 0 0 #fff,
+        inset -2px -2px 0 0 #808080,
+        inset 2px 2px 0 0 #dfdfdf;
+    background: #c0c0c0;
+    font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+    font-size: 11px;
+    position: absolute;
+    min-width: 400px;
+    min-height: 300px;
+}
+
+/* Title Bar */
+.folder_dragbar-InternetExplorer {
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: white;
+    height: 18px;
+    padding: 2px 2px 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 11px;
+    user-select: none;
+}
+
+.folder_barname-InternetExplorer {
+    display: flex;
+    align-items: center;
+}
+
+.folder_barname-InternetExplorer img {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+
+.folder_barbtn-InternetExplorer {
+    display: flex;
+    gap: 3px;
+}
+
+.folder_barbtn-InternetExplorer > div {
+    width: 28px;
+    height: 14px;
+    background: #c0c0c0;
+    border: 1px outset #dfdfdf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.folder_barbtn-InternetExplorer > div:active {
+    border: 1px inset #808080;
+}
+
+.dash-InternetExplorer {
+    width: 10px;
+    height: 2px;
+    background: black;
+    margin: 0;
+}
+
+.expand-InternetExplorer {
+    width: 10px;
+    height: 2px;
+    background: black;
+    position: relative;
+}
+
+.expand-InternetExplorer.full::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    background: black;
+    top: -4px;
+    left: 4px;
+}
+
+.expand_2-InternetExplorer {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 1px solid black;
+    bottom: 2px;
+    right: 2px;
+}
+
+.x-InternetExplorer {
+    margin: 0;
+    font-size: 14px;
+    line-height: 10px;
+    font-weight: bold;
+}
+
+/* Menu Bar */
+.file_edit_container-InternetExplorer {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 4px;
+    display: flex;
+    gap: 8px;
+    position: relative;
+    user-select: none;
+}
+
+.file_edit_container-InternetExplorer p {
+    padding: 2px 8px;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+}
+
+.file_edit_container-InternetExplorer p:hover {
+    background: #000080;
+    color: white;
+}
+
+.file_edit_container-InternetExplorer p span {
+    position: absolute;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    box-shadow: 2px 2px 0 #000;
+    z-index: 1000;
+    min-width: 150px;
+    padding: 2px 0;
+}
+
+.dropdown-menu > div {
+    padding: 2px 20px;
+    cursor: pointer;
+}
+
+.dropdown-menu > div:hover {
+    background: #000080;
+    color: white;
+}
+
+.menu-separator {
+    height: 1px;
+    background: #808080;
+    margin: 2px 0;
+    pointer-events: none;
+}
+
+/* Toolbar */
+.ie-toolbar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 3px;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+}
+
+.ie-toolbar-button {
+    width: 24px;
+    height: 22px;
+    border: 1px solid transparent;
+    background: #c0c0c0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ie-toolbar-button:hover {
+    border: 1px outset #dfdfdf;
+}
+
+.ie-toolbar-button:active {
+    border: 1px inset #808080;
+}
+
+.ie-toolbar-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ie-address-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+}
+
+.ie-address-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.ie-address-label {
+    margin-right: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.ie-address-input {
+    flex: 1;
+    height: 20px;
+    border: 1px inset #dfdfdf;
+    padding: 0 4px;
+    font-size: 11px;
+    font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+    background: white;
+}
+
+.ie-go-button {
+    width: 30px;
+    height: 22px;
+    margin-left: 4px;
+    border: 1px outset #dfdfdf;
+    background: #c0c0c0;
+    cursor: pointer;
+    font-size: 11px;
+    font-family: "MS Sans Serif", "Microsoft Sans Serif", sans-serif;
+}
+
+.ie-go-button:hover {
+    border: 1px outset #fff;
+}
+
+.ie-go-button:active {
+    border: 1px inset #808080;
+}
+
+/* Browser Content Area */
+.folder_content-InternetExplorer {
+    position: relative;
+    height: calc(100% - 100px);
+    background: #c0c0c0;
+    overflow: hidden;
+}
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #c0c0c0;
+    border: 1px solid #808080;
+    padding: 10px 20px;
+    z-index: 10;
+    box-shadow: 2px 2px 0 #000;
+}
+
+.ie-browser-frame {
+    width: 100%;
+    height: 100%;
+    border: 2px inset #dfdfdf;
+    background: white;
+}
+
+/* Status Bar */
+.ie-status-bar {
+    background: #c0c0c0;
+    border-top: 1px solid #fff;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    height: 20px;
+}
+
+.ie-status-text {
+    flex: 1;
+    border: 1px inset #dfdfdf;
+    padding: 1px 4px;
+    margin-right: 4px;
+    background: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ie-status-zone {
+    border: 1px inset #dfdfdf;
+    padding: 1px 8px;
+    min-width: 80px;
+    text-align: center;
+    background: white;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 500px) {
+    .folder_folder-InternetExplorer {
+        min-width: 300px;
+    }
+
+    .file_edit_container-InternetExplorer {
+        flex-wrap: wrap;
+    }
+
+    .ie-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .ie-address-container {
+        order: 2;
+        width: 100%;
+        margin-top: 4px;
+        margin-left: 0;
+    }
+}
