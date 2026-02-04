@@ -21,8 +21,14 @@ import { bookmarks } from './utils/bookmarks';
 import { validateUrl } from './utils/urlValidator';
 import { handleSpecialUrls, isKnownToBlock } from './utils/urlHandler';
 
-function InternetExplorer() {
-  const iframeRef = useRef(null);
+function InternetExplorer({ 
+  windowId, 
+  initialZIndex = 1000,
+  onClose, 
+  onMinimize,
+  onFocus 
+}) {
+  const nodeRef = useRef(null);
   
   const { 
     setRightClickDefault,
@@ -39,11 +45,11 @@ function InternetExplorer() {
 
   // Window state
   const [windowState, setWindowState] = useState({
-    position: { x: 100, y: 100 },
-    size: { width: 800, height: 600 },
+    position: { x: 100, y: 50 },
+    size: { width: 900, height: 600 },
     isMaximized: false,
-    isMinimized: false,
-    zIndex: 1
+    zIndex: initialZIndex,
+    previousState: null
   });
 
   // Browser state
@@ -72,33 +78,69 @@ function InternetExplorer() {
   const [history, setHistory] = useState({ items: ['about:blank'], currentIndex: 0 });
   const [favorites, setFavorites] = useState({ items: [], folders: [] });
 
-  function handleDragStop(event, data) {
-    const positionX = data.x 
-    const positionY = data.y
-    setIEExpand(prev => ({
-      ...prev,
-      x: positionX,
-      y: positionY
-    }))
-  }
-
   // ============ WINDOW CONTROL HANDLERS ============
   const handleMinimize = () => {
     console.log('Minimize clicked');
-    setIEExpand(prev => ({...prev, hide: true, focusItem: false}))
-    StyleHide('IE')
+    if (onMinimize) {
+      onMinimize(windowId);
+    } else {
+      // Fallback to existing behavior
+      setIEExpand(prev => ({...prev, hide: true, focusItem: false}))
+      StyleHide('IE')
+    }
   };
 
   const handleMaximize = () => {
     console.log('Maximize clicked');
-    setIEExpand(prev => ({...prev, expand: !prev.expand}))
+    setWindowState(prev => {
+      if (prev.isMaximized) {
+        // Restore to previous size and position
+        return {
+          ...prev,
+          isMaximized: false,
+          position: prev.previousState?.position || { x: 100, y: 50 },
+          size: prev.previousState?.size || { width: 900, height: 600 },
+          previousState: null
+        };
+      } else {
+        // Maximize to full screen - respect taskbar (40px)
+        return {
+          ...prev,
+          isMaximized: true,
+          previousState: {
+            position: prev.position,
+            size: prev.size
+          },
+          position: { x: 0, y: 0 },
+          size: { 
+            width: window.innerWidth, 
+            height: window.innerHeight - 40 // Account for taskbar
+          }
+        };
+      }
+    });
   };
 
   const handleClose = () => {
     console.log('Close clicked');
     // Save history and favorites to localStorage before closing
     localStorage.setItem('ie_history', JSON.stringify(history));
-    deleteTap('IE')
+    
+    if (onClose) {
+      onClose(windowId);
+    } else {
+      // Fallback to existing behavior
+      deleteTap('IE')
+    }
+  };
+
+  const handleWindowClick = () => {
+    if (onFocus) {
+      onFocus(windowId);
+    } else {
+      // Fallback to existing behavior
+      handleSetFocusItemTrue('IE');
+    }
   };
 
   // ============ NAVIGATION HANDLERS ============
@@ -146,11 +188,6 @@ function InternetExplorer() {
       canGoBack: newHistory.currentIndex > 0,
       canGoForward: false
     }));
-    
-    // Load URL in iframe
-    if (iframeRef.current) {
-      iframeRef.current.src = finalUrl;
-    }
   };
 
   const goBack = () => {
@@ -164,9 +201,6 @@ function InternetExplorer() {
         canGoBack: newIndex > 0,
         canGoForward: true
       }));
-      if (iframeRef.current) {
-        iframeRef.current.src = url;
-      }
     }
   };
 
@@ -181,25 +215,20 @@ function InternetExplorer() {
         canGoBack: true,
         canGoForward: newIndex < history.items.length - 1
       }));
-      if (iframeRef.current) {
-        iframeRef.current.src = url;
-      }
     }
   };
 
   const refresh = () => {
     console.log('Refresh clicked');
     setBrowserState(prev => ({ ...prev, isLoading: true }));
-    if (iframeRef.current) {
-      iframeRef.current.src = iframeRef.current.src;
+    const iframe = nodeRef.current?.querySelector('iframe');
+    if (iframe) {
+      iframe.src = iframe.src;
     }
   };
 
   const stopLoading = () => {
     console.log('Stop clicked');
-    if (iframeRef.current) {
-      iframeRef.current.src = 'about:blank';
-    }
     setBrowserState(prev => ({ ...prev, isLoading: false }));
   };
 
@@ -214,8 +243,9 @@ function InternetExplorer() {
     
     // Try to get page title from iframe
     try {
-      if (iframeRef.current && iframeRef.current.contentDocument) {
-        const pageTitle = iframeRef.current.contentDocument.title;
+      const iframe = nodeRef.current?.querySelector('iframe');
+      if (iframe && iframe.contentDocument) {
+        const pageTitle = iframe.contentDocument.title;
         if (pageTitle) {
           setBrowserState(prev => ({ ...prev, title: pageTitle }));
         }
@@ -270,6 +300,11 @@ function InternetExplorer() {
     setUiState(prev => ({ ...prev, showHistoryPanel: !prev.showHistoryPanel, showFavoritesPanel: false }));
   };
 
+  // Update z-index when initialZIndex changes (when window is brought to front)
+  useEffect(() => {
+    setWindowState(prev => ({ ...prev, zIndex: initialZIndex }));
+  }, [initialZIndex]);
+
   // Load favorites from localStorage on mount
   useEffect(() => {
     const savedFavorites = localStorage.getItem('win95_ie_favorites');
@@ -282,144 +317,177 @@ function InternetExplorer() {
     }
   }, []);
 
-  if (!IEExpand.show) return null;
+  // CRITICAL: Proper window style
+  const getWindowStyle = () => {
+    if (windowState.isMaximized) {
+      return {
+        position: 'fixed', // Use fixed when maximized
+        left: 0,
+        top: 0,
+        width: '100vw',
+        height: 'calc(100vh - 40px)', // Account for taskbar
+        zIndex: windowState.zIndex,
+        margin: 0
+      };
+    }
+    
+    return {
+      position: 'absolute', // Use absolute for normal windows
+      left: windowState.position.x,
+      top: windowState.position.y,
+      width: windowState.size.width,
+      height: windowState.size.height,
+      zIndex: windowState.zIndex
+    };
+  };
+
+  // Handle drag stop
+  const handleDragStop = (event, data) => {
+    if (!windowState.isMaximized) {
+      setWindowState(prev => ({
+        ...prev,
+        position: { x: data.x, y: data.y }
+      }));
+    }
+  };
+
+  // Don't render if using new window management system
+  if (onClose && !IEExpand.show) {
+    return null;
+  }
+
+  // Don't render if using old system and hidden
+  if (!onClose && !IEExpand.show) {
+    return null;
+  }
 
   return (
-    <>
-      <Draggable
-        axis="both" 
-        handle={'.ie-title-bar'}
-        grid={[1, 1]}
-        scale={1}
-        disabled={IEExpand.expand}
-        bounds={{top: 0}}
-        defaultPosition={{ 
-          x: window.innerWidth <= 500 ? 20 : 100,
-          y: window.innerWidth <= 500 ? 40 : 100,
-        }}
-        onStop={(event, data) => handleDragStop(event, data)}
-        onStart={() => handleSetFocusItemTrue('IE')}
+    <Draggable
+      handle=".ie-title-bar"
+      disabled={windowState.isMaximized}
+      nodeRef={nodeRef}
+      position={windowState.isMaximized ? { x: 0, y: 0 } : windowState.position}
+      onStart={handleWindowClick}
+      onStop={handleDragStop}
+      bounds="parent" // CRITICAL: Keep window within desktop bounds
+    >
+      <div
+        ref={nodeRef}
+        className={`ie-window ${windowState.isMaximized ? 'maximized' : ''}`}
+        style={onClose ? getWindowStyle() : (IEExpand.expand ? inlineStyleExpand('IE') : inlineStyle('IE'))}
+        onClick={handleWindowClick}
       >
-        <div
-          className='ie-window'
-          onClick={(e) => {
-            e.stopPropagation();
-            handleSetFocusItemTrue('IE');
-          }}
-          style={ IEExpand.expand ? inlineStyleExpand('IE') : inlineStyle('IE')}
-        >
-          {/* Title Bar */}
-          <div className="ie-title-bar" style={{ background: IEExpand.focusItem ? themeDragBar : '#757579' }}>
-            <div className="ie-title-content">
-              <img src={imageMapping('Internet Explorer')} alt="IE" className="ie-title-icon" />
-              <span className="ie-title-text">{browserState.title}</span>
-            </div>
-            <div className="ie-window-controls">
-              <button 
-                className="ie-control-button" 
-                onClick={!isTouchDevice ? handleMinimize : undefined}
-                onTouchEnd={handleMinimize}
-                title="Minimize"
-              >
-                <span className="ie-minimize-icon">_</span>
-              </button>
-              <button 
-                className="ie-control-button" 
-                onClick={!isTouchDevice ? handleMaximize : undefined}
-                onTouchEnd={handleMaximize}
-                title={IEExpand.expand ? "Restore" : "Maximize"}
-              >
-                <span className="ie-maximize-icon">{IEExpand.expand ? "❐" : "□"}</span>
-              </button>
-              <button 
-                className="ie-control-button ie-close-button" 
-                onClick={!isTouchDevice ? handleClose : undefined}
-                onTouchEnd={handleClose}
-                title="Close"
-              >
-                <span className="ie-close-icon">×</span>
-              </button>
-            </div>
+        {/* Title Bar */}
+        <div className="ie-title-bar" style={{ background: (onClose ? windowState.zIndex === initialZIndex : IEExpand.focusItem) ? themeDragBar : '#757579' }}>
+          <div className="ie-title-content">
+            <img src={imageMapping('Internet Explorer')} alt="IE" className="ie-title-icon" />
+            <span className="ie-title-text">{browserState.title}</span>
           </div>
+          <div className="ie-window-controls">
+            <button 
+              className="ie-control-button" 
+              onClick={!isTouchDevice ? handleMinimize : undefined}
+              onTouchEnd={handleMinimize}
+              title="Minimize"
+            >
+              <span className="ie-minimize-icon">_</span>
+            </button>
+            <button 
+              className="ie-control-button" 
+              onClick={!isTouchDevice ? handleMaximize : undefined}
+              onTouchEnd={handleMaximize}
+              title={windowState.isMaximized ? "Restore" : "Maximize"}
+            >
+              <span className="ie-maximize-icon">{windowState.isMaximized ? "❐" : "□"}</span>
+            </button>
+            <button 
+              className="ie-control-button ie-close-button" 
+              onClick={!isTouchDevice ? handleClose : undefined}
+              onTouchEnd={handleClose}
+              title="Close"
+            >
+              <span className="ie-close-icon">×</span>
+            </button>
+          </div>
+        </div>
 
-          {/* Menu Bar */}
-          <MenuBar 
-            onToggleToolbar={toggleToolbar}
-            onToggleStatusBar={toggleStatusBar}
-            onAddToFavorites={addToFavorites}
-            onShowHistory={toggleHistoryPanel}
+        {/* Menu Bar */}
+        <MenuBar 
+          onToggleToolbar={toggleToolbar}
+          onToggleStatusBar={toggleStatusBar}
+          onAddToFavorites={addToFavorites}
+          onShowHistory={toggleHistoryPanel}
+          onShowFavorites={toggleFavoritesPanel}
+        />
+
+        {/* Toolbar */}
+        {uiState.showToolbar && (
+          <Toolbar 
+            onBack={goBack}
+            onForward={goForward}
+            onStop={stopLoading}
+            onRefresh={refresh}
+            onHome={goHome}
             onShowFavorites={toggleFavoritesPanel}
-          />
-
-          {/* Toolbar */}
-          {uiState.showToolbar && (
-            <Toolbar 
-              onBack={goBack}
-              onForward={goForward}
-              onStop={stopLoading}
-              onRefresh={refresh}
-              onHome={goHome}
-              onShowFavorites={toggleFavoritesPanel}
-              onShowHistory={toggleHistoryPanel}
-              canGoBack={browserState.canGoBack}
-              canGoForward={browserState.canGoForward}
-              isLoading={browserState.isLoading}
-            />
-          )}
-
-          {/* Address Bar */}
-          <AddressBar 
-            currentUrl={browserState.currentUrl}
-            onNavigate={navigate}
+            onShowHistory={toggleHistoryPanel}
+            canGoBack={browserState.canGoBack}
+            canGoForward={browserState.canGoForward}
             isLoading={browserState.isLoading}
           />
+        )}
 
-          {/* Main Content Area */}
-          <div className="ie-content-area">
-            {/* Favorites Panel */}
-            {uiState.showFavoritesPanel && (
-              <FavoritesPanel 
-                favorites={favorites}
-                onNavigate={navigate}
-                onClose={() => setUiState(prev => ({ ...prev, showFavoritesPanel: false }))}
-              />
-            )}
+        {/* Address Bar */}
+        <AddressBar 
+          currentUrl={browserState.currentUrl}
+          onNavigate={navigate}
+          isLoading={browserState.isLoading}
+        />
 
-            {/* History Panel */}
-            {uiState.showHistoryPanel && (
-              <HistoryPanel 
-                history={history}
-                onNavigate={navigate}
-                onClose={() => setUiState(prev => ({ ...prev, showHistoryPanel: false }))}
-              />
-            )}
-
-            {/* Browser Frame */}
-            <div className="ie-browser-container">
-              {/* Quick Links - only show on about:blank */}
-              {browserState.currentUrl === 'about:blank' && (
-                <QuickLinks onNavigate={navigate} />
-              )}
-              
-              <BrowserFrame 
-                url={browserState.currentUrl}
-                onLoad={handlePageLoad}
-                onError={handlePageError}
-              />
-            </div>
-          </div>
-
-          {/* Status Bar */}
-          {uiState.showStatusBar && (
-            <StatusBar 
-              status={browserState.isLoading ? "Loading..." : "Done"}
-              url={browserState.currentUrl}
-              secureConnection={browserState.secureConnection}
+        {/* Main Content Area */}
+        <div className="ie-content-area">
+          {/* Favorites Panel */}
+          {uiState.showFavoritesPanel && (
+            <FavoritesPanel 
+              favorites={favorites}
+              onNavigate={navigate}
+              onClose={() => setUiState(prev => ({ ...prev, showFavoritesPanel: false }))}
             />
           )}
+
+          {/* History Panel */}
+          {uiState.showHistoryPanel && (
+            <HistoryPanel 
+              history={history}
+              onNavigate={navigate}
+              onClose={() => setUiState(prev => ({ ...prev, showHistoryPanel: false }))}
+            />
+          )}
+
+          {/* Browser Frame */}
+          <div className="ie-browser-container">
+            {/* Quick Links - only show on about:blank */}
+            {browserState.currentUrl === 'about:blank' && (
+              <QuickLinks onNavigate={navigate} />
+            )}
+            
+            <BrowserFrame 
+              url={browserState.currentUrl}
+              onLoad={handlePageLoad}
+              onError={handlePageError}
+            />
+          </div>
         </div>
-      </Draggable>
-    </>
+
+        {/* Status Bar */}
+        {uiState.showStatusBar && (
+          <StatusBar 
+            status={browserState.isLoading ? "Loading..." : "Done"}
+            url={browserState.currentUrl}
+            secureConnection={browserState.secureConnection}
+          />
+        )}
+      </div>
+    </Draggable>
   )
 }
 

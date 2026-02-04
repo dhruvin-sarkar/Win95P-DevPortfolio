@@ -1,25 +1,34 @@
 /* ------------ Internet Explorer Window ---------------- */
 
-/* Main window container */
+/* Main window - CRITICAL positioning */
 .ie-window {
     display: flex;
     flex-direction: column;
     border: 2px outset #dfdfdf;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
     background: #c0c0c0;
     font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
     overflow: hidden;
+
+    /* CRITICAL: Prevent layout issues */
+    box-sizing: border-box;
+
+    /* Default size constraints */
     min-width: 400px;
     min-height: 300px;
+    max-width: 100vw;
+    max-height: calc(100vh - 40px);
 }
 
 .ie-window.maximized {
-    position: fixed !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100vw !important;
-    height: calc(100vh - 40px) !important;
     border: none;
+    box-shadow: none;
+    max-width: 100vw !important;
+    max-height: calc(100vh - 40px) !important;
+}
+
+.ie-window * {
+    box-sizing: border-box;
 }
 
 /* Title bar - 18px */
@@ -39,6 +48,77 @@
     flex-shrink: 0;
 }
 
+.ie-title-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 2px;
+    flex: 1;
+    pointer-events: none;
+    /* Allow drag through this area */
+}
+
+.ie-title-icon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+}
+
+.ie-title-text {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ie-window-controls {
+    display: flex;
+    gap: 2px;
+    pointer-events: auto;
+    /* Enable button clicks */
+}
+
+.ie-control-button {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border: 1px outset #dfdfdf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.ie-control-button:hover {
+    background: #d4d0c8;
+}
+
+.ie-control-button:active {
+    border: 1px inset #808080;
+    background: #b0b0b0;
+}
+
+.ie-minimize-icon {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ie-maximize-icon {
+    font-size: 10px;
+    line-height: 1;
+}
+
+.ie-close-icon {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: normal;
+}
+
 /* Menu bar - 20px */
 .ie-menu-bar {
     background: #c0c0c0;
@@ -49,6 +129,17 @@
     height: 20px;
     align-items: center;
     flex-shrink: 0;
+}
+
+.ie-menu-item {
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.ie-menu-item:hover {
+    background: #000080;
+    color: white;
 }
 
 /* Navigation bar - 28px */
@@ -76,6 +167,87 @@
     position: relative;
     z-index: 1;
     /* Ensure it's above other elements */
+}
+
+.ie-address-label {
+    margin-right: 4px;
+    font-size: 11px;
+    color: #000;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.ie-address-input-container {
+    flex: 1;
+    display: flex;
+    border: 1px inset #dfdfdf;
+    background: white;
+}
+
+.ie-address-input {
+    flex: 1;
+    height: 20px;
+    border: none;
+    padding: 0 4px;
+    font-size: 11px;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    background: white;
+    color: black;
+    outline: none;
+
+    /* CRITICAL: Ensure input is interactive */
+    pointer-events: auto !important;
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    cursor: text !important;
+}
+
+.ie-address-input:focus {
+    outline: 1px dotted #000;
+    outline-offset: -2px;
+}
+
+.ie-address-input:disabled {
+    background: #c0c0c0;
+    color: #808080;
+}
+
+.ie-go-button {
+    padding: 2px 12px;
+    height: 22px;
+    margin-left: 4px;
+    border: 1px outset #dfdfdf;
+    background: #c0c0c0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ie-go-button:active:not(:disabled) {
+    border: 1px inset #808080;
+    padding: 3px 11px 1px 13px;
+}
+
+.ie-go-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ie-loading-indicator {
+    margin-left: 4px;
+    animation: spin 1s linear infinite;
+    font-size: 12px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Browser frame - takes remaining space */
@@ -109,6 +281,16 @@
     font-size: 11px;
     height: 22px;
     flex-shrink: 0;
+}
+
+.ie-status-text {
+    flex: 1;
+    border: 1px inset #dfdfdf;
+    padding: 1px 4px;
+    background: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Fix for blank page */
@@ -147,6 +329,15 @@
 /* Error page styling */
 .ie-error-page {
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 40px 20px;
+    text-align: center;
+    overflow-y: auto;
     height: 100%;
     display: flex;
     flex-direction: column;
