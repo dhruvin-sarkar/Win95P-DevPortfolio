@@ -67,7 +67,7 @@ function InternetExplorer() {
   });
 
   // History and favorites
-  const [history, setHistory] = useState({ items: [], currentIndex: -1 });
+  const [history, setHistory] = useState({ items: ['about:blank'], currentIndex: 0 });
   const [favorites, setFavorites] = useState({ items: [], folders: [] });
 
   function handleDragStop(event, data) {
@@ -80,26 +80,66 @@ function InternetExplorer() {
     }))
   }
 
-  // Navigation functions
-  const navigate = (url) => {
-    const validUrl = validateUrl(url);
+  // ============ WINDOW CONTROL HANDLERS ============
+  const handleMinimize = () => {
+    console.log('Minimize clicked');
+    setIEExpand(prev => ({...prev, hide: true, focusItem: false}))
+    StyleHide('IE')
+  };
+
+  const handleMaximize = () => {
+    console.log('Maximize clicked');
+    setIEExpand(prev => ({...prev, expand: !prev.expand}))
+  };
+
+  const handleClose = () => {
+    console.log('Close clicked');
+    // Save history and favorites to localStorage before closing
+    localStorage.setItem('ie_history', JSON.stringify(history));
+    deleteTap('IE')
+  };
+
+  // ============ NAVIGATION HANDLERS ============
+  const validateAndFormatUrl = (url) => {
+    url = url.trim();
     
-    // Update history
-    const newHistory = [...history.items.slice(0, history.currentIndex + 1), validUrl];
-    setHistory({ items: newHistory, currentIndex: newHistory.length - 1 });
+    // If it's already a valid URL, return it
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('about:')) {
+      return url;
+    }
+    
+    // If it looks like a domain, add https://
+    if (url.includes('.') && !url.includes(' ')) {
+      return 'https://' + url;
+    }
+    
+    // Otherwise, treat it as a search query
+    return 'https://www.google.com/search?q=' + encodeURIComponent(url);
+  };
+
+  const navigate = (url) => {
+    console.log('Navigating to:', url);
+    const formattedUrl = validateAndFormatUrl(url);
+    
+    // Add to history
+    const newHistory = {
+      items: [...history.items.slice(0, history.currentIndex + 1), formattedUrl],
+      currentIndex: history.currentIndex + 1
+    };
+    setHistory(newHistory);
     
     // Update browser state
-    setBrowserState(prev => ({ 
+    setBrowserState(prev => ({
       ...prev, 
-      currentUrl: validUrl, 
+      currentUrl: formattedUrl, 
       isLoading: true,
-      canGoBack: newHistory.length > 1,
+      canGoBack: newHistory.currentIndex > 0,
       canGoForward: false
     }));
     
     // Load URL in iframe
     if (iframeRef.current) {
-      iframeRef.current.src = validUrl;
+      iframeRef.current.src = formattedUrl;
     }
   };
 
@@ -112,7 +152,7 @@ function InternetExplorer() {
         ...prev, 
         currentUrl: url,
         canGoBack: newIndex > 0,
-        canGoForward: newIndex < history.items.length - 1
+        canGoForward: true
       }));
       if (iframeRef.current) {
         iframeRef.current.src = url;
@@ -128,7 +168,7 @@ function InternetExplorer() {
       setBrowserState(prev => ({ 
         ...prev, 
         currentUrl: url,
-        canGoBack: newIndex > 0,
+        canGoBack: true,
         canGoForward: newIndex < history.items.length - 1
       }));
       if (iframeRef.current) {
@@ -138,13 +178,15 @@ function InternetExplorer() {
   };
 
   const refresh = () => {
+    console.log('Refresh clicked');
+    setBrowserState(prev => ({ ...prev, isLoading: true }));
     if (iframeRef.current) {
-      setBrowserState(prev => ({ ...prev, isLoading: true }));
       iframeRef.current.src = iframeRef.current.src;
     }
   };
 
   const stopLoading = () => {
+    console.log('Stop clicked');
     if (iframeRef.current) {
       iframeRef.current.src = 'about:blank';
     }
@@ -155,29 +197,31 @@ function InternetExplorer() {
     navigate('about:blank');
   };
 
-  // Window management functions
-  const handleMinimize = () => {
-    setIEExpand(prev => ({...prev, hide: true, focusItem: false}))
-    StyleHide('IE')
-  };
-
-  const handleMaximize = () => {
-    setIEExpand(prev => ({...prev, expand: !prev.expand}))
-  };
-
-  const handleClose = () => {
-    deleteTap('IE')
-  };
-
   // Page load handlers
   const handlePageLoad = () => {
+    console.log('Page loaded:', browserState.currentUrl);
     setBrowserState(prev => ({ ...prev, isLoading: false, loadProgress: 100 }));
+    
+    // Try to get page title from iframe
+    try {
+      if (iframeRef.current && iframeRef.current.contentDocument) {
+        const pageTitle = iframeRef.current.contentDocument.title;
+        if (pageTitle) {
+          setBrowserState(prev => ({ ...prev, title: pageTitle }));
+        }
+      }
+    } catch (e) {
+      // Cross-origin restriction, can't access iframe content
+      console.log('Cannot access iframe content (CORS)');
+    }
+    
     setTimeout(() => {
       setBrowserState(prev => ({ ...prev, loadProgress: 0 }));
     }, 1000);
   };
 
   const handlePageError = () => {
+    console.error('Page load error:', browserState.currentUrl);
     setBrowserState(prev => ({ ...prev, isLoading: false }));
   };
 
@@ -260,30 +304,30 @@ function InternetExplorer() {
               <img src={imageMapping('Internet Explorer')} alt="IE" className="ie-title-icon" />
               <span className="ie-title-text">{browserState.title}</span>
             </div>
-            <div className="ie-title-buttons">
+            <div className="ie-window-controls">
               <button 
-                className="ie-title-button" 
+                className="ie-control-button" 
                 onClick={!isTouchDevice ? handleMinimize : undefined}
                 onTouchEnd={handleMinimize}
                 title="Minimize"
               >
-                <span>_</span>
+                <span className="ie-minimize-icon">_</span>
               </button>
               <button 
-                className="ie-title-button" 
+                className="ie-control-button" 
                 onClick={!isTouchDevice ? handleMaximize : undefined}
                 onTouchEnd={handleMaximize}
                 title={IEExpand.expand ? "Restore" : "Maximize"}
               >
-                <span>{IEExpand.expand ? "❐" : "□"}</span>
+                <span className="ie-maximize-icon">{IEExpand.expand ? "❐" : "□"}</span>
               </button>
               <button 
-                className="ie-title-button ie-close-button" 
+                className="ie-control-button ie-close-button" 
                 onClick={!isTouchDevice ? handleClose : undefined}
                 onTouchEnd={handleClose}
                 title="Close"
               >
-                <span>×</span>
+                <span className="ie-close-icon">×</span>
               </button>
             </div>
           </div>

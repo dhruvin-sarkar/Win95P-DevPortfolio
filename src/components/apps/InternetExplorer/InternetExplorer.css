@@ -1,7 +1,6 @@
 /* ------------ Internet Explorer Window ---------------- */
 
 .ie-window {
-    display: none;
     position: fixed;
     width: 800px;
     height: 600px;
@@ -188,31 +187,99 @@
 .ie-address-bar {
     display: flex;
     align-items: center;
-    padding: 3px;
+    gap: 4px;
+    padding: 3px 4px;
     background: #c0c0c0;
     border-bottom: 1px solid #808080;
-    height: 28px;
+    position: relative;
+    z-index: 1;
+    /* Ensure it's above other elements */
 }
 
 .ie-address-label {
     margin-right: 4px;
     font-size: 11px;
     color: #000;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.ie-address-input-container {
+    flex: 1;
+    display: flex;
+    border: 1px inset #dfdfdf;
+    background: white;
 }
 
 .ie-address-input {
     flex: 1;
     height: 20px;
-    border: 1px inset #dfdfdf;
+    border: none;
     padding: 0 4px;
     font-size: 11px;
     font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
     background: white;
+    color: black;
+    outline: none;
+
+    /* CRITICAL: Ensure input is interactive */
+    pointer-events: auto !important;
+    -webkit-user-select: text;
+    user-select: text;
+    cursor: text !important;
 }
 
 .ie-address-input:focus {
-    outline: 1px solid #000080;
-    outline-offset: -1px;
+    outline: 1px dotted #000;
+    outline-offset: -2px;
+}
+
+.ie-address-input:disabled {
+    background: #c0c0c0;
+    color: #808080;
+}
+
+.ie-go-button {
+    padding: 2px 12px;
+    height: 22px;
+    margin-left: 4px;
+    border: 1px outset #dfdfdf;
+    background: #c0c0c0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ie-go-button:active:not(:disabled) {
+    border: 1px inset #808080;
+    padding: 3px 11px 1px 13px;
+}
+
+.ie-go-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ie-loading-indicator {
+    margin-left: 4px;
+    animation: spin 1s linear infinite;
+    font-size: 12px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ie-go-button:active {
+    border-color: #000000 #ffffff #ffffff #000000;
+    background: #7f7f7f;
 }
 
 .ie-address-suggestions {
@@ -248,49 +315,105 @@
     border-bottom: none;
 }
 
-.ie-go-button {
-    width: 40px;
-    height: 20px;
-    margin-left: 4px;
-    border: 1px solid;
-    border-color: #ffffff #000000 #000000 #ffffff;
-    background: #c0c0c0;
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-.ie-go-button:active {
-    border-color: #000000 #ffffff #ffffff #000000;
-    background: #7f7f7f;
-}
-
-/* Content Area */
-.ie-content-area {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-}
-
-.ie-browser-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
+/* Browser Frame */
 .ie-browser-frame {
     flex: 1;
-    border: 2px inset #dfdfdf;
     background: white;
+    border: 2px inset #dfdfdf;
     overflow: hidden;
+    position: relative;
 }
 
 .ie-browser-frame iframe {
     width: 100%;
     height: 100%;
     border: none;
+    display: block;
+}
+
+.ie-blank-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: white;
+    color: #000;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.ie-blank-page h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #000080;
+}
+
+.ie-blank-page p {
+    font-size: 14px;
+    color: #666;
+    margin: 8px 0;
+}
+
+/* Window Controls */
+.ie-window-controls {
+    display: flex;
+    gap: 2px;
+    pointer-events: auto;
+    /* Enable button clicks */
+}
+
+.ie-control-button {
+    width: 16px;
+    height: 14px;
+    background: #c0c0c0;
+    border: 1px outset #dfdfdf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+.ie-control-button:hover {
+    background: #d4d0c8;
+}
+
+.ie-control-button:active {
+    border: 1px inset #808080;
+    background: #b0b0b0;
+}
+
+.ie-minimize-icon {
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.ie-maximize-icon {
+    font-size: 10px;
+    line-height: 1;
+}
+
+.ie-close-icon {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: normal;
+}
+
+.ie-title-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 2px;
+    flex: 1;
+    pointer-events: none;
+    /* Allow drag through this area */
 }
 
 /* Side Panels */

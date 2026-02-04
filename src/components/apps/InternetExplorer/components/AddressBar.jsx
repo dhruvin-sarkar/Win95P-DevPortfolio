@@ -1,86 +1,68 @@
 import React, { useState, useRef, useEffect } from 'react';
 
 const AddressBar = ({ currentUrl, onNavigate, isLoading }) => {
-  const [url, setUrl] = useState(currentUrl);
-  const [suggestions, setSuggestions] = useState([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [inputValue, setInputValue] = useState(currentUrl);
   const inputRef = useRef(null);
 
+  // Sync input value when currentUrl changes from navigation
   useEffect(() => {
-    setUrl(currentUrl);
+    setInputValue(currentUrl);
   }, [currentUrl]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (url.trim()) {
-      onNavigate(url.trim());
-      setShowSuggestions(false);
-    }
+  // Handle input change - CRITICAL: Must allow typing
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
   };
 
-  const handleChange = (e) => {
-    const newUrl = e.target.value;
-    setUrl(newUrl);
-    
-    // Generate suggestions (simplified - in real app would use history/favorites)
-    if (newUrl.length > 2) {
-      const mockSuggestions = [
-        'https://google.com',
-        'https://github.com',
-        'https://stackoverflow.com',
-        'https://youtube.com'
-      ].filter(s => s.includes(newUrl.toLowerCase()));
-      setSuggestions(mockSuggestions);
-      setShowSuggestions(mockSuggestions.length > 0);
-    } else {
-      setShowSuggestions(false);
-    }
-  };
-
-  const handleSuggestionClick = (suggestion) => {
-    setUrl(suggestion);
-    onNavigate(suggestion);
-    setShowSuggestions(false);
-  };
-
+  // Handle Enter key press to navigate
   const handleKeyDown = (e) => {
-    if (e.key === 'Escape') {
-      setShowSuggestions(false);
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleNavigate();
     }
+  };
+
+  // Handle navigation button click
+  const handleNavigate = () => {
+    if (inputValue.trim()) {
+      onNavigate(inputValue.trim());
+    }
+  };
+
+  // Handle input focus
+  const handleFocus = () => {
+    inputRef.current?.select(); // Select all text on focus
   };
 
   return (
     <div className="ie-address-bar">
       <span className="ie-address-label">Address</span>
-      <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
+      
+      <div className="ie-address-input-container">
         <input
           ref={inputRef}
           type="text"
           className="ie-address-input"
-          value={url}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
+          value={inputValue}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          placeholder="Enter a web address or search term"
+          onFocus={handleFocus}
+          placeholder="Enter URL here..."
+          disabled={isLoading}
+          autoComplete="off"
+          spellCheck="false"
         />
-        {isLoading && <div className="ie-loading" />}
-        {showSuggestions && (
-          <div className="ie-address-suggestions">
-            {suggestions.map((suggestion, index) => (
-              <div
-                key={index}
-                className="ie-address-suggestion-item"
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
-                {suggestion}
-              </div>
-            ))}
-          </div>
-        )}
       </div>
-      <button className="ie-go-button" onClick={handleSubmit}>
+
+      <button 
+        className="ie-go-button"
+        onClick={handleNavigate}
+        disabled={isLoading || !inputValue.trim()}
+      >
         Go
       </button>
+
+      {isLoading && <div className="ie-loading-indicator">⏳</div>}
     </div>
   );
 };
