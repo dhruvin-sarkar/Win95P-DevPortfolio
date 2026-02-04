@@ -17,6 +17,7 @@ import Shutdown from "./components/Shutdown";
 import MineSweeper from "./components/MineSweeper";
 import MsnFolder from "./components/MsnFolder";
 import DoomGame from "./components/DoomGame";
+import InternetExplorer from "./components/apps/InternetExplorer/InternetExplorer";
 import iconInfo from "./icon.json";
 import Login from "./components/Login";
 import OpenProject from "./components/OpenProject";
@@ -342,10 +343,18 @@ function App() {
     expand: false,
     show: false,
     hide: false,
-    focusItem: true,
+    focusItem: false,
     x: 0,
     y: 0,
-    zIndex: 1,
+  });
+
+  const [IEExpand, setIEExpand] = useState({
+    expand: false,
+    show: false,
+    hide: false,
+    focusItem: false,
+    x: 0,
+    y: 0,
   });
 
   const [DoomExpand, setDoomExpand] = useState({
@@ -1419,6 +1428,8 @@ function App() {
     setShutdownWindow,
     MineSweeperExpand,
     setMineSweeperExpand,
+    IEExpand,
+    setIEExpand,
     DoomExpand,
     setDoomExpand,
     MSNExpand,
@@ -1604,6 +1615,7 @@ function App() {
         <ResumeFile />
         <WebampPlayer />
         <MineSweeper />
+        <InternetExplorer />
         <DoomGame />
         <MsnFolder />
         <OpenProject />
@@ -1613,7 +1625,6 @@ function App() {
         <VSCode />
         <BTC />
         <Dragdrop />
-        <InternetExplorer />
         <Footer />
       </UserContext.Provider>
     </>
@@ -1955,6 +1966,13 @@ function App() {
         setter: setMineSweeperExpand,
         usestate: MineSweeperExpand,
         color: "rgba(187, 51, 48, 0.85)",
+        size: "small",
+      },
+      {
+        name: "Internet Explorer",
+        setter: setIEExpand,
+        usestate: IEExpand,
+        color: "rgba(0, 100, 200, 0.85)",
         size: "small",
       },
       {
