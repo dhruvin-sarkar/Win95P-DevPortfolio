@@ -5,8 +5,8 @@
         "folderId": "Desktop",
         "size": 4,
         "type": ".exe",
-        "x": 1,
-        "y": 1
+        "x": 20,
+        "y": 20
     },
     {
         "name": "MyComputer",
@@ -14,8 +14,8 @@
         "folderId": "Desktop",
         "size": 4,
         "type": "Drive",
-        "x": 1.5,
-        "y": 1.5
+        "x": 120,
+        "y": 20
     },
     {
         "name": "Resume",
@@ -23,8 +23,8 @@
         "folderId": "Desktop",
         "size": 30,
         "type": "folder",
-        "x": 2,
-        "y": 2
+        "x": 220,
+        "y": 20
     },
     {
         "name": "Project",
@@ -32,8 +32,8 @@
         "folderId": "Desktop",
         "size": 2000,
         "type": "folder",
-        "x": 3,
-        "y": 3
+        "x": 20,
+        "y": 120
     },
     {
         "name": "Mail",
@@ -41,11 +41,8 @@
         "folderId": "Desktop",
         "size": 12,
         "type": ".exe",
-        "x": 4,
-        "y": 4,
-        "category": "Productivity",
-        "description": "Email client for sending and receiving emails."
-
+        "x": 320,
+        "y": 20
     },
     {
         "name": "MineSweeper",
@@ -53,10 +50,8 @@
         "folderId": "Project",
         "size": 250,
         "type": ".exe",
-        "x": 5,
-        "y": 5,
-        "category": "Games",
-        "description": "Classic puzzle game where you clear mines without detonating them."
+        "x": 120,
+        "y": 120
     },
     {
         "name": "MSN",
@@ -64,10 +59,8 @@
         "folderId": "Desktop",
         "size": 1500,
         "type": ".exe",
-        "x": 6,
-        "y": 6,
-        "category": "Utilities",
-        "description": "Instant messaging application for chatting with friends."
+        "x": 20,
+        "y": 220
     },
     {
         "name": "Winamp",
@@ -75,10 +68,8 @@
         "folderId": "Utility",
         "size": 4300,
         "type": ".exe",
-        "x": 7,
-        "y": 7,
-        "category": "Utilities",
-        "description": "Media player for playing music and audio files."
+        "x": 120,
+        "y": 220
     },
     {
         "name": "Hard Disk (C:)",
@@ -86,8 +77,8 @@
         "folderId": "MyComputer",
         "size": 4000,
         "type": "Drive",
-        "x": 11,
-        "y": 11
+        "x": 20,
+        "y": 20
     },
     {
         "name": "Hard Disk (D:)",
@@ -95,8 +86,8 @@
         "folderId": "MyComputer",
         "size": 1000,
         "type": "Drive",
-        "x": 12,
-        "y": 12
+        "x": 120,
+        "y": 20
     },
     {
         "name": "CD-ROM",
@@ -104,8 +95,8 @@
         "folderId": "MyComputer",
         "size": 500,
         "type": "Drive",
-        "x": 13,
-        "y": 13
+        "x": 220,
+        "y": 20
     },
     {
         "name": "Picture",
@@ -113,8 +104,8 @@
         "folderId": "DiskC",
         "size": 1000,
         "type": "folder",
-        "x": 14,
-        "y": 14
+        "x": 20,
+        "y": 120
     },
     {
         "name": "Bitcoin",
@@ -122,49 +113,11 @@
         "folderId": "Utility",
         "size": 500,
         "type": ".exe",
-        "x": 15,
-        "y": 15,
-        "category": "Utilities",
-        "description": "Crypto tracking and wallet utility tool."
+        "x": 220,
+        "y": 120
     },
     {
         "name": "001",
-        "pic": "Jpeg",
-        "folderId": "Picture",
-        "size": 50,
-        "type": ".jpeg",
-        "x": 16,
-        "y": 16
-    },
-    {
-        "name": "002",
-        "pic": "Jpeg",
-        "folderId": "Picture",
-        "size": 50,
-        "type": ".jpeg",
-        "x": 17,
-        "y": 17
-    },
-    {
-        "name": "003",
-        "pic": "Jpeg",
-        "folderId": "Picture",
-        "size": 50,
-        "type": ".jpeg",
-        "x": 18,
-        "y": 18
-    },
-    {
-        "name": "004",
-        "pic": "Jpeg",
-        "folderId": "Picture",
-        "size": 50,
-        "type": ".jpeg",
-        "x": 19,
-        "y": 19
-    },
-    {
-        "name": "005",
         "pic": "Jpeg",
         "folderId": "Picture",
         "size": 50,
@@ -173,13 +126,49 @@
         "y": 20
     },
     {
+        "name": "002",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 120,
+        "y": 20
+    },
+    {
+        "name": "003",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 220,
+        "y": 20
+    },
+    {
+        "name": "004",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 20,
+        "y": 120
+    },
+    {
+        "name": "005",
+        "pic": "Jpeg",
+        "folderId": "Picture",
+        "size": 50,
+        "type": ".jpeg",
+        "x": 120,
+        "y": 120
+    },
+    {
         "name": "006",
         "pic": "Jpeg",
         "folderId": "Picture",
         "size": 50,
         "type": ".jpeg",
-        "x": 21,
-        "y": 21
+        "x": 220,
+        "y": 120
     },
     {
         "name": "007",
@@ -187,8 +176,8 @@
         "folderId": "Picture",
         "size": 50,
         "type": ".jpeg",
-        "x": 22,
-        "y": 22
+        "x": 20,
+        "y": 220
     },
     {
         "name": "008",
@@ -196,8 +185,8 @@
         "folderId": "Picture",
         "size": 50,
         "type": ".jpeg",
-        "x": 23,
-        "y": 23
+        "x": 120,
+        "y": 220
     },
     {
         "name": "009",
@@ -205,8 +194,8 @@
         "folderId": "Picture",
         "size": 50,
         "type": ".jpeg",
-        "x": 24,
-        "y": 24
+        "x": 220,
+        "y": 220
     },
     {
         "name": "010",
@@ -214,8 +203,8 @@
         "folderId": "RecycleBin",
         "size": 50,
         "type": ".jpeg",
-        "x": 25,
-        "y": 25
+        "x": 20,
+        "y": 20
     },
     {
         "name": "011",
@@ -223,8 +212,8 @@
         "folderId": "Picture",
         "size": 50,
         "type": ".jpeg",
-        "x": 26,
-        "y": 26
+        "x": 120,
+        "y": 20
     },
     {
         "name": "Github",
@@ -232,10 +221,8 @@
         "folderId": "Resume",
         "size": 15,
         "type": ".exe",
-        "x": 27,
-        "y": 27,
-        "category": "Productivity",
-        "description": "Tool for accessing and managing code repositories online."
+        "x": 120,
+        "y": 120
     },
     {
         "name": "AiAgent",
@@ -243,10 +230,8 @@
         "folderId": "Desktop",
         "size": 10000,
         "type": ".exe",
-        "x": 29,
-        "y": 29,
-        "category": "Productivity",
-        "description": "AI-powered personal assistant for answering questions."
+        "x": 320,
+        "y": 120
     },
     {
         "name": "Cat",
@@ -254,10 +239,8 @@
         "folderId": "Desktop",
         "size": 5000,
         "type": ".exe",
-        "x": 30,
-        "y": 30,
-        "category": "Games",
-        "description": "Virtual pet simulation game featuring a cute cat spinning."
+        "x": 20,
+        "y": 320
     },
     {
         "name": "RecycleBin",
@@ -265,8 +248,8 @@
         "folderId": "Desktop",
         "size": 250,
         "type": "ReCycleBin",
-        "x": 31,
-        "y": 31
+        "x": 120,
+        "y": 320
     },
     {
         "name": "ResetStorage",
@@ -274,10 +257,8 @@
         "folderId": "Utility",
         "size": 20,
         "type": ".exe",
-        "x": 32,
-        "y": 32,
-        "category": "Utilities",
-        "description": "Clears or resets storage data to free up system space."
+        "x": 220,
+        "y": 320
     },
     {
         "name": "Paint",
@@ -285,10 +266,8 @@
         "folderId": "Utility",
         "size": 200,
         "type": ".exe",
-        "x": 33,
-        "y": 33,
-        "category": "Utilities",
-        "description": "Basic drawing program for creating and editing images."
+        "x": 320,
+        "y": 220
     },
     {
         "name": "Utility",
@@ -296,8 +275,8 @@
         "folderId": "DiskD",
         "size": 2500,
         "type": "folder",
-        "x": 34,
-        "y": 34
+        "x": 20,
+        "y": 20
     },
     {
         "name": "Patch",
@@ -305,10 +284,8 @@
         "folderId": "Utility",
         "size": 500,
         "type": ".exe",
-        "x": 35,
-        "y": 35,
-        "category": "Utilities",
-        "description": "Software patch used to fix bugs or apply updates."
+        "x": 120,
+        "y": 20
     },
     {
         "name": "TaskManager",
@@ -316,10 +293,8 @@
         "folderId": "Utility",
         "size": 3500,
         "type": ".exe",
-        "x": 38,
-        "y": 38,
-        "category": "Utilities",
-        "description": "System tool to monitor active processes and performance."
+        "x": 220,
+        "y": 20
     },
     {
         "name": "Store",
@@ -327,8 +302,8 @@
         "folderId": "Desktop",
         "size": 5500,
         "type": ".exe",
-        "x": 39,
-        "y": 39
+        "x": 220,
+        "y": 320
     },
     {
         "name": "DOOM",
@@ -336,34 +311,26 @@
         "folderId": "Desktop",
         "size": 15000,
         "type": ".exe",
-        "x": 40,
-        "y": 40,
-        "category": "Games",
-        "description": "Classic first-person shooter game from 1993."
+        "x": 320,
+        "y": 320
     },
-
     {
         "name": "Internet Explorer",
         "pic": "Internet-Explorer",
         "folderId": "Desktop",
         "size": 8000,
         "type": ".exe",
-        "x": 41,
-        "y": 41,
-        "category": "Utilities",
-        "description": "Web browser for navigating the internet."
+        "x": 20,
+        "y": 420
     },
-
     {
         "name": "MS-DOS Prompt",
         "pic": "MS-DOS Prompt",
         "folderId": "Desktop",
         "size": 5000,
         "type": ".exe",
-        "x": 2,
-        "y": 1,
-        "category": "Utilities",
-        "description": "Command line interface for system operations."
+        "x": 120,
+        "y": 420
     },
     {
         "name": "VS Code",
@@ -371,9 +338,7 @@
         "folderId": "Desktop",
         "size": 15000,
         "type": ".exe",
-        "x": 3,
-        "y": 1,
-        "category": "Productivity",
-        "description": "Powerful code editor for developers."
+        "x": 220,
+        "y": 420
     }
 ]

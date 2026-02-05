@@ -130,7 +130,7 @@ function App() {
     img: imageMapping("MyComputer"),
   });
   const [currentFolder, setCurrentFolder] = useState("MyComputer");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [resumeStartBar, setResumejectStartBar] = useState(false);
   const [projectStartBar, setProjectStartBar] = useState(false);
   const [calenderToggle, setCalenderToggle] = useState(false);
@@ -1189,7 +1189,35 @@ function App() {
       handleShowMobile(name);
     }
     setLastTapTime(now);
-  }
+  };
+
+  // Icon sizing functions
+  const iconContainerSize = (size) => {
+    const sizes = {
+      0: { width: 70, height: 70, fontSize: 11 },
+      1: { width: 80, height: 80, fontSize: 12 },
+      2: { width: 90, height: 90, fontSize: 13 }
+    };
+    return sizes[size] || sizes[0];
+  };
+
+  const iconImgSize = (size) => {
+    const sizes = {
+      0: { width: 32, height: 32 },
+      1: { width: 40, height: 40 },
+      2: { width: 48, height: 48 }
+    };
+    return sizes[size] || sizes[0];
+  };
+
+  const iconTextSize = (size) => {
+    const sizes = {
+      0: { fontSize: '11px' },
+      1: { fontSize: '12px' },
+      2: { fontSize: '13px' }
+    };
+    return sizes[size] || sizes[0];
+  };
 
   const contextValue = {
     itemIsBeingDeleted,

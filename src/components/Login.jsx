@@ -17,14 +17,9 @@ function Login() {
         e.preventDefault()
 
         if(username === 'admin' && password === '1234'){
-            // Play startup sound BEFORE changing login state
-            // This ensures the click event is still active for autoplay policy
-            if (sounds?.playStartup) {
-                console.log('Attempting to play startup sound...');
-                sounds.playStartup();
-            }
+            // Don't play startup sound here - let App.jsx handle it after login success
             
-            // Small delay to let sound start before UI changes
+            // Small delay to let UI change before login state updates
             setTimeout(() => {
                 setLogin(false)
             }, 100);

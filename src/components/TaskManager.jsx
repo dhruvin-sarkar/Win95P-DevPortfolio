@@ -139,13 +139,12 @@ function TaskManager() {
             }
           >
               {activeState.map((item, index) => (
-                <>
                   <p 
                     style={itemSelected === index ? 
                       { background: '#040482', color: 'white' } 
                       : {}
                     }
-                    key={index}
+                    key={item.name}
                     onClick={(e) => {
                       e.stopPropagation();
                       setItemSelected(index)
@@ -154,7 +153,6 @@ function TaskManager() {
                   >
                     {item.name}
                   </p>
-                </>
               ))}
   
           </div>

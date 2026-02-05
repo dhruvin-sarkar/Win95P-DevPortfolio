@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useContext } from 'react';
 import UseContext from '../../Context';
 import '../../css/Desktop.css';
 
@@ -51,8 +51,8 @@ function Desktop() {
   const handleIconRightClick = (e, icon) => {
     e.preventDefault();
     e.stopPropagation();
-    setRightClickIcon(icon.name);
-    setIconBeingRightClicked(true);
+    setRightClickIcon(true);
+    setIconBeingRightClicked(icon);
     setRightClickDefault(false);
   };
 
@@ -64,7 +64,9 @@ function Desktop() {
 
   const handleIconDragStart = (e, icon) => {
     if (!isTouchDevice) {
-      handleOnDrag(e, icon);
+      // Create a ref for the icon element
+      const iconRef = { current: e.target.closest('.icon-container') };
+      handleOnDrag(icon.name, iconRef, icon.type)();
     }
   };
 
@@ -86,7 +88,6 @@ function Desktop() {
             top: `${icon.y}px`,
             ...iconContainerSize(icon.size)
           }}
-          onClick={() => handleIconClick(icon)}
           onContextMenu={(e) => handleIconRightClick(e, icon)}
           onDoubleClick={() => handleIconDoubleClick(icon)}
           onMouseDown={(e) => handleIconDragStart(e, icon)}
