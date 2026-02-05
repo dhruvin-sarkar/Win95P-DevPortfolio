@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Store from "./components/Store";
 import Dragdrop from "./components/Dragdrop";
 import MyBioFolder from "./components/MyBioFolder";
+import Desktop from "./components/Desktop/Desktop";
 import MyComputer from "./components/MyComputer";
 import ResumeFolder from "./components/ResumeFolder";
 import ProjectFolder from "./components/ProjectFolder";
@@ -129,7 +130,7 @@ function App() {
     img: imageMapping("MyComputer"),
   });
   const [currentFolder, setCurrentFolder] = useState("MyComputer");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [resumeStartBar, setResumejectStartBar] = useState(false);
   const [projectStartBar, setProjectStartBar] = useState(false);
   const [calenderToggle, setCalenderToggle] = useState(false);
@@ -161,7 +162,7 @@ function App() {
   const [themeDragBar, setThemeDragBar] = useState(
     () => localStorage.getItem("barcolor") || "#14045c",
   );
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const [windowsShutDownAnimation, setWindowsShutDownAnimation] =
     useState(false);
   const [detectMouse, setDetectMouse] = useState(false);
@@ -1550,6 +1551,8 @@ function App() {
           folderName="Paint"
           paintMode={true}
         />
+
+        <Desktop />
 
         <EmptyFolder
           state={pictureExpand}

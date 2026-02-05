@@ -1,0 +1,58 @@
+.desktop {
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 35px);
+  overflow: hidden;
+  background: transparent;
+  z-index: 1;
+}
+
+.icon-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  transition: background 0.1s ease;
+}
+
+.icon-container:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.icon-container:active {
+  background: rgba(0, 0, 0, 0.2);
+  transform: scale(0.98);
+}
+
+.icon-container img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.icon-container span {
+  margin-top: 2px;
+  font-size: 11px;
+  font-family: 'win95', sans-serif;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,6 +1,9 @@
 /* Import Internet Explorer CSS */
 @import './components/apps/InternetExplorer/InternetExplorer.css';
 
+/* Import Desktop CSS */
+@import './css/Desktop.css';
+
 @font-face {
     font-family: 'win95';
     src: url('../src/assets/win95.ttf') format('truetype');
