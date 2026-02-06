@@ -83,6 +83,7 @@ function Desktop() {
         <div
           key={icon.name}
           className="icon-container"
+          draggable={true}
           style={{
             left: `${icon.x}px`,
             top: `${icon.y}px`,

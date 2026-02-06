@@ -162,7 +162,7 @@ function App() {
   const [themeDragBar, setThemeDragBar] = useState(
     () => localStorage.getItem("barcolor") || "#14045c",
   );
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const [windowsShutDownAnimation, setWindowsShutDownAnimation] =
     useState(false);
   const [detectMouse, setDetectMouse] = useState(false);
@@ -326,17 +326,16 @@ function App() {
   });
 
   const [desktopIcon, setDesktopIcon] = useState(() => {
-    const localItems = localStorage.getItem("icons");
-
-    const deleteIcon = ["Cat", "AiAgent", "Winamp", "Paint", "3dObject"];
+    // Clear localStorage to start fresh and prevent double icons
+    localStorage.removeItem("icons");
+    
+    const deleteIcon = ["Cat", "AiAgent", "Winamp", "Paint", "3dObject", "TaskManager", "Patch", "SpinningCat", "NewsApp", "Notification", "Shutdown", "Doom", "MSN", "InternetExplorer", "WebampPlayer", "MineSweeper", "Bitcoin", "Github", "Store", "DOOM", "Internet Explorer", "MS-DOS Prompt", "VS Code"];
 
     const filteredItems = iconInfo.filter(
       (item) => !deleteIcon.includes(item.name),
     );
 
-    const parsedItems = localItems ? JSON.parse(localItems) : filteredItems;
-
-    return parsedItems;
+    return filteredItems;
   });
 
   const [MineSweeperExpand, setMineSweeperExpand] = useState({
@@ -1193,30 +1192,48 @@ function App() {
 
   // Icon sizing functions
   const iconContainerSize = (size) => {
+    // Normalize size to 0, 1, or 2 based on actual values
+    let normalizedSize = 0;
+    if (size >= 2000) normalizedSize = 2;  // Large folders
+    else if (size >= 30) normalizedSize = 1;  // Medium folders
+    else normalizedSize = 0;  // Small icons
+    
     const sizes = {
       0: { width: 70, height: 70, fontSize: 11 },
       1: { width: 80, height: 80, fontSize: 12 },
       2: { width: 90, height: 90, fontSize: 13 }
     };
-    return sizes[size] || sizes[0];
+    return sizes[normalizedSize] || sizes[0];
   };
 
   const iconImgSize = (size) => {
+    // Normalize size to 0, 1, or 2 based on actual values
+    let normalizedSize = 0;
+    if (size >= 2000) normalizedSize = 2;  // Large folders
+    else if (size >= 30) normalizedSize = 1;  // Medium folders
+    else normalizedSize = 0;  // Small icons
+    
     const sizes = {
       0: { width: 32, height: 32 },
       1: { width: 40, height: 40 },
       2: { width: 48, height: 48 }
     };
-    return sizes[size] || sizes[0];
+    return sizes[normalizedSize] || sizes[0];
   };
 
   const iconTextSize = (size) => {
+    // Normalize size to 0, 1, or 2 based on actual values
+    let normalizedSize = 0;
+    if (size >= 2000) normalizedSize = 2;  // Large folders
+    else if (size >= 30) normalizedSize = 1;  // Medium folders
+    else normalizedSize = 0;  // Small icons
+    
     const sizes = {
       0: { fontSize: '11px' },
       1: { fontSize: '12px' },
       2: { fontSize: '13px' }
     };
-    return sizes[size] || sizes[0];
+    return sizes[normalizedSize] || sizes[0];
   };
 
   const contextValue = {
@@ -1486,7 +1503,6 @@ function App() {
 
   // show login page
   if (login) {
-    setLoading(true);
     return (
       <UserContext.Provider value={contextValue}>
         <Login />

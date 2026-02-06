@@ -17,9 +17,13 @@ function Login() {
         e.preventDefault()
 
         if(username === 'admin' && password === '1234'){
-            // Don't play startup sound here - let App.jsx handle it after login success
+            // Play startup sound when login button is clicked
+            if (sounds?.playStartup) {
+                console.log('Playing startup sound on login button click');
+                sounds.playStartup();
+            }
             
-            // Small delay to let UI change before login state updates
+            // Small delay to let sound start before UI changes
             setTimeout(() => {
                 setLogin(false)
             }, 100);
