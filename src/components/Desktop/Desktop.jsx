@@ -24,6 +24,7 @@ function Desktop() {
     iconTextSize,
     imageMapping,
     handleOnDrag,
+    handleDragStop,
     DesktopRef,
     ProjectFolderRef,
     ResumeFolderRef,
@@ -37,16 +38,6 @@ function Desktop() {
     setTap,
     isTouchDevice,
   } = useContext(UseContext);
-
-  const handleIconClick = (icon) => {
-    if (isTouchDevice) {
-      // For touch devices, use the mobile handler
-      handleDoubleClickEnterLink(icon.name, icon.type, icon.folderId);
-    } else {
-      // For desktop, use the regular handler
-      handleDoubleClickEnterLink(icon.name, icon.type, icon.folderId);
-    }
-  };
 
   const handleIconRightClick = (e, icon) => {
     e.preventDefault();
@@ -64,9 +55,29 @@ function Desktop() {
 
   const handleIconDragStart = (e, icon) => {
     if (!isTouchDevice) {
+      setDragging(true);
       // Create a ref for the icon element
       const iconRef = { current: e.target.closest('.icon-container') };
       handleOnDrag(icon.name, iconRef, icon.type)();
+    }
+  };
+
+  const handleIconDragEnd = (e, icon) => {
+    if (!isTouchDevice) {
+      setDragging(false);
+      // Update icon position in localStorage
+      const updatedIcons = desktopIcon.map(item => {
+        if (item.name === icon.name) {
+          return {
+            ...item,
+            x: e.clientX - 50, // Offset to center icon under cursor
+            y: e.clientY - 50
+          };
+        }
+        return item;
+      });
+      setDesktopIcon(updatedIcons);
+      localStorage.setItem("icons", JSON.stringify(updatedIcons));
     }
   };
 
@@ -92,6 +103,7 @@ function Desktop() {
           onContextMenu={(e) => handleIconRightClick(e, icon)}
           onDoubleClick={() => handleIconDoubleClick(icon)}
           onMouseDown={(e) => handleIconDragStart(e, icon)}
+          onDragEnd={(e) => handleIconDragEnd(e, icon)}
           onTouchStart={(e) => {
             if (isTouchDevice) {
               handleMobileLongPress(e, icon);
