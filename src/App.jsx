@@ -1199,9 +1199,9 @@ function App() {
     else normalizedSize = 0;  // Small icons
     
     const sizes = {
-      0: { width: 70, height: 70, fontSize: 11 },
-      1: { width: 80, height: 80, fontSize: 12 },
-      2: { width: 90, height: 90, fontSize: 13 }
+      0: { width: 80, height: 80, fontSize: 12 },
+      1: { width: 90, height: 90, fontSize: 13 },
+      2: { width: 100, height: 100, fontSize: 14 }
     };
     return sizes[normalizedSize] || sizes[0];
   };
@@ -1214,9 +1214,9 @@ function App() {
     else normalizedSize = 0;  // Small icons
     
     const sizes = {
-      0: { width: 32, height: 32 },
-      1: { width: 40, height: 40 },
-      2: { width: 48, height: 48 }
+      0: { width: 36, height: 36 },
+      1: { width: 44, height: 44 },
+      2: { width: 52, height: 52 }
     };
     return sizes[normalizedSize] || sizes[0];
   };
@@ -1229,9 +1229,9 @@ function App() {
     else normalizedSize = 0;  // Small icons
     
     const sizes = {
-      0: { fontSize: '11px' },
-      1: { fontSize: '12px' },
-      2: { fontSize: '13px' }
+      0: { fontSize: '12px' },
+      1: { fontSize: '13px' },
+      2: { fontSize: '14px' }
     };
     return sizes[normalizedSize] || sizes[0];
   };
